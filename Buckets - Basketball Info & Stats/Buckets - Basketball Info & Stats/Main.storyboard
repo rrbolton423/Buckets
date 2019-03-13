@@ -30,13 +30,13 @@
         <!--Teams-->
         <scene sceneID="BH3-IZ-8bI">
             <objects>
-                <tableViewController id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets___Basketball_Stats" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets___Basketball_Info___Stats" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VUs-FI-1zi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TeamCell" rowHeight="95" id="b9U-Nd-B30" userLabel="TeamCell" customClass="TeamCell" customModule="Buckets___Basketball_Stats" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TeamCell" rowHeight="95" id="b9U-Nd-B30" userLabel="TeamCell" customClass="TeamCell" customModule="Buckets___Basketball_Info___Stats" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b9U-Nd-B30" id="YcS-lw-LOi">
@@ -88,7 +88,7 @@
         <!--Team-->
         <scene sceneID="USP-jG-xQh">
             <objects>
-                <viewController title="Team" id="yK1-Mn-z3A" customClass="TeamDetailVC" customModule="Buckets___Basketball_Stats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Team" id="yK1-Mn-z3A" customClass="TeamDetailVC" customModule="Buckets___Basketball_Info___Stats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebe-S6-Ebp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,9 +190,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgu-cF-Zg4">
-                                                <rect key="frame" x="34" y="899.5" width="78" height="46"/>
+                                                <rect key="frame" x="34" y="899.5" width="97" height="46"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                                <state key="normal" title="Home">
+                                                <state key="normal" title="Players">
                                                     <color key="titleColor" red="0.97647058819999999" green="0.4582539676219668" blue="0.4747907966203212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -301,13 +301,13 @@
         <!--Players-->
         <scene sceneID="gL9-MY-z1f">
             <objects>
-                <tableViewController title="Players" id="ywG-LX-oRk" customClass="PlayersTableVC" customModule="Buckets___Basketball_Stats" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Players" id="ywG-LX-oRk" customClass="PlayersTableVC" customModule="Buckets___Basketball_Info___Stats" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IaS-cc-L8L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="87" id="hen-Qv-hrJ" customClass="PlayerCell" customModule="Buckets___Basketball_Stats" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="87" id="hen-Qv-hrJ" customClass="PlayerCell" customModule="Buckets___Basketball_Info___Stats" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hen-Qv-hrJ" id="SkX-uV-RbK">
@@ -356,7 +356,7 @@
         <!--Player-->
         <scene sceneID="vb2-A5-BwZ">
             <objects>
-                <viewController title="Player" id="qCt-hS-ETd" userLabel="Player" customClass="PlayerDetailVC" customModule="Buckets___Basketball_Stats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Player" id="qCt-hS-ETd" userLabel="Player" customClass="PlayerDetailVC" customModule="Buckets___Basketball_Info___Stats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fNd-s8-M4l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1396"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
