@@ -1,0 +1,6 @@
+framework module Pods_Buckets___Basketball_Info___Stats {
+  umbrella header "Pods-Buckets - Basketball Info & Stats-umbrella.h"
+
+  export *
+  module * { export * }
+}
