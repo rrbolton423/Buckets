@@ -1,0 +1,513 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A34191612239DAF50041E3CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191562239DAF50041E3CD /* AppDelegate.swift */; };
+		A341916C2239DB160041E3CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A34191692239DB160041E3CD /* Assets.xcassets */; };
+		A341916D2239DB160041E3CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A341916A2239DB160041E3CD /* LaunchScreen.storyboard */; };
+		A341916E2239DB160041E3CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A341916B2239DB160041E3CD /* Main.storyboard */; };
+		A34191732239DB830041E3CD /* PlayersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191702239DB830041E3CD /* PlayersAPI.swift */; };
+		A34191742239DB830041E3CD /* PlayerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191712239DB830041E3CD /* PlayerAPI.swift */; };
+		A34191752239DB830041E3CD /* TeamAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191722239DB830041E3CD /* TeamAPI.swift */; };
+		A341917B2239DBA80041E3CD /* TeamsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191772239DBA80041E3CD /* TeamsTableVC.swift */; };
+		A341917C2239DBA80041E3CD /* PlayerDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191782239DBA80041E3CD /* PlayerDetailVC.swift */; };
+		A341917D2239DBA80041E3CD /* PlayersTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191792239DBA80041E3CD /* PlayersTableVC.swift */; };
+		A341917E2239DBA80041E3CD /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341917A2239DBA80041E3CD /* TeamDetailVC.swift */; };
+		A34191812239DBDD0041E3CD /* StaticTeams.json in Resources */ = {isa = PBXBuildFile; fileRef = A34191802239DBDD0041E3CD /* StaticTeams.json */; };
+		A34191862239DBED0041E3CD /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191832239DBED0041E3CD /* CheckInternet.swift */; };
+		A34191872239DBED0041E3CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191842239DBED0041E3CD /* Constants.swift */; };
+		A34191882239DBED0041E3CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191852239DBED0041E3CD /* Extensions.swift */; };
+		A341918E2239DC010041E3CD /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341918A2239DC000041E3CD /* Players.swift */; };
+		A341918F2239DC010041E3CD /* DetailTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341918B2239DC010041E3CD /* DetailTeam.swift */; };
+		A34191902239DC010041E3CD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341918C2239DC010041E3CD /* Player.swift */; };
+		A34191912239DC010041E3CD /* StaticTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A341918D2239DC010041E3CD /* StaticTeam.swift */; };
+		A34191952239DC170041E3CD /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191932239DC170041E3CD /* TeamCell.swift */; };
+		A34191962239DC170041E3CD /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34191942239DC170041E3CD /* PlayerCell.swift */; };
+		B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Buckets__Basketball_Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81A92BFA25561DA4AE54DD1E /* Pods-Buckets: Basketball Data.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.release.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.release.xcconfig"; sourceTree = "<group>"; };
+		A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buckets: Basketball Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A341914D2239DA2C0041E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A34191562239DAF50041E3CD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A34191692239DB160041E3CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A341916A2239DB160041E3CD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A341916B2239DB160041E3CD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A34191702239DB830041E3CD /* PlayersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersAPI.swift; sourceTree = "<group>"; };
+		A34191712239DB830041E3CD /* PlayerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerAPI.swift; sourceTree = "<group>"; };
+		A34191722239DB830041E3CD /* TeamAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamAPI.swift; sourceTree = "<group>"; };
+		A34191772239DBA80041E3CD /* TeamsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsTableVC.swift; sourceTree = "<group>"; };
+		A34191782239DBA80041E3CD /* PlayerDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailVC.swift; sourceTree = "<group>"; };
+		A34191792239DBA80041E3CD /* PlayersTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersTableVC.swift; sourceTree = "<group>"; };
+		A341917A2239DBA80041E3CD /* TeamDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVC.swift; sourceTree = "<group>"; };
+		A34191802239DBDD0041E3CD /* StaticTeams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticTeams.json; sourceTree = "<group>"; };
+		A34191832239DBED0041E3CD /* CheckInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
+		A34191842239DBED0041E3CD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A34191852239DBED0041E3CD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A341918A2239DC000041E3CD /* Players.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
+		A341918B2239DC010041E3CD /* DetailTeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTeam.swift; sourceTree = "<group>"; };
+		A341918C2239DC010041E3CD /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		A341918D2239DC010041E3CD /* StaticTeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTeam.swift; sourceTree = "<group>"; };
+		A34191932239DC170041E3CD /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
+		A34191942239DC170041E3CD /* PlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
+		A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A341913B2239DA2A0041E3CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3652C7695FDEFACC487366D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */,
+				81A92BFA25561DA4AE54DD1E /* Pods-Buckets: Basketball Data.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A34191352239DA2A0041E3CD = {
+			isa = PBXGroup;
+			children = (
+				A34191402239DA2A0041E3CD /* Buckets: Basketball Data */,
+				A341913F2239DA2A0041E3CD /* Products */,
+				3652C7695FDEFACC487366D6 /* Pods */,
+				BC84F26864683BBD1A2C0BE0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A341913F2239DA2A0041E3CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A34191402239DA2A0041E3CD /* Buckets: Basketball Data */ = {
+			isa = PBXGroup;
+			children = (
+				A34191892239DBF70041E3CD /* Models */,
+				A34191922239DC0E0041E3CD /* Views */,
+				A34191762239DB9D0041E3CD /* Controllers */,
+				A341916F2239DB6D0041E3CD /* APIs */,
+				A341917F2239DBD50041E3CD /* JSON */,
+				A34191822239DBE10041E3CD /* Utils */,
+				A34191562239DAF50041E3CD /* AppDelegate.swift */,
+				A341916B2239DB160041E3CD /* Main.storyboard */,
+				A34191692239DB160041E3CD /* Assets.xcassets */,
+				A341916A2239DB160041E3CD /* LaunchScreen.storyboard */,
+				A341914D2239DA2C0041E3CD /* Info.plist */,
+			);
+			path = "Buckets: Basketball Data";
+			sourceTree = "<group>";
+		};
+		A341916F2239DB6D0041E3CD /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				A34191712239DB830041E3CD /* PlayerAPI.swift */,
+				A34191702239DB830041E3CD /* PlayersAPI.swift */,
+				A34191722239DB830041E3CD /* TeamAPI.swift */,
+			);
+			name = APIs;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A34191762239DB9D0041E3CD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A34191782239DBA80041E3CD /* PlayerDetailVC.swift */,
+				A34191792239DBA80041E3CD /* PlayersTableVC.swift */,
+				A341917A2239DBA80041E3CD /* TeamDetailVC.swift */,
+				A34191772239DBA80041E3CD /* TeamsTableVC.swift */,
+			);
+			name = Controllers;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		A341917F2239DBD50041E3CD /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				A34191802239DBDD0041E3CD /* StaticTeams.json */,
+			);
+			name = JSON;
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		A34191822239DBE10041E3CD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A34191832239DBED0041E3CD /* CheckInternet.swift */,
+				A34191842239DBED0041E3CD /* Constants.swift */,
+				A34191852239DBED0041E3CD /* Extensions.swift */,
+			);
+			name = Utils;
+			path = "New Group3";
+			sourceTree = "<group>";
+		};
+		A34191892239DBF70041E3CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A341918B2239DC010041E3CD /* DetailTeam.swift */,
+				A341918C2239DC010041E3CD /* Player.swift */,
+				A341918A2239DC000041E3CD /* Players.swift */,
+				A341918D2239DC010041E3CD /* StaticTeam.swift */,
+			);
+			name = Models;
+			path = "New Group4";
+			sourceTree = "<group>";
+		};
+		A34191922239DC0E0041E3CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A34191942239DC170041E3CD /* PlayerCell.swift */,
+				A34191932239DC170041E3CD /* TeamCell.swift */,
+			);
+			name = Views;
+			path = "New Group5";
+			sourceTree = "<group>";
+		};
+		BC84F26864683BBD1A2C0BE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A341913D2239DA2A0041E3CD /* Buckets: Basketball Data */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A34191502239DA2C0041E3CD /* Build configuration list for PBXNativeTarget "Buckets: Basketball Data" */;
+			buildPhases = (
+				BF7CA93E960088F9BED4E1DD /* [CP] Check Pods Manifest.lock */,
+				A341913A2239DA2A0041E3CD /* Sources */,
+				A341913B2239DA2A0041E3CD /* Frameworks */,
+				A341913C2239DA2A0041E3CD /* Resources */,
+				01686E5CBEBB2EAB5B54B89E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Buckets: Basketball Data";
+			productName = "Buckets: Basketball Data";
+			productReference = A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A34191362239DA2A0041E3CD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Romell Bolton";
+				TargetAttributes = {
+					A341913D2239DA2A0041E3CD = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
+					};
+				};
+			};
+			buildConfigurationList = A34191392239DA2A0041E3CD /* Build configuration list for PBXProject "Buckets: Basketball Data" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A34191352239DA2A0041E3CD;
+			productRefGroup = A341913F2239DA2A0041E3CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A341913D2239DA2A0041E3CD /* Buckets: Basketball Data */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A341913C2239DA2A0041E3CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A341916D2239DB160041E3CD /* LaunchScreen.storyboard in Resources */,
+				A341916E2239DB160041E3CD /* Main.storyboard in Resources */,
+				A34191812239DBDD0041E3CD /* StaticTeams.json in Resources */,
+				A341916C2239DB160041E3CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01686E5CBEBB2EAB5B54B89E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF7CA93E960088F9BED4E1DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Buckets: Basketball Data-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A341913A2239DA2A0041E3CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A34191952239DC170041E3CD /* TeamCell.swift in Sources */,
+				A341918E2239DC010041E3CD /* Players.swift in Sources */,
+				A341917E2239DBA80041E3CD /* TeamDetailVC.swift in Sources */,
+				A34191862239DBED0041E3CD /* CheckInternet.swift in Sources */,
+				A34191742239DB830041E3CD /* PlayerAPI.swift in Sources */,
+				A34191912239DC010041E3CD /* StaticTeam.swift in Sources */,
+				A34191902239DC010041E3CD /* Player.swift in Sources */,
+				A34191752239DB830041E3CD /* TeamAPI.swift in Sources */,
+				A341917D2239DBA80041E3CD /* PlayersTableVC.swift in Sources */,
+				A34191872239DBED0041E3CD /* Constants.swift in Sources */,
+				A341917B2239DBA80041E3CD /* TeamsTableVC.swift in Sources */,
+				A341918F2239DC010041E3CD /* DetailTeam.swift in Sources */,
+				A34191612239DAF50041E3CD /* AppDelegate.swift in Sources */,
+				A34191962239DC170041E3CD /* PlayerCell.swift in Sources */,
+				A341917C2239DBA80041E3CD /* PlayerDetailVC.swift in Sources */,
+				A34191882239DBED0041E3CD /* Extensions.swift in Sources */,
+				A34191732239DB830041E3CD /* PlayersAPI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A341914E2239DA2C0041E3CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A341914F2239DA2C0041E3CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A34191512239DA2C0041E3CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XQ87AL2NL5;
+				INFOPLIST_FILE = "Buckets: Basketball Data/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.romellbolton.Buckets--Basketball-Data";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A34191522239DA2C0041E3CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81A92BFA25561DA4AE54DD1E /* Pods-Buckets: Basketball Data.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XQ87AL2NL5;
+				INFOPLIST_FILE = "Buckets: Basketball Data/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.romellbolton.Buckets--Basketball-Data";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A34191392239DA2A0041E3CD /* Build configuration list for PBXProject "Buckets: Basketball Data" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A341914E2239DA2C0041E3CD /* Debug */,
+				A341914F2239DA2C0041E3CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A34191502239DA2C0041E3CD /* Build configuration list for PBXNativeTarget "Buckets: Basketball Data" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A34191512239DA2C0041E3CD /* Debug */,
+				A34191522239DA2C0041E3CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A34191362239DA2A0041E3CD /* Project object */;
+}
