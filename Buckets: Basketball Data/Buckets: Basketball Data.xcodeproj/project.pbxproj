@@ -120,9 +120,9 @@
 		A341916F2239DB6D0041E3CD /* APIs */ = {
 			isa = PBXGroup;
 			children = (
-				A331D55C223BFE590096A5A9 /* PlayerAPI.swift */,
-				A331D55B223BFE590096A5A9 /* PlayersAPI.swift */,
 				A331D55A223BFE580096A5A9 /* TeamAPI.swift */,
+				A331D55B223BFE590096A5A9 /* PlayersAPI.swift */,
+				A331D55C223BFE590096A5A9 /* PlayerAPI.swift */,
 			);
 			name = APIs;
 			path = "New Group";
@@ -131,10 +131,10 @@
 		A34191762239DB9D0041E3CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A331D549223BFE3B0096A5A9 /* PlayerDetailVC.swift */,
-				A331D546223BFE3A0096A5A9 /* PlayersTableVC.swift */,
-				A331D548223BFE3B0096A5A9 /* TeamDetailVC.swift */,
 				A331D547223BFE3B0096A5A9 /* TeamsTableVC.swift */,
+				A331D548223BFE3B0096A5A9 /* TeamDetailVC.swift */,
+				A331D546223BFE3A0096A5A9 /* PlayersTableVC.swift */,
+				A331D549223BFE3B0096A5A9 /* PlayerDetailVC.swift */,
 			);
 			name = Controllers;
 			path = "New Group1";
@@ -152,9 +152,9 @@
 		A34191822239DBE10041E3CD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A331D541223BFE310096A5A9 /* CheckInternet.swift */,
-				A331D540223BFE300096A5A9 /* Constants.swift */,
 				A331D542223BFE310096A5A9 /* Extensions.swift */,
+				A331D540223BFE300096A5A9 /* Constants.swift */,
+				A331D541223BFE310096A5A9 /* CheckInternet.swift */,
 			);
 			name = Utils;
 			path = "New Group3";
@@ -163,10 +163,10 @@
 		A34191892239DBF70041E3CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A331D553223BFE4B0096A5A9 /* DetailTeam.swift */,
-				A331D552223BFE4A0096A5A9 /* Player.swift */,
-				A331D554223BFE4B0096A5A9 /* Players.swift */,
 				A331D555223BFE4B0096A5A9 /* StaticTeam.swift */,
+				A331D554223BFE4B0096A5A9 /* Players.swift */,
+				A331D552223BFE4A0096A5A9 /* Player.swift */,
+				A331D553223BFE4B0096A5A9 /* DetailTeam.swift */,
 			);
 			name = Models;
 			path = "New Group4";
@@ -175,8 +175,8 @@
 		A34191922239DC0E0041E3CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A331D54E223BFE420096A5A9 /* PlayerCell.swift */,
 				A331D54F223BFE430096A5A9 /* TeamCell.swift */,
+				A331D54E223BFE420096A5A9 /* PlayerCell.swift */,
 			);
 			name = Views;
 			path = "New Group5";
