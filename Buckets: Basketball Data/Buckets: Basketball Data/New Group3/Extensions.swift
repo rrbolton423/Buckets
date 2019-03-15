@@ -38,7 +38,7 @@ extension UIImageView {
         }).resume()
     }
     func displayPlaceholderImage() {
-        DispatchQueue.main.async { self.image = UIImage(named: "placeholder.png") }
+        DispatchQueue.main.async { self.image = UIImage(named: "placeholder") }
     }
 }
 

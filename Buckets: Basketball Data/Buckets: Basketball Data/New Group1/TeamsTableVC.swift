@@ -35,7 +35,7 @@ class TeamsTableVC: UITableViewController {
         guard let url = Bundle.main.url(forResource: "StaticTeams", withExtension: "json") else { return [] }
         do {
             let data = try Data(contentsOf: url)
-            let JSON = try JSONSerialization.jsonObject(with: data, options: [])
+            let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
             if let jsonArray = JSON as? [[String: Any]] {
                 for team in jsonArray {
                     let team = StaticTeam(dictionary: team)
@@ -61,7 +61,6 @@ class TeamsTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
-        cell?.selectionStyle = .none
         if let teamPic = teamsData?[indexPath.row].picture {
             cell?.teamLogo.image = UIImage(named: teamPic)
         } else {

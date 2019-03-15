@@ -98,7 +98,7 @@ class PlayerApi {
                         player = Player(ID: ID, teamID: teamID, name: name, teamCity: teamCity, teamName: teamName, jerseyNumber: jerseyNumber, position: position, birthdate: birthdate, height: height, weight: weight, school: school, experience: experience, draftYear: draftYear, draftRound: draftRound, draftNumber: draftNumber, ppg: ppg, apg: apg, rpg: rpg)
                     }
                 }
-            }
+            }            
         } catch {
             print(error)
         }

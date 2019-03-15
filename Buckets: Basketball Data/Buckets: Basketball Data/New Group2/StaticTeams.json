@@ -3,180 +3,180 @@
         "teamID": "1610612737",
         "abbreviation": "ATL",
         "teamName": "Atlanta Hawks",
-        "teamPic": "atl.jpg"
+        "teamPic": "atl.png"
     },
     {
         "teamID": "1610612738",
         "abbreviation": "BOS",
         "teamName": "Boston Celtics",
-        "teamPic": "bos.jpg"
+        "teamPic": "bos.png"
     },
     {
         "teamID": "1610612751",
         "abbreviation": "BKN",
         "teamName": "Brooklyn Nets",
-        "teamPic": "bkn.jpg"
+        "teamPic": "bkn.png"
     },
     {
         "teamID": "1610612766",
         "abbreviation": "CHA",
         "teamName": "Charlotte Hornets",
-        "teamPic": "cha.jpg"
+        "teamPic": "cha.png"
     },
     {
         "teamID": "1610612741",
         "abbreviation": "CHI",
         "teamName": "Chicago Bulls",
-        "teamPic": "chi.jpg"
+        "teamPic": "chi.png"
     },
     {
         "teamID": "1610612739",
         "abbreviation": "CLE",
         "teamName": "Cleveland Cavaliers",
-        "teamPic": "cle.jpg"
+        "teamPic": "cle.png"
     },
     {
         "teamID": "1610612742",
         "abbreviation": "DAL",
         "teamName": "Dallas Mavericks",
-        "teamPic": "dal.jpg"
+        "teamPic": "dal.png"
     },
     {
         "teamID": "1610612743",
         "abbreviation": "DEN",
         "teamName": "Denver Nuggets",
-        "teamPic": "den.jpg"
+        "teamPic": "den.png"
     },
     {
         "teamID": "1610612765",
         "abbreviation": "DET",
         "teamName": "Detroit Pistons",
-        "teamPic": "det.jpg"
+        "teamPic": "det.png"
     },
     {
         "teamID": "1610612744",
         "abbreviation": "GSW",
         "teamName": "Golden State Warriors",
-        "teamPic": "gsw.jpg"
+        "teamPic": "gsw.png"
     },
     {
         "teamID": "1610612745",
         "abbreviation": "HOU",
         "teamName": "Houston Rockets",
-        "teamPic": "hou.jpg"
+        "teamPic": "hou.png"
     },
     {
         "teamID": "1610612754",
         "abbreviation": "IND",
         "teamName": "Indiana Pacers",
-        "teamPic": "ind.jpg"
+        "teamPic": "ind.png"
     },
     {
         "teamID": "1610612746",
         "abbreviation": "LAC",
         "teamName": "Los Angeles Clippers",
-        "teamPic": "lac.jpg"
+        "teamPic": "lac.png"
     },
     {
         "teamID": "1610612747",
         "abbreviation": "LAL",
         "teamName": "Los Angeles Lakers",
-        "teamPic": "lal.jpg"
+        "teamPic": "lal.png"
     },
     {
         "teamID": "1610612763",
         "abbreviation": "MEM",
         "teamName": "Memphis Grizzlies",
-        "teamPic": "mem.jpg"
+        "teamPic": "mem.png"
     },
     {
         "teamID": "1610612748",
         "abbreviation": "MIA",
         "teamName": "Miami Heat",
-        "teamPic": "mia.jpg"
+        "teamPic": "mia.png"
     },
     {
         "teamID": "1610612749",
         "abbreviation": "MIL",
         "teamName": "Milwaukee Bucks",
-        "teamPic": "mil.jpg"
+        "teamPic": "mil.png"
     },
     {
         "teamID": "1610612750",
         "abbreviation": "MIN",
         "teamName": "Minnesota Timberwolves",
-        "teamPic": "min.jpg"
+        "teamPic": "min.png"
     },
     {
         "teamID": "1610612740",
         "abbreviation": "NOP",
         "teamName": "New Orleans Pelicans",
-        "teamPic": "nop.jpg"
+        "teamPic": "nop.png"
     },
     {
         "teamID": "1610612752",
         "abbreviation": "NYK",
         "teamName": "New York Knicks",
-        "teamPic": "nyk.jpg"
+        "teamPic": "nyk.png"
     },
     {
         "teamID": "1610612760",
         "abbreviation": "OKC",
         "teamName": "Oklahoma City Thunder",
-        "teamPic": "okc.jpg"
+        "teamPic": "okc.png"
     },
     {
         "teamID": "1610612753",
         "abbreviation": "ORL",
         "teamName": "Orlando Magic",
-        "teamPic": "orl.jpg"
+        "teamPic": "orl.png"
     },
     {
         "teamID": "1610612755",
         "abbreviation": "PHI",
         "teamName": "Philadelphia 76ers",
-        "teamPic": "phi.jpg"
+        "teamPic": "phi.png"
     },
     {
         "teamID": "1610612756",
         "abbreviation": "PHX",
         "teamName": "Phoenix Suns",
-        "teamPic": "phx.jpg"
+        "teamPic": "phx.png"
     },
     {
         "teamID": "1610612757",
         "abbreviation": "POR",
         "teamName": "Portland Trail Blazers",
-        "teamPic": "por.jpg"
+        "teamPic": "por.png"
     },
     {
         "teamID": "1610612758",
         "abbreviation": "SAC",
         "teamName": "Sacramento Kings",
-        "teamPic": "sac.jpeg"
+        "teamPic": "sac.png"
     },
     {
         "teamID": "1610612759",
         "abbreviation": "SAS",
         "teamName": "San Antonio Spurs",
-        "teamPic": "sas.jpg"
+        "teamPic": "sas.png"
     },
     {
         "teamID": "1610612761",
         "abbreviation": "TOR",
         "teamName": "Toronto Raptors",
-        "teamPic": "tor.jpg"
+        "teamPic": "tor.png"
     },
     {
         "teamID": "1610612762",
         "abbreviation": "UTA",
         "teamName": "Utah Jazz",
-        "teamPic": "uta.jpg"
+        "teamPic": "uta.png"
     },
     {
         "teamID": "1610612764",
         "abbreviation": "WAS",
         "teamName": "Washington Wizards",
-        "teamPic": "was.jpg"
+        "teamPic": "was.png"
     }
 ]
