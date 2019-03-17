@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        FirebaseConstants().setupAPP()
         var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
         appLaunches += 1
         UserDefaults.standard.set(appLaunches, forKey: "appLaunches")

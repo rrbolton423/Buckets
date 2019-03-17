@@ -74,9 +74,7 @@ class PlayerDetailVC: UIViewController {
         DispatchQueue.main.async {
             self.activityIndicator.removeFromSuperview()
             self.navigationItem.title = player.name
-            
-
-            
+    
             if let name = player.name {
                 if name == "" {
                     self.nameLabel.text = "N/A"

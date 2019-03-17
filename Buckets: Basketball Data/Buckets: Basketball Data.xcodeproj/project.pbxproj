@@ -119,8 +119,8 @@
 				A331D539223BFE0F0096A5A9 /* Assets.xcassets */,
 				A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */,
 				A341914D2239DA2C0041E3CD /* Info.plist */,
-				A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */,
 				A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */,
+				A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */,
 			);
 			path = "Buckets: Basketball Data";
 			sourceTree = "<group>";
@@ -160,10 +160,10 @@
 		A34191822239DBE10041E3CD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A331D541223BFE310096A5A9 /* CheckInternet.swift */,
+				A331D542223BFE310096A5A9 /* Extensions.swift */,
 				A331D540223BFE300096A5A9 /* Constants.swift */,
 				A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */,
-				A331D542223BFE310096A5A9 /* Extensions.swift */,
+				A331D541223BFE310096A5A9 /* CheckInternet.swift */,
 			);
 			name = Utils;
 			path = "New Group3";

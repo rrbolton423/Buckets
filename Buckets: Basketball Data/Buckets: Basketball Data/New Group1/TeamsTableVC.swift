@@ -16,7 +16,6 @@ class TeamsTableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FirebaseConstants().setupAPP()
         loadTeams()
     }
     
@@ -63,8 +62,6 @@ class TeamsTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
-        
-        
         if let teamPic = teamsData?[indexPath.row].picture {
             if use_real_images == "false" {
                 cell?.teamLogo.image = UIImage(named: "placeholder.png")
@@ -74,8 +71,6 @@ class TeamsTableVC: UITableViewController {
         } else {
             cell?.teamLogo.image = UIImage(named: "placeholder.png")
         }
-        
-        
         if let teamName = teamsData?[indexPath.row].name {
             cell?.teamName.text = teamName
         }
