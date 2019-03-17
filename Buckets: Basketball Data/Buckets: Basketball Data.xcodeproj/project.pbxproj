@@ -28,6 +28,9 @@
 		A331D55E223BFE590096A5A9 /* PlayersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D55B223BFE590096A5A9 /* PlayersAPI.swift */; };
 		A331D55F223BFE590096A5A9 /* PlayerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D55C223BFE590096A5A9 /* PlayerAPI.swift */; };
 		A331D561223BFE5F0096A5A9 /* StaticTeams.json in Resources */ = {isa = PBXBuildFile; fileRef = A331D560223BFE5F0096A5A9 /* StaticTeams.json */; };
+		A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */; };
+		A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */; };
+		A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */; };
 		B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +58,9 @@
 		A331D55B223BFE590096A5A9 /* PlayersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersAPI.swift; sourceTree = "<group>"; };
 		A331D55C223BFE590096A5A9 /* PlayerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerAPI.swift; sourceTree = "<group>"; };
 		A331D560223BFE5F0096A5A9 /* StaticTeams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticTeams.json; sourceTree = "<group>"; };
+		A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buckets: Basketball Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A341914D2239DA2C0041E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +119,8 @@
 				A331D539223BFE0F0096A5A9 /* Assets.xcassets */,
 				A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */,
 				A341914D2239DA2C0041E3CD /* Info.plist */,
+				A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */,
+				A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */,
 			);
 			path = "Buckets: Basketball Data";
 			sourceTree = "<group>";
@@ -152,9 +160,10 @@
 		A34191822239DBE10041E3CD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A331D542223BFE310096A5A9 /* Extensions.swift */,
-				A331D540223BFE300096A5A9 /* Constants.swift */,
 				A331D541223BFE310096A5A9 /* CheckInternet.swift */,
+				A331D540223BFE300096A5A9 /* Constants.swift */,
+				A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */,
+				A331D542223BFE310096A5A9 /* Extensions.swift */,
 			);
 			name = Utils;
 			path = "New Group3";
@@ -251,8 +260,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */,
 				A331D53F223BFE100096A5A9 /* Main.storyboard in Resources */,
 				A331D53D223BFE100096A5A9 /* Assets.xcassets in Resources */,
+				A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */,
 				A331D561223BFE5F0096A5A9 /* StaticTeams.json in Resources */,
 				A331D53C223BFE100096A5A9 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -268,11 +279,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -318,6 +335,7 @@
 				A331D544223BFE310096A5A9 /* CheckInternet.swift in Sources */,
 				A331D543223BFE310096A5A9 /* Constants.swift in Sources */,
 				A331D545223BFE310096A5A9 /* Extensions.swift in Sources */,
+				A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */,
 				A331D54A223BFE3B0096A5A9 /* PlayersTableVC.swift in Sources */,
 				A331D55F223BFE590096A5A9 /* PlayerAPI.swift in Sources */,
 				A331D54C223BFE3B0096A5A9 /* TeamDetailVC.swift in Sources */,

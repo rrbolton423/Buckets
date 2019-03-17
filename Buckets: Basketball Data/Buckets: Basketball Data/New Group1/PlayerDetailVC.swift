@@ -75,6 +75,8 @@ class PlayerDetailVC: UIViewController {
             self.activityIndicator.removeFromSuperview()
             self.navigationItem.title = player.name
             
+
+            
             if let name = player.name {
                 if name == "" {
                     self.nameLabel.text = "N/A"
@@ -224,13 +226,17 @@ class PlayerDetailVC: UIViewController {
                 if ID == "" {
                     self.headshotImageView.displayPlaceholderImage()
                 } else {
-                    self.playerHeadshotURL = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/\(teamID)/2018/260x190/\(ID).png"
-                    if self.playerHeadshotURL != nil {
-                        self.headshotImageView.loadImageUsingCache(withURL: self.playerHeadshotURL ?? "")
-                        if self.headshotImageView.image != nil {
-                            return
-                        } else {
-                            self.headshotImageView.displayPlaceholderImage()
+                    if use_real_images == "false" {
+                        self.headshotImageView.displayPlaceholderImage()
+                    } else {
+                        self.playerHeadshotURL = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/\(teamID)/2018/260x190/\(ID).png"
+                        if self.playerHeadshotURL != nil {
+                            self.headshotImageView.loadImageUsingCache(withURL: self.playerHeadshotURL ?? "")
+                            if self.headshotImageView.image != nil {
+                                return
+                            } else {
+                                self.headshotImageView.displayPlaceholderImage()
+                            }
                         }
                     }
                 }
