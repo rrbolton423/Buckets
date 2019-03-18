@@ -29,12 +29,19 @@ class TeamDetailVC: UIViewController {
     var teamInfoURL: String?
     var teamImage: UIImage?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
+    var use_real_images: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firebaseSetup()
         setupActivityIndicator()
         checkForTeamID()
         fetchRoster()
+    }
+    
+    func firebaseSetup() {
+        FirebaseConstants().setupAPP()
+        use_real_images = FirebaseConstants().getImages()
     }
     
     func setupActivityIndicator() {
@@ -76,7 +83,7 @@ class TeamDetailVC: UIViewController {
                 } else {
                     self.teamNameLabel.text = "\(city) \(name)"
                     self.navigationItem.title = "\(city) \(name)"
-                    if use_real_images == "false" {
+                    if self.use_real_images == "false" {
                         self.teamImage = UIImage(named: "placeholder.png")
                     } else {
                         switch name {

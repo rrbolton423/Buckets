@@ -13,10 +13,17 @@ class TeamsTableVC: UITableViewController {
     var teamsData: [StaticTeam]?
     var teamToPass: StaticTeam?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
+    var use_real_images: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firebaseSetup()
         loadTeams()
+    }
+    
+    func firebaseSetup() {
+        FirebaseConstants().setupAPP()
+        use_real_images = FirebaseConstants().getImages()
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +61,7 @@ class TeamsTableVC: UITableViewController {
         activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
         teamsData = parseTeamsFromJSONFile()
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

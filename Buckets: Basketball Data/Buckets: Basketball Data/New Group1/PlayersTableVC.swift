@@ -16,9 +16,14 @@ class PlayersTableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firebaseSetup()
         setupActivityIndicator()
         checkForTeamID()
         fetchPlayers()
+    }
+    
+    func firebaseSetup() {
+        FirebaseConstants().setupAPP()
     }
     
     func setupActivityIndicator() {
@@ -46,6 +51,7 @@ class PlayersTableVC: UITableViewController {
                         return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
                     }
                     self.roster = namesSorted
+                    self.tableView.reloadData()
                 }
             }
         } else {

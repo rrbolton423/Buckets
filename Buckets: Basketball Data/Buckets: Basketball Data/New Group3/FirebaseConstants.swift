@@ -20,10 +20,8 @@ class FirebaseConstants: NSObject {
             if (status == RemoteConfigFetchStatus.success) {
                 print("Config fetched!")
                 self.remoteConfig.activateFetched()
-                
             } else {
                 print("Config not fetched")
-                print("Error \(error!.localizedDescription)")
             }
         }
     }

@@ -32,13 +32,20 @@ class PlayerDetailVC: UIViewController {
     var playerInfoURL: String?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
+    var use_real_images: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firebaseSetup()
         setupActivityIndicator()
         checkForPlayerID()
         fetchPlayer()
         requestAppStoreReview()
+    }
+    
+    func firebaseSetup() {
+        FirebaseConstants().setupAPP()
+        use_real_images = FirebaseConstants().getImages()
     }
     
     func setupActivityIndicator() {
@@ -74,7 +81,7 @@ class PlayerDetailVC: UIViewController {
         DispatchQueue.main.async {
             self.activityIndicator.removeFromSuperview()
             self.navigationItem.title = player.name
-    
+            
             if let name = player.name {
                 if name == "" {
                     self.nameLabel.text = "N/A"
@@ -224,7 +231,7 @@ class PlayerDetailVC: UIViewController {
                 if ID == "" {
                     self.headshotImageView.displayPlaceholderImage()
                 } else {
-                    if use_real_images == "false" {
+                    if self.use_real_images == "false" {
                         self.headshotImageView.displayPlaceholderImage()
                     } else {
                         self.playerHeadshotURL = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/\(teamID)/2018/260x190/\(ID).png"
