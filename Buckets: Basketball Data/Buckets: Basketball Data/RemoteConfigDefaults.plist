@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>use_real_images</key>
-	<string>true</string>
+	<string>false</string>
 </dict>
 </plist>
