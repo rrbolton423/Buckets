@@ -9,16 +9,42 @@
 import UIKit
 import Firebase
 
-class TeamsTableVC: UITableViewController {
-    var teamsData: [StaticTeam]?
+class TeamsTableVC: UITableViewController, UISearchResultsUpdating {
+    var unfilteredTeamList: [StaticTeam]?
+    var filteredTeamList: [StaticTeam]?
     var teamToPass: StaticTeam?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchController()
         firebaseSetup()
         loadTeams()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchController.dismiss(animated: false, completion: nil)
+    }
+    
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        tableView.tableHeaderView = searchController.searchBar
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            filteredTeamList = unfilteredTeamList?.filter { team in
+                return (team.name?.lowercased().contains(searchText.lowercased()))!
+            }
+        } else {
+            filteredTeamList = unfilteredTeamList
+        }
+        tableView.reloadData()
     }
     
     func firebaseSetup() {
@@ -35,7 +61,7 @@ class TeamsTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teamsData?.count ?? 0
+        return filteredTeamList?.count ?? 0
     }
     
     func parseTeamsFromJSONFile() -> [StaticTeam] {
@@ -60,7 +86,8 @@ class TeamsTableVC: UITableViewController {
         view.addSubview(activityIndicator)
         activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
-        teamsData = parseTeamsFromJSONFile()
+        unfilteredTeamList = parseTeamsFromJSONFile()
+        filteredTeamList = unfilteredTeamList
         tableView.reloadData()
     }
     
@@ -70,7 +97,7 @@ class TeamsTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
-        if let teamPic = teamsData?[indexPath.row].picture {
+        if let teamPic = filteredTeamList?[indexPath.row].picture {
             if use_real_images == "false" {
                 cell?.teamLogo.image = UIImage(named: "placeholder.png")
             } else {
@@ -79,7 +106,7 @@ class TeamsTableVC: UITableViewController {
         } else {
             cell?.teamLogo.image = UIImage(named: "placeholder.png")
         }
-        if let teamName = teamsData?[indexPath.row].name {
+        if let teamName = filteredTeamList?[indexPath.row].name {
             cell?.teamName.text = teamName
         }
         return cell ?? UITableViewCell()
@@ -97,7 +124,7 @@ class TeamsTableVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? TeamDetailVC
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            teamToPass = teamsData?[(selectedIndexPath.row)]
+            teamToPass = filteredTeamList?[(selectedIndexPath.row)]
             detailVC?.staticTeam = teamToPass
             let selectedCell = tableView.cellForRow(at: selectedIndexPath)
             detailVC?.detailImage = selectedCell?.imageView?.image
