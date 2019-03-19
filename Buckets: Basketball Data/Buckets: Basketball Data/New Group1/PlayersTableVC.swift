@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayersTableVC: UITableViewController, UISearchResultsUpdating {
+class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     var unfilteredRoster: [Players]?
     var filteredRoster: [Players]?
@@ -32,6 +32,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating {
     }
     
     func setupSearchController() {
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
@@ -46,6 +47,17 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating {
         } else {
             filteredRoster = unfilteredRoster
         }
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
         tableView.reloadData()
     }
     

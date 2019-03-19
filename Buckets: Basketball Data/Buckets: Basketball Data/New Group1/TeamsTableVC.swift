@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class TeamsTableVC: UITableViewController, UISearchResultsUpdating {
+class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     var unfilteredTeamList: [StaticTeam]?
     var filteredTeamList: [StaticTeam]?
     var teamToPass: StaticTeam?
@@ -30,6 +30,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating {
     }
     
     func setupSearchController() {
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
@@ -44,6 +45,17 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating {
         } else {
             filteredTeamList = unfilteredTeamList
         }
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
         tableView.reloadData()
     }
     
