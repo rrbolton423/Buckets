@@ -15,8 +15,8 @@
             <objects>
                 <navigationController id="g0M-fh-the" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" id="dqc-bm-idL"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vf3-yB-GTi">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Vf3-yB-GTi">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -30,7 +30,7 @@
         <!--Teams-->
         <scene sceneID="BH3-IZ-8bI">
             <objects>
-                <tableViewController id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Teams" id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VUs-FI-1zi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,7 +94,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOu-oP-8AO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1022"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="970"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCj-U1-v5C">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="978"/>
@@ -362,7 +362,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3B-GR-JVX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1332"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="1280"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKW-bW-X2K">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1310"/>
@@ -669,7 +669,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="A54-rL-gmB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Player" id="LQc-z3-Z9J"/>
+                    <navigationItem key="navigationItem" title="Player" largeTitleDisplayMode="always" id="LQc-z3-Z9J"/>
                     <size key="freeformSize" width="375" height="1396"/>
                     <connections>
                         <outlet property="apgLabel" destination="OTF-sC-9mR" id="ik9-rC-Y70"/>

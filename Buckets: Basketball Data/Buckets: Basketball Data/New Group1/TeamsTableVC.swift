@@ -24,17 +24,33 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         loadTeams()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.hidesSearchBarWhenScrolling = false
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        searchController.dismiss(animated: false, completion: nil)
+        searchController.dismiss(animated: true, completion: nil)
     }
     
     func setupSearchController() {
+        searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
-        tableView.tableHeaderView = searchController.searchBar
+        navigationItem.searchController = searchController;
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -49,13 +65,13 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
+        searchBar.setShowsCancelButton(true, animated: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
-        searchBar.showsCancelButton = false
         searchBar.endEditing(true)
+        searchBar.text = nil
+        searchBar.setShowsCancelButton(false, animated: true)
         tableView.reloadData()
     }
     

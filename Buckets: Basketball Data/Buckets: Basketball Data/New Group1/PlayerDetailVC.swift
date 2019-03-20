@@ -43,6 +43,13 @@ class PlayerDetailVC: UIViewController {
         requestAppStoreReview()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
+    }
+    
     func firebaseSetup() {
         FirebaseConstants().setupAPP()
         use_real_images = FirebaseConstants().getImages()
