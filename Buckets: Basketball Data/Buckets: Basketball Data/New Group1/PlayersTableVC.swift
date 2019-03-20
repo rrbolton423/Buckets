@@ -53,6 +53,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
+        self.definesPresentationContext = true
     }
     
     func updateSearchResults(for searchController: UISearchController) {

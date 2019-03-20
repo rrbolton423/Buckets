@@ -51,6 +51,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
+        self.definesPresentationContext = true
     }
     
     func updateSearchResults(for searchController: UISearchController) {
