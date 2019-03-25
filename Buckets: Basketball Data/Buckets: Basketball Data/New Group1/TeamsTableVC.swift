@@ -9,16 +9,101 @@
 import UIKit
 import Firebase
 
-class TeamsTableVC: UITableViewController {
-    var teamsData: [StaticTeam]?
+class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+    var unfilteredTeamList: [StaticTeam]?
+    var filteredTeamList: [StaticTeam]?
     var teamToPass: StaticTeam?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupInfoBarButtonItem()
+        setupSearchController()
         firebaseSetup()
         loadTeams()
+    }
+    
+    func setupInfoBarButtonItem() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc func getInfoAction() {
+        let alert = UIAlertController(title: "Version 1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+//    func setupInfoBarButtonItem() {
+//        let infoButton = UIButton(type: .infoLight)
+//        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+//        navigationItem.rightBarButtonItem = infoBarButtonItem
+//    }
+//
+//    @objc func getInfoAction() {
+//        let alert = UIAlertController(title: "Version 1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = false
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchController.dismiss(animated: true, completion: nil)
+    }
+    
+    func setupSearchController() {
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController;
+        self.definesPresentationContext = true
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            filteredTeamList = unfilteredTeamList?.filter { team in
+                return (team.name?.lowercased().contains(searchText.lowercased()))!
+            }
+        } else {
+            filteredTeamList = unfilteredTeamList
+        }
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        searchBar.text = nil
+        searchBar.setShowsCancelButton(false, animated: true)
+        tableView.reloadData()
     }
     
     func firebaseSetup() {
@@ -35,7 +120,7 @@ class TeamsTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teamsData?.count ?? 0
+        return filteredTeamList?.count ?? 0
     }
     
     func parseTeamsFromJSONFile() -> [StaticTeam] {
@@ -60,7 +145,8 @@ class TeamsTableVC: UITableViewController {
         view.addSubview(activityIndicator)
         activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
-        teamsData = parseTeamsFromJSONFile()
+        unfilteredTeamList = parseTeamsFromJSONFile()
+        filteredTeamList = unfilteredTeamList
         tableView.reloadData()
     }
     
@@ -70,7 +156,7 @@ class TeamsTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
-        if let teamPic = teamsData?[indexPath.row].picture {
+        if let teamPic = filteredTeamList?[indexPath.row].picture {
             if use_real_images == "false" {
                 cell?.teamLogo.image = UIImage(named: "placeholder.png")
             } else {
@@ -79,7 +165,7 @@ class TeamsTableVC: UITableViewController {
         } else {
             cell?.teamLogo.image = UIImage(named: "placeholder.png")
         }
-        if let teamName = teamsData?[indexPath.row].name {
+        if let teamName = filteredTeamList?[indexPath.row].name {
             cell?.teamName.text = teamName
         }
         return cell ?? UITableViewCell()
@@ -97,7 +183,7 @@ class TeamsTableVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? TeamDetailVC
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            teamToPass = teamsData?[(selectedIndexPath.row)]
+            teamToPass = filteredTeamList?[(selectedIndexPath.row)]
             detailVC?.staticTeam = teamToPass
             let selectedCell = tableView.cellForRow(at: selectedIndexPath)
             detailVC?.detailImage = selectedCell?.imageView?.image

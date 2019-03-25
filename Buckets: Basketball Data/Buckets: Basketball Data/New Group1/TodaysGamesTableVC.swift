@@ -47,11 +47,12 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
 //
 //    }
 //
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        addNavBarImage()
-//        loadTodaysGames()
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupInfoBarButtonItem()
+        //addNavBarImage()
+        //loadTodaysGames()
+    }
 //
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
@@ -102,7 +103,25 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
 //            print(error!)
 //        }
 //    }
+    
+    
 //
+    
+    func setupInfoBarButtonItem() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc func getInfoAction() {
+        let alert = UIAlertController(title: "Version 1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -112,9 +131,6 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
         return 0
 
     }
-    
-    
-
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
@@ -134,15 +150,4 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
 
         return cell
     }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        let detailVC = segue.destination as! LiveFeedTableViewController
-//        let selectedIndexPath = tableView.indexPathForSelectedRow
-//        detailVC.liveFeedLink = gameData[(selectedIndexPath?.row)!].link
-//        detailVC.homeTeam = (gameData[(selectedIndexPath?.row)!].teams.home.team?.name)!
-//        detailVC.awayTeam = (gameData[(selectedIndexPath?.row)!].teams.away.team?.name)!
-//    }
-
-
 }

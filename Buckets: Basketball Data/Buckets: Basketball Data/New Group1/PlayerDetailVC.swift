@@ -36,11 +36,27 @@ class PlayerDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupInfoBarButtonItem()
         firebaseSetup()
         setupActivityIndicator()
         checkForPlayerID()
         fetchPlayer()
         requestAppStoreReview()
+    }
+    
+    func setupInfoBarButtonItem() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc func getInfoAction() {
+        let alert = UIAlertController(title: "Version 1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func firebaseSetup() {
