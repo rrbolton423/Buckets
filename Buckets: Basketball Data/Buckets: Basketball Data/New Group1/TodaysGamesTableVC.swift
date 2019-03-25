@@ -15,7 +15,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
     @IBOutlet weak var noGamesimage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
     let NBAapi = NBA_API()
-    var games: [Game]?
+    var games = [Game]()
     var awayTeamImage: UIImage?
     var homeTeamImage: UIImage?
 
@@ -46,7 +46,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
 //    }
 //
     func loadTodaysGames(){
-        self.games = nil
+        self.games.removeAll()
         self.tableView.reloadData()
         view.addSubview(activityIndicator)
         activityIndicator.frame = view.bounds
@@ -58,11 +58,11 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
             
             if returnedGames.count > 0 {
                 self.games = returnedGames
-                print(self.games)
+                //print(self.games)
                 DispatchQueue.main.async {
+                    self.tableView.reloadData()
                     self.noGames.isHidden = true
                     self.noGamesimage.isHidden = true
-                    self.tableView.reloadData()
                     self.activityIndicator.removeFromSuperview()
                     self.tableView.reloadData()
                 }
@@ -114,15 +114,15 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return gameData.count
         self.activityIndicator.removeFromSuperview()
-        return games?.count ?? 0
+        return games.count
 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
-        cell.homeTeamName.text = games?[indexPath.row].homeTeamName
-        cell.awayTeamName.text = games?[indexPath.row].awayTeamName
-        switch games?[indexPath.row].awayTeamName {
+        cell.homeTeamName.text = games[indexPath.row].homeTeamName
+        cell.awayTeamName.text = games[indexPath.row].awayTeamName
+        switch games[indexPath.row].awayTeamName {
         case "BKN": self.awayTeamImage = UIImage(named: "bkn.png")
         case "ATL": self.awayTeamImage = UIImage(named: "atl.png")
         case "BOS": self.awayTeamImage = UIImage(named: "bos.png")
@@ -156,7 +156,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
         default: self.awayTeamImage = UIImage(named: "placeholder.png")
         }
         
-        switch games?[indexPath.row].homeTeamName {
+        switch games[indexPath.row].homeTeamName {
         case "BKN": self.homeTeamImage = UIImage(named: "bkn.png")
         case "ATL": self.homeTeamImage = UIImage(named: "atl.png")
         case "BOS": self.homeTeamImage = UIImage(named: "bos.png")
@@ -192,23 +192,23 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
         
         cell.homeAfbeelding.image = homeTeamImage
         cell.awayAfbeelding.image = awayTeamImage
-        cell.puckDrop.text = games?[indexPath.row].quarter
+        cell.puckDrop.text = games[indexPath.row].quarter
         
-        let awayScore = games?[indexPath.row].awayTeamScore
+        let awayScore = games[indexPath.row].awayTeamScore
             if awayScore == "" {
                 cell.awayScore.text = "0"
             } else {
                 cell.awayScore.text = awayScore
             }
         
-        let homeScore = games?[indexPath.row].homeTeamScore
+        let homeScore = games[indexPath.row].homeTeamScore
         if homeScore == "" {
             cell.homeScore.text = "0"
         } else {
             cell.homeScore.text = awayScore
         }
 
-        cell.venue.text = games?[indexPath.row].arena
+        cell.venue.text = games[indexPath.row].arena
         return cell
     }
 }
