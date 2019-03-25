@@ -25,14 +25,32 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     let date = Date()
     var standingsURL: String? = String()
     let activityIndicator = UIActivityIndicatorView(style: .gray)
+    var use_real_images: String?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate func start() {
+        firebaseSetup()
         setupInfoBarButtonItem()
         standingsURL = "https://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=\(date.month)%2F\(date.day)%2F\(date.year)"
         loadStandings()
-        print(standingsURL)
         self.tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        start()
+    }
+    
+    func firebaseSetup() {
+        DispatchQueue.global(qos: .background).async {
+            FirebaseConstants().setupAPP()
+            self.use_real_images = FirebaseConstants().getImages()
+            print(self.use_real_images)
+        }
     }
     
     func setupInfoBarButtonItem() {
@@ -62,23 +80,30 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func fetchStandings() {
+        firebaseSetup()
         if CheckInternet.connection() {
-            activityIndicator.startAnimating()
-            let eastStandingsAPI = EastStandingsAPI()
-            if let eastStandingsURL = self.standingsURL {
-                eastStandingsAPI.getStandings(url: eastStandingsURL) { (eastTeams) in
-                    self.eastTeams = eastTeams
-                    self.activityIndicator.removeFromSuperview()
-                }
-            }
-            let westStandingsAPI = WestStandingsAPI()
-            if let westStandingsURL = self.standingsURL {
-                westStandingsAPI.getStandings(url: westStandingsURL) { (westTeams) in
-                    self.westTeams = westTeams
-                    self.activityIndicator.removeFromSuperview()
-                }
-            }
+            self.eastTeams.removeAll()
+            self.westTeams.removeAll()
             self.tableView.reloadData()
+            activityIndicator.startAnimating()
+            DispatchQueue.global(qos: .background).async {
+                let eastStandingsAPI = EastStandingsAPI()
+                if let eastStandingsURL = self.standingsURL {
+                    eastStandingsAPI.getStandings(url: eastStandingsURL) { (eastTeams) in
+                        self.eastTeams = eastTeams
+                    }
+                }
+                let westStandingsAPI = WestStandingsAPI()
+                if let westStandingsURL = self.standingsURL {
+                    westStandingsAPI.getStandings(url: westStandingsURL) { (westTeams) in
+                        self.westTeams = westTeams
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.activityIndicator.removeFromSuperview()
+                    self.tableView.reloadData()
+                }
+            }
         } else {
             self.activityIndicator.removeFromSuperview()
             self.navigationController?.popToRootViewController(animated: true)
@@ -108,8 +133,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     @IBAction func segmentedControlActionChanged(sender: AnyObject) {
-        fetchStandings()
-        self.tableView.reloadData()
+        segmentedControl?.isEnabled = false
+        start()
+        segmentedControl?.isEnabled = true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,6 +144,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         switch(segmentedControl?.selectedSegmentIndex)
         {
         case 0:
+            if self.use_real_images == "false" {
+                self.teamImage = UIImage(named: "placeholder.png")
+            } else {
             switch eastTeams[indexPath.row].team {
             case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")//
             case "Atlanta": self.teamImage = UIImage(named: "atl.png")
@@ -151,6 +180,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             case "Washington": self.teamImage = UIImage(named: "was.png")//
             default: self.teamImage = UIImage(named: "placeholder.png")
             }
+            }
             cell.teamImage.image = teamImage
             cell.gamesPlayed.text = eastTeams[indexPath.row].gamesPlayed
             cell.wins.text = eastTeams[indexPath.row].wins
@@ -159,6 +189,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             cell.winPercentage.text = value.string(fractionDigits: 3)
             break
         case 1:
+            if self.use_real_images == "false" {
+                self.teamImage = UIImage(named: "placeholder.png")
+            } else {
             switch westTeams[indexPath.row].team {
             case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")//
             case "Atlanta": self.teamImage = UIImage(named: "atl.png")
@@ -191,6 +224,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             case "Utah": self.teamImage = UIImage(named: "uta.png")//
             case "Washington": self.teamImage = UIImage(named: "was.png")
             default: self.teamImage = UIImage(named: "placeholder.png")
+            }
             }
             cell.teamImage.image = teamImage
             cell.gamesPlayed.text = westTeams[indexPath.row].gamesPlayed

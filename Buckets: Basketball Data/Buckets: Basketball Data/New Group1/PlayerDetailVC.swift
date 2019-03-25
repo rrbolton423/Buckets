@@ -34,14 +34,23 @@ class PlayerDetailVC: UIViewController {
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var use_real_images: String?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate func start() {
         setupInfoBarButtonItem()
         firebaseSetup()
         setupActivityIndicator()
         checkForPlayerID()
         fetchPlayer()
         requestAppStoreReview()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        start()
     }
     
     func setupInfoBarButtonItem() {
@@ -60,8 +69,11 @@ class PlayerDetailVC: UIViewController {
     }
     
     func firebaseSetup() {
-        FirebaseConstants().setupAPP()
-        use_real_images = FirebaseConstants().getImages()
+        DispatchQueue.global(qos: .background).async {
+            FirebaseConstants().setupAPP()
+            self.use_real_images = FirebaseConstants().getImages()
+            print(self.use_real_images)
+        }
     }
     
     func setupActivityIndicator() {
@@ -81,10 +93,14 @@ class PlayerDetailVC: UIViewController {
     func fetchPlayer() {
         if CheckInternet.connection() {
             activityIndicator.startAnimating()
-            let detailPlayerApi = PlayerApi()
-            if let playerInfoURL = self.playerInfoURL {
-                detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer) in
-                    self.showDetail(player: detailPlayer)
+            DispatchQueue.global(qos: .background).async {
+                let detailPlayerApi = PlayerApi()
+                if let playerInfoURL = self.playerInfoURL {
+                    detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer) in
+                        DispatchQueue.main.async {
+                            self.showDetail(player: detailPlayer)
+                        }
+                    }
                 }
             }
         } else {
@@ -97,6 +113,28 @@ class PlayerDetailVC: UIViewController {
         DispatchQueue.main.async {
             self.activityIndicator.removeFromSuperview()
             self.navigationItem.title = player.name
+            
+            if let ID = player.ID, let teamID = player.teamID {
+                if ID == "" {
+                    self.headshotImageView.displayPlaceholderImage()
+                } else {
+                    if self.use_real_images == "false" {
+                        self.headshotImageView.displayPlaceholderImage()
+                    } else {
+                        self.playerHeadshotURL = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/\(teamID)/2018/260x190/\(ID).png"
+                        if self.playerHeadshotURL != nil {
+                            self.headshotImageView.loadImageUsingCache(withURL: self.playerHeadshotURL ?? "")
+                            if self.headshotImageView.image != nil {
+                                return
+                            } else {
+                                self.headshotImageView.displayPlaceholderImage()
+                            }
+                        }
+                    }
+                }
+            } else {
+                self.headshotImageView.displayPlaceholderImage()
+            }
             
             if let name = player.name {
                 if name == "" {
@@ -241,28 +279,6 @@ class PlayerDetailVC: UIViewController {
                 }
             } else {
                 self.rpgLabel.text = "N/A"
-            }
-            
-            if let ID = player.ID, let teamID = player.teamID {
-                if ID == "" {
-                    self.headshotImageView.displayPlaceholderImage()
-                } else {
-                    if self.use_real_images == "false" {
-                        self.headshotImageView.displayPlaceholderImage()
-                    } else {
-                        self.playerHeadshotURL = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/\(teamID)/2018/260x190/\(ID).png"
-                        if self.playerHeadshotURL != nil {
-                            self.headshotImageView.loadImageUsingCache(withURL: self.playerHeadshotURL ?? "")
-                            if self.headshotImageView.image != nil {
-                                return
-                            } else {
-                                self.headshotImageView.displayPlaceholderImage()
-                            }
-                        }
-                    }
-                }
-            } else {
-                self.headshotImageView.displayPlaceholderImage()
             }
         }
     }

@@ -17,14 +17,18 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     let searchController = UISearchController(searchResultsController: nil)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate func start() {
         setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
         setupActivityIndicator()
         checkForTeamID()
         fetchPlayers()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
     }
     
     func setupInfoBarButtonItem() {
@@ -45,6 +49,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if #available(iOS 11.0, *) {
+            start()
             navigationItem.hidesSearchBarWhenScrolling = false
         }
     }
@@ -60,6 +65,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         super.viewWillDisappear(animated)
         searchController.dismiss(animated: true, completion: nil)
     }
+    
     
     func setupSearchController() {
         searchController.searchBar.searchBarStyle = .minimal
@@ -94,7 +100,9 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func firebaseSetup() {
-        FirebaseConstants().setupAPP()
+        DispatchQueue.global(qos: .background).async {
+            FirebaseConstants().setupAPP()
+        }
     }
     
     func setupActivityIndicator() {
@@ -112,21 +120,30 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func fetchPlayers() {
+        activityIndicator.startAnimating()
         if CheckInternet.connection() {
-            activityIndicator.startAnimating()
-            let playersAPI = PlayersApi()
-            if let teamRosterURL = self.teamRosterURL {
-                playersAPI.getPlayers(url: teamRosterURL) { (players) in
-                    self.unfilteredRoster = players
-                    let namesSorted = self.unfilteredRoster?.sorted { (initial, next) -> Bool in
-                        return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
+            self.unfilteredRoster = nil
+            self.filteredRoster = nil
+            self.tableView.reloadData()
+            DispatchQueue.global(qos: .background).async {
+                let playersAPI = PlayersApi()
+                if let teamRosterURL = self.teamRosterURL {
+                    playersAPI.getPlayers(url: teamRosterURL) { (players) in
+                        self.unfilteredRoster = players
+                        let namesSorted = self.unfilteredRoster?.sorted { (initial, next) -> Bool in
+                            return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
+                        }
+                        self.unfilteredRoster = namesSorted
+                        self.filteredRoster = self.unfilteredRoster
+                        DispatchQueue.main.async {
+                            self.activityIndicator.removeFromSuperview()
+                            self.tableView.reloadData()
+                        }
                     }
-                    self.unfilteredRoster = namesSorted
-                    self.filteredRoster = self.unfilteredRoster
-                    self.tableView.reloadData()
                 }
             }
         } else {
+            activityIndicator.stopAnimating()
             self.navigationController?.popToRootViewController(animated: true)
             self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
         }
@@ -159,14 +176,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         }
         
         return cell ?? UITableViewCell()
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last {
-            if indexPath == lastVisibleIndexPath {
-                self.activityIndicator.removeFromSuperview()
-            }
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

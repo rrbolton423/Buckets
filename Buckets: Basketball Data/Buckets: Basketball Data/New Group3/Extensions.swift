@@ -25,17 +25,19 @@ extension UIImageView {
             self.image = cachedImage
             return
         }
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if error != nil {
-                return
-            }
-            DispatchQueue.main.async {
-                if let data = data, let image = UIImage(data: data) {
-                    imageCache.setObject(image, forKey: urlString as NSString)
-                    self.image = image
+        DispatchQueue.global(qos: .background).async {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                if error != nil {
+                    return
                 }
-            }
-        }).resume()
+                DispatchQueue.main.async {
+                    if let data = data, let image = UIImage(data: data) {
+                        imageCache.setObject(image, forKey: urlString as NSString)
+                        self.image = image
+                    }
+                }
+            }).resume()
+        }
     }
     func displayPlaceholderImage() {
         DispatchQueue.main.async { self.image = UIImage(named: "placeholder") }

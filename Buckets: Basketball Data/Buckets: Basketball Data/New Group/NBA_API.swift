@@ -49,6 +49,8 @@ class NBA_API {
     
     func getScores(date: String, success: @escaping ([Game]) -> Void) {
         let url = URL(string: String(format: baseURL, date))
+        //         let url = URL(string: String(format: baseURL, "20190724")) test no games being played
+
         //var nba = NBA(games: [], numberOfGames: 0)
         //var games: [Game] = []
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -59,9 +61,12 @@ class NBA_API {
                     if let games = self.parseJSON(data: data! as NSData) {
                         let arr = games.removingDuplicates()
                         success(arr)
+                    } else {
+                        success([])
                     }
                 } catch let error as NSError {
                     print(error)
+                    //success([])
                 }
             }
             

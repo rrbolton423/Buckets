@@ -31,13 +31,22 @@ class TeamDetailVC: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate func start() {
         setupInfoBarButtonItem()
         firebaseSetup()
         setupActivityIndicator()
         checkForTeamID()
         fetchRoster()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        start()
     }
     
     func setupInfoBarButtonItem() {
@@ -56,8 +65,11 @@ class TeamDetailVC: UIViewController {
     }
     
     func firebaseSetup() {
-        FirebaseConstants().setupAPP()
-        use_real_images = FirebaseConstants().getImages()
+        DispatchQueue.global(qos: .background).async {
+            FirebaseConstants().setupAPP()
+            self.use_real_images = FirebaseConstants().getImages()
+            print(self.use_real_images)
+        }
     }
     
     func setupActivityIndicator() {
@@ -77,13 +89,15 @@ class TeamDetailVC: UIViewController {
     func fetchRoster() {
         if CheckInternet.connection() {
             activityIndicator.startAnimating()
-            let teamApi = TeamAPI()
-            if let teamInfoURL = self.teamInfoURL {
-                teamApi.getTeamInfo(url: teamInfoURL) { (detailTeam) in
-                    self.showInfoDetail(team: detailTeam)
-                    self.teamToPass = detailTeam
+            DispatchQueue.global(qos: .background).async {
+                let teamApi = TeamAPI()
+                if let teamInfoURL = self.teamInfoURL {
+                    teamApi.getTeamInfo(url: teamInfoURL) { (detailTeam) in
+                        self.teamToPass = detailTeam
+                        self.showInfoDetail(team: detailTeam)
+                    }
                 }
-            }
+            }     
         } else {
             self.navigationController?.popToRootViewController(animated: true)
             self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
