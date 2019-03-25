@@ -8,74 +8,18 @@
 
 import UIKit
 
-class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    
-    var unfilteredRoster: [Players]?
-    var filteredRoster: [Players]?
+class PlayersTableVC: UITableViewController {
+    var roster: [Players]?
     var selectedTeamID: String?
     var teamRosterURL: String?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
-    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSearchController()
         firebaseSetup()
         setupActivityIndicator()
         checkForTeamID()
         fetchPlayers()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationItem.hidesSearchBarWhenScrolling = false
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if #available(iOS 11.0, *) {
-            navigationItem.hidesSearchBarWhenScrolling = true
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        searchController.dismiss(animated: true, completion: nil)
-    }
-    
-    func setupSearchController() {
-        searchController.searchBar.searchBarStyle = .minimal
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController;
-        self.definesPresentationContext = true
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            filteredRoster = unfilteredRoster?.filter { player in
-                return (player.fullName?.lowercased().contains(searchText.lowercased()))!
-            }
-        } else {
-            filteredRoster = unfilteredRoster
-        }
-        tableView.reloadData()
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        searchBar.text = nil
-        searchBar.setShowsCancelButton(false, animated: true)
-        tableView.reloadData()
     }
     
     func firebaseSetup() {
@@ -102,12 +46,11 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
             let playersAPI = PlayersApi()
             if let teamRosterURL = self.teamRosterURL {
                 playersAPI.getPlayers(url: teamRosterURL) { (players) in
-                    self.unfilteredRoster = players
-                    let namesSorted = self.unfilteredRoster?.sorted { (initial, next) -> Bool in
+                    self.roster = players
+                    let namesSorted = self.roster?.sorted { (initial, next) -> Bool in
                         return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
                     }
-                    self.unfilteredRoster = namesSorted
-                    self.filteredRoster = self.unfilteredRoster
+                    self.roster = namesSorted
                     self.tableView.reloadData()
                 }
             }
@@ -120,11 +63,13 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredRoster?.count ?? 0
+        // #warning Incomplete implementation, return the number of rows
+        return roster?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,16 +78,12 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as? PlayerCell
-        
-        if let nbaTeams = filteredRoster {
-            if let playerName = nbaTeams[indexPath.row].fullName, let jerseyNumber = nbaTeams[indexPath.row].jerseyNumber {
-                cell?.playerName.text = "#"+jerseyNumber + " " + playerName
-            }
-            if let position = nbaTeams[indexPath.row].position {
-                cell?.position.text = position
-            }
+        if let playerName = roster?[indexPath.row].fullName, let jerseyNumber = roster?[indexPath.row].jerseyNumber {
+            cell?.playerName.text = "#"+jerseyNumber + " " + playerName
         }
-        
+        if let position = roster?[indexPath.row].position {
+            cell?.position.text = position
+        }
         return cell ?? UITableViewCell()
     }
     
@@ -157,10 +98,10 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? PlayerDetailVC
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            if let playerID = filteredRoster?[(selectedIndexPath.row)].ID {
+            if let playerID = roster?[(selectedIndexPath.row)].ID {
                 detailVC?.playerID = playerID
             }
-            if let birthdate = filteredRoster?[(selectedIndexPath.row)].birthdate {
+            if let birthdate = roster?[(selectedIndexPath.row)].birthdate {
                 detailVC?.playerBirthdateFormatted = birthdate
             }
         }

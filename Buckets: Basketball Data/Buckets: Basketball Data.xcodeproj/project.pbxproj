@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A32D595C22474C730038CE69 /* StandingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D595B22474C730038CE69 /* StandingsCell.swift */; };
+		A32D595E22474DF70038CE69 /* TodaysGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D595D22474DF70038CE69 /* TodaysGamesCell.swift */; };
+		A32D5960224751120038CE69 /* TodaysGamesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D595F224751120038CE69 /* TodaysGamesTableVC.swift */; };
+		A32D59622247514B0038CE69 /* StandingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D59612247514B0038CE69 /* StandingsTableVC.swift */; };
+		A32D59642247BAAA0038CE69 /* EastStandingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D59632247BAAA0038CE69 /* EastStandingsAPI.swift */; };
+		A32D59662247CB290038CE69 /* TodaysGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D59652247CB290038CE69 /* TodaysGamesAPI.swift */; };
+		A32D59682247CEAC0038CE69 /* StandingTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D59672247CEAC0038CE69 /* StandingTeam.swift */; };
+		A32D596A2247ECA00038CE69 /* WestStandingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32D59692247ECA00038CE69 /* WestStandingsAPI.swift */; };
 		A331D53C223BFE100096A5A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */; };
 		A331D53D223BFE100096A5A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A331D539223BFE0F0096A5A9 /* Assets.xcassets */; };
 		A331D53E223BFE100096A5A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */; };
@@ -37,6 +45,14 @@
 /* Begin PBXFileReference section */
 		0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Buckets__Basketball_Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A92BFA25561DA4AE54DD1E /* Pods-Buckets: Basketball Data.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.release.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.release.xcconfig"; sourceTree = "<group>"; };
+		A32D595B22474C730038CE69 /* StandingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCell.swift; sourceTree = "<group>"; };
+		A32D595D22474DF70038CE69 /* TodaysGamesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysGamesCell.swift; sourceTree = "<group>"; };
+		A32D595F224751120038CE69 /* TodaysGamesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysGamesTableVC.swift; sourceTree = "<group>"; };
+		A32D59612247514B0038CE69 /* StandingsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandingsTableVC.swift; sourceTree = "<group>"; };
+		A32D59632247BAAA0038CE69 /* EastStandingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EastStandingsAPI.swift; sourceTree = "<group>"; };
+		A32D59652247CB290038CE69 /* TodaysGamesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysGamesAPI.swift; sourceTree = "<group>"; };
+		A32D59672247CEAC0038CE69 /* StandingTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingTeam.swift; sourceTree = "<group>"; };
+		A32D59692247ECA00038CE69 /* WestStandingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WestStandingsAPI.swift; sourceTree = "<group>"; };
 		A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A331D539223BFE0F0096A5A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +147,9 @@
 				A331D55A223BFE580096A5A9 /* TeamAPI.swift */,
 				A331D55B223BFE590096A5A9 /* PlayersAPI.swift */,
 				A331D55C223BFE590096A5A9 /* PlayerAPI.swift */,
+				A32D59632247BAAA0038CE69 /* EastStandingsAPI.swift */,
+				A32D59692247ECA00038CE69 /* WestStandingsAPI.swift */,
+				A32D59652247CB290038CE69 /* TodaysGamesAPI.swift */,
 			);
 			name = APIs;
 			path = "New Group";
@@ -143,6 +162,8 @@
 				A331D548223BFE3B0096A5A9 /* TeamDetailVC.swift */,
 				A331D546223BFE3A0096A5A9 /* PlayersTableVC.swift */,
 				A331D549223BFE3B0096A5A9 /* PlayerDetailVC.swift */,
+				A32D59612247514B0038CE69 /* StandingsTableVC.swift */,
+				A32D595F224751120038CE69 /* TodaysGamesTableVC.swift */,
 			);
 			name = Controllers;
 			path = "New Group1";
@@ -176,6 +197,7 @@
 				A331D554223BFE4B0096A5A9 /* Players.swift */,
 				A331D552223BFE4A0096A5A9 /* Player.swift */,
 				A331D553223BFE4B0096A5A9 /* DetailTeam.swift */,
+				A32D59672247CEAC0038CE69 /* StandingTeam.swift */,
 			);
 			name = Models;
 			path = "New Group4";
@@ -186,6 +208,8 @@
 			children = (
 				A331D54F223BFE430096A5A9 /* TeamCell.swift */,
 				A331D54E223BFE420096A5A9 /* PlayerCell.swift */,
+				A32D595B22474C730038CE69 /* StandingsCell.swift */,
+				A32D595D22474DF70038CE69 /* TodaysGamesCell.swift */,
 			);
 			name = Views;
 			path = "New Group5";
@@ -322,21 +346,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				A331D556223BFE4B0096A5A9 /* Player.swift in Sources */,
+				A32D595C22474C730038CE69 /* StandingsCell.swift in Sources */,
+				A32D59662247CB290038CE69 /* TodaysGamesAPI.swift in Sources */,
 				A331D557223BFE4B0096A5A9 /* DetailTeam.swift in Sources */,
 				A331D558223BFE4B0096A5A9 /* Players.swift in Sources */,
 				A331D54D223BFE3B0096A5A9 /* PlayerDetailVC.swift in Sources */,
 				A331D559223BFE4B0096A5A9 /* StaticTeam.swift in Sources */,
 				A331D55E223BFE590096A5A9 /* PlayersAPI.swift in Sources */,
+				A32D59642247BAAA0038CE69 /* EastStandingsAPI.swift in Sources */,
 				A331D54B223BFE3B0096A5A9 /* TeamsTableVC.swift in Sources */,
 				A331D551223BFE430096A5A9 /* TeamCell.swift in Sources */,
+				A32D5960224751120038CE69 /* TodaysGamesTableVC.swift in Sources */,
 				A331D55D223BFE590096A5A9 /* TeamAPI.swift in Sources */,
+				A32D59682247CEAC0038CE69 /* StandingTeam.swift in Sources */,
 				A331D53E223BFE100096A5A9 /* AppDelegate.swift in Sources */,
 				A331D550223BFE430096A5A9 /* PlayerCell.swift in Sources */,
+				A32D59622247514B0038CE69 /* StandingsTableVC.swift in Sources */,
 				A331D544223BFE310096A5A9 /* CheckInternet.swift in Sources */,
 				A331D543223BFE310096A5A9 /* Constants.swift in Sources */,
 				A331D545223BFE310096A5A9 /* Extensions.swift in Sources */,
 				A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */,
+				A32D596A2247ECA00038CE69 /* WestStandingsAPI.swift in Sources */,
 				A331D54A223BFE3B0096A5A9 /* PlayersTableVC.swift in Sources */,
+				A32D595E22474DF70038CE69 /* TodaysGamesCell.swift in Sources */,
 				A331D55F223BFE590096A5A9 /* PlayerAPI.swift in Sources */,
 				A331D54C223BFE3B0096A5A9 /* TeamDetailVC.swift in Sources */,
 			);
@@ -479,7 +511,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -500,7 +532,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.romellbolton.Buckets--Basketball-Data";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
