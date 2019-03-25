@@ -1039,7 +1039,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uIR-OE-KYp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Gyy-y7-stM"/>
+                    <navigationItem key="navigationItem" title="Buckets" id="Gyy-y7-stM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="noGames" destination="nMh-03-oEc" id="ETj-fN-cey"/>
