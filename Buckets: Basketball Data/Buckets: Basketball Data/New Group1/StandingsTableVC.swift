@@ -31,6 +31,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         setupInfoBarButtonItem()
         standingsURL = "https://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=\(date.month)%2F\(date.day)%2F\(date.year)"
         loadStandings()
+        print(standingsURL)
         self.tableView.reloadData()
     }
     

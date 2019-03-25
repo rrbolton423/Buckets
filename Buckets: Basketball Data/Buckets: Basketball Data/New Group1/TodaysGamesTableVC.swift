@@ -14,7 +14,15 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGamesimage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
-    
+    let NBAapi = NBA_API()
+    var games = [Game]()
+    var awayTeamImage: UIImage?
+    var homeTeamImage: UIImage?
+
+
+
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
+
     var gameTimer: Timer!
     
     //local file, for testing or when no games are being played or will be played today
@@ -24,96 +32,79 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
     var todaysGamesURL: URL = URL(string: "https://statsapi.web.nhl.com/api/v1/schedule")!
     var liveFeed = ""
     
-    
-//    var gameData: [Game] = []
-//    let activityIndicator = UIActivityIndicatorView(style: .gray)
-//
-//    func addNavBarImage () {
-//        let navController = navigationController!
-//
-//        let image = #imageLiteral(resourceName: "nhlLogo")
-//        let imageView = UIImageView(image: image)
-//
-//        let bannerWidth = navController.navigationBar.frame.size.width
-//        let bannerHeight = navController.navigationBar.frame.size.height
-//
-//        let bannerX = bannerWidth/2 - image.size.width/2
-//        let bannerY = bannerHeight/2 - image.size.height/2
-//
-//        imageView.frame = CGRect(x: bannerX, y: bannerY, width: bannerWidth, height: bannerHeight)
-//        imageView.contentMode = .scaleAspectFit
-//
-//        navigationItem.titleView = imageView
-//
-//    }
-//
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInfoBarButtonItem()
-        //addNavBarImage()
-        //loadTodaysGames()
+        addNavBarRefreshButton()
+        if CheckInternet.connection() {
+            loadTodaysGames()
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+            self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+        }
+    }
+    
+    func addNavBarRefreshButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem:
+            UIBarButtonItem.SystemItem.refresh, target: self, action:
+            #selector(refresh))
     }
 //
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
 //    }
 //
-//    func loadTodaysGames(){
-//        print("load Games")
-//
-//        view.addSubview(activityIndicator)
-//        activityIndicator.frame = view.bounds
-//        activityIndicator.startAnimating()
-//
-//        let todaysGamesDatatask = URLSession.shared.dataTask(with: todaysGamesURL, completionHandler: dataLoaded)
-//
-//        todaysGamesDatatask.resume()
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 211
-//    }
-//
-//    func dataLoaded(data:Data?,response:URLResponse?,error:Error?){
-//        if let detailData = data{
-//            let decoder = JSONDecoder()
-//            do {
-//                let jsondata = try decoder.decode(Initial.self, from: detailData)
-//                if (jsondata.dates?.count)! > 0 {
-//                gameData = jsondata.dates![0].games
-//                DispatchQueue.main.async{
-//
-//                    self.noGames.isHidden = true
-//                    self.noGamesimage.isHidden = true
-//                    self.tableView.reloadData()
-//                    self.activityIndicator.removeFromSuperview()
-//                }
-//                } else {
-//                    DispatchQueue.main.async{
-//                        self.tableView.isHidden = true
-//                        self.noGames.isHidden = false
-//                        self.noGamesimage.isHidden = false
-//                        self.activityIndicator.removeFromSuperview()
-//                    }
-//                }
-//            }catch let error{
-//               print(error)
-//            }
-//        }else{
-//            print(error!)
-//        }
-//    }
+    func loadTodaysGames(){
+
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
+        activityIndicator.startAnimating()
+
+        let nbaDate = NBAapi.getTodaysDate()
+        NBAapi.getScores(date: nbaDate) { returnedGames in
+            //print(nba)
+            
+            if returnedGames.count > 0 {
+                self.games = returnedGames
+                print(self.games)
+                DispatchQueue.main.async {
+                    self.noGames.isHidden = true
+                    self.noGamesimage.isHidden = true
+                    self.tableView.reloadData()
+                    self.activityIndicator.removeFromSuperview()
+                }
+            } else {
+                DispatchQueue.main.async{
+                self.tableView.isHidden = true
+                self.noGames.isHidden = false
+                self.noGamesimage.isHidden = false
+                self.activityIndicator.removeFromSuperview()
+            }
+            }
+        }
+    }
     
-    
-//
-    
+    @objc func refresh() {
+        if CheckInternet.connection() {
+            loadTodaysGames()
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+            self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+        }
+    }
+
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 211
+    }
+
     func setupInfoBarButtonItem() {
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
         navigationItem.rightBarButtonItem = infoBarButtonItem
     }
-    
+
     @objc func getInfoAction() {
         let alert = UIAlertController(title: "Version 1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -121,33 +112,111 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
+
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return gameData.count
-        return 0
+        self.activityIndicator.removeFromSuperview()
+        return games.count
 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
-//        let date = gameData[indexPath.row].gameDate;
-//
-//        let start = date.index(date.startIndex, offsetBy: 11)
-//        let end = date.index(date.endIndex, offsetBy: -4)
-//        let range = start..<end
-//        liveFeed = gameData[indexPath.row].link
-//
-//        cell.homeTeamName.text = gameData[indexPath.row].teams.home.team?.name
-//        cell.awayTeamName.text = gameData[indexPath.row].teams.away.team?.name
-//        cell.homeAfbeelding.image = UIImage(named: (gameData[indexPath.row].teams.home.team?.name)!)
-//        cell.awayAfbeelding.image = UIImage(named: (gameData[indexPath.row].teams.away.team?.name)!)
-//        cell.puckDrop.text = String(date[range])
-//        cell.venue.text = "@" + gameData[indexPath.row].venue.name
+        cell.homeTeamName.text = games[indexPath.row].homeTeamName
+        cell.awayTeamName.text = games[indexPath.row].awayTeamName
+        switch games[indexPath.row].awayTeamName {
+        case "BKN": self.awayTeamImage = UIImage(named: "bkn.png")
+        case "ATL": self.awayTeamImage = UIImage(named: "atl.png")
+        case "BOS": self.awayTeamImage = UIImage(named: "bos.png")
+        case "CHA": self.awayTeamImage = UIImage(named: "cha.png")
+        case "CHI": self.awayTeamImage = UIImage(named: "chi.png")
+        case "CLE": self.awayTeamImage = UIImage(named: "cle.png")
+        case "DAL": self.awayTeamImage = UIImage(named: "dal.png")
+        case "DEN": self.awayTeamImage = UIImage(named: "den.png")
+        case "DET": self.awayTeamImage = UIImage(named: "det.png")
+        case "GSW": self.awayTeamImage = UIImage(named: "gsw.png")
+        case "HOU": self.awayTeamImage = UIImage(named: "hou.png")
+        case "IND": self.awayTeamImage = UIImage(named: "ind.png")
+        case "LAC": self.awayTeamImage = UIImage(named: "lac.png")
+        case "LAL": self.awayTeamImage = UIImage(named: "lal.png")
+        case "MEM": self.awayTeamImage = UIImage(named: "mem.png")
+        case "MIA": self.awayTeamImage = UIImage(named: "mia.png")
+        case "MIL": self.awayTeamImage = UIImage(named: "mil.png")
+        case "MIN": self.awayTeamImage = UIImage(named: "min.png")
+        case "NOP": self.awayTeamImage = UIImage(named: "nop.png")
+        case "NYK": self.awayTeamImage = UIImage(named: "nyk.png")
+        case "OKC": self.awayTeamImage = UIImage(named: "okc.png")
+        case "ORL": self.awayTeamImage = UIImage(named: "orl.png")
+        case "PHI": self.awayTeamImage = UIImage(named: "phi.png")
+        case "PHX": self.awayTeamImage = UIImage(named: "phx.png")
+        case "POR": self.awayTeamImage = UIImage(named: "por.png")
+        case "SAC": self.awayTeamImage = UIImage(named: "sac.png")
+        case "SAS": self.awayTeamImage = UIImage(named: "sas.png")
+        case "TOR": self.awayTeamImage = UIImage(named: "tor.png")
+        case "UTA": self.awayTeamImage = UIImage(named: "uta.png")
+        case "WAS": self.awayTeamImage = UIImage(named: "was.png")
+        default: self.awayTeamImage = UIImage(named: "placeholder.png")
+        }
+        
+        switch games[indexPath.row].homeTeamName {
+        case "BKN": self.homeTeamImage = UIImage(named: "bkn.png")
+        case "ATL": self.homeTeamImage = UIImage(named: "atl.png")
+        case "BOS": self.homeTeamImage = UIImage(named: "bos.png")
+        case "CHA": self.homeTeamImage = UIImage(named: "cha.png")
+        case "CHI": self.homeTeamImage = UIImage(named: "chi.png")
+        case "CLE": self.homeTeamImage = UIImage(named: "cle.png")
+        case "DAL": self.homeTeamImage = UIImage(named: "dal.png")
+        case "DEN": self.homeTeamImage = UIImage(named: "den.png")
+        case "DET": self.homeTeamImage = UIImage(named: "det.png")
+        case "GSW": self.homeTeamImage = UIImage(named: "gsw.png")
+        case "HOU": self.homeTeamImage = UIImage(named: "hou.png")
+        case "IND": self.homeTeamImage = UIImage(named: "ind.png")
+        case "LAC": self.homeTeamImage = UIImage(named: "lac.png")
+        case "LAL": self.homeTeamImage = UIImage(named: "lal.png")
+        case "MEM": self.homeTeamImage = UIImage(named: "mem.png")
+        case "MIA": self.homeTeamImage = UIImage(named: "mia.png")
+        case "MIL": self.homeTeamImage = UIImage(named: "mil.png")
+        case "MIN": self.homeTeamImage = UIImage(named: "min.png")
+        case "NOP": self.homeTeamImage = UIImage(named: "nop.png")
+        case "NYK": self.homeTeamImage = UIImage(named: "nyk.png")
+        case "OKC": self.homeTeamImage = UIImage(named: "okc.png")
+        case "ORL": self.homeTeamImage = UIImage(named: "orl.png")
+        case "PHI": self.homeTeamImage = UIImage(named: "phi.png")
+        case "PHX": self.homeTeamImage = UIImage(named: "phx.png")
+        case "POR": self.homeTeamImage = UIImage(named: "por.png")
+        case "SAC": self.homeTeamImage = UIImage(named: "sac.png")
+        case "SAS": self.homeTeamImage = UIImage(named: "sas.png")
+        case "TOR": self.homeTeamImage = UIImage(named: "tor.png")
+        case "UTA": self.homeTeamImage = UIImage(named: "uta.png")
+        case "WAS": self.homeTeamImage = UIImage(named: "was.png")
+        default: self.homeTeamImage = UIImage(named: "placeholder.png")
+        }
+        
+        cell.homeAfbeelding.image = homeTeamImage
+        cell.awayAfbeelding.image = awayTeamImage
+        cell.puckDrop.text = games[indexPath.row].quarter
+        
+        let awayScore = games[indexPath.row].awayTeamScore
+            if awayScore == "" {
+                cell.awayScore.text = "0"
+            } else {
+                cell.awayScore.text = awayScore
+            }
+        
+        let homeScore = games[indexPath.row].homeTeamScore
+        if homeScore == "" {
+            cell.homeScore.text = "0"
+        } else {
+            cell.homeScore.text = awayScore
+        }
 
+        cell.venue.text = games[indexPath.row].arena
         return cell
     }
 }
+

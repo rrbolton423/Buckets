@@ -894,7 +894,7 @@
                                 <rect key="frame" x="0.0" y="104" width="375" height="514"/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todaysGamesCell" rowHeight="211" id="g1R-q4-6eO" customClass="TodaysGamesCell" customModule="Buckets__Basketball_Data" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="todaysGamesCell" rowHeight="211" id="g1R-q4-6eO" customClass="TodaysGamesCell" customModule="Buckets__Basketball_Data" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="211"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g1R-q4-6eO" id="zDW-0m-Uhs">
@@ -939,20 +939,20 @@
                                                         <constraint firstAttribute="width" constant="80" id="DVp-Ar-3uP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="puck drop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-5K-xTg">
-                                                    <rect key="frame" x="16" y="184" width="73" height="19"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip-Off" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-5K-xTg">
+                                                    <rect key="frame" x="16" y="184" width="50" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.46724302029999998" green="0.46724302029999998" blue="0.46724302029999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VENUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S72-cz-aRe">
-                                                    <rect key="frame" x="111" y="184" width="46" height="17"/>
+                                                    <rect key="frame" x="88" y="184" width="46" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.46724302029999998" green="0.46724302029999998" blue="0.46724302029999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJc-j9-tcc">
-                                                    <rect key="frame" x="96" y="182" width="6" height="21"/>
+                                                    <rect key="frame" x="73" y="182" width="6" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <color key="textColor" red="0.46724302029999998" green="0.46724302029999998" blue="0.46724302029999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -997,9 +997,12 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="awayAfbeelding" destination="spL-XO-I1M" id="OQW-Wr-COJ"/>
+                                            <outlet property="awayScore" destination="0GH-MW-sRc" id="8sR-u7-Byi"/>
                                             <outlet property="awayTeamName" destination="9p5-lm-2e9" id="e40-Vj-liU"/>
                                             <outlet property="homeAfbeelding" destination="Nog-KR-iM5" id="aRC-1F-TqJ"/>
+                                            <outlet property="homeScore" destination="Kp1-2N-pZF" id="hHe-e6-VgW"/>
                                             <outlet property="homeTeamName" destination="28n-rd-qnP" id="dlM-dh-UWV"/>
+                                            <outlet property="noGames" destination="nMh-03-oEc" id="zpr-nB-6NV"/>
                                             <outlet property="puckDrop" destination="7wl-5K-xTg" id="d0c-h3-HzB"/>
                                             <outlet property="venue" destination="S72-cz-aRe" id="Vig-3B-yqr"/>
                                         </connections>
@@ -1012,8 +1015,8 @@
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TODAYS GAMES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJn-6g-opJ">
                                 <rect key="frame" x="20" y="66" width="339" height="36"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1036,7 +1039,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uIR-OE-KYp"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Games" id="Gyy-y7-stM"/>
+                    <navigationItem key="navigationItem" id="Gyy-y7-stM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="noGames" destination="nMh-03-oEc" id="ETj-fN-cey"/>

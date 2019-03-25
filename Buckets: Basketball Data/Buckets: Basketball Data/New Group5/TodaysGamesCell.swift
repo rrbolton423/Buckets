@@ -16,5 +16,7 @@ class TodaysGamesCell: UITableViewCell {
     @IBOutlet weak var awayTeamName: UILabel!
     @IBOutlet weak var puckDrop: UILabel!
     @IBOutlet weak var venue: UILabel!
+    @IBOutlet weak var awayScore: UILabel!
+    @IBOutlet weak var homeScore: UILabel!
     @IBOutlet weak var noGames: UILabel!
 }
