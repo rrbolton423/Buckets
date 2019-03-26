@@ -58,7 +58,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="EYI-hK-cO0" firstAttribute="centerY" secondItem="YcS-lw-LOi" secondAttribute="centerY" id="QgY-ft-nOD"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Det-SI-Ta2" secondAttribute="trailing" constant="20" symbolic="YES" id="RvP-dy-vh3"/>
@@ -67,7 +67,7 @@
                                         <constraint firstItem="Det-SI-Ta2" firstAttribute="centerY" secondItem="YcS-lw-LOi" secondAttribute="centerY" id="uof-kP-xcb"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="teamLogo" destination="EYI-hK-cO0" id="ExG-xe-KT9"/>
                                     <outlet property="teamName" destination="Det-SI-Ta2" id="nI3-Y3-1uR"/>
@@ -837,6 +837,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="vId-Ct-7h6" firstAttribute="centerX" secondItem="8Gs-8b-3eO" secondAttribute="centerX" id="03O-3a-cUI"/>
                                                 <constraint firstItem="hlz-ZZ-fTn" firstAttribute="top" secondItem="AHl-Mn-EvU" secondAttribute="top" constant="9" id="1BS-CU-lcx"/>
@@ -862,7 +863,7 @@
                                                 <constraint firstItem="MLv-d8-ex8" firstAttribute="top" secondItem="6iL-wD-feO" secondAttribute="bottom" constant="7.6699999999999999" id="yMK-ZG-fJC"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="gamesPlayed" destination="NLJ-re-BXV" id="u4F-JV-I6Q"/>
                                             <outlet property="losses" destination="vId-Ct-7h6" id="joT-m7-MzS"/>
@@ -1008,7 +1009,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3bJ-OX-9Yd" secondAttribute="trailing" constant="20" symbolic="YES" id="1X1-tT-jec"/>
                                                 <constraint firstItem="yKH-qw-LRP" firstAttribute="leading" secondItem="CqF-Da-B77" secondAttribute="leadingMargin" id="3XO-5y-Hh2"/>
@@ -1035,6 +1036,7 @@
                                                 <constraint firstItem="3bJ-OX-9Yd" firstAttribute="leading" secondItem="eZf-v6-H6m" secondAttribute="leading" id="wPx-6U-yTJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="awayAfbeelding" destination="09i-Jr-pjT" id="Wg9-3H-Ft4"/>
                                             <outlet property="awayScore" destination="v9h-nA-K9s" id="9nF-za-8ay"/>
@@ -1059,13 +1061,23 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rN-aK-rXV">
+                                <rect key="frame" x="0.0" y="104" width="414" height="0.6666666666666714"/>
+                                <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="MGn-x4-F0Z"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GAM-3v-PdS" firstAttribute="centerX" secondItem="ZDv-yj-Wb0" secondAttribute="centerX" id="1lb-3Y-fqK"/>
+                            <constraint firstItem="0rN-aK-rXV" firstAttribute="top" secondItem="I0Q-qd-wLO" secondAttribute="bottom" id="1pk-lk-eUD"/>
                             <constraint firstItem="3En-WZ-TMq" firstAttribute="bottom" secondItem="GAM-3v-PdS" secondAttribute="bottom" constant="126" id="5CI-V9-IlE"/>
                             <constraint firstItem="I0Q-qd-wLO" firstAttribute="top" secondItem="3En-WZ-TMq" secondAttribute="top" id="Ab0-yL-QSN"/>
                             <constraint firstItem="I0Q-qd-wLO" firstAttribute="leading" secondItem="3En-WZ-TMq" secondAttribute="leading" id="PDj-Ti-UXf"/>
+                            <constraint firstAttribute="trailing" secondItem="0rN-aK-rXV" secondAttribute="trailing" id="SQc-N4-GVA"/>
+                            <constraint firstItem="0rN-aK-rXV" firstAttribute="leading" secondItem="ZDv-yj-Wb0" secondAttribute="leading" id="U6N-Vg-KHG"/>
                             <constraint firstItem="bXg-nk-Xra" firstAttribute="top" secondItem="3En-WZ-TMq" secondAttribute="top" constant="40" id="VMJ-Ge-rtK"/>
                             <constraint firstItem="3En-WZ-TMq" firstAttribute="trailing" secondItem="Gvx-Cg-hEo" secondAttribute="trailing" constant="46" id="ZuG-fg-4nP"/>
                             <constraint firstItem="I0Q-qd-wLO" firstAttribute="trailing" secondItem="3En-WZ-TMq" secondAttribute="trailing" id="fXD-KD-Zh9"/>
