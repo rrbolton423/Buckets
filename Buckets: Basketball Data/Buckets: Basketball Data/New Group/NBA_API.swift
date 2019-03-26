@@ -47,7 +47,7 @@ class NBA_API {
     }
     
     func getScores(date: String, success: @escaping ([Game]) -> Void) {
-        let url = URL(string: String(format: baseURL, "20190724"))
+        let url = URL(string: String(format: baseURL, date))
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
