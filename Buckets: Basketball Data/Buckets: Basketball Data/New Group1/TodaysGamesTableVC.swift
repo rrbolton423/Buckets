@@ -92,7 +92,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
                         if self.use_real_images == "false" {
                             self.noGamesimage.image = UIImage(named: "placeholder.png")
                         } else {
-                            self.noGamesimage.image = UIImage(named: "jordan.png")
+                            self.noGamesimage.image = UIImage(named: "nba_logo.png")
                         }
                         self.noGamesimage.isHidden = false
                         self.activityIndicator.removeFromSuperview()

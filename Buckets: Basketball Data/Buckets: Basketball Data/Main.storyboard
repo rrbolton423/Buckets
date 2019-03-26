@@ -789,7 +789,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="azg-UD-7BS">
                                                             <rect key="frame" x="0.0" y="51" width="207.66666666666666" height="20.666666666666671"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NLJ-re-BXV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NLJ-re-BXV">
                                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="20.666666666666668"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="gRg-8F-N0V"/>
@@ -798,7 +798,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="85" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Cr-4t-LRm">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Cr-4t-LRm">
                                                                     <rect key="frame" x="64" y="0.0" width="21" height="20.666666666666668"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -890,10 +890,9 @@
                                     <constraint firstAttribute="height" constant="44" id="8a3-cT-4RA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jordan" translatesAutoresizingMaskIntoConstraints="NO" id="Gvx-Cg-hEo">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nba_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Gvx-Cg-hEo">
                                 <rect key="frame" x="47" y="104" width="321" height="405"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bXg-nk-Xra">
@@ -1120,7 +1119,7 @@
     <resources>
         <image name="basketball-light" width="18.75" height="18.75"/>
         <image name="jersey-light" width="18.75" height="18.75"/>
-        <image name="jordan" width="650" height="800"/>
+        <image name="nba_logo" width="512" height="512"/>
         <image name="placeholder" width="266.66665649414062" height="200"/>
         <image name="standings-light" width="18.75" height="18.75"/>
     </resources>
