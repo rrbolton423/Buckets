@@ -18,7 +18,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var games = [Game]()
     var awayTeamImage: UIImage?
     var homeTeamImage: UIImage?
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    var activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     
@@ -40,7 +40,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        start()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,12 +48,14 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        start()
     }
     
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
+            print("THIS IS THE CONFIG: \(self.use_real_images ?? "DEFAULT")")
         }
     }
     
@@ -65,11 +66,15 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func loadTodaysGames(){
-        self.games.removeAll()
-        self.tableView.reloadData()
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            self.games.removeAll()
+            self.tableView.reloadData()
+            self.activityIndicator.center = self.view.center
+            self.activityIndicator.hidesWhenStopped = true
+            self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+            self.view.addSubview(self.activityIndicator)
+            self.activityIndicator.startAnimating()
+        }
         DispatchQueue.global(qos: .background).async {
             let nbaDate = self.NBAapi.getTodaysDate()
             self.NBAapi.getScores(date: nbaDate) { returnedGames in
@@ -77,14 +82,17 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     print(returnedGames)
                     self.games = returnedGames
                     DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.removeFromSuperview()
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
                         self.noGamesimage.isHidden = true
-                        self.activityIndicator.removeFromSuperview()
                         self.tableView.reloadData()
                     }
                 } else {
                     DispatchQueue.main.async{
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.removeFromSuperview()
                         self.tableView.isHidden = true
                         self.noGames.isHidden = false
                         if self.use_real_images == "false" {
@@ -93,7 +101,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                             self.noGamesimage.image = UIImage(named: "nba_logo.png")
                         }
                         self.noGamesimage.isHidden = false
-                        self.activityIndicator.removeFromSuperview()
                     }
                 }
             }

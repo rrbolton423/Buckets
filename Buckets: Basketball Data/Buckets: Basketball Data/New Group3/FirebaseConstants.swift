@@ -35,6 +35,7 @@ class FirebaseConstants: NSObject {
     
     func getImages() -> String{
         createDefaults()
+        print("Config Value: \(self.remoteConfig["use_real_images"].stringValue!)")
         return self.remoteConfig["use_real_images"].stringValue!
     }
 }
