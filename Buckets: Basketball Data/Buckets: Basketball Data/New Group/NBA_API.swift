@@ -48,7 +48,7 @@ class NBA_API {
     }
     
     func getScores(date: String, success: @escaping ([Game]) -> Void) {
-        let url = URL(string: String(format: baseURL, date))
+        let url = URL(string: String(format: baseURL, "20190325"))
         //         let url = URL(string: String(format: baseURL, "20190724")) test no games being played
 
         //var nba = NBA(games: [], numberOfGames: 0)

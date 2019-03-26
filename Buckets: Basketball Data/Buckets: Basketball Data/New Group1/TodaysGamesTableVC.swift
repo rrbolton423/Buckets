@@ -75,6 +75,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
             let nbaDate = self.NBAapi.getTodaysDate()
             self.NBAapi.getScores(date: nbaDate) { returnedGames in
                 if returnedGames.count > 0 {
+                    print(returnedGames)
                     self.games = returnedGames
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -231,7 +232,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
         if homeScore == "" {
             cell.homeScore.text = "0"
         } else {
-            cell.homeScore.text = awayScore
+            cell.homeScore.text = homeScore
         }
         
         cell.venue.text = games[indexPath.row].arena
