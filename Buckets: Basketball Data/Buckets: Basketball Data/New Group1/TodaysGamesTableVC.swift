@@ -42,10 +42,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         start()
@@ -65,16 +61,18 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             #selector(refresh))
     }
     
+    fileprivate func setupActivityIndicator() {
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+        self.view.addSubview(self.activityIndicator)
+    }
+    
     func loadTodaysGames(){
-        DispatchQueue.main.async {
-            self.games.removeAll()
-            self.tableView.reloadData()
-            self.activityIndicator.center = self.view.center
-            self.activityIndicator.hidesWhenStopped = true
-            self.activityIndicator.style = UIActivityIndicatorView.Style.gray
-            self.view.addSubview(self.activityIndicator)
-            self.activityIndicator.startAnimating()
-        }
+        self.games.removeAll()
+        self.tableView.reloadData()
+        setupActivityIndicator()
+        self.activityIndicator.startAnimating()
         DispatchQueue.global(qos: .background).async {
             let nbaDate = self.NBAapi.getTodaysDate()
             self.NBAapi.getScores(date: nbaDate) { returnedGames in
@@ -146,7 +144,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return gameData.count
         self.activityIndicator.removeFromSuperview()
         return games.count
         

@@ -70,20 +70,27 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         return 100
     }
     
+    fileprivate func setupActivityIndicator() {
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+        self.view.addSubview(self.activityIndicator)
+    }
+    
     func loadStandings(){
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
-        activityIndicator.startAnimating()
         fetchStandings()
     }
     
     func fetchStandings() {
         firebaseSetup()
         if CheckInternet.connection() {
-            self.eastTeams.removeAll()
-            self.westTeams.removeAll()
-            self.tableView.reloadData()
-            activityIndicator.startAnimating()
+            DispatchQueue.main.async {
+                self.eastTeams.removeAll()
+                self.westTeams.removeAll()
+                self.tableView.reloadData()
+                self.setupActivityIndicator()
+                self.activityIndicator.startAnimating()
+            }
             DispatchQueue.global(qos: .background).async {
                 let eastStandingsAPI = EastStandingsAPI()
                 if let eastStandingsURL = self.standingsURL {
@@ -103,9 +110,11 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 }
             }
         } else {
-            self.activityIndicator.removeFromSuperview()
-            self.navigationController?.popToRootViewController(animated: true)
-            self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            DispatchQueue.main.async {
+                self.activityIndicator.removeFromSuperview()
+                self.navigationController?.popToRootViewController(animated: true)
+                self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            }
         }
     }
     
@@ -145,39 +154,39 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             if self.use_real_images == "false" {
                 self.teamImage = UIImage(named: "placeholder.png")
             } else {
-            switch eastTeams[indexPath.row].team {
-            case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")//
-            case "Atlanta": self.teamImage = UIImage(named: "atl.png")
-            case "Boston": self.teamImage = UIImage(named: "bos.png")//
-            case "Charlotte": self.teamImage = UIImage(named: "cha.png")//
-            case "Chicago": self.teamImage = UIImage(named: "chi.png")//
-            case "Cleveland": self.teamImage = UIImage(named: "cle.png")//
-            case "Dallas": self.teamImage = UIImage(named: "dal.png")//
-            case "Denver": self.teamImage = UIImage(named: "den.png")//
-            case "Detroit": self.teamImage = UIImage(named: "det.png")//
-            case "Golden State": self.teamImage = UIImage(named: "gsw.png")//
-            case "Houston": self.teamImage = UIImage(named: "hou.png")//
-            case "Indiana": self.teamImage = UIImage(named: "ind.png")//
-            case "LA Clippers": self.teamImage = UIImage(named: "lac.png")//
-            case "L.A. Lakers": self.teamImage = UIImage(named: "lal.png")//
-            case "Memphis": self.teamImage = UIImage(named: "mem.png")//
-            case "Miami": self.teamImage = UIImage(named: "mia.png")//
-            case "Milwaukee": self.teamImage = UIImage(named: "mil.png")//
-            case "Minnesota": self.teamImage = UIImage(named: "min.png")//
-            case "New Orleans": self.teamImage = UIImage(named: "nop.png")//
-            case "New York": self.teamImage = UIImage(named: "nyk.png")//
-            case "Oklahoma City": self.teamImage = UIImage(named: "okc.png")//
-            case "Orlando": self.teamImage = UIImage(named: "orl.png")//
-            case "Philadelphia": self.teamImage = UIImage(named: "phi.png")//
-            case "Phoenix": self.teamImage = UIImage(named: "phx.png")//
-            case "Portland": self.teamImage = UIImage(named: "por.png")//
-            case "Sacramento": self.teamImage = UIImage(named: "sac.png")//
-            case "San Antonio": self.teamImage = UIImage(named: "sas.png")//
-            case "Toronto": self.teamImage = UIImage(named: "tor.png")//
-            case "Utah": self.teamImage = UIImage(named: "uta.png")//
-            case "Washington": self.teamImage = UIImage(named: "was.png")//
-            default: self.teamImage = UIImage(named: "placeholder.png")
-            }
+                switch eastTeams[indexPath.row].team {
+                case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")//
+                case "Atlanta": self.teamImage = UIImage(named: "atl.png")
+                case "Boston": self.teamImage = UIImage(named: "bos.png")//
+                case "Charlotte": self.teamImage = UIImage(named: "cha.png")//
+                case "Chicago": self.teamImage = UIImage(named: "chi.png")//
+                case "Cleveland": self.teamImage = UIImage(named: "cle.png")//
+                case "Dallas": self.teamImage = UIImage(named: "dal.png")//
+                case "Denver": self.teamImage = UIImage(named: "den.png")//
+                case "Detroit": self.teamImage = UIImage(named: "det.png")//
+                case "Golden State": self.teamImage = UIImage(named: "gsw.png")//
+                case "Houston": self.teamImage = UIImage(named: "hou.png")//
+                case "Indiana": self.teamImage = UIImage(named: "ind.png")//
+                case "LA Clippers": self.teamImage = UIImage(named: "lac.png")//
+                case "L.A. Lakers": self.teamImage = UIImage(named: "lal.png")//
+                case "Memphis": self.teamImage = UIImage(named: "mem.png")//
+                case "Miami": self.teamImage = UIImage(named: "mia.png")//
+                case "Milwaukee": self.teamImage = UIImage(named: "mil.png")//
+                case "Minnesota": self.teamImage = UIImage(named: "min.png")//
+                case "New Orleans": self.teamImage = UIImage(named: "nop.png")//
+                case "New York": self.teamImage = UIImage(named: "nyk.png")//
+                case "Oklahoma City": self.teamImage = UIImage(named: "okc.png")//
+                case "Orlando": self.teamImage = UIImage(named: "orl.png")//
+                case "Philadelphia": self.teamImage = UIImage(named: "phi.png")//
+                case "Phoenix": self.teamImage = UIImage(named: "phx.png")//
+                case "Portland": self.teamImage = UIImage(named: "por.png")//
+                case "Sacramento": self.teamImage = UIImage(named: "sac.png")//
+                case "San Antonio": self.teamImage = UIImage(named: "sas.png")//
+                case "Toronto": self.teamImage = UIImage(named: "tor.png")//
+                case "Utah": self.teamImage = UIImage(named: "uta.png")//
+                case "Washington": self.teamImage = UIImage(named: "was.png")//
+                default: self.teamImage = UIImage(named: "placeholder.png")
+                }
             }
             cell.standing.text = String(indexPath.row + 1)
             cell.teamImage.image = teamImage
@@ -191,39 +200,39 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             if self.use_real_images == "false" {
                 self.teamImage = UIImage(named: "placeholder.png")
             } else {
-            switch westTeams[indexPath.row].team {
-            case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")//
-            case "Atlanta": self.teamImage = UIImage(named: "atl.png")
-            case "Boston": self.teamImage = UIImage(named: "bos.png")//
-            case "Charlotte": self.teamImage = UIImage(named: "cha.png")//
-            case "Chicago": self.teamImage = UIImage(named: "chi.png")//
-            case "Cleveland": self.teamImage = UIImage(named: "cle.png")//
-            case "Dallas": self.teamImage = UIImage(named: "dal.png")//
-            case "Denver": self.teamImage = UIImage(named: "den.png")//
-            case "Detroit": self.teamImage = UIImage(named: "det.png")//
-            case "Golden State": self.teamImage = UIImage(named: "gsw.png")//
-            case "Houston": self.teamImage = UIImage(named: "hou.png")//
-            case "Indiana": self.teamImage = UIImage(named: "ind.png")//
-            case "LA Clippers": self.teamImage = UIImage(named: "lac.png")//
-            case "L.A. Lakers": self.teamImage = UIImage(named: "lal.png")//
-            case "Memphis": self.teamImage = UIImage(named: "mem.png")//
-            case "Miami": self.teamImage = UIImage(named: "mia.png")//
-            case "Milwaukee": self.teamImage = UIImage(named: "mil.png")//
-            case "Minnesota": self.teamImage = UIImage(named: "min.png")//
-            case "New Orleans": self.teamImage = UIImage(named: "nop.png")//
-            case "New York": self.teamImage = UIImage(named: "nyk.png")//
-            case "Oklahoma City": self.teamImage = UIImage(named: "okc.png")//
-            case "Orlando": self.teamImage = UIImage(named: "orl.png")//
-            case "Philadelphia": self.teamImage = UIImage(named: "phi.png")//
-            case "Phoenix": self.teamImage = UIImage(named: "phx.png")//
-            case "Portland": self.teamImage = UIImage(named: "por.png")//
-            case "Sacramento": self.teamImage = UIImage(named: "sac.png")//
-            case "San Antonio": self.teamImage = UIImage(named: "sas.png")//
-            case "Toronto": self.teamImage = UIImage(named: "tor.png")//
-            case "Utah": self.teamImage = UIImage(named: "uta.png")//
-            case "Washington": self.teamImage = UIImage(named: "was.png")
-            default: self.teamImage = UIImage(named: "placeholder.png")
-            }
+                switch westTeams[indexPath.row].team {
+                case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")//
+                case "Atlanta": self.teamImage = UIImage(named: "atl.png")
+                case "Boston": self.teamImage = UIImage(named: "bos.png")//
+                case "Charlotte": self.teamImage = UIImage(named: "cha.png")//
+                case "Chicago": self.teamImage = UIImage(named: "chi.png")//
+                case "Cleveland": self.teamImage = UIImage(named: "cle.png")//
+                case "Dallas": self.teamImage = UIImage(named: "dal.png")//
+                case "Denver": self.teamImage = UIImage(named: "den.png")//
+                case "Detroit": self.teamImage = UIImage(named: "det.png")//
+                case "Golden State": self.teamImage = UIImage(named: "gsw.png")//
+                case "Houston": self.teamImage = UIImage(named: "hou.png")//
+                case "Indiana": self.teamImage = UIImage(named: "ind.png")//
+                case "LA Clippers": self.teamImage = UIImage(named: "lac.png")//
+                case "L.A. Lakers": self.teamImage = UIImage(named: "lal.png")//
+                case "Memphis": self.teamImage = UIImage(named: "mem.png")//
+                case "Miami": self.teamImage = UIImage(named: "mia.png")//
+                case "Milwaukee": self.teamImage = UIImage(named: "mil.png")//
+                case "Minnesota": self.teamImage = UIImage(named: "min.png")//
+                case "New Orleans": self.teamImage = UIImage(named: "nop.png")//
+                case "New York": self.teamImage = UIImage(named: "nyk.png")//
+                case "Oklahoma City": self.teamImage = UIImage(named: "okc.png")//
+                case "Orlando": self.teamImage = UIImage(named: "orl.png")//
+                case "Philadelphia": self.teamImage = UIImage(named: "phi.png")//
+                case "Phoenix": self.teamImage = UIImage(named: "phx.png")//
+                case "Portland": self.teamImage = UIImage(named: "por.png")//
+                case "Sacramento": self.teamImage = UIImage(named: "sac.png")//
+                case "San Antonio": self.teamImage = UIImage(named: "sas.png")//
+                case "Toronto": self.teamImage = UIImage(named: "tor.png")//
+                case "Utah": self.teamImage = UIImage(named: "uta.png")//
+                case "Washington": self.teamImage = UIImage(named: "was.png")
+                default: self.teamImage = UIImage(named: "placeholder.png")
+                }
             }
             cell.standing.text = String(indexPath.row + 1)
             cell.teamImage.image = teamImage

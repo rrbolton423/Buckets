@@ -35,7 +35,6 @@ class PlayerDetailVC: UIViewController {
     fileprivate func start() {
         setupInfoBarButtonItem()
         firebaseSetup()
-        setupActivityIndicator()
         checkForPlayerID()
         fetchPlayer()
     }
@@ -68,8 +67,10 @@ class PlayerDetailVC: UIViewController {
     }
     
     func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+        self.view.addSubview(self.activityIndicator)
     }
     
     func checkForPlayerID() {
@@ -83,7 +84,10 @@ class PlayerDetailVC: UIViewController {
     
     func fetchPlayer() {
         if CheckInternet.connection() {
-            activityIndicator.startAnimating()
+            DispatchQueue.main.async {
+                self.setupActivityIndicator()
+                self.activityIndicator.startAnimating()
+            }
             DispatchQueue.global(qos: .background).async {
                 let detailPlayerApi = PlayerApi()
                 if let playerInfoURL = self.playerInfoURL {
@@ -95,8 +99,10 @@ class PlayerDetailVC: UIViewController {
                 }
             }
         } else {
-            self.navigationController?.popToRootViewController(animated: true)
-            self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+                self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            }
         }
     }
     

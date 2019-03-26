@@ -21,7 +21,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
-        setupActivityIndicator()
         checkForTeamID()
         fetchPlayers()
     }
@@ -101,8 +100,10 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+        self.view.addSubview(self.activityIndicator)
     }
     
     func checkForTeamID() {
@@ -115,11 +116,14 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func fetchPlayers() {
-        activityIndicator.startAnimating()
         if CheckInternet.connection() {
-            self.unfilteredRoster = nil
-            self.filteredRoster = nil
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.unfilteredRoster = nil
+                self.filteredRoster = nil
+                self.tableView.reloadData()
+                self.setupActivityIndicator()
+                self.activityIndicator.startAnimating()
+            }
             DispatchQueue.global(qos: .background).async {
                 let playersAPI = PlayersApi()
                 if let teamRosterURL = self.teamRosterURL {
@@ -131,6 +135,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                         self.unfilteredRoster = namesSorted
                         self.filteredRoster = self.unfilteredRoster
                         DispatchQueue.main.async {
+                            self.activityIndicator.stopAnimating()
                             self.activityIndicator.removeFromSuperview()
                             self.tableView.reloadData()
                         }
@@ -138,9 +143,12 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                 }
             }
         } else {
-            activityIndicator.stopAnimating()
-            self.navigationController?.popToRootViewController(animated: true)
-            self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.removeFromSuperview()
+                self.navigationController?.popToRootViewController(animated: true)
+                self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            }
         }
     }
     

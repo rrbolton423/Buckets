@@ -131,10 +131,16 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         return resultArray
     }
     
+    fileprivate func setupActivityIndicator() {
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+        self.view.addSubview(self.activityIndicator)
+    }
+    
     func loadTeams(){
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
-        activityIndicator.startAnimating()
+        setupActivityIndicator()
+        self.activityIndicator.startAnimating()
         unfilteredTeamList = parseTeamsFromJSONFile()
         filteredTeamList = unfilteredTeamList
         tableView.reloadData()
@@ -164,6 +170,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last {
             if indexPath == lastVisibleIndexPath {
+                self.activityIndicator.stopAnimating()
                 self.activityIndicator.removeFromSuperview()
             }
         }
