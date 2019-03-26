@@ -206,10 +206,10 @@
 		A34191922239DC0E0041E3CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A32D595D22474DF70038CE69 /* TodaysGamesCell.swift */,
 				A331D54F223BFE430096A5A9 /* TeamCell.swift */,
 				A331D54E223BFE420096A5A9 /* PlayerCell.swift */,
 				A32D595B22474C730038CE69 /* StandingsCell.swift */,
-				A32D595D22474DF70038CE69 /* TodaysGamesCell.swift */,
 			);
 			name = Views;
 			path = "New Group5";

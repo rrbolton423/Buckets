@@ -39,11 +39,6 @@ class TeamDetailVC: UIViewController {
         fetchRoster()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        start()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         start()
@@ -57,7 +52,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Version 1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
