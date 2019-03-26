@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import UserNotifications
+import StoreKit
 
 class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
     
@@ -20,6 +20,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
     var homeTeamImage: UIImage?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     
     fileprivate func start() {
         firebaseSetup()
@@ -31,6 +32,7 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
             self.navigationController?.popToRootViewController(animated: true)
             self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
         }
+        requestAppStoreReview()
     }
     
     override func viewDidLoad() {
@@ -55,7 +57,6 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
-            print(self.use_real_images)
         }
     }
     
@@ -124,6 +125,15 @@ class TodaysGamesTableVC: UIViewController , UITableViewDataSource, UITableViewD
             NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func requestAppStoreReview() {
+        if appLaunches == 5 || appLaunches == 25 || appLaunches == 50 {
+            SKStoreReviewController.requestReview()
+            var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
+            appLaunches += 1
+            UserDefaults.standard.set(appLaunches, forKey: "appLaunches")
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

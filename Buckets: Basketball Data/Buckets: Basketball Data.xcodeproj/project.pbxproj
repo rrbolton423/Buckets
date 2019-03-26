@@ -158,12 +158,12 @@
 		A34191762239DB9D0041E3CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A32D595F224751120038CE69 /* TodaysGamesTableVC.swift */,
 				A331D547223BFE3B0096A5A9 /* TeamsTableVC.swift */,
 				A331D548223BFE3B0096A5A9 /* TeamDetailVC.swift */,
 				A331D546223BFE3A0096A5A9 /* PlayersTableVC.swift */,
 				A331D549223BFE3B0096A5A9 /* PlayerDetailVC.swift */,
 				A32D59612247514B0038CE69 /* StandingsTableVC.swift */,
-				A32D595F224751120038CE69 /* TodaysGamesTableVC.swift */,
 			);
 			name = Controllers;
 			path = "New Group1";

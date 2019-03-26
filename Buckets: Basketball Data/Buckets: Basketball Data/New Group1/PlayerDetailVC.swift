@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 
 class PlayerDetailVC: UIViewController {
     @IBOutlet weak var headshotImageView: UIImageView!
@@ -31,7 +30,6 @@ class PlayerDetailVC: UIViewController {
     var playerBirthdateFormatted: String?
     var playerInfoURL: String?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
-    var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var use_real_images: String?
     
     fileprivate func start() {
@@ -40,7 +38,6 @@ class PlayerDetailVC: UIViewController {
         setupActivityIndicator()
         checkForPlayerID()
         fetchPlayer()
-        requestAppStoreReview()
     }
     
     override func viewDidLoad() {
@@ -72,7 +69,6 @@ class PlayerDetailVC: UIViewController {
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
-            print(self.use_real_images)
         }
     }
     
@@ -292,15 +288,6 @@ class PlayerDetailVC: UIViewController {
         let calcAge = calendar.components(.year, from: birthdayDate!, to: now, options: [])
         let age = calcAge.year
         return age!
-    }
-    
-    func requestAppStoreReview() {
-        if appLaunches == 5 || appLaunches == 25 || appLaunches == 50 {
-            SKStoreReviewController.requestReview()
-            var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
-            appLaunches += 1
-            UserDefaults.standard.set(appLaunches, forKey: "appLaunches")
-        }
     }
     
     @IBAction func reset(_ sender: Any) {

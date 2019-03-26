@@ -49,7 +49,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
-            print(self.use_real_images)
         }
     }
     
@@ -181,6 +180,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             default: self.teamImage = UIImage(named: "placeholder.png")
             }
             }
+            cell.standing.text = String(indexPath.row + 1)
             cell.teamImage.image = teamImage
             cell.gamesPlayed.text = eastTeams[indexPath.row].gamesPlayed
             cell.wins.text = eastTeams[indexPath.row].wins
@@ -226,6 +226,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             default: self.teamImage = UIImage(named: "placeholder.png")
             }
             }
+            cell.standing.text = String(indexPath.row + 1)
             cell.teamImage.image = teamImage
             cell.gamesPlayed.text = westTeams[indexPath.row].gamesPlayed
             cell.wins.text = westTeams[indexPath.row].wins

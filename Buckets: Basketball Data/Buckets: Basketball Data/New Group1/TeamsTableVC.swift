@@ -100,7 +100,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
-            print(self.use_real_images)
             DispatchQueue.main.async {
                 self.loadTeams()
             }

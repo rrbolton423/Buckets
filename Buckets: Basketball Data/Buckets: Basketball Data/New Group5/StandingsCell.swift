@@ -16,4 +16,5 @@ class StandingsCell: UITableViewCell {
     @IBOutlet weak var wins: UILabel!
     @IBOutlet weak var losses: UILabel!
     @IBOutlet weak var winPercentage: UILabel!
+    @IBOutlet weak var standing: UILabel!
 }

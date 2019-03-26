@@ -36,7 +36,6 @@ func ==(lhs: Game, rhs: Game) -> Bool {
 class NBA_API {
     
     var gamesArray = [Game]()
-
     let baseURL = "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json"
     
     func getTodaysDate() -> String {
@@ -48,31 +47,19 @@ class NBA_API {
     }
     
     func getScores(date: String, success: @escaping ([Game]) -> Void) {
-        let url = URL(string: String(format: baseURL, "20190325"))
-        //         let url = URL(string: String(format: baseURL, "20190724")) test no games being played
-
-        //var nba = NBA(games: [], numberOfGames: 0)
-        //var games: [Game] = []
+        let url = URL(string: String(format: baseURL, date))
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
-                print(error)
+                print(error?.localizedDescription as Any)
             } else {
-                do {
-                    if let games = self.parseJSON(data: data! as NSData) {
-                        let arr = games.removingDuplicates()
-                        success(arr)
-                    } else {
-                        success([])
-                    }
-                } catch let error as NSError {
-                    print(error)
-                    //success([])
+                if let games = self.parseJSON(data: data! as NSData) {
+                    let arr = games.removingDuplicates()
+                    success(arr)
+                } else {
+                    success([])
                 }
             }
-            
             }.resume()
-        
-        
     }
     
     func parseJSON(data: NSData) -> [Game]? {
@@ -90,9 +77,8 @@ class NBA_API {
         var games = jsonData["games"] as! [String:Any]
         let gameList = games["game"] as? [[String:Any]]
         
-        //var nba = NBA(games: [], numberOfGames: 0)
         for game in gameList! {
-            let g = game as! NSDictionary
+            let g = game as NSDictionary
             let home = g["home"] as! NSDictionary
             let away = g["visitor"] as! NSDictionary
             let gameStatus = g["period_time"] as! NSDictionary
@@ -114,14 +100,8 @@ class NBA_API {
                 quarter: quarter,
                 time: time
             )
-            
             gamesArray.append(gameInfo)
         }
-        
-        
-        
         return gamesArray
     }
-    
-    
 }
