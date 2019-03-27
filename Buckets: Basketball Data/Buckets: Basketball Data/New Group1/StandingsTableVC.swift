@@ -26,8 +26,11 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     var standingsURL: String? = String()
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    let refreshController = UIRefreshControl()
     
-    fileprivate func start() {
+    @objc fileprivate func start() {
+        tableView.addSubview(refreshController)
+        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
         navigationController?.navigationBar.backgroundColor = UIColor.clear
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -85,11 +88,12 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         firebaseSetup()
         if CheckInternet.connection() {
             DispatchQueue.main.async {
+                self.tableView.isUserInteractionEnabled = false
                 self.eastTeams.removeAll()
                 self.westTeams.removeAll()
                 self.tableView.reloadData()
                 self.setupActivityIndicator()
-                self.activityIndicator.startAnimating()
+                if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
             }
             DispatchQueue.global(qos: .background).async {
                 let eastStandingsAPI = EastStandingsAPI()
@@ -105,12 +109,18 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                     }
                 }
                 DispatchQueue.main.async {
+                    self.refreshController.endRefreshing()
+                    self.activityIndicator.stopAnimating()
                     self.activityIndicator.removeFromSuperview()
                     self.tableView.reloadData()
+                    self.tableView.isUserInteractionEnabled = true
                 }
             }
         } else {
             DispatchQueue.main.async {
+                self.tableView.isUserInteractionEnabled = false
+                self.refreshController.endRefreshing()
+                self.activityIndicator.stopAnimating()
                 self.activityIndicator.removeFromSuperview()
                 self.navigationController?.popToRootViewController(animated: true)
                 self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")

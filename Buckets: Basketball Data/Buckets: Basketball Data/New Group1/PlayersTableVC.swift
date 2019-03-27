@@ -16,8 +16,11 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     var teamRosterURL: String?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     let searchController = UISearchController(searchResultsController: nil)
+    let refreshController = UIRefreshControl()
     
-    fileprivate func start() {
+    @objc fileprivate func start() {
+        tableView.addSubview(refreshController)
+        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
         setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
@@ -118,11 +121,12 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     func fetchPlayers() {
         if CheckInternet.connection() {
             DispatchQueue.main.async {
+                self.tableView.isUserInteractionEnabled = false
                 self.unfilteredRoster = nil
                 self.filteredRoster = nil
                 self.tableView.reloadData()
                 self.setupActivityIndicator()
-                self.activityIndicator.startAnimating()
+                if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
             }
             DispatchQueue.global(qos: .background).async {
                 let playersAPI = PlayersApi()
@@ -135,15 +139,19 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                         self.unfilteredRoster = namesSorted
                         self.filteredRoster = self.unfilteredRoster
                         DispatchQueue.main.async {
+                            self.refreshController.endRefreshing()
                             self.activityIndicator.stopAnimating()
                             self.activityIndicator.removeFromSuperview()
                             self.tableView.reloadData()
+                            self.tableView.isUserInteractionEnabled = true
                         }
                     }
                 }
             }
         } else {
             DispatchQueue.main.async {
+                self.tableView.isUserInteractionEnabled = false
+                self.refreshController.endRefreshing()
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.removeFromSuperview()
                 self.navigationController?.popToRootViewController(animated: true)

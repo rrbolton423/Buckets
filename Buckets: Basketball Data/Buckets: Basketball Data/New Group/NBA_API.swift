@@ -47,8 +47,13 @@ class NBA_API {
     }
     
     func getScores(date: String, success: @escaping ([Game]) -> Void) {
-        let url = URL(string: String(format: baseURL, date))
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        var url = URL(string: String(format: baseURL, date))
+        url?.removeAllCachedResourceValues()
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        let session = URLSession.init(configuration: config)
+        session.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
             } else {

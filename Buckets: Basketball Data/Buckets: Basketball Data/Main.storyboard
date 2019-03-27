@@ -10,11 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Teams & Players-->
+        <!--Teams-->
         <scene sceneID="RrF-nE-dSa">
             <objects>
                 <navigationController id="g0M-fh-the" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Teams &amp; Players" image="jersey-light" selectedImage="jersey-light" id="wak-zL-5uZ"/>
+                    <tabBarItem key="tabBarItem" title="Teams" image="jersey-light" selectedImage="jersey-light" id="wak-zL-5uZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vf3-yB-GTi">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>

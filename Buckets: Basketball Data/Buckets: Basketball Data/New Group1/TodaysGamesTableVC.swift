@@ -21,11 +21,13 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
+    let refreshController = UIRefreshControl()
     
-    fileprivate func start() {
+    @objc fileprivate func start() {
+        tableView.addSubview(refreshController)
+        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
         firebaseSetup()
         setupInfoBarButtonItem()
-        addNavBarRefreshButton()
         if CheckInternet.connection() {
             loadTodaysGames()
         } else {
@@ -55,12 +57,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func addNavBarRefreshButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem:
-            UIBarButtonItem.SystemItem.refresh, target: self, action:
-            #selector(refresh))
-    }
-    
     fileprivate func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
@@ -69,10 +65,11 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func loadTodaysGames(){
+        self.tableView.isUserInteractionEnabled = false
         self.games.removeAll()
         self.tableView.reloadData()
         setupActivityIndicator()
-        self.activityIndicator.startAnimating()
+        if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
         DispatchQueue.global(qos: .background).async {
             let nbaDate = self.NBAapi.getTodaysDate()
             self.NBAapi.getScores(date: nbaDate) { returnedGames in
@@ -81,14 +78,17 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     self.games = returnedGames
                     print(self.games)
                     DispatchQueue.main.async {
+                        self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
                         self.noGames.isHidden = true
                         self.noGamesimage.isHidden = true
                         self.tableView.reloadData()
+                        self.tableView.isUserInteractionEnabled = true
                     }
                 } else {
                     DispatchQueue.main.async{
+                        self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
                         self.tableView.isHidden = true
@@ -99,6 +99,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                             self.noGamesimage.image = UIImage(named: "nba_logo.png")
                         }
                         self.noGamesimage.isHidden = false
+                        self.tableView.isUserInteractionEnabled = false
                     }
                 }
             }
@@ -106,9 +107,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @objc func refresh() {
-        navigationItem.leftBarButtonItem?.isEnabled = false
         start()
-        navigationItem.leftBarButtonItem?.isEnabled = true
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
