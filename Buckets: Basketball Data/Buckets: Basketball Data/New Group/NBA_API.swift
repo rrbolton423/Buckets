@@ -49,7 +49,6 @@ class NBA_API {
     func getScores(date: String, success: @escaping ([Game]) -> Void) {
         var url = URL(string: String(format: baseURL, date))
         url?.removeAllCachedResourceValues()
-        print(url)
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
@@ -74,6 +73,7 @@ class NBA_API {
         
         do {
             json = try JSONSerialization.jsonObject(with: data as Data, options: []) as! JSONDict
+            print(json)
         } catch {
             NSLog("JSON parsing failed: \(error)")
             return nil

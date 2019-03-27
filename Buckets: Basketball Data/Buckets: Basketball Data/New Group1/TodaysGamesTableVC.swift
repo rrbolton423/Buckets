@@ -60,7 +60,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     fileprivate func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.gray
+        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        self.activityIndicator.color = UIColor.gray
         self.view.addSubview(self.activityIndicator)
     }
     
