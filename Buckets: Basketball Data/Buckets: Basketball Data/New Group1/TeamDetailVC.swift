@@ -19,6 +19,7 @@ class TeamDetailVC: UIViewController {
     @IBOutlet weak var teamRecordLabel: UILabel!
     @IBOutlet weak var teamConferenceRankLabel: UILabel!
     @IBOutlet weak var teamDivisionRankLabel: UILabel!
+    @IBOutlet weak var teamDetailScrollView: UIScrollView!
     
     var staticTeam: StaticTeam?
     var teamToPass: DetailTeam?
@@ -84,6 +85,7 @@ class TeamDetailVC: UIViewController {
     func fetchRoster() {
         if CheckInternet.connection() {
             DispatchQueue.main.async {
+                self.teamDetailScrollView.isUserInteractionEnabled = false
                 self.setupActivityIndicator()
                 self.activityIndicator.startAnimating()
             }
@@ -96,6 +98,7 @@ class TeamDetailVC: UIViewController {
                             self.activityIndicator.removeFromSuperview()
                             self.teamToPass = detailTeam
                             self.showInfoDetail(team: detailTeam)
+                            self.teamDetailScrollView.isUserInteractionEnabled = true
                         }
                     }
                 }

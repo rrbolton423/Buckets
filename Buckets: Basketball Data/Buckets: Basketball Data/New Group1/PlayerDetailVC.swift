@@ -23,6 +23,7 @@ class PlayerDetailVC: UIViewController {
     @IBOutlet weak var ppgLabel: UILabel!
     @IBOutlet weak var apgLabel: UILabel!
     @IBOutlet weak var rpgLabel: UILabel!
+    @IBOutlet weak var playerDetailScrollView: UIScrollView!
     
     var teamID: String?
     var playerHeadshotURL: String?
@@ -85,6 +86,7 @@ class PlayerDetailVC: UIViewController {
     func fetchPlayer() {
         if CheckInternet.connection() {
             DispatchQueue.main.async {
+                self.playerDetailScrollView.isUserInteractionEnabled = false
                 self.setupActivityIndicator()
                 self.activityIndicator.startAnimating()
             }
@@ -93,7 +95,10 @@ class PlayerDetailVC: UIViewController {
                 if let playerInfoURL = self.playerInfoURL {
                     detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer) in
                         DispatchQueue.main.async {
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
                             self.showDetail(player: detailPlayer)
+                            self.playerDetailScrollView.isUserInteractionEnabled = true
                         }
                     }
                 }
@@ -108,9 +113,7 @@ class PlayerDetailVC: UIViewController {
     
     func showDetail(player: Player) {
         DispatchQueue.main.async {
-            self.activityIndicator.removeFromSuperview()
             self.navigationItem.title = player.name
-            
             if let ID = player.ID, let teamID = player.teamID {
                 if ID == "" {
                     self.headshotImageView.displayPlaceholderImage()

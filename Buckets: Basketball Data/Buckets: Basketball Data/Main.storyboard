@@ -287,6 +287,7 @@
                         <outlet property="teamCityLabel" destination="RfV-rO-Aw8" id="T9B-3m-Qzj"/>
                         <outlet property="teamConferenceLabel" destination="1vw-1b-lUW" id="F7i-wb-tRG"/>
                         <outlet property="teamConferenceRankLabel" destination="TlY-DS-hJp" id="dcZ-hQ-8tF"/>
+                        <outlet property="teamDetailScrollView" destination="fOu-oP-8AO" id="DmX-d9-WCp"/>
                         <outlet property="teamDivisionLabel" destination="V7A-1K-HQz" id="brv-wh-9SP"/>
                         <outlet property="teamDivisionRankLabel" destination="3ZB-Xu-DX3" id="EGO-TI-lLm"/>
                         <outlet property="teamLogoImageView" destination="8aB-sq-wgV" id="CJf-yg-m0y"/>
@@ -681,6 +682,7 @@
                         <outlet property="heightLabel" destination="eBE-CJ-X6g" id="yXo-vM-Xnz"/>
                         <outlet property="jerseyLabel" destination="SJK-tN-P9d" id="1mG-65-gOC"/>
                         <outlet property="nameLabel" destination="nxt-gD-T7Q" id="VDB-VP-PHd"/>
+                        <outlet property="playerDetailScrollView" destination="P3B-GR-JVX" id="8o0-gT-XcR"/>
                         <outlet property="positionLabel" destination="NVx-CN-oda" id="ww9-yA-MDk"/>
                         <outlet property="ppgLabel" destination="Onl-yW-Gux" id="78U-mz-npM"/>
                         <outlet property="rpgLabel" destination="ljH-hX-0Qm" id="8rg-Gz-Gjw"/>
