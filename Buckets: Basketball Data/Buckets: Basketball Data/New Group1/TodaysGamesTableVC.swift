@@ -77,12 +77,12 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let nbaDate = self.NBAapi.getTodaysDate()
             self.NBAapi.getScores(date: nbaDate) { returnedGames in
                 if returnedGames.count > 0 {
-                    print(returnedGames)
+                    //print(returnedGames)
                     self.games = returnedGames
+                    print(self.games)
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
-                        self.tableView.reloadData()
                         self.noGames.isHidden = true
                         self.noGamesimage.isHidden = true
                         self.tableView.reloadData()

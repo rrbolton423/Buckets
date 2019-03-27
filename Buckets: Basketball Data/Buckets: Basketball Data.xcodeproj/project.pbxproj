@@ -18,7 +18,6 @@
 		A331D53C223BFE100096A5A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */; };
 		A331D53D223BFE100096A5A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A331D539223BFE0F0096A5A9 /* Assets.xcassets */; };
 		A331D53E223BFE100096A5A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */; };
-		A331D53F223BFE100096A5A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A331D53B223BFE100096A5A9 /* Main.storyboard */; };
 		A331D543223BFE310096A5A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D540223BFE300096A5A9 /* Constants.swift */; };
 		A331D544223BFE310096A5A9 /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D541223BFE310096A5A9 /* CheckInternet.swift */; };
 		A331D545223BFE310096A5A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D542223BFE310096A5A9 /* Extensions.swift */; };
@@ -39,6 +38,7 @@
 		A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */; };
 		A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */; };
 		A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */; };
+		A389CA62224BBB1400DB9BF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A389CA61224BBB1400DB9BF9 /* Main.storyboard */; };
 		B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,6 @@
 		A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A331D539223BFE0F0096A5A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A331D53B223BFE100096A5A9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A331D540223BFE300096A5A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A331D541223BFE310096A5A9 /* CheckInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 		A331D542223BFE310096A5A9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buckets: Basketball Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A341914D2239DA2C0041E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A389CA61224BBB1400DB9BF9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,7 +131,7 @@
 				A341917F2239DBD50041E3CD /* JSON */,
 				A34191822239DBE10041E3CD /* Utils */,
 				A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */,
-				A331D53B223BFE100096A5A9 /* Main.storyboard */,
+				A389CA61224BBB1400DB9BF9 /* Main.storyboard */,
 				A331D539223BFE0F0096A5A9 /* Assets.xcassets */,
 				A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */,
 				A341914D2239DA2C0041E3CD /* Info.plist */,
@@ -285,9 +285,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */,
-				A331D53F223BFE100096A5A9 /* Main.storyboard in Resources */,
 				A331D53D223BFE100096A5A9 /* Assets.xcassets in Resources */,
 				A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */,
+				A389CA62224BBB1400DB9BF9 /* Main.storyboard in Resources */,
 				A331D561223BFE5F0096A5A9 /* StaticTeams.json in Resources */,
 				A331D53C223BFE100096A5A9 /* LaunchScreen.storyboard in Resources */,
 			);

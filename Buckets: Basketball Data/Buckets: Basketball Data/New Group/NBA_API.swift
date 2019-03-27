@@ -102,6 +102,7 @@ class NBA_API {
             )
             gamesArray.append(gameInfo)
         }
+        print("CALLED IN NBA_API() \(gamesArray)")
         return gamesArray
     }
 }
