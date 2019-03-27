@@ -52,6 +52,7 @@ class NBA_API {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
+        config.urlCache = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
         let session = URLSession.init(configuration: config)
         session.dataTask(with: url!) { (data, response, error) in
             if error != nil {

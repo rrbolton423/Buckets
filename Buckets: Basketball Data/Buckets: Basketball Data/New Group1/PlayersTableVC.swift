@@ -152,11 +152,14 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         } else {
             DispatchQueue.main.async {
                 self.tableView.isUserInteractionEnabled = false
-                self.refreshController.endRefreshing()
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.removeFromSuperview()
-                self.navigationController?.popToRootViewController(animated: true)
-                self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    self.refreshController.endRefreshing()
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

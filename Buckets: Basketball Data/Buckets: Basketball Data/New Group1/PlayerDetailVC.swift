@@ -45,6 +45,10 @@ class PlayerDetailVC: UIViewController {
         start()
     }
     
+    func hideUI(value: Bool) {
+        playerDetailScrollView.isHidden = value
+    }
+    
     func setupInfoBarButtonItem() {
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
@@ -85,9 +89,11 @@ class PlayerDetailVC: UIViewController {
     }
     
     func fetchPlayer() {
+        self.hideUI(value: true)
         if CheckInternet.connection() {
             DispatchQueue.main.async {
                 self.playerDetailScrollView.isUserInteractionEnabled = false
+                self.hideUI(value: true)
                 self.setupActivityIndicator()
                 self.activityIndicator.startAnimating()
             }
@@ -99,6 +105,7 @@ class PlayerDetailVC: UIViewController {
                             self.activityIndicator.stopAnimating()
                             self.activityIndicator.removeFromSuperview()
                             self.showDetail(player: detailPlayer)
+                            self.hideUI(value: false)
                             self.playerDetailScrollView.isUserInteractionEnabled = true
                         }
                     }
@@ -106,8 +113,11 @@ class PlayerDetailVC: UIViewController {
             }
         } else {
             DispatchQueue.main.async {
-                self.navigationController?.popToRootViewController(animated: true)
-                self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

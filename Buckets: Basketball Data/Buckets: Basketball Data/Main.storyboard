@@ -284,9 +284,10 @@
                     </view>
                     <size key="freeformSize" width="375" height="1080"/>
                     <connections>
+                        <outlet property="playersButton" destination="pgu-cF-Zg4" id="jnf-Lj-4I8"/>
                         <outlet property="teamCityLabel" destination="RfV-rO-Aw8" id="T9B-3m-Qzj"/>
                         <outlet property="teamConferenceLabel" destination="1vw-1b-lUW" id="F7i-wb-tRG"/>
-                        <outlet property="teamConferenceRankLabel" destination="TlY-DS-hJp" id="dcZ-hQ-8tF"/>
+                        <outlet property="teamConferenceRankLabel" destination="TlY-DS-hJp" id="Dsa-8E-Ubn"/>
                         <outlet property="teamDetailScrollView" destination="fOu-oP-8AO" id="DmX-d9-WCp"/>
                         <outlet property="teamDivisionLabel" destination="V7A-1K-HQz" id="brv-wh-9SP"/>
                         <outlet property="teamDivisionRankLabel" destination="3ZB-Xu-DX3" id="EGO-TI-lLm"/>

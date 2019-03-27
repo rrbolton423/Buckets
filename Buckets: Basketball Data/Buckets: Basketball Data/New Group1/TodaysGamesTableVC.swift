@@ -31,8 +31,16 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         if CheckInternet.connection() {
             loadTodaysGames()
         } else {
+            self.tableView.isUserInteractionEnabled = true
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.removeFromSuperview()
             self.navigationController?.popToRootViewController(animated: true)
-            self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            //self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                self.refreshController.endRefreshing()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -125,7 +133,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     @objc func getInfoAction() {
         let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
     }

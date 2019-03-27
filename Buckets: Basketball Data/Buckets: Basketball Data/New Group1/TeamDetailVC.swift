@@ -20,6 +20,7 @@ class TeamDetailVC: UIViewController {
     @IBOutlet weak var teamConferenceRankLabel: UILabel!
     @IBOutlet weak var teamDivisionRankLabel: UILabel!
     @IBOutlet weak var teamDetailScrollView: UIScrollView!
+    @IBOutlet weak var playersButton: UIButton!
     
     var staticTeam: StaticTeam?
     var teamToPass: DetailTeam?
@@ -31,6 +32,10 @@ class TeamDetailVC: UIViewController {
     var teamImage: UIImage?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    
+    func hideUI(value: Bool) {
+        teamDetailScrollView.isHidden = value
+    }
     
     fileprivate func start() {
         setupInfoBarButtonItem()
@@ -84,6 +89,7 @@ class TeamDetailVC: UIViewController {
     }
     
     func fetchRoster() {
+        self.hideUI(value: true)
         if CheckInternet.connection() {
             DispatchQueue.main.async {
                 self.teamDetailScrollView.isUserInteractionEnabled = false
@@ -99,6 +105,7 @@ class TeamDetailVC: UIViewController {
                             self.activityIndicator.removeFromSuperview()
                             self.teamToPass = detailTeam
                             self.showInfoDetail(team: detailTeam)
+                            self.hideUI(value: false)
                             self.teamDetailScrollView.isUserInteractionEnabled = true
                         }
                     }
@@ -106,8 +113,11 @@ class TeamDetailVC: UIViewController {
             }     
         } else {
             DispatchQueue.main.async {
-                self.navigationController?.popToRootViewController(animated: true)
-                self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
