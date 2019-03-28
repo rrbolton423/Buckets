@@ -14,7 +14,7 @@
         <scene sceneID="RrF-nE-dSa">
             <objects>
                 <navigationController id="g0M-fh-the" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Teams" image="jersey-light" selectedImage="jersey-light" id="wak-zL-5uZ"/>
+                    <tabBarItem key="tabBarItem" title="Teams" image="teams" selectedImage="teams" id="wak-zL-5uZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vf3-yB-GTi">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -1110,7 +1110,7 @@
         <scene sceneID="jkL-Q3-gHh">
             <objects>
                 <navigationController title="Games" automaticallyAdjustsScrollViewInsets="NO" id="xpt-BV-pFt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Games" image="basketball-light" selectedImage="basketball-light" id="SvK-Sc-5hy"/>
+                    <tabBarItem key="tabBarItem" title="Games" image="games" selectedImage="games" id="SvK-Sc-5hy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JUR-O4-SVV">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -1129,7 +1129,7 @@
         <scene sceneID="30F-SV-243">
             <objects>
                 <navigationController title="Standings" automaticallyAdjustsScrollViewInsets="NO" id="t4F-w5-mPi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Standings" image="standings-light" selectedImage="standings-light" id="WAB-Vc-fzj"/>
+                    <tabBarItem key="tabBarItem" title="Standings" image="standings" selectedImage="standings" id="WAB-Vc-fzj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AHJ-Xa-9Dt">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -1166,10 +1166,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="basketball-light" width="25" height="25"/>
-        <image name="jersey-light" width="25" height="25"/>
-        <image name="nba_logo" width="2400" height="5332"/>
+        <image name="games" width="20" height="20"/>
+        <image name="nba_logo" width="800" height="1777.3333740234375"/>
         <image name="placeholder" width="266.66665649414062" height="200"/>
-        <image name="standings-light" width="25" height="25"/>
+        <image name="standings" width="20" height="20"/>
+        <image name="teams" width="20" height="20"/>
     </resources>
 </document>
