@@ -747,8 +747,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="99.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-Pq-06G">
-                                                    <rect key="frame" x="17" y="35" width="30" height="27"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-Pq-06G">
+                                                    <rect key="frame" x="17" y="35.333333333333336" width="30" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="Iam-J9-xsD"/>
                                                         <constraint firstAttribute="width" constant="30" id="OD9-Rg-pMd"/>

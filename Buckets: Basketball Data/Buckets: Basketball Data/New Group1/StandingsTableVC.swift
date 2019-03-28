@@ -89,6 +89,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         firebaseSetup()
         if CheckInternet.connection() {
             DispatchQueue.main.async {
+                self.segmentedControl?.isEnabled = false
                 self.tableView.isUserInteractionEnabled = false
                 self.eastTeams.removeAll()
                 self.westTeams.removeAll()
@@ -115,6 +116,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.removeFromSuperview()
                     self.tableView.isUserInteractionEnabled = true
+                    self.segmentedControl?.isEnabled = true
                 }
             }
         } else {
@@ -157,9 +159,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     @IBAction func segmentedControlActionChanged(sender: AnyObject) {
-        segmentedControl?.isEnabled = false
         start()
-        segmentedControl?.isEnabled = true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
