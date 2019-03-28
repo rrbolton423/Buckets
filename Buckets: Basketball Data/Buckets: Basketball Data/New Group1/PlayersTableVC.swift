@@ -140,10 +140,10 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                         self.unfilteredRoster = namesSorted
                         self.filteredRoster = self.unfilteredRoster
                         DispatchQueue.main.async {
+                            self.tableView.reloadData()
                             self.refreshController.endRefreshing()
                             self.activityIndicator.stopAnimating()
                             self.activityIndicator.removeFromSuperview()
-                            self.tableView.reloadData()
                             self.tableView.isUserInteractionEnabled = true
                         }
                     }

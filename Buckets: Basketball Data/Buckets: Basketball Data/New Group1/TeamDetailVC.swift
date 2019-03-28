@@ -101,11 +101,11 @@ class TeamDetailVC: UIViewController {
                 if let teamInfoURL = self.teamInfoURL {
                     teamApi.getTeamInfo(url: teamInfoURL) { (detailTeam) in
                         DispatchQueue.main.async {
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.removeFromSuperview()
                             self.teamToPass = detailTeam
                             self.showInfoDetail(team: detailTeam)
                             self.hideUI(value: false)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
                             self.teamDetailScrollView.isUserInteractionEnabled = true
                         }
                     }

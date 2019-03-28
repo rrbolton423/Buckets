@@ -102,10 +102,10 @@ class PlayerDetailVC: UIViewController {
                 if let playerInfoURL = self.playerInfoURL {
                     detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer) in
                         DispatchQueue.main.async {
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.removeFromSuperview()
                             self.showDetail(player: detailPlayer)
                             self.hideUI(value: false)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
                             self.playerDetailScrollView.isUserInteractionEnabled = true
                         }
                     }

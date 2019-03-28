@@ -87,19 +87,16 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                 if returnedGames.count > 0 {
                     self.games = returnedGames
                     DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.noGames.isHidden = true
+                        self.noGamesimage.isHidden = true
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
-                        self.noGames.isHidden = true
-                        self.noGamesimage.isHidden = true
-                        self.tableView.reloadData()
                         self.tableView.isUserInteractionEnabled = true
                     }
                 } else {
                     DispatchQueue.main.async{
-                        self.refreshController.endRefreshing()
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.removeFromSuperview()
                         self.tableView.isHidden = true
                         self.noGames.isHidden = false
                         if self.use_real_images == "false" {
@@ -108,6 +105,9 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                             self.noGamesimage.image = UIImage(named: "nba_logo.png")
                         }
                         self.noGamesimage.isHidden = false
+                        self.refreshController.endRefreshing()
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.removeFromSuperview()
                         self.tableView.isUserInteractionEnabled = false
                     }
                 }
