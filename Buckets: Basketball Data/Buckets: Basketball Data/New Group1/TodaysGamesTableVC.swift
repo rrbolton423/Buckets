@@ -32,6 +32,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             loadTodaysGames()
         } else {
             self.tableView.isUserInteractionEnabled = true
+            self.games.removeAll()
+            self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.navigationController?.popToRootViewController(animated: true)

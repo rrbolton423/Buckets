@@ -195,12 +195,12 @@
 		A34191892239DBF70041E3CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A3A8A01B224C56A00051BF7E /* Game.swift */,
 				A331D555223BFE4B0096A5A9 /* StaticTeam.swift */,
 				A331D554223BFE4B0096A5A9 /* Players.swift */,
 				A331D552223BFE4A0096A5A9 /* Player.swift */,
 				A331D553223BFE4B0096A5A9 /* DetailTeam.swift */,
 				A32D59672247CEAC0038CE69 /* StandingTeam.swift */,
-				A3A8A01B224C56A00051BF7E /* Game.swift */,
 			);
 			name = Models;
 			path = "New Group4";

@@ -152,6 +152,8 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         } else {
             DispatchQueue.main.async {
                 self.tableView.isUserInteractionEnabled = false
+                self.filteredRoster = nil
+                self.tableView.reloadData()
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.removeFromSuperview()
                 let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)

@@ -119,6 +119,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             }
         } else {
             DispatchQueue.main.async {
+                self.eastTeams.removeAll()
+                self.westTeams.removeAll()
+                self.tableView.reloadData()
                 self.tableView.isUserInteractionEnabled = true
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.removeFromSuperview()
