@@ -14,7 +14,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGamesimage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
-    let NBAapi = NBA_API()
+    let gamesAPI = GameAPI()
     var games = [Game]()
     var awayTeamImage: UIImage?
     var homeTeamImage: UIImage?
@@ -80,12 +80,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         setupActivityIndicator()
         if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
         DispatchQueue.global(qos: .background).async {
-            let nbaDate = self.NBAapi.getTodaysDate()
-            self.NBAapi.getScores(date: nbaDate) { returnedGames in
+            let nbaDate = self.gamesAPI.getTodaysDate()
+            self.gamesAPI.getGames(date: nbaDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
                 if returnedGames.count > 0 {
-                    //print(returnedGames)
                     self.games = returnedGames
-                    print(self.games)
                     DispatchQueue.main.async {
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
@@ -111,7 +109,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                         self.tableView.isUserInteractionEnabled = false
                     }
                 }
-            }
+            })
         }
     }
     
