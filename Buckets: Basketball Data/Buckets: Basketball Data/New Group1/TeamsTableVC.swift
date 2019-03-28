@@ -98,14 +98,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
-            DispatchQueue.main.async {
-                self.loadTeams()
-            }
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -149,6 +142,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         unfilteredTeamList = parseTeamsFromJSONFile()
         filteredTeamList = unfilteredTeamList
         tableView.reloadData()
+        self.refreshController.endRefreshing()
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
         self.tableView.isUserInteractionEnabled = true
     }
     
@@ -171,16 +167,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             cell?.teamName.text = teamName
         }
         return cell ?? UITableViewCell()
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last {
-            if indexPath == lastVisibleIndexPath {
-                self.refreshController.endRefreshing()
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.removeFromSuperview()
-            }
-        }
     }
     
     // MARK: - Navigation
