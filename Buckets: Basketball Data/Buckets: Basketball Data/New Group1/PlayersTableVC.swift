@@ -43,10 +43,14 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         self.present(alert, animated: true, completion: nil)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if #available(iOS 11.0, *) {
-            start()
             navigationItem.hidesSearchBarWhenScrolling = false
         }
     }

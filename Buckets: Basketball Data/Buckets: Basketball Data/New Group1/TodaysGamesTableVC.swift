@@ -21,11 +21,11 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
-    let refreshController = UIRefreshControl()
+    var refreshController = UIRefreshControl()
     
     @objc fileprivate func start() {
         tableView.addSubview(refreshController)
-        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
+        refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
         setupInfoBarButtonItem()
         if CheckInternet.connection() {
@@ -37,7 +37,28 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.navigationController?.popToRootViewController(animated: true)
-            //self.alert(title: "No Internet Connection", message: "Your device is not connected to the internet")
+            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                self.refreshController.endRefreshing()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @objc fileprivate func startWithRefreshController() {
+        tableView.addSubview(refreshController)
+        refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
+        firebaseSetup()
+        setupInfoBarButtonItem()
+        if CheckInternet.connection() {
+            loadTodaysGamesWithRefreshController()
+        } else {
+            self.tableView.isUserInteractionEnabled = true
+            self.games.removeAll()
+            self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.removeFromSuperview()
+            self.navigationController?.popToRootViewController(animated: true)
             let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                 self.refreshController.endRefreshing()
@@ -47,17 +68,27 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        //start()
         requestAppStoreReview()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        start()
+        if tableView.visibleCells.isEmpty {
+            print("empty")
+            start()
+        } else {
+            //do nothing
+            print("not empty")
+            if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+
+        }
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//    }
     
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {
@@ -75,12 +106,54 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.addSubview(self.activityIndicator)
     }
     
+    func loadTodaysGamesWithRefreshController(){
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        self.tableView.isUserInteractionEnabled = false
+        self.games.removeAll()
+        self.tableView.reloadData()
+        DispatchQueue.global(qos: .background).async {
+            let nbaDate = self.gamesAPI.getTodaysDate()
+            self.gamesAPI.getGames(date: nbaDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
+                if returnedGames.count > 0 {
+                    self.games = returnedGames
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.noGames.isHidden = true
+                        self.noGamesimage.isHidden = true
+                        self.refreshController.endRefreshing()
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.removeFromSuperview()
+                        self.tableView.isUserInteractionEnabled = true
+                    }
+                } else {
+                    DispatchQueue.main.async{
+                        self.tableView.isHidden = true
+                        self.noGames.isHidden = false
+                        if self.use_real_images == "false" {
+                            self.noGamesimage.image = UIImage(named: "placeholder.png")
+                        } else {
+                            self.noGamesimage.image = UIImage(named: "nba_logo.png")
+                        }
+                        self.noGamesimage.isHidden = false
+                        self.refreshController.endRefreshing()
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.removeFromSuperview()
+                        self.tableView.isUserInteractionEnabled = false
+                    }
+                }
+            })
+        }
+    }
+    
     func loadTodaysGames(){
         self.tableView.isUserInteractionEnabled = false
         self.games.removeAll()
         self.tableView.reloadData()
         setupActivityIndicator()
-        if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+        if (!self.refreshController.isRefreshing) {
+            self.activityIndicator.startAnimating()
+            }
         DispatchQueue.global(qos: .background).async {
             let nbaDate = self.gamesAPI.getTodaysDate()
             self.gamesAPI.getGames(date: nbaDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in

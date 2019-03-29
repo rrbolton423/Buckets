@@ -17,7 +17,7 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedUrl)
             let json = try JSON(data: data)
-            print(json["sports_content"]["games"]["game"])
+            //print(json["sports_content"]["games"]["game"])
             
             var jsonData = json["sports_content"].dictionaryObject
             var games = jsonData?["games"] as! [String:Any]
@@ -42,7 +42,7 @@ class GameAPI {
                     let game = Game.init(arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                     resultArray.append(game)
                 }
-            print(resultArray)
+            //print(resultArray)
             completion(resultArray)
         } catch {
             print(error)

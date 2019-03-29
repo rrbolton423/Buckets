@@ -18,6 +18,11 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     let searchController = UISearchController(searchResultsController: nil)
     let refreshController = UIRefreshControl()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
     @objc fileprivate func start() {
         tableView.addSubview(refreshController)
         refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
@@ -45,7 +50,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if #available(iOS 11.0, *) {
-            start()
             navigationItem.hidesSearchBarWhenScrolling = false
         }
     }

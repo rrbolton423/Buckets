@@ -44,6 +44,11 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //start()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         start()
     }
     

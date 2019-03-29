@@ -40,9 +40,14 @@ class PlayerDetailVC: UIViewController {
         fetchPlayer()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        start()
+        //start()
     }
     
     func hideUI(value: Bool) {
