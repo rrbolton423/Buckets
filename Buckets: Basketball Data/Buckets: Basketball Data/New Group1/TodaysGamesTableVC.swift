@@ -14,8 +14,11 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGamesimage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
+    let section = ["Today's Games", "Yesterday's Games"]
     let gamesAPI = GameAPI()
-    var games = [Game]()
+    var todaysGames = [Game]()
+    var yesterdaysGames = [Game]()
+    var allGames = [[Game]]()
     var awayTeamImage: UIImage?
     var homeTeamImage: UIImage?
     var activityIndicator = UIActivityIndicatorView(style: .gray)
@@ -29,10 +32,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         firebaseSetup()
         setupInfoBarButtonItem()
         if CheckInternet.connection() {
-            loadTodaysGames()
+            loadGamesWithActivityIndicator()
         } else {
             self.tableView.isUserInteractionEnabled = true
-            self.games.removeAll()
+            self.allGames.removeAll()
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
@@ -51,10 +54,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         firebaseSetup()
         setupInfoBarButtonItem()
         if CheckInternet.connection() {
-            loadTodaysGamesWithRefreshController()
+            loadGamesWithRefreshController()
         } else {
             self.tableView.isUserInteractionEnabled = true
-            self.games.removeAll()
+            self.todaysGames.removeAll()
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
@@ -106,17 +109,20 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.addSubview(self.activityIndicator)
     }
     
-    func loadTodaysGamesWithRefreshController(){
+    func loadGamesWithRefreshController(){
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         self.tableView.isUserInteractionEnabled = false
-        self.games.removeAll()
+        self.todaysGames.removeAll()
         self.tableView.reloadData()
         DispatchQueue.global(qos: .background).async {
-            let nbaDate = self.gamesAPI.getTodaysDate()
-            self.gamesAPI.getGames(date: nbaDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
+            let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
+            let todaysDate = self.gamesAPI.getTodaysDate()
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
                 if returnedGames.count > 0 {
-                    self.games = returnedGames
+                    self.allGames = returnedGames
+                    self.yesterdaysGames = returnedGames[1]
+                    self.todaysGames = returnedGames[0]
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
@@ -146,19 +152,22 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func loadTodaysGames(){
+    func loadGamesWithActivityIndicator(){
         self.tableView.isUserInteractionEnabled = false
-        self.games.removeAll()
+        self.todaysGames.removeAll()
         self.tableView.reloadData()
         setupActivityIndicator()
         if (!self.refreshController.isRefreshing) {
             self.activityIndicator.startAnimating()
             }
         DispatchQueue.global(qos: .background).async {
-            let nbaDate = self.gamesAPI.getTodaysDate()
-            self.gamesAPI.getGames(date: nbaDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
+            let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
+            let todaysDate = self.gamesAPI.getTodaysDate()
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
                 if returnedGames.count > 0 {
-                    self.games = returnedGames
+                    self.allGames = returnedGames
+                    self.yesterdaysGames = returnedGames[1]
+                    self.todaysGames = returnedGames[0]
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
@@ -219,25 +228,39 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (allGames.count == 0) {
+            return ""
+        } else {
+        return self.section[section]
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if (allGames.count == 0) {
+            return 0
+        } else {
+            return self.section.count
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.activityIndicator.removeFromSuperview()
-        return games.count
-        
+        print(allGames.count)
+        if (allGames.count == 0) {
+            return 0
+        } else {return self.allGames[section].count}
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
-        cell.homeTeamName.text = games[indexPath.row].homeTeamName
-        cell.awayTeamName.text = games[indexPath.row].awayTeamName
+        cell.homeTeamName.text = allGames[indexPath.section][indexPath.row].homeTeamName
+        cell.awayTeamName.text = allGames[indexPath.section][indexPath.row].awayTeamName
         
         if self.use_real_images == "false" {
             self.awayTeamImage = UIImage(named: "placeholder.png")
         } else {
-            switch games[indexPath.row].awayTeamName {
+            switch allGames[indexPath.section][indexPath.row].awayTeamName {
             case "BKN": self.awayTeamImage = UIImage(named: "bkn.png")
             case "ATL": self.awayTeamImage = UIImage(named: "atl.png")
             case "BOS": self.awayTeamImage = UIImage(named: "bos.png")
@@ -275,7 +298,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         if self.use_real_images == "false" {
             self.homeTeamImage = UIImage(named: "placeholder.png")
         } else {
-            switch games[indexPath.row].homeTeamName {
+            switch allGames[indexPath.section][indexPath.row].homeTeamName {
             case "BKN": self.homeTeamImage = UIImage(named: "bkn.png")
             case "ATL": self.homeTeamImage = UIImage(named: "atl.png")
             case "BOS": self.homeTeamImage = UIImage(named: "bos.png")
@@ -311,23 +334,23 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
         cell.homeAfbeelding.image = homeTeamImage
         cell.awayAfbeelding.image = awayTeamImage
-        cell.puckDrop.text = games[indexPath.row].quarter
+        cell.puckDrop.text = allGames[indexPath.section][indexPath.row].quarter
         
-        let awayScore = games[indexPath.row].awayTeamScore
+        let awayScore = allGames[indexPath.section][indexPath.row].awayTeamScore
         if awayScore == "" {
             cell.awayScore.text = "0"
         } else {
             cell.awayScore.text = awayScore
         }
         
-        let homeScore = games[indexPath.row].homeTeamScore
+        let homeScore = allGames[indexPath.section][indexPath.row].homeTeamScore
         if homeScore == "" {
             cell.homeScore.text = "0"
         } else {
             cell.homeScore.text = homeScore
         }
         
-        cell.venue.text = games[indexPath.row].arena
+        cell.venue.text = allGames[indexPath.section][indexPath.row].arena
         return cell
     }
 }
