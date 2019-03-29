@@ -16,7 +16,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     let searchController = UISearchController(searchResultsController: nil)
-    let refreshController = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +23,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc fileprivate func start() {
-        tableView.addSubview(refreshController)
-        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
         setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
@@ -142,11 +139,10 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     func loadTeams(){
         self.tableView.isUserInteractionEnabled = false
         setupActivityIndicator()
-        if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+        self.activityIndicator.startAnimating()
         unfilteredTeamList = parseTeamsFromJSONFile()
         filteredTeamList = unfilteredTeamList
         tableView.reloadData()
-        self.refreshController.endRefreshing()
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         self.tableView.isUserInteractionEnabled = true

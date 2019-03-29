@@ -26,11 +26,15 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     var standingsURL: String? = String()
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
-    let refreshController = UIRefreshControl()
     
     @objc fileprivate func start() {
-        tableView.addSubview(refreshController)
-        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
+        if (eastTeams.count > 0) || (westTeams.count > 0) {
+            self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.removeFromSuperview()
+            self.tableView.isUserInteractionEnabled = true
+            self.segmentedControl?.isEnabled = true
+            return }
         navigationController?.navigationBar.backgroundColor = UIColor.clear
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -38,7 +42,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         firebaseSetup()
         setupInfoBarButtonItem()
         standingsURL = "https://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=\(date.month)%2F\(date.day)%2F\(date.year)"
-        loadStandings()
+            loadStandings()
         self.tableView.reloadData()
     }
     
@@ -91,16 +95,16 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func fetchStandings() {
+        
         firebaseSetup()
         if CheckInternet.connection() {
             DispatchQueue.main.async {
-                self.segmentedControl?.isEnabled = false
                 self.tableView.isUserInteractionEnabled = false
                 self.eastTeams.removeAll()
                 self.westTeams.removeAll()
                 self.tableView.reloadData()
                 self.setupActivityIndicator()
-                if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+                self.activityIndicator.startAnimating()
             }
             DispatchQueue.global(qos: .background).async {
                 let eastStandingsAPI = EastStandingsAPI()
@@ -117,11 +121,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    self.refreshController.endRefreshing()
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.removeFromSuperview()
                     self.tableView.isUserInteractionEnabled = true
-                    self.segmentedControl?.isEnabled = true
                 }
             }
         } else {
@@ -134,8 +136,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 self.activityIndicator.removeFromSuperview()
                 let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    self.refreshController.endRefreshing()
-                    self.navigationController?.popToRootViewController(animated: true)
+                     self.navigationController?.popToRootViewController(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
             }

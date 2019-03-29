@@ -16,11 +16,8 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     var teamRosterURL: String?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     let searchController = UISearchController(searchResultsController: nil)
-    let refreshController = UIRefreshControl()
     
     @objc fileprivate func start() {
-        tableView.addSubview(refreshController)
-        refreshController.addTarget(self, action: #selector(start), for: .valueChanged)
         setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
@@ -131,7 +128,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                 self.filteredRoster = nil
                 self.tableView.reloadData()
                 self.setupActivityIndicator()
-                if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+                self.activityIndicator.startAnimating()
             }
             DispatchQueue.global(qos: .background).async {
                 let playersAPI = PlayersApi()
@@ -145,7 +142,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                         self.filteredRoster = self.unfilteredRoster
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
-                            self.refreshController.endRefreshing()
                             self.activityIndicator.stopAnimating()
                             self.activityIndicator.removeFromSuperview()
                             self.tableView.isUserInteractionEnabled = true
@@ -162,7 +158,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                 self.activityIndicator.removeFromSuperview()
                 let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    self.refreshController.endRefreshing()
                     self.navigationController?.popToRootViewController(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
