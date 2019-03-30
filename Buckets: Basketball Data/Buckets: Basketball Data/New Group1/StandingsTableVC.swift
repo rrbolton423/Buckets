@@ -62,8 +62,16 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         //start()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //self.navigationController?.navigationBar.tintColor = UIColor.white
         let items = ["East", "West"]
         segmentedController = UISegmentedControl(items: items)
         segmentedController.setWidth(80, forSegmentAt: 0)

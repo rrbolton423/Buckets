@@ -41,7 +41,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+                
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         var navBarDefalutColor: UIColor?
@@ -51,6 +51,12 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         
         //restore:
         self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.refreshController.endRefreshing()
+        self.activityIndicator.stopAnimating()
+        tableView.reloadData()
     }
     
     @objc fileprivate func start() {
@@ -104,6 +110,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         //start()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //self.navigationController?.navigationBar.tintColor = UIColor.white
+        //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         requestAppStoreReview()
     }
     
@@ -304,7 +314,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         
         if sectionTitle == "Yesterday's Games" {
             //cell.backgroundColor = UIColor.init(red:236.0/255, green:240.0/255.0, blue:241.0/255.0, alpha:1.0)
-            cell.backgroundColor = UIColor.groupTableViewBackground
+            cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
         } else {
             cell.backgroundColor = .white
         }

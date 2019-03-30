@@ -60,6 +60,9 @@ class TeamDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //self.navigationController?.navigationBar.tintColor = UIColor.white
         start()
     }
     

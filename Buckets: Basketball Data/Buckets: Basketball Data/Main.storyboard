@@ -15,7 +15,7 @@
             <objects>
                 <navigationController id="g0M-fh-the" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" image="teams" selectedImage="teams" id="wak-zL-5uZ"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Vf3-yB-GTi">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -31,7 +31,7 @@
         <!--Teams-->
         <scene sceneID="BH3-IZ-8bI">
             <objects>
-                <tableViewController id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VUs-FI-1zi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +58,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="EYI-hK-cO0" firstAttribute="centerY" secondItem="YcS-lw-LOi" secondAttribute="centerY" id="QgY-ft-nOD"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Det-SI-Ta2" secondAttribute="trailing" constant="20" symbolic="YES" id="RvP-dy-vh3"/>
@@ -90,11 +90,11 @@
             <objects>
                 <viewController title="Team" id="yK1-Mn-z3A" customClass="TeamDetailVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebe-S6-Ebp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1031"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOu-oP-8AO">
-                                <rect key="frame" x="0.0" y="116" width="375" height="970"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="921"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCj-U1-v5C">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="978"/>
@@ -305,7 +305,7 @@
             <objects>
                 <tableViewController title="Players" id="ywG-LX-oRk" customClass="PlayersTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IaS-cc-L8L">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -359,11 +359,11 @@
             <objects>
                 <viewController title="Player" id="qCt-hS-ETd" userLabel="Player" customClass="PlayerDetailVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fNd-s8-M4l">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1396"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3B-GR-JVX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1332"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1283"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKW-bW-X2K">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1310"/>
@@ -949,19 +949,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip-Off" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGW-qU-np8">
                                                     <rect key="frame" x="16" y="184.33333333333334" width="50" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VENUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKB-s6-kZw">
                                                     <rect key="frame" x="88" y="185.66666666666666" width="46" height="16.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ja1-jh-3iu">
                                                     <rect key="frame" x="73" y="182.33333333333334" width="6" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZf-v6-H6m">
@@ -1050,6 +1050,7 @@
                 <navigationController title="Games" automaticallyAdjustsScrollViewInsets="NO" id="xpt-BV-pFt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Games" image="games" selectedImage="games" id="SvK-Sc-5hy"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JUR-O4-SVV">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1069,6 +1070,7 @@
                 <navigationController title="Standings" automaticallyAdjustsScrollViewInsets="NO" id="t4F-w5-mPi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Standings" image="standings" selectedImage="standings" id="WAB-Vc-fzj"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="AHJ-Xa-9Dt">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>

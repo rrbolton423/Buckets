@@ -19,6 +19,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //self.navigationController?.navigationBar.tintColor = UIColor.white
         start()
     }
     
@@ -46,6 +49,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isTranslucent = true
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
