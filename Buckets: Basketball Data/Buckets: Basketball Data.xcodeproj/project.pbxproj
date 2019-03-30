@@ -37,9 +37,9 @@
 		A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */; };
 		A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */; };
 		A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */; };
-		A389CA62224BBB1400DB9BF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A389CA61224BBB1400DB9BF9 /* Main.storyboard */; };
 		A3A8A01C224C56A00051BF7E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A01B224C56A00051BF7E /* Game.swift */; };
 		A3A8A01E224C56BD0051BF7E /* GameAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A01D224C56BD0051BF7E /* GameAPI.swift */; };
+		A3E56B20224ECDD000C3E72E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E56B1F224ECDD000C3E72E /* Main.storyboard */; };
 		B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,9 +78,9 @@
 		A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buckets: Basketball Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A341914D2239DA2C0041E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A389CA61224BBB1400DB9BF9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A3A8A01B224C56A00051BF7E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		A3A8A01D224C56BD0051BF7E /* GameAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAPI.swift; sourceTree = "<group>"; };
+		A3E56B1F224ECDD000C3E72E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,7 +133,7 @@
 				A341917F2239DBD50041E3CD /* JSON */,
 				A34191822239DBE10041E3CD /* Utils */,
 				A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */,
-				A389CA61224BBB1400DB9BF9 /* Main.storyboard */,
+				A3E56B1F224ECDD000C3E72E /* Main.storyboard */,
 				A331D539223BFE0F0096A5A9 /* Assets.xcassets */,
 				A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */,
 				A341914D2239DA2C0041E3CD /* Info.plist */,
@@ -290,7 +290,7 @@
 				A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */,
 				A331D53D223BFE100096A5A9 /* Assets.xcassets in Resources */,
 				A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */,
-				A389CA62224BBB1400DB9BF9 /* Main.storyboard in Resources */,
+				A3E56B20224ECDD000C3E72E /* Main.storyboard in Resources */,
 				A331D561223BFE5F0096A5A9 /* StaticTeams.json in Resources */,
 				A331D53C223BFE100096A5A9 /* LaunchScreen.storyboard in Resources */,
 			);

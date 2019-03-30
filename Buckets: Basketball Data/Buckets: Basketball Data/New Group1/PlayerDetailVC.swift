@@ -47,7 +47,13 @@ class PlayerDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //start()
+        var navBarDefalutColor: UIColor?
+        
+        // save:
+        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
+        
+        //restore:
+        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
     }
     
     func hideUI(value: Bool) {

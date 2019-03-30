@@ -47,6 +47,13 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        var navBarDefalutColor: UIColor?
+        
+        // save:
+        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
+        
+        //restore:
+        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -181,7 +188,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as? PlayerCell
-        
+        cell?.backgroundColor = .clear
         if let nbaTeams = filteredRoster {
             if let playerName = nbaTeams[indexPath.row].fullName, let jerseyNumber = nbaTeams[indexPath.row].jerseyNumber {
                 cell?.playerName.text = "#"+jerseyNumber + " " + playerName

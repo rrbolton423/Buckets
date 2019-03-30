@@ -46,6 +46,13 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        var navBarDefalutColor: UIColor?
+        
+        // save:
+        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
+        
+        //restore:
+        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -154,6 +161,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
+        cell?.backgroundColor = .clear
         if let teamPic = filteredTeamList?[indexPath.row].picture {
             if use_real_images == "false" {
                 cell?.teamLogo.image = UIImage(named: "placeholder.png")

@@ -11,7 +11,8 @@ import Foundation
 
 class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var segmentedControl: UISegmentedControl?
+    //@IBOutlet weak var segmentedControl: UISegmentedControl?
+    @IBOutlet weak var segmentControlParentView: UIView!
     
     var teams: [StandingTeam] = []
     var eastTeams: [StandingTeam] = []
@@ -26,6 +27,8 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     var standingsURL: String? = String()
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    var segmentedController: UISegmentedControl!
+
     
     @objc fileprivate func start() {
         if (eastTeams.count > 0) || (westTeams.count > 0) {
@@ -33,12 +36,12 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.tableView.isUserInteractionEnabled = true
-            self.segmentedControl?.isEnabled = true
+            self.segmentedController?.isEnabled = true
             return }
-        navigationController?.navigationBar.backgroundColor = UIColor.clear
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.backgroundColor = UIColor.clear
+//        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
         firebaseSetup()
         setupInfoBarButtonItem()
         standingsURL = "https://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=\(date.month)%2F\(date.day)%2F\(date.year)"
@@ -48,11 +51,29 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        var navBarDefalutColor: UIColor?
+        
+        // save:
+        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
+        
+        //restore:
+        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
         //start()
+        
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let items = ["East", "West"]
+        segmentedController = UISegmentedControl(items: items)
+        segmentedController.setWidth(80, forSegmentAt: 0)
+        segmentedController.setWidth(80, forSegmentAt: 1)
+        segmentedController.selectedSegmentIndex = 0
+        segmentedController.addTarget(self, action: #selector(changeConference), for: .valueChanged)
+        navigationItem.titleView = segmentedController
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         start()
     }
     
@@ -95,7 +116,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func fetchStandings() {
-        
         firebaseSetup()
         if CheckInternet.connection() {
             DispatchQueue.main.async {
@@ -150,7 +170,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var returnValue = 0
-        switch(segmentedControl?.selectedSegmentIndex)
+        switch(segmentedController?.selectedSegmentIndex)
         {
         case 0:
             returnValue = eastTeams.count
@@ -164,14 +184,14 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         return returnValue
     }
     
-    @IBAction func segmentedControlActionChanged(sender: AnyObject) {
+    @objc func changeConference(sender: UISegmentedControl) {
         start()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "standingsCell", for: indexPath) as! StandingsCell
-        
-        switch(segmentedControl?.selectedSegmentIndex)
+        cell.backgroundColor = .clear
+        switch(segmentedController?.selectedSegmentIndex)
         {
         case 0:
             if self.use_real_images == "false" {
