@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UINavigationBar.appearance().isTranslucent = false
         FirebaseApp.configure()
         FirebaseConstants().setupAPP()
         var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
