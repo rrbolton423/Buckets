@@ -19,9 +19,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //self.navigationController?.navigationBar.tintColor = UIColor.white
         start()
     }
     
@@ -49,18 +46,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = true
-        
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        var navBarDefalutColor: UIColor?
-        
-        // save:
-        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
-        
-        //restore:
-        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -76,6 +64,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //self.tabBarController?.tabBar.isHidden = true
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
         searchController.dismiss(animated: true, completion: nil)
     }
     

@@ -42,21 +42,14 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //self.navigationController?.navigationBar.tintColor = UIColor.white
         start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        var navBarDefalutColor: UIColor?
-        
-        // save:
-        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
-        
-        //restore:
-        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -64,7 +57,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = true
         }
@@ -72,6 +64,8 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
         searchController.dismiss(animated: true, completion: nil)
     }
     

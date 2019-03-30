@@ -889,7 +889,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nba_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Gvx-Cg-hEo">
-                                <rect key="frame" x="47" y="-1268.3333333333333" width="321" height="1777.3333333333333"/>
+                                <rect key="frame" x="47" y="148" width="321" height="361"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bXg-nk-Xra">
                                 <rect key="frame" x="0.0" y="116" width="414" height="571"/>
@@ -1022,13 +1022,14 @@
                         <constraints>
                             <constraint firstItem="GAM-3v-PdS" firstAttribute="centerX" secondItem="ZDv-yj-Wb0" secondAttribute="centerX" id="1lb-3Y-fqK"/>
                             <constraint firstItem="3En-WZ-TMq" firstAttribute="bottom" secondItem="GAM-3v-PdS" secondAttribute="bottom" constant="126" id="5CI-V9-IlE"/>
+                            <constraint firstItem="3En-WZ-TMq" firstAttribute="trailing" secondItem="Gvx-Cg-hEo" secondAttribute="trailing" constant="46" id="ODJ-HJ-1Ua"/>
                             <constraint firstItem="bXg-nk-Xra" firstAttribute="top" secondItem="3En-WZ-TMq" secondAttribute="top" id="VMJ-Ge-rtK"/>
-                            <constraint firstItem="3En-WZ-TMq" firstAttribute="trailing" secondItem="Gvx-Cg-hEo" secondAttribute="trailing" constant="46" id="ZuG-fg-4nP"/>
+                            <constraint firstItem="Gvx-Cg-hEo" firstAttribute="top" secondItem="3En-WZ-TMq" secondAttribute="top" constant="32" id="fNL-Wl-CVm"/>
                             <constraint firstItem="3En-WZ-TMq" firstAttribute="trailing" secondItem="bXg-nk-Xra" secondAttribute="trailing" id="gNS-t3-gAh"/>
                             <constraint firstItem="bXg-nk-Xra" firstAttribute="leading" secondItem="3En-WZ-TMq" secondAttribute="leading" id="khS-4N-Xaq"/>
-                            <constraint firstItem="Gvx-Cg-hEo" firstAttribute="leading" secondItem="3En-WZ-TMq" secondAttribute="leading" constant="47" id="tAt-wa-Zbe"/>
+                            <constraint firstItem="Gvx-Cg-hEo" firstAttribute="leading" secondItem="3En-WZ-TMq" secondAttribute="leading" constant="47" id="uk5-vy-5mz"/>
+                            <constraint firstItem="GAM-3v-PdS" firstAttribute="top" secondItem="Gvx-Cg-hEo" secondAttribute="bottom" constant="8" id="vIz-LM-bYH"/>
                             <constraint firstItem="3En-WZ-TMq" firstAttribute="bottom" secondItem="bXg-nk-Xra" secondAttribute="bottom" id="wp2-02-GyM"/>
-                            <constraint firstItem="GAM-3v-PdS" firstAttribute="top" secondItem="Gvx-Cg-hEo" secondAttribute="bottom" constant="8" id="yhf-KQ-YC4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3En-WZ-TMq"/>
                     </view>
@@ -1042,7 +1043,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BUd-YS-7jT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6812" y="-946"/>
+            <point key="canvasLocation" x="6811.594202898551" y="-946.46739130434787"/>
         </scene>
         <!--Games-->
         <scene sceneID="jkL-Q3-gHh">

@@ -46,23 +46,19 @@ class TeamDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        
-        var navBarDefalutColor: UIColor?
-        
-        // save:
-        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
-        
-        //restore:
-        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //self.navigationController?.navigationBar.tintColor = UIColor.white
         start()
     }
     

@@ -18,3 +18,5 @@ var PlayerID = "PlayerID="
 var LeagueID = "LeagueID=00"
 var SeasonType = "SeasonType=Regular+Season"
 var IsOnlyCurrentSeason = "IsOnlyCurrentSeason=1"
+var PictureYear = "2018"
+

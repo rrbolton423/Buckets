@@ -41,22 +41,16 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        var navBarDefalutColor: UIColor?
-        
-        // save:
-        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
-        
-        //restore:
-        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.refreshController.endRefreshing()
         self.activityIndicator.stopAnimating()
-        tableView.reloadData()
+        self.activityIndicator.removeFromSuperview()
+        //tableView.reloadData()
     }
     
     @objc fileprivate func start() {
@@ -85,7 +79,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc fileprivate func startWithRefreshController() {
         tableView.addSubview(refreshController)
-        refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
+        refreshController.addTarget(self,  action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
         setupInfoBarButtonItem()
         if CheckInternet.connection() {
@@ -109,23 +103,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //start()
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //self.navigationController?.navigationBar.tintColor = UIColor.white
-        //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        requestAppStoreReview()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        var navBarDefalutColor: UIColor?
-        
-        // save:
-        navBarDefalutColor = self.navigationController?.navigationBar.tintColor
-        
-        //restore:
-        self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
         if tableView.visibleCells.isEmpty {
             print("empty")
             start()
@@ -133,13 +110,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             //do nothing
             print("not empty")
             if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
-
         }
+        
+        requestAppStoreReview()
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//    }
     
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {

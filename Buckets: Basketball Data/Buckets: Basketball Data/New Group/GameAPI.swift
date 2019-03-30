@@ -48,6 +48,7 @@ class GameAPI {
             //completion(resultArray)
         } catch {
             print(error)
+            completion([])
         }
         
         let todaysUrl = URL(string: String(format: url, todaysDate))
@@ -85,6 +86,7 @@ class GameAPI {
             completion(resultArray)
         } catch {
             print(error)
+            completion([])
         }
         
     }
