@@ -63,7 +63,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //self.tabBarController?.tabBar.isHidden = true
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         searchController.dismiss(animated: true, completion: nil)

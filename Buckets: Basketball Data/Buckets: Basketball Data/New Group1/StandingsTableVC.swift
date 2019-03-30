@@ -36,10 +36,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             self.tableView.isUserInteractionEnabled = true
             self.segmentedController?.isEnabled = true
             return }
-//        navigationController?.navigationBar.backgroundColor = UIColor.clear
-//        navigationController?.navigationBar.isTranslucent = true
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
         firebaseSetup()
         setupInfoBarButtonItem()
         standingsURL = "https://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=\(date.month)%2F\(date.day)%2F\(date.year)"

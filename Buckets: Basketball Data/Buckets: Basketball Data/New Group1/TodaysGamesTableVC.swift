@@ -26,14 +26,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var refreshController = UIRefreshControl()
     
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView()
-//        let separatorView = UIView(frame: CGRect(x: tableView.separatorInset.left, y: footerView.frame.height, width: tableView.frame.width - tableView.separatorInset.right - tableView.separatorInset.left, height: 1))
-//        separatorView.backgroundColor = UIColor.separatorColor
-//        footerView.addSubview(separatorView)
-//        return footerView
-//    }
-    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let tableHeader = view as! UITableViewHeaderFooterView
         tableHeader.backgroundView?.backgroundColor = UIColor.groupTableViewBackground
@@ -50,7 +42,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.refreshController.endRefreshing()
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
-        //tableView.reloadData()
     }
     
     @objc fileprivate func start() {
@@ -107,7 +98,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             print("empty")
             start()
         } else {
-            //do nothing
             print("not empty")
             if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
         }
@@ -274,25 +264,14 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {return self.allGames[section].count}
     }
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        self.selectedBackgroundView = UIView()
-//        self.selectionStyle = .default // you can also take this line out
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
         
-        let sectionHeaderView = tableView.headerView(forSection: indexPath.section)
-        let sectionTitle = sectionHeaderView?.textLabel?.text
-        
-        if sectionTitle == "Yesterday's Games" {
-            //cell.backgroundColor = UIColor.init(red:236.0/255, green:240.0/255.0, blue:241.0/255.0, alpha:1.0)
-            cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
-        } else {
+        if indexPath.section == 0 {
             cell.backgroundColor = .white
+        } else {
+            cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
         }
-        
         
         cell.homeTeamName.text = allGames[indexPath.section][indexPath.row].homeTeamName
         cell.awayTeamName.text = allGames[indexPath.section][indexPath.row].awayTeamName
