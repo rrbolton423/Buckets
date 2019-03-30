@@ -61,6 +61,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = true
         }

@@ -41,6 +41,9 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         var navBarDefalutColor: UIColor?
         
         // save:

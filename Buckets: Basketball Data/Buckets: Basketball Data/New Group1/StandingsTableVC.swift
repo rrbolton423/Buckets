@@ -11,8 +11,6 @@ import Foundation
 
 class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    //@IBOutlet weak var segmentedControl: UISegmentedControl?
-    @IBOutlet weak var segmentControlParentView: UIView!
     
     var teams: [StandingTeam] = []
     var eastTeams: [StandingTeam] = []
@@ -51,6 +49,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+
         var navBarDefalutColor: UIColor?
         
         // save:
@@ -59,9 +60,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         //restore:
         self.navigationController?.navigationBar.tintColor = navBarDefalutColor!
         //start()
-        
-        
-        
     }
     
     override func viewDidLoad() {
