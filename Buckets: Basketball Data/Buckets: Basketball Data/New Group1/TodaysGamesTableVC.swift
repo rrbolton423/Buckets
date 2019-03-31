@@ -10,10 +10,10 @@ import UIKit
 import StoreKit
 
 class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGamesimage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
+    
     let section = ["Today's Games", "Yesterday's Games"]
     let gamesAPI = GameAPI()
     var todaysGames = [Game]()
@@ -26,9 +26,14 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var refreshController = UIRefreshControl()
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-        let tableHeader = view as! UITableViewHeaderFooterView
-        tableHeader.backgroundView?.backgroundColor = UIColor.groupTableViewBackground
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if tableView.visibleCells.isEmpty {
+            start()
+        } else {
+            if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+        }
+        requestAppStoreReview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +49,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.activityIndicator.removeFromSuperview()
     }
     
-    @objc fileprivate func start() {
+    @objc func start() {
         tableView.addSubview(refreshController)
         refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
@@ -60,15 +65,15 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.navigationController?.popToRootViewController(animated: true)
-            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                self.refreshController.endRefreshing()
-            }))
-            self.present(alert, animated: true, completion: nil)
+            displayConnectionErrorAlert()
         }
     }
     
-    @objc fileprivate func startWithRefreshController() {
+    @objc func refresh() {
+        start()
+    }
+    
+    @objc func startWithRefreshController() {
         tableView.addSubview(refreshController)
         refreshController.addTarget(self,  action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
@@ -84,25 +89,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.navigationController?.popToRootViewController(animated: true)
-            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                self.refreshController.endRefreshing()
-            }))
-            self.present(alert, animated: true, completion: nil)
+            displayConnectionErrorAlert()
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if tableView.visibleCells.isEmpty {
-            print("empty")
-            start()
-        } else {
-            print("not empty")
-            if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
-        }
-        
-        requestAppStoreReview()
     }
     
     func firebaseSetup() {
@@ -113,7 +101,21 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    fileprivate func setupActivityIndicator() {
+    func setupInfoBarButtonItem() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc func getInfoAction() {
+        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
@@ -130,7 +132,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         DispatchQueue.global(qos: .background).async {
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
-            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
                 if returnedGames.count > 0 {
                     self.allGames = returnedGames
                     self.yesterdaysGames = returnedGames[1]
@@ -169,13 +171,11 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.todaysGames.removeAll()
         self.tableView.reloadData()
         setupActivityIndicator()
-        if (!self.refreshController.isRefreshing) {
-            self.activityIndicator.startAnimating()
-            }
+        if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
         DispatchQueue.global(qos: .background).async {
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
-            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/%@/games.json", completion: { (returnedGames) in
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
                 if returnedGames.count > 0 {
                     self.allGames = returnedGames
                     self.yesterdaysGames = returnedGames[1]
@@ -209,42 +209,15 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    @objc func refresh() {
-        start()
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 211
-    }
-    
-    func setupInfoBarButtonItem() {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItem = infoBarButtonItem
-    }
-    
-    @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func requestAppStoreReview() {
-        if appLaunches == 5 || appLaunches == 25 || appLaunches == 50 {
-            SKStoreReviewController.requestReview()
-            var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
-            appLaunches += 1
-            UserDefaults.standard.set(appLaunches, forKey: "appLaunches")
-        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if (allGames.count == 0) {
             return ""
         } else {
-        return self.section[section]
+            return self.section[section]
         }
     }
     
@@ -264,18 +237,20 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {return self.allGames[section].count}
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let tableHeader = view as! UITableViewHeaderFooterView
+        tableHeader.backgroundView?.backgroundColor = UIColor.groupTableViewBackground
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
-        
         if indexPath.section == 0 {
             cell.backgroundColor = .white
         } else {
             cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
         }
-        
         cell.homeTeamName.text = allGames[indexPath.section][indexPath.row].homeTeamName
         cell.awayTeamName.text = allGames[indexPath.section][indexPath.row].awayTeamName
-        
         if self.use_real_images == "false" {
             self.awayTeamImage = UIImage(named: "placeholder.png")
         } else {
@@ -313,7 +288,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             default: self.awayTeamImage = UIImage(named: "placeholder.png")
             }
         }
-        
         if self.use_real_images == "false" {
             self.homeTeamImage = UIImage(named: "placeholder.png")
         } else {
@@ -354,23 +328,37 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         cell.homeAfbeelding.image = homeTeamImage
         cell.awayAfbeelding.image = awayTeamImage
         cell.puckDrop.text = allGames[indexPath.section][indexPath.row].quarter
-        
         let awayScore = allGames[indexPath.section][indexPath.row].awayTeamScore
         if awayScore == "" {
             cell.awayScore.text = "0"
         } else {
             cell.awayScore.text = awayScore
         }
-        
         let homeScore = allGames[indexPath.section][indexPath.row].homeTeamScore
         if homeScore == "" {
             cell.homeScore.text = "0"
         } else {
             cell.homeScore.text = homeScore
         }
-        
         cell.venue.text = allGames[indexPath.section][indexPath.row].arena
         return cell
+    }
+    
+    func displayConnectionErrorAlert() {
+        let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            self.refreshController.endRefreshing()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func requestAppStoreReview() {
+        if appLaunches == 5 || appLaunches == 25 || appLaunches == 50 {
+            SKStoreReviewController.requestReview()
+            var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
+            appLaunches += 1
+            UserDefaults.standard.set(appLaunches, forKey: "appLaunches")
+        }
     }
 }
 

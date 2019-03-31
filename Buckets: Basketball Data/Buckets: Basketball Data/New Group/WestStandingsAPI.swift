@@ -23,7 +23,6 @@ class WestStandingsAPI {
         var homeRecord: String?
         var awayRecord: String?
         guard let url = URL(string: url) else { return }
-        print(url)
         do {
             let data = try Data(contentsOf: url)
             let json = try JSON(data: data)

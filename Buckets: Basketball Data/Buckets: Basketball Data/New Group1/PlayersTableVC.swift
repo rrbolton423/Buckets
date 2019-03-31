@@ -17,29 +17,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     let searchController = UISearchController(searchResultsController: nil)
     
-    @objc fileprivate func start() {
-        setupInfoBarButtonItem()
-        setupSearchController()
-        firebaseSetup()
-        checkForTeamID()
-        fetchPlayers()
-    }
-    
-    func setupInfoBarButtonItem() {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItem = infoBarButtonItem
-    }
-    
-    @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
@@ -69,6 +46,28 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         searchController.dismiss(animated: true, completion: nil)
     }
     
+    @objc func start() {
+        setupInfoBarButtonItem()
+        setupSearchController()
+        firebaseSetup()
+        checkForTeamID()
+        fetchPlayers()
+    }
+    
+    func setupInfoBarButtonItem() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc func getInfoAction() {
+        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func setupSearchController() {
         searchController.searchBar.searchBarStyle = .minimal
@@ -78,28 +77,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
         self.definesPresentationContext = true
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            filteredRoster = unfilteredRoster?.filter { player in
-                return (player.fullName?.lowercased().contains(searchText.lowercased()))!
-            }
-        } else {
-            filteredRoster = unfilteredRoster
-        }
-        tableView.reloadData()
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        searchBar.text = nil
-        searchBar.setShowsCancelButton(false, animated: true)
-        tableView.reloadData()
     }
     
     func firebaseSetup() {
@@ -123,6 +100,28 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
             self.navigationController?.popToRootViewController(animated: true)
             self.alert(title: "Fatal Error", message: "TeamID Required")
         }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        searchBar.text = nil
+        searchBar.setShowsCancelButton(false, animated: true)
+        tableView.reloadData()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            filteredRoster = unfilteredRoster?.filter { player in
+                return (player.fullName?.lowercased().contains(searchText.lowercased()))!
+            }
+        } else {
+            filteredRoster = unfilteredRoster
+        }
+        tableView.reloadData()
     }
     
     func fetchPlayers() {
@@ -195,7 +194,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                 cell?.position.text = position
             }
         }
-        
         return cell ?? UITableViewCell()
     }
     

@@ -22,28 +22,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         start()
     }
     
-    @objc fileprivate func start() {
-        setupInfoBarButtonItem()
-        setupSearchController()
-        firebaseSetup()
-        loadTeams()
-    }
-    
-    func setupInfoBarButtonItem() {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItem = infoBarButtonItem
-    }
-    
-    @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -68,6 +46,28 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         searchController.dismiss(animated: true, completion: nil)
     }
     
+    @objc func start() {
+        setupInfoBarButtonItem()
+        setupSearchController()
+        firebaseSetup()
+        loadTeams()
+    }
+    
+    func setupInfoBarButtonItem() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc func getInfoAction() {
+        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func setupSearchController() {
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.delegate = self
@@ -76,6 +76,25 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
         self.definesPresentationContext = true
+    }
+    
+    func firebaseSetup() {
+        DispatchQueue.global(qos: .background).async {
+            FirebaseConstants().setupAPP()
+            self.use_real_images = FirebaseConstants().getImages()
+        }
+    }
+    
+    func loadTeams(){
+        self.tableView.isUserInteractionEnabled = false
+        setupActivityIndicator()
+        self.activityIndicator.startAnimating()
+        unfilteredTeamList = parseTeamsFromJSONFile()
+        filteredTeamList = unfilteredTeamList
+        tableView.reloadData()
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        self.tableView.isUserInteractionEnabled = true
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -100,21 +119,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         tableView.reloadData()
     }
     
-    func firebaseSetup() {
-        DispatchQueue.global(qos: .background).async {
-            FirebaseConstants().setupAPP()
-            self.use_real_images = FirebaseConstants().getImages()
-        }
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredTeamList?.count ?? 0
-    }
-    
     func parseTeamsFromJSONFile() -> [StaticTeam] {
         var resultArray = [StaticTeam]()
         guard let url = Bundle.main.url(forResource: "StaticTeams", withExtension: "json") else { return [] }
@@ -133,7 +137,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         return resultArray
     }
     
-    fileprivate func setupActivityIndicator() {
+    func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
@@ -141,16 +145,12 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         self.view.addSubview(self.activityIndicator)
     }
     
-    func loadTeams(){
-        self.tableView.isUserInteractionEnabled = false
-        setupActivityIndicator()
-        self.activityIndicator.startAnimating()
-        unfilteredTeamList = parseTeamsFromJSONFile()
-        filteredTeamList = unfilteredTeamList
-        tableView.reloadData()
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
-        self.tableView.isUserInteractionEnabled = true
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredTeamList?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

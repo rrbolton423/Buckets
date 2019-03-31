@@ -33,11 +33,7 @@ class TeamDetailVC: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     
-    func hideUI(value: Bool) {
-        teamDetailScrollView.isHidden = value
-    }
-    
-    fileprivate func start() {
+    func start() {
         setupInfoBarButtonItem()
         firebaseSetup()
         checkForTeamID()
@@ -133,6 +129,10 @@ class TeamDetailVC: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    func hideUI(value: Bool) {
+        teamDetailScrollView.isHidden = value
     }
     
     func showInfoDetail(team: DetailTeam?) {

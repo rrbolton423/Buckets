@@ -19,14 +19,9 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedYesterdaysUrl)
             let json = try JSON(data: data)
-            //print(json["sports_content"]["games"]["game"])
-            
             var jsonData = json["sports_content"].dictionaryObject
             var games = jsonData?["games"] as! [String:Any]
             let gameList = (games["game"] as? [[String:Any]])!
-            
-            //let rowSet = json["sports_content"]["games"]["game"]
-            
                 for game in gameList
                 {
                     let g = game as NSDictionary
@@ -44,33 +39,24 @@ class GameAPI {
                     let game = Game.init(arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                     yesterdaysGamesArray.append(game)
                 }
-            //print(resultArray)
-            //completion(resultArray)
         } catch {
             print(error)
             completion([])
         }
-        
         let todaysUrl = URL(string: String(format: url, todaysDate))
         guard let unwrappedTodaysUrl = todaysUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedTodaysUrl)
             let json = try JSON(data: data)
-            //print(json["sports_content"]["games"]["game"])
-            
             var jsonData = json["sports_content"].dictionaryObject
             var games = jsonData?["games"] as! [String:Any]
             let gameList = (games["game"] as? [[String:Any]])!
-            
-            //let rowSet = json["sports_content"]["games"]["game"]
-            
             for game in gameList
             {
                 let g = game as NSDictionary
                 let home = g["home"] as! NSDictionary
                 let away = g["visitor"] as! NSDictionary
                 let gameStatus = g["period_time"] as! NSDictionary
-                
                 let arena = g["arena"]! as! String
                 let awayTeamName = away["abbreviation"]! as! String
                 let awayTeamScore = away["score"]! as! String
@@ -81,14 +67,12 @@ class GameAPI {
                 let game = Game.init(arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                 todaysGamesArray.append(game)
             }
-            //print(resultArray)
             resultArray = [todaysGamesArray, yesterdaysGamesArray]
             completion(resultArray)
         } catch {
             print(error)
             completion([])
         }
-        
     }
     func getTodaysDate() -> String {
         let date = Date()
@@ -105,12 +89,4 @@ class GameAPI {
         let aDayBefore:String = dateFormatter.string(from: yesterdaysDate!)
         return aDayBefore
     }
-    
-//    func getYesterdaysDate() -> String {
-//        let date = Date()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yMMdd"
-//        let result = formatter.string(from: date)
-//        return result
-//    }
 }

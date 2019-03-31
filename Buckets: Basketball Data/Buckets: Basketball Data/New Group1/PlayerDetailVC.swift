@@ -33,7 +33,7 @@ class PlayerDetailVC: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     
-    fileprivate func start() {
+    func start() {
         setupInfoBarButtonItem()
         firebaseSetup()
         checkForPlayerID()
@@ -56,10 +56,6 @@ class PlayerDetailVC: UIViewController {
         super.viewWillDisappear(animated)
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
-    }
-    
-    func hideUI(value: Bool) {
-        playerDetailScrollView.isHidden = value
     }
     
     func setupInfoBarButtonItem() {
@@ -133,6 +129,10 @@ class PlayerDetailVC: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    func hideUI(value: Bool) {
+        playerDetailScrollView.isHidden = value
     }
     
     func showDetail(player: Player) {
