@@ -97,7 +97,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
             self.use_real_images = FirebaseConstants().getImages()
-            print("THIS IS THE CONFIG: \(self.use_real_images ?? "DEFAULT")")
         }
     }
     
@@ -231,7 +230,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.activityIndicator.removeFromSuperview()
-        print(allGames.count)
         if (allGames.count == 0) {
             return 0
         } else {return self.allGames[section].count}
