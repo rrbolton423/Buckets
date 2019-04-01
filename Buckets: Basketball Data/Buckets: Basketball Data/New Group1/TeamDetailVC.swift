@@ -143,7 +143,39 @@ class TeamDetailVC: UIViewController {
                 self.teamNameLabel.text = "\(city) \(name)"
                 self.navigationItem.title = "\(city) \(name)"
                 if self.use_real_images == "false" {
-                    self.teamImage = UIImage(named: "placeholder.png")
+                    switch name {
+                    case "Nets": self.teamImage = UIImage(named: "BKN_placeholder.png")
+                    case "Hawks": self.teamImage = UIImage(named: "ATL_placeholder.png")
+                    case "Celtics": self.teamImage = UIImage(named: "BOS_placeholder.png")
+                    case "Hornets": self.teamImage = UIImage(named: "CHA_placeholder.png")
+                    case "Bulls": self.teamImage = UIImage(named: "CHI_placeholder.png")
+                    case "Cavaliers": self.teamImage = UIImage(named: "CLE_placeholder.png")
+                    case "Mavericks": self.teamImage = UIImage(named: "DAL_placeholder.png")
+                    case "Nuggets": self.teamImage = UIImage(named: "DEN_placeholder.png")
+                    case "Pistons": self.teamImage = UIImage(named: "DET_placeholder.png")
+                    case "Warriors": self.teamImage = UIImage(named: "GSW_placeholder.png")
+                    case "Rockets": self.teamImage = UIImage(named: "HOU_placeholder.png")
+                    case "Pacers": self.teamImage = UIImage(named: "IND_placeholder.png")
+                    case "Clippers": self.teamImage = UIImage(named: "LAC_placeholder.png")
+                    case "Lakers": self.teamImage = UIImage(named: "LAL_placeholder.png")
+                    case "Grizzlies": self.teamImage = UIImage(named: "MEM_placeholder.png")
+                    case "Heat": self.teamImage = UIImage(named: "MIA_placeholder.png")
+                    case "Bucks": self.teamImage = UIImage(named: "MIL_placeholder.png")
+                    case "Timberwolves": self.teamImage = UIImage(named: "MIN_placeholder.png")
+                    case "Pelicans": self.teamImage = UIImage(named: "NOP_placeholder.png")
+                    case "Knicks": self.teamImage = UIImage(named: "NYK_placeholder.png")
+                    case "Thunder": self.teamImage = UIImage(named: "OKC_placeholder.png")
+                    case "Magic": self.teamImage = UIImage(named: "ORL_placeholder.png")
+                    case "76ers": self.teamImage = UIImage(named: "PHI_placeholder.png")
+                    case "Suns": self.teamImage = UIImage(named: "PHX_placeholder.png")
+                    case "Trail Blazers": self.teamImage = UIImage(named: "POR_placeholder.png")
+                    case "Kings": self.teamImage = UIImage(named: "SAC_placeholder.png")
+                    case "Spurs": self.teamImage = UIImage(named: "SAS_placeholder.png")
+                    case "Raptors": self.teamImage = UIImage(named: "TOR_placeholder.png")
+                    case "Jazz": self.teamImage = UIImage(named: "UTA_placeholder.png")
+                    case "Wizards": self.teamImage = UIImage(named: "WAS_placeholder.png")
+                    default: self.teamImage = UIImage(named: "placeholder.png")
+                    }
                 } else {
                     switch name {
                     case "Nets": self.teamImage = UIImage(named: "bkn.png")

@@ -40,7 +40,7 @@ extension UIImageView {
         }
     }
     func displayPlaceholderImage() {
-        DispatchQueue.main.async { self.image = UIImage(named: "placeholder") }
+        DispatchQueue.main.async { self.image = UIImage(named: "player_placeholder") }
     }
 }
 

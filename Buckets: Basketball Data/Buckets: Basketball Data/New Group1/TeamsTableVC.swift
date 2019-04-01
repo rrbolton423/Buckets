@@ -49,7 +49,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     @objc func start() {
         setupInfoBarButtonItem()
         setupSearchController()
-        firebaseSetup()
         loadTeams()
     }
     
@@ -76,13 +75,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
         self.definesPresentationContext = true
-    }
-    
-    func firebaseSetup() {
-        DispatchQueue.global(qos: .background).async {
-            FirebaseConstants().setupAPP()
-            self.use_real_images = FirebaseConstants().getImages()
-        }
     }
     
     func loadTeams(){
@@ -120,19 +112,37 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func parseTeamsFromJSONFile() -> [StaticTeam] {
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
         var resultArray = [StaticTeam]()
         guard let url = Bundle.main.url(forResource: "StaticTeams", withExtension: "json") else { return [] }
-        do {
-            let data = try Data(contentsOf: url)
-            let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            if let jsonArray = JSON as? [[String: Any]] {
-                for team in jsonArray {
-                    let team = StaticTeam(dictionary: team)
-                    resultArray.append(team)
+        guard let url_placeholder = Bundle.main.url(forResource: "StaticTeamsPlaceholder", withExtension: "json") else { return [] }
+        if self.use_real_images == "false" {
+            do {
+                let data = try Data(contentsOf: url_placeholder)
+                let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                if let jsonArray = JSON as? [[String: Any]] {
+                    for team in jsonArray {
+                        let team = StaticTeam(dictionary: team)
+                        resultArray.append(team)
+                    }
                 }
+            } catch {
+                print(error)
             }
-        } catch {
-            print(error)
+        } else {
+            do {
+                let data = try Data(contentsOf: url)
+                let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                if let jsonArray = JSON as? [[String: Any]] {
+                    for team in jsonArray {
+                        let team = StaticTeam(dictionary: team)
+                        resultArray.append(team)
+                    }
+                }
+            } catch {
+                print(error)
+            }
         }
         return resultArray
     }
@@ -161,16 +171,12 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
         cell?.backgroundColor = .clear
         if let teamPic = filteredTeamList?[indexPath.row].picture {
-            if use_real_images == "false" {
-                cell?.teamLogo.image = UIImage(named: "placeholder.png")
-            } else {
-                cell?.teamLogo.image = UIImage(named: teamPic)
-            }
+            cell?.teamLogoImageView.image = UIImage(named: teamPic)
         } else {
-            cell?.teamLogo.image = UIImage(named: "placeholder.png")
+            cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
         }
         if let teamName = filteredTeamList?[indexPath.row].name {
-            cell?.teamName.text = teamName
+            cell?.teamNameLabel.text = teamName
         }
         return cell ?? UITableViewCell()
     }

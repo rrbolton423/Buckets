@@ -188,10 +188,10 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         cell?.backgroundColor = .clear
         if let nbaTeams = filteredRoster {
             if let playerName = nbaTeams[indexPath.row].fullName, let jerseyNumber = nbaTeams[indexPath.row].jerseyNumber {
-                cell?.playerName.text = "#"+jerseyNumber + " " + playerName
+                cell?.playerNameLabel.text = "#"+jerseyNumber + " " + playerName
             }
             if let position = nbaTeams[indexPath.row].position {
-                cell?.position.text = position
+                cell?.positionLabel.text = position
             }
         }
         return cell ?? UITableViewCell()

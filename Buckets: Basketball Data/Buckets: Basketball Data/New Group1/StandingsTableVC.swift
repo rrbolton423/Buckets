@@ -185,7 +185,39 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         {
         case 0:
             if self.use_real_images == "false" {
-                self.teamImage = UIImage(named: "placeholder.png")
+                switch eastTeams[indexPath.row].team {
+                case "Brooklyn": self.teamImage = UIImage(named: "BKN_placeholder.png")
+                case "Atlanta": self.teamImage = UIImage(named: "ATL_placeholder.png")
+                case "Boston": self.teamImage = UIImage(named: "BOS_placeholder.png")
+                case "Charlotte": self.teamImage = UIImage(named: "CHA_placeholder.png")
+                case "Chicago": self.teamImage = UIImage(named: "CHI_placeholder.png")
+                case "Cleveland": self.teamImage = UIImage(named: "CLE_placeholder.png")
+                case "Dallas": self.teamImage = UIImage(named: "DAL_placeholder.png")
+                case "Denver": self.teamImage = UIImage(named: "DEN_placeholder.png")
+                case "Detroit": self.teamImage = UIImage(named: "DET_placeholder.png")
+                case "Golden State": self.teamImage = UIImage(named: "GSW_placeholder.png")
+                case "Houston": self.teamImage = UIImage(named: "HOU_placeholder.png")
+                case "Indiana": self.teamImage = UIImage(named: "IND_placeholder.png")
+                case "LA Clippers": self.teamImage = UIImage(named: "LAC_placeholder.png")
+                case "L.A. Lakers": self.teamImage = UIImage(named: "LAL_placeholder.png")
+                case "Memphis": self.teamImage = UIImage(named: "MEM_placeholder.png")
+                case "Miami": self.teamImage = UIImage(named: "MIA_placeholder.png")
+                case "Milwaukee": self.teamImage = UIImage(named: "MIL_placeholder.png")
+                case "Minnesota": self.teamImage = UIImage(named: "MIN_placeholder.png")
+                case "New Orleans": self.teamImage = UIImage(named: "NOP_placeholder.png")
+                case "New York": self.teamImage = UIImage(named: "NYK_placeholder.png")
+                case "Oklahoma City": self.teamImage = UIImage(named: "OKC_placeholder.png")
+                case "Orlando": self.teamImage = UIImage(named: "ORL_placeholder.png")
+                case "Philadelphia": self.teamImage = UIImage(named: "PHI_placeholder.png")
+                case "Phoenix": self.teamImage = UIImage(named: "PHX_placeholder.png")
+                case "Portland": self.teamImage = UIImage(named: "POR_placeholder.png")
+                case "Sacramento": self.teamImage = UIImage(named: "SAC_placeholder.png")
+                case "San Antonio": self.teamImage = UIImage(named: "SAS_placeholder.png")
+                case "Toronto": self.teamImage = UIImage(named: "TOR_placeholder.png")
+                case "Utah": self.teamImage = UIImage(named: "UTA_placeholder.png")
+                case "Washington": self.teamImage = UIImage(named: "WAS_placeholder.png")
+                default: self.teamImage = UIImage(named: "placeholder.png")
+                }
             } else {
                 switch eastTeams[indexPath.row].team {
                 case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")
@@ -221,17 +253,49 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 default: self.teamImage = UIImage(named: "placeholder.png")
                 }
             }
-            cell.standing.text = String(indexPath.row + 1)
-            cell.teamImage.image = teamImage
-            cell.gamesPlayed.text = eastTeams[indexPath.row].gamesPlayed
-            cell.wins.text = eastTeams[indexPath.row].wins
-            cell.losses.text = eastTeams[indexPath.row].losses
+            cell.standingLabel.text = String(indexPath.row + 1)
+            cell.teamImageView.image = teamImage
+            cell.gamesPlayedLabel.text = eastTeams[indexPath.row].gamesPlayed
+            cell.winsLabel.text = eastTeams[indexPath.row].wins
+            cell.lossesLabel.text = eastTeams[indexPath.row].losses
             let value: Float = (eastTeams[indexPath.row].winPercentage?.floatValue)!
-            cell.winPercentage.text = value.string(fractionDigits: 3)
+            cell.winPercentageLabel.text = value.string(fractionDigits: 3)
             break
         case 1:
             if self.use_real_images == "false" {
-                self.teamImage = UIImage(named: "placeholder.png")
+                switch westTeams[indexPath.row].team {
+                case "Brooklyn": self.teamImage = UIImage(named: "BKN_placeholder.png")
+                case "Atlanta": self.teamImage = UIImage(named: "ATL_placeholder.png")
+                case "Boston": self.teamImage = UIImage(named: "BOS_placeholder.png")
+                case "Charlotte": self.teamImage = UIImage(named: "CHA_placeholder.png")
+                case "Chicago": self.teamImage = UIImage(named: "CHI_placeholder.png")
+                case "Cleveland": self.teamImage = UIImage(named: "CLE_placeholder.png")
+                case "Dallas": self.teamImage = UIImage(named: "DAL_placeholder.png")
+                case "Denver": self.teamImage = UIImage(named: "DEN_placeholder.png")
+                case "Detroit": self.teamImage = UIImage(named: "DET_placeholder.png")
+                case "Golden State": self.teamImage = UIImage(named: "GSW_placeholder.png")
+                case "Houston": self.teamImage = UIImage(named: "HOU_placeholder.png")
+                case "Indiana": self.teamImage = UIImage(named: "IND_placeholder.png")
+                case "LA Clippers": self.teamImage = UIImage(named: "LAC_placeholder.png")
+                case "L.A. Lakers": self.teamImage = UIImage(named: "LAL_placeholder.png")
+                case "Memphis": self.teamImage = UIImage(named: "MEM_placeholder.png")
+                case "Miami": self.teamImage = UIImage(named: "MIA_placeholder.png")
+                case "Milwaukee": self.teamImage = UIImage(named: "MIL_placeholder.png")
+                case "Minnesota": self.teamImage = UIImage(named: "MIN_placeholder.png")
+                case "New Orleans": self.teamImage = UIImage(named: "NOP_placeholder.png")
+                case "New York": self.teamImage = UIImage(named: "NYK_placeholder.png")
+                case "Oklahoma City": self.teamImage = UIImage(named: "OKC_placeholder.png")
+                case "Orlando": self.teamImage = UIImage(named: "ORL_placeholder.png")
+                case "Philadelphia": self.teamImage = UIImage(named: "PHI_placeholder.png")
+                case "Phoenix": self.teamImage = UIImage(named: "PHX_placeholder.png")
+                case "Portland": self.teamImage = UIImage(named: "POR_placeholder.png")
+                case "Sacramento": self.teamImage = UIImage(named: "SAC_placeholder.png")
+                case "San Antonio": self.teamImage = UIImage(named: "SAS_placeholder.png")
+                case "Toronto": self.teamImage = UIImage(named: "TOR_placeholder.png")
+                case "Utah": self.teamImage = UIImage(named: "UTA_placeholder.png")
+                case "Washington": self.teamImage = UIImage(named: "WAS_placeholder.png")
+                default: self.teamImage = UIImage(named: "placeholder.png")
+                }
             } else {
                 switch westTeams[indexPath.row].team {
                 case "Brooklyn": self.teamImage = UIImage(named: "bkn.png")
@@ -267,14 +331,14 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 default: self.teamImage = UIImage(named: "placeholder.png")
                 }
             }
-            cell.standing.text = String(indexPath.row + 1)
-            cell.teamImage.image = teamImage
-            cell.gamesPlayed.text = westTeams[indexPath.row].gamesPlayed
-            cell.wins.text = westTeams[indexPath.row].wins
-            cell.losses.text = westTeams[indexPath.row].losses
-            cell.winPercentage.text = westTeams[indexPath.row].winPercentage
+            cell.standingLabel.text = String(indexPath.row + 1)
+            cell.teamImageView.image = teamImage
+            cell.gamesPlayedLabel.text = westTeams[indexPath.row].gamesPlayed
+            cell.winsLabel.text = westTeams[indexPath.row].wins
+            cell.lossesLabel.text = westTeams[indexPath.row].losses
+            cell.winPercentageLabel.text = westTeams[indexPath.row].winPercentage
             let value: Float = (westTeams[indexPath.row].winPercentage?.floatValue)!
-            cell.winPercentage.text = value.string(fractionDigits: 3)
+            cell.winPercentageLabel.text = value.string(fractionDigits: 3)
             break
         default:
             break

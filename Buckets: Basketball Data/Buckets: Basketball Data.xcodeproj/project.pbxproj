@@ -33,13 +33,14 @@
 		A331D55D223BFE590096A5A9 /* TeamAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D55A223BFE580096A5A9 /* TeamAPI.swift */; };
 		A331D55E223BFE590096A5A9 /* PlayersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D55B223BFE590096A5A9 /* PlayersAPI.swift */; };
 		A331D55F223BFE590096A5A9 /* PlayerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A331D55C223BFE590096A5A9 /* PlayerAPI.swift */; };
-		A331D561223BFE5F0096A5A9 /* StaticTeams.json in Resources */ = {isa = PBXBuildFile; fileRef = A331D560223BFE5F0096A5A9 /* StaticTeams.json */; };
+		A331D561223BFE5F0096A5A9 /* StaticTeamsPlaceholder.json in Resources */ = {isa = PBXBuildFile; fileRef = A331D560223BFE5F0096A5A9 /* StaticTeamsPlaceholder.json */; };
 		A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */; };
 		A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */; };
 		A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */; };
 		A3A8A01C224C56A00051BF7E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A01B224C56A00051BF7E /* Game.swift */; };
 		A3A8A01E224C56BD0051BF7E /* GameAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A01D224C56BD0051BF7E /* GameAPI.swift */; };
 		A3E56B20224ECDD000C3E72E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E56B1F224ECDD000C3E72E /* Main.storyboard */; };
+		A3EA9D1622529BCB005D85F1 /* StaticTeams.json in Resources */ = {isa = PBXBuildFile; fileRef = A3EA9D1522529BCB005D85F1 /* StaticTeams.json */; };
 		B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +73,7 @@
 		A331D55A223BFE580096A5A9 /* TeamAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamAPI.swift; sourceTree = "<group>"; };
 		A331D55B223BFE590096A5A9 /* PlayersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersAPI.swift; sourceTree = "<group>"; };
 		A331D55C223BFE590096A5A9 /* PlayerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerAPI.swift; sourceTree = "<group>"; };
-		A331D560223BFE5F0096A5A9 /* StaticTeams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticTeams.json; sourceTree = "<group>"; };
+		A331D560223BFE5F0096A5A9 /* StaticTeamsPlaceholder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticTeamsPlaceholder.json; sourceTree = "<group>"; };
 		A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		A3A8A01B224C56A00051BF7E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		A3A8A01D224C56BD0051BF7E /* GameAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAPI.swift; sourceTree = "<group>"; };
 		A3E56B1F224ECDD000C3E72E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A3EA9D1522529BCB005D85F1 /* StaticTeams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticTeams.json; sourceTree = "<group>"; };
 		A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,7 +176,8 @@
 		A341917F2239DBD50041E3CD /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				A331D560223BFE5F0096A5A9 /* StaticTeams.json */,
+				A3EA9D1522529BCB005D85F1 /* StaticTeams.json */,
+				A331D560223BFE5F0096A5A9 /* StaticTeamsPlaceholder.json */,
 			);
 			name = JSON;
 			path = "New Group2";
@@ -290,8 +293,9 @@
 				A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */,
 				A331D53D223BFE100096A5A9 /* Assets.xcassets in Resources */,
 				A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */,
+				A3EA9D1622529BCB005D85F1 /* StaticTeams.json in Resources */,
 				A3E56B20224ECDD000C3E72E /* Main.storyboard in Resources */,
-				A331D561223BFE5F0096A5A9 /* StaticTeams.json in Resources */,
+				A331D561223BFE5F0096A5A9 /* StaticTeamsPlaceholder.json in Resources */,
 				A331D53C223BFE100096A5A9 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

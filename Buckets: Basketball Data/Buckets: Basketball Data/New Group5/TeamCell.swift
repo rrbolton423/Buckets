@@ -9,6 +9,6 @@
 import UIKit
 
 class TeamCell: UITableViewCell {
-    @IBOutlet weak var teamName: UILabel!
-    @IBOutlet weak var teamLogo: UIImageView!
+    @IBOutlet weak var teamNameLabel: UILabel!
+    @IBOutlet weak var teamLogoImageView: UIImageView!
 }

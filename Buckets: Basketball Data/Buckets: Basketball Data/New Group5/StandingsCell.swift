@@ -11,10 +11,10 @@ import UIKit
 
 class StandingsCell: UITableViewCell {
     
-    @IBOutlet weak var teamImage: UIImageView!
-    @IBOutlet weak var gamesPlayed: UILabel!
-    @IBOutlet weak var wins: UILabel!
-    @IBOutlet weak var losses: UILabel!
-    @IBOutlet weak var winPercentage: UILabel!
-    @IBOutlet weak var standing: UILabel!
+    @IBOutlet weak var teamImageView: UIImageView!
+    @IBOutlet weak var gamesPlayedLabel: UILabel!
+    @IBOutlet weak var winsLabel: UILabel!
+    @IBOutlet weak var lossesLabel: UILabel!
+    @IBOutlet weak var winPercentageLabel: UILabel!
+    @IBOutlet weak var standingLabel: UILabel!
 }

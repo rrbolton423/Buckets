@@ -247,10 +247,42 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
         }
-        cell.homeTeamName.text = allGames[indexPath.section][indexPath.row].homeTeamName
-        cell.awayTeamName.text = allGames[indexPath.section][indexPath.row].awayTeamName
+        cell.homeTeamNameLabel.text = allGames[indexPath.section][indexPath.row].homeTeamName
+        cell.awayTeamNameLabel.text = allGames[indexPath.section][indexPath.row].awayTeamName
         if self.use_real_images == "false" {
-            self.awayTeamImage = UIImage(named: "placeholder.png")
+            switch allGames[indexPath.section][indexPath.row].awayTeamName {
+            case "BKN": self.awayTeamImage = UIImage(named: "BKN_placeholder.png")
+            case "ATL": self.awayTeamImage = UIImage(named: "ATL_placeholder.png")
+            case "BOS": self.awayTeamImage = UIImage(named: "BOS_placeholder.png")
+            case "CHA": self.awayTeamImage = UIImage(named: "CHA_placeholder.png")
+            case "CHI": self.awayTeamImage = UIImage(named: "CHI_placeholder.png")
+            case "CLE": self.awayTeamImage = UIImage(named: "CLE_placeholder.png")
+            case "DAL": self.awayTeamImage = UIImage(named: "DAL_placeholder.png")
+            case "DEN": self.awayTeamImage = UIImage(named: "DEN_placeholder.png")
+            case "DET": self.awayTeamImage = UIImage(named: "DET_placeholder.png")
+            case "GSW": self.awayTeamImage = UIImage(named: "GSW_placeholder.png")
+            case "HOU": self.awayTeamImage = UIImage(named: "HOU_placeholder.png")
+            case "IND": self.awayTeamImage = UIImage(named: "IND_placeholder.png")
+            case "LAC": self.awayTeamImage = UIImage(named: "LAC_placeholder.png")
+            case "LAL": self.awayTeamImage = UIImage(named: "LAL_placeholder.png")
+            case "MEM": self.awayTeamImage = UIImage(named: "MEM_placeholder.png")
+            case "MIA": self.awayTeamImage = UIImage(named: "MIA_placeholder.png")
+            case "MIL": self.awayTeamImage = UIImage(named: "MIL_placeholder.png")
+            case "MIN": self.awayTeamImage = UIImage(named: "MIN_placeholder.png")
+            case "NOP": self.awayTeamImage = UIImage(named: "NOP_placeholder.png")
+            case "NYK": self.awayTeamImage = UIImage(named: "NYK_placeholder.png")
+            case "OKC": self.awayTeamImage = UIImage(named: "OKC_placeholder.png")
+            case "ORL": self.awayTeamImage = UIImage(named: "ORL_placeholder.png")
+            case "PHI": self.awayTeamImage = UIImage(named: "PHI_placeholder.png")
+            case "PHX": self.awayTeamImage = UIImage(named: "PHX_placeholder.png")
+            case "POR": self.awayTeamImage = UIImage(named: "POR_placeholder.png")
+            case "SAC": self.awayTeamImage = UIImage(named: "SAC_placeholder.png")
+            case "SAS": self.awayTeamImage = UIImage(named: "SAS_placeholder.png")
+            case "TOR": self.awayTeamImage = UIImage(named: "TOR_placeholder.png")
+            case "UTA": self.awayTeamImage = UIImage(named: "UTA_placeholder.png")
+            case "WAS": self.awayTeamImage = UIImage(named: "WAS_placeholder.png")
+            default: self.awayTeamImage = UIImage(named: "placeholder.png")
+            }
         } else {
             switch allGames[indexPath.section][indexPath.row].awayTeamName {
             case "BKN": self.awayTeamImage = UIImage(named: "bkn.png")
@@ -287,7 +319,39 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         if self.use_real_images == "false" {
-            self.homeTeamImage = UIImage(named: "placeholder.png")
+            switch allGames[indexPath.section][indexPath.row].homeTeamName {
+            case "BKN": self.homeTeamImage = UIImage(named: "BKN_placeholder.png")
+            case "ATL": self.homeTeamImage = UIImage(named: "ATL_placeholder.png")
+            case "BOS": self.homeTeamImage = UIImage(named: "BOS_placeholder.png")
+            case "CHA": self.homeTeamImage = UIImage(named: "CHA_placeholder.png")
+            case "CHI": self.homeTeamImage = UIImage(named: "CHI_placeholder.png")
+            case "CLE": self.homeTeamImage = UIImage(named: "CLE_placeholder.png")
+            case "DAL": self.homeTeamImage = UIImage(named: "DAL_placeholder.png")
+            case "DEN": self.homeTeamImage = UIImage(named: "DEN_placeholder.png")
+            case "DET": self.homeTeamImage = UIImage(named: "DET_placeholder.png")
+            case "GSW": self.homeTeamImage = UIImage(named: "GSW_placeholder.png")
+            case "HOU": self.homeTeamImage = UIImage(named: "HOU_placeholder.png")
+            case "IND": self.homeTeamImage = UIImage(named: "IND_placeholder.png")
+            case "LAC": self.homeTeamImage = UIImage(named: "LAC_placeholder.png")
+            case "LAL": self.homeTeamImage = UIImage(named: "LAL_placeholder.png")
+            case "MEM": self.homeTeamImage = UIImage(named: "MEM_placeholder.png")
+            case "MIA": self.homeTeamImage = UIImage(named: "MIA_placeholder.png")
+            case "MIL": self.homeTeamImage = UIImage(named: "MIL_placeholder.png")
+            case "MIN": self.homeTeamImage = UIImage(named: "MIN_placeholder.png")
+            case "NOP": self.homeTeamImage = UIImage(named: "NOP_placeholder.png")
+            case "NYK": self.homeTeamImage = UIImage(named: "NYK_placeholder.png")
+            case "OKC": self.homeTeamImage = UIImage(named: "OKC_placeholder.png")
+            case "ORL": self.homeTeamImage = UIImage(named: "ORL_placeholder.png")
+            case "PHI": self.homeTeamImage = UIImage(named: "PHI_placeholder.png")
+            case "PHX": self.homeTeamImage = UIImage(named: "PHX_placeholder.png")
+            case "POR": self.homeTeamImage = UIImage(named: "POR_placeholder.png")
+            case "SAC": self.homeTeamImage = UIImage(named: "SAC_placeholder.png")
+            case "SAS": self.homeTeamImage = UIImage(named: "SAS_placeholder.png")
+            case "TOR": self.homeTeamImage = UIImage(named: "TOR_placeholder.png")
+            case "UTA": self.homeTeamImage = UIImage(named: "UTA_placeholder.png")
+            case "WAS": self.homeTeamImage = UIImage(named: "WAS_placeholder.png")
+            default: self.homeTeamImage = UIImage(named: "placeholder.png")
+            }
         } else {
             switch allGames[indexPath.section][indexPath.row].homeTeamName {
             case "BKN": self.homeTeamImage = UIImage(named: "bkn.png")
@@ -323,22 +387,22 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             default: self.homeTeamImage = UIImage(named: "placeholder.png")
             }
         }
-        cell.homeAfbeelding.image = homeTeamImage
-        cell.awayAfbeelding.image = awayTeamImage
-        cell.puckDrop.text = allGames[indexPath.section][indexPath.row].quarter
+        cell.homeTeamImageView.image = homeTeamImage
+        cell.awayTeamImageView.image = awayTeamImage
+        cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].quarter
         let awayScore = allGames[indexPath.section][indexPath.row].awayTeamScore
         if awayScore == "" {
-            cell.awayScore.text = "0"
+            cell.awayScoreLabel.text = "0"
         } else {
-            cell.awayScore.text = awayScore
+            cell.awayScoreLabel.text = awayScore
         }
         let homeScore = allGames[indexPath.section][indexPath.row].homeTeamScore
         if homeScore == "" {
-            cell.homeScore.text = "0"
+            cell.homeScoreLabel.text = "0"
         } else {
-            cell.homeScore.text = homeScore
+            cell.homeScoreLabel.text = homeScore
         }
-        cell.venue.text = allGames[indexPath.section][indexPath.row].arena
+        cell.venueLabel.text = allGames[indexPath.section][indexPath.row].arena
         return cell
     }
     

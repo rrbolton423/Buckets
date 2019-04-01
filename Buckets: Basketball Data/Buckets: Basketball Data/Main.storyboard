@@ -31,9 +31,9 @@
         <!--Teams-->
         <scene sceneID="BH3-IZ-8bI">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VUs-FI-1zi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -68,8 +68,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="teamLogo" destination="EYI-hK-cO0" id="ExG-xe-KT9"/>
-                                    <outlet property="teamName" destination="Det-SI-Ta2" id="nI3-Y3-1uR"/>
+                                    <outlet property="teamLogoImageView" destination="EYI-hK-cO0" id="ExG-xe-KT9"/>
+                                    <outlet property="teamNameLabel" destination="Det-SI-Ta2" id="nI3-Y3-1uR"/>
                                     <segue destination="yK1-Mn-z3A" kind="show" id="kW9-4m-tou"/>
                                 </connections>
                             </tableViewCell>
@@ -338,8 +338,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="playerName" destination="PIG-CK-MEu" id="IMF-yh-LHe"/>
-                                    <outlet property="position" destination="Lc7-e3-4Hj" id="1Ew-Yu-jXO"/>
+                                    <outlet property="playerNameLabel" destination="PIG-CK-MEu" id="IMF-yh-LHe"/>
+                                    <outlet property="positionLabel" destination="Lc7-e3-4Hj" id="1Ew-Yu-jXO"/>
                                     <segue destination="qCt-hS-ETd" kind="show" id="B2I-WH-dRv"/>
                                 </connections>
                             </tableViewCell>
@@ -838,12 +838,12 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
-                                            <outlet property="gamesPlayed" destination="NLJ-re-BXV" id="u4F-JV-I6Q"/>
-                                            <outlet property="losses" destination="vId-Ct-7h6" id="joT-m7-MzS"/>
-                                            <outlet property="standing" destination="Hee-Pq-06G" id="n7t-wy-LEr"/>
-                                            <outlet property="teamImage" destination="hlz-ZZ-fTn" id="47q-6d-ugw"/>
-                                            <outlet property="winPercentage" destination="MLv-d8-ex8" id="f8c-Z6-Hsk"/>
-                                            <outlet property="wins" destination="8Cr-4t-LRm" id="7I5-Rg-D92"/>
+                                            <outlet property="gamesPlayedLabel" destination="NLJ-re-BXV" id="u4F-JV-I6Q"/>
+                                            <outlet property="lossesLabel" destination="vId-Ct-7h6" id="joT-m7-MzS"/>
+                                            <outlet property="standingLabel" destination="Hee-Pq-06G" id="n7t-wy-LEr"/>
+                                            <outlet property="teamImageView" destination="hlz-ZZ-fTn" id="47q-6d-ugw"/>
+                                            <outlet property="winPercentageLabel" destination="MLv-d8-ex8" id="f8c-Z6-Hsk"/>
+                                            <outlet property="winsLabel" destination="8Cr-4t-LRm" id="7I5-Rg-D92"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1000,15 +1000,15 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="awayAfbeelding" destination="09i-Jr-pjT" id="Wg9-3H-Ft4"/>
-                                            <outlet property="awayScore" destination="v9h-nA-K9s" id="9nF-za-8ay"/>
-                                            <outlet property="awayTeamName" destination="E9Q-L0-buc" id="7oB-OJ-qeG"/>
-                                            <outlet property="homeAfbeelding" destination="yKH-qw-LRP" id="fHt-sv-oZD"/>
-                                            <outlet property="homeScore" destination="HW1-ef-s0A" id="Ccr-ec-6zz"/>
-                                            <outlet property="homeTeamName" destination="3bJ-OX-9Yd" id="hvY-bX-UFb"/>
-                                            <outlet property="noGames" destination="GAM-3v-PdS" id="eHz-vH-IJb"/>
-                                            <outlet property="puckDrop" destination="xGW-qU-np8" id="wbC-de-SMw"/>
-                                            <outlet property="venue" destination="yKB-s6-kZw" id="PZP-Z2-PVh"/>
+                                            <outlet property="awayScoreLabel" destination="v9h-nA-K9s" id="9nF-za-8ay"/>
+                                            <outlet property="awayTeamImageView" destination="09i-Jr-pjT" id="Wg9-3H-Ft4"/>
+                                            <outlet property="awayTeamNameLabel" destination="E9Q-L0-buc" id="7oB-OJ-qeG"/>
+                                            <outlet property="homeScoreLabel" destination="HW1-ef-s0A" id="Ccr-ec-6zz"/>
+                                            <outlet property="homeTeamImageView" destination="yKH-qw-LRP" id="fHt-sv-oZD"/>
+                                            <outlet property="homeTeamNameLabel" destination="3bJ-OX-9Yd" id="hvY-bX-UFb"/>
+                                            <outlet property="noGamesLabel" destination="GAM-3v-PdS" id="eHz-vH-IJb"/>
+                                            <outlet property="tipoffLabel" destination="xGW-qU-np8" id="wbC-de-SMw"/>
+                                            <outlet property="venueLabel" destination="yKB-s6-kZw" id="PZP-Z2-PVh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class TodaysGamesCell: UITableViewCell {
-    @IBOutlet weak var homeAfbeelding: UIImageView!
-    @IBOutlet weak var homeTeamName: UILabel!
-    @IBOutlet weak var awayAfbeelding: UIImageView!
-    @IBOutlet weak var awayTeamName: UILabel!
-    @IBOutlet weak var puckDrop: UILabel!
-    @IBOutlet weak var venue: UILabel!
-    @IBOutlet weak var awayScore: UILabel!
-    @IBOutlet weak var homeScore: UILabel!
-    @IBOutlet weak var noGames: UILabel!
+    @IBOutlet weak var homeTeamImageView: UIImageView!
+    @IBOutlet weak var homeTeamNameLabel: UILabel!
+    @IBOutlet weak var awayTeamImageView: UIImageView!
+    @IBOutlet weak var awayTeamNameLabel: UILabel!
+    @IBOutlet weak var tipoffLabel: UILabel!
+    @IBOutlet weak var venueLabel: UILabel!
+    @IBOutlet weak var awayScoreLabel: UILabel!
+    @IBOutlet weak var homeScoreLabel: UILabel!
+    @IBOutlet weak var noGamesLabel: UILabel!
 }
