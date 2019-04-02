@@ -241,6 +241,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
         if indexPath.section == 0 {
             cell.backgroundColor = .white
