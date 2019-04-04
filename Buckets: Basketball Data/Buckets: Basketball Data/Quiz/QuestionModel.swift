@@ -12,7 +12,7 @@ struct QuestionModel {
     
     let questions = [
         Question(interrogative: "Who invented the game of basketball?", answers: ["Frank Mahan", "Abner Doubleday", "Walter Camp", "James Naismith"], correctAnswerIndex: 3),
-        Question(interrogative: "What teammates were nicknamed the \"Splash Brothers\"?", answers: ["Jerry West & Wilt Chamberlain", "Kevin Durant & Ruseell Westbrook", "Michael Jordan & Scottie Pippen", "Stephen Curry & Klay Thompson"], correctAnswerIndex: 3),
+        Question(interrogative: "What teammates were nicknamed the \"Splash Brothers\"?", answers: ["Jerry West & Wilt Chamberlain", "Kevin Durant & Russell Westbrook", "Michael Jordan & Scottie Pippen", "Stephen Curry & Klay Thompson"], correctAnswerIndex: 3),
         Question(interrogative: "What player holds the NBA record for the most career assists?", answers: ["Jason Kidd", "John Stockton", "Magic Johnson", "Steve Nash"], correctAnswerIndex: 1),
         Question(interrogative: "Who was the first NBA player to record a triple-double in the All-Star Game?", answers: ["Dwyane Wade", "John Stockton", "LeBron James", "Michael Jordan"], correctAnswerIndex: 3),
         Question(interrogative: "Who is the highest-scoring foreign-born player in NBA history?", answers: ["Dirk Nowitzki", "Yao Ming", "Hakeem Olajuwon", "Detlef Schrempf"], correctAnswerIndex: 0),
