@@ -37,7 +37,7 @@
 		A3378DA8223ECEEA0043BFFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */; };
 		A3378DAA223ED0770043BFFC /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3378DA9223ED0770043BFFC /* FirebaseConstants.swift */; };
 		A3378DAC223ED37E0043BFFC /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */; };
-		A34903F222556FD1008F159D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34903EF22556FD0008F159D /* ViewController.swift */; };
+		A34903F222556FD1008F159D /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34903EF22556FD0008F159D /* QuizViewController.swift */; };
 		A34903F322556FD1008F159D /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34903F022556FD0008F159D /* QuestionModel.swift */; };
 		A34903F422556FD1008F159D /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34903F122556FD1008F159D /* ScoreModel.swift */; };
 		A34903F622557075008F159D /* GameSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = A34903F522557074008F159D /* GameSound.wav */; };
@@ -83,7 +83,7 @@
 		A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A341913E2239DA2A0041E3CD /* Buckets: Basketball Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buckets: Basketball Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A341914D2239DA2C0041E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A34903EF22556FD0008F159D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A34903EF22556FD0008F159D /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		A34903F022556FD0008F159D /* QuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		A34903F122556FD1008F159D /* ScoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
 		A34903F522557074008F159D /* GameSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameSound.wav; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 			children = (
 				A34903F022556FD0008F159D /* QuestionModel.swift */,
 				A34903F122556FD1008F159D /* ScoreModel.swift */,
-				A34903EF22556FD0008F159D /* ViewController.swift */,
+				A34903EF22556FD0008F159D /* QuizViewController.swift */,
 				A34903F522557074008F159D /* GameSound.wav */,
 			);
 			path = Quiz;
@@ -393,7 +393,7 @@
 				A331D550223BFE430096A5A9 /* PlayerCell.swift in Sources */,
 				A32D59622247514B0038CE69 /* StandingsTableVC.swift in Sources */,
 				A34903F322556FD1008F159D /* QuestionModel.swift in Sources */,
-				A34903F222556FD1008F159D /* ViewController.swift in Sources */,
+				A34903F222556FD1008F159D /* QuizViewController.swift in Sources */,
 				A331D544223BFE310096A5A9 /* CheckInternet.swift in Sources */,
 				A331D543223BFE310096A5A9 /* Constants.swift in Sources */,
 				A331D545223BFE310096A5A9 /* Extensions.swift in Sources */,

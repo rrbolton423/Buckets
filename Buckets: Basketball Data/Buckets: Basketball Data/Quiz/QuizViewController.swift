@@ -10,7 +10,7 @@ import UIKit
 import GameKit
 import AudioToolbox
 
-class ViewController: UIViewController {
+class QuizViewController: UIViewController {
     
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var feedbackField: UILabel!
