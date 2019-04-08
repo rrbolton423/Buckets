@@ -36,6 +36,42 @@ class QuizViewController: UIViewController {
         displayQuestion()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = true
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 1136:
+                print("iPhone 5 or 5S or 5C")
+                self.navigationController?.navigationBar.prefersLargeTitles = false
+                
+            case 1334:
+                print("iPhone 6/6S/7/8")
+                self.navigationController?.navigationBar.prefersLargeTitles = false
+                
+            case 1920, 2208:
+                print("iPhone 6+/6S+/7+/8+")
+                self.navigationController?.navigationBar.prefersLargeTitles = true
+                
+            case 2436:
+                print("iPhone X, XS")
+                self.navigationController?.navigationBar.prefersLargeTitles = true
+                
+            case 2688:
+                print("iPhone XS Max")
+                self.navigationController?.navigationBar.prefersLargeTitles = true
+                
+            case 1792:
+                print("iPhone XR")
+                self.navigationController?.navigationBar.prefersLargeTitles = true
+                
+            default:
+                print("Unknown")
+            }
+        }
+    }
+    
     func setupInfoBarButtonItem() {
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)

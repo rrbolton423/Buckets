@@ -213,10 +213,14 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (allGames.count == 0) {
-            return ""
+        if self.tableView(tableView, numberOfRowsInSection: section) > 0 {
+            if (allGames.count == 0) {
+                return ""
+            } else {
+                return self.section[section]
+            }
         } else {
-            return self.section[section]
+            return nil
         }
     }
     
