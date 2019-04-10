@@ -117,3 +117,19 @@ func hexStringToUIColor (hex:String) -> UIColor {
         alpha: CGFloat(1.0)
     )
 }
+
+extension UIView {
+    @IBInspectable var ignoresInvertColors: Bool {
+        get {
+            if #available(iOS 11.0, *) {
+                return accessibilityIgnoresInvertColors
+            }
+            return false
+        }
+        set {
+            if #available(iOS 11.0, *) {
+                accessibilityIgnoresInvertColors = newValue
+            }
+        }
+    }
+}

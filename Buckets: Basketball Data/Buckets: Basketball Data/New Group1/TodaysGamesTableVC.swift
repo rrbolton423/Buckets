@@ -28,6 +28,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.accessibilityIgnoresInvertColors = true
         if tableView.visibleCells.isEmpty {
             start()
         } else {
@@ -53,7 +54,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshController)
         refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
-        setupInfoBarButtonItem()
+//        setupSettingsBarButtonItem()
+//        setupInfoBarButtonItem()
         if CheckInternet.connection() {
             loadGamesWithActivityIndicator()
         } else {
@@ -77,7 +79,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshController)
         refreshController.addTarget(self,  action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
-        setupInfoBarButtonItem()
+//        setupInfoBarButtonItem()
         if CheckInternet.connection() {
             loadGamesWithRefreshController()
         } else {
@@ -100,19 +102,34 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func setupInfoBarButtonItem() {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItem = infoBarButtonItem
-    }
-    
-    @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+//    func setupInfoBarButtonItem() {
+//        let infoButton = UIButton(type: .infoLight)
+//        infoButton.addTarget(self, action: #selector(getFavoriteAction), for: .touchUpInside)
+//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+//        navigationItem.rightBarButtonItem = infoBarButtonItem
+//    }
+//
+//    @objc func getFavoriteAction() {
+//        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
+
+//    func setupSettingsBarButtonItem() {
+//        let settingsButton = UIBarButtonItem(title: NSString(string: "\u{2699}\u{0000FE0E}") as String, style: .plain, target: self, action: #selector(getSettingsAction))
+//        let font = UIFont.systemFont(ofSize: 28) // adjust the size as required
+//        let attributes = [NSAttributedString.Key.font : font]
+//        settingsButton.setTitleTextAttributes(attributes, for: .normal)
+//        navigationItem.leftBarButtonItem = settingsButton
+//    }
+//
+//    @objc func getSettingsAction() {
+//        let alert = UIAlertController(title: "Settings...", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
@@ -429,4 +446,3 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 }
-

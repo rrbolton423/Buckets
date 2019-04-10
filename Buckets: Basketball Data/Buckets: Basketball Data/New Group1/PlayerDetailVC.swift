@@ -25,6 +25,7 @@ class PlayerDetailVC: UIViewController {
     @IBOutlet weak var rpgLabel: UILabel!
     @IBOutlet weak var playerDetailScrollView: UIScrollView!
     
+    var detailPlayer: Player?
     var teamID: String?
     var playerHeadshotURL: String?
     var playerID: String?
@@ -34,7 +35,7 @@ class PlayerDetailVC: UIViewController {
     var use_real_images: String?
     
     func start() {
-        setupInfoBarButtonItem()
+        setupFavoriteBarButtonItem()
         firebaseSetup()
         checkForPlayerID()
         fetchPlayer()
@@ -49,7 +50,7 @@ class PlayerDetailVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,21 +59,19 @@ class PlayerDetailVC: UIViewController {
         self.activityIndicator.removeFromSuperview()
     }
     
-    func setupInfoBarButtonItem() {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItem = infoBarButtonItem
+    func setupFavoriteBarButtonItem() {
+        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(getFavoriteAction))
+        navigationItem.rightBarButtonItem = favoriteItem
     }
     
-    @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+    @objc func getFavoriteAction() {
+        let alert = UIAlertController(title: nil, message: "\(detailPlayer?.name ?? "") has been added to your favorites!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()
@@ -111,6 +110,7 @@ class PlayerDetailVC: UIViewController {
                 if let playerInfoURL = self.playerInfoURL {
                     detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer) in
                         DispatchQueue.main.async {
+                            self.detailPlayer = detailPlayer
                             self.showDetail(player: detailPlayer)
                             self.hideUI(value: false)
                             self.activityIndicator.stopAnimating()

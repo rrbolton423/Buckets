@@ -26,7 +26,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -47,27 +47,27 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     @objc func start() {
-        setupInfoBarButtonItem()
+//        setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
         checkForTeamID()
         fetchPlayers()
     }
     
-    func setupInfoBarButtonItem() {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItem = infoBarButtonItem
-    }
-    
-    @objc func getInfoAction() {
-        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+//    func setupInfoBarButtonItem() {
+//        let infoButton = UIButton(type: .infoLight)
+//        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+//        navigationItem.rightBarButtonItem = infoBarButtonItem
+//    }
+//
+//    @objc func getInfoAction() {
+//        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     func setupSearchController() {
         searchController.searchBar.searchBarStyle = .minimal
