@@ -27,10 +27,48 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     var use_real_images: String?
     var segmentedController: UISegmentedControl!
     
+    
+    @objc func defaultsChanged(){
+        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            //dark theme enabled
+            updateToDarkTheme()
+            //isDarkMode = true
+            print(isDarkMode)
+            tableView.reloadData()
+
+            
+        } else {
+            
+            //dark theme disabled
+            updateToLightTheme()
+            //isDarkMode = false
+            print(isDarkMode)
+            tableView.reloadData()
+
+        }
+    }
+    
+    func updateToDarkTheme(){
+        self.view.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        self.view.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = true
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -253,6 +291,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 default: self.teamImage = UIImage(named: "placeholder.png")
                 }
             }
+            
             cell.standingLabel.text = String(indexPath.row + 1)
             cell.teamImageView.image = teamImage
             cell.gamesPlayedLabel.text = eastTeams[indexPath.row].gamesPlayed
@@ -260,6 +299,32 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             cell.lossesLabel.text = eastTeams[indexPath.row].losses
             let value: Float = (eastTeams[indexPath.row].winPercentage?.floatValue)!
             cell.winPercentageLabel.text = value.string(fractionDigits: 3)
+            
+            var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+            if isDarkMode == true {
+                cell.standingLabel.textColor = .white
+                cell.gamesPlayedLabel.textColor = .white
+                cell.winsLabel.textColor = .white
+                cell.lossesLabel.textColor = .white
+                cell.winPercentageLabel.textColor = .white
+                
+                cell.gpLabel.textColor = .white
+                cell.lLabel.textColor = .white
+                cell.wLabel.textColor = .white
+                cell.wpLabel.textColor = .white
+            } else {
+                cell.standingLabel.textColor = .black
+                cell.gamesPlayedLabel.textColor = .black
+                cell.winsLabel.textColor = .black
+                cell.lossesLabel.textColor = .black
+                cell.winPercentageLabel.textColor = .black
+                
+                cell.gpLabel.textColor = .black
+                cell.lLabel.textColor = .black
+                cell.wLabel.textColor = .black
+                cell.wpLabel.textColor = .black
+            }
+            
             break
         case 1:
             if self.use_real_images == "false" {
@@ -339,6 +404,31 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             cell.winPercentageLabel.text = westTeams[indexPath.row].winPercentage
             let value: Float = (westTeams[indexPath.row].winPercentage?.floatValue)!
             cell.winPercentageLabel.text = value.string(fractionDigits: 3)
+            
+            var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+            if isDarkMode == true {
+                cell.standingLabel.textColor = .white
+                cell.gamesPlayedLabel.textColor = .white
+                cell.winsLabel.textColor = .white
+                cell.lossesLabel.textColor = .white
+                cell.winPercentageLabel.textColor = .white
+                
+                cell.gpLabel.textColor = .white
+                cell.lLabel.textColor = .white
+                cell.wLabel.textColor = .white
+                cell.wpLabel.textColor = .white
+            } else {
+                cell.standingLabel.textColor = .black
+                cell.gamesPlayedLabel.textColor = .black
+                cell.winsLabel.textColor = .black
+                cell.lossesLabel.textColor = .black
+                cell.winPercentageLabel.textColor = .black
+                
+                cell.gpLabel.textColor = .black
+                cell.lLabel.textColor = .black
+                cell.wLabel.textColor = .black
+                cell.wpLabel.textColor = .black
+            }
             break
         default:
             break

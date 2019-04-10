@@ -19,4 +19,6 @@ class TodaysGamesCell: UITableViewCell {
     @IBOutlet weak var awayScoreLabel: UILabel!
     @IBOutlet weak var homeScoreLabel: UILabel!
     @IBOutlet weak var noGamesLabel: UILabel!
+    @IBOutlet weak var versusLabel: UILabel!
+    @IBOutlet weak var dividerLabel: UILabel!
 }

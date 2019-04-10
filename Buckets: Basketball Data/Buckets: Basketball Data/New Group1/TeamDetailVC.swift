@@ -32,6 +32,39 @@ class TeamDetailVC: UIViewController {
     var teamImage: UIImage?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    var isDarkMode: Bool = false
+
+    
+    @objc func defaultsChanged(){
+        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            //dark theme enabled
+            updateToDarkTheme()
+            //isDarkMode = true
+            print(isDarkMode)
+            
+        } else {
+            
+            //dark theme disabled
+            updateToLightTheme()
+            //isDarkMode = false
+            print(isDarkMode)
+        }
+    }
+    
+    func updateToDarkTheme(){
+        self.view.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
     
     func start() {
         setupFavoriteBarButtonItem()
@@ -42,9 +75,9 @@ class TeamDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {

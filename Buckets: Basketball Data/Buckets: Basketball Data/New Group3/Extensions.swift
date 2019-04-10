@@ -133,3 +133,77 @@ extension UIView {
         }
     }
 }
+
+extension String {
+    
+    func openInBrowser() {
+        if let url = URL(string: self) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+}
+
+extension UITableViewController {
+    public func unselectSelectedRow() {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: true)
+        }
+    }
+    public func removeNavigationBarSeparator() {
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+    }
+}
+
+extension Notification.Name {
+    static let darkModeEnabled = Notification.Name("com.romellbolton.Buckets--Basketball-Data.notifications.darkModeEnabled")
+    static let darkModeDisabled = Notification.Name("com.romellbolton.Buckets--Basketball-Data.notifications.darkModeDisabled")
+}
+
+extension UITableViewCell {
+    public func setSelectedColor(color: UIColor) {
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = color
+        self.selectedBackgroundView = bgColorView
+    }
+}
+
+extension UIColor {
+    public class var main: UIColor {
+        return UIColor(red: 240.0 / 255.0, green: 101.0 / 255.0, blue: 8.0 / 255.0, alpha: 1.0)
+    }
+    
+    public class func main(alpha: CGFloat) -> UIColor {
+        return UIColor(red: 240.0 / 255.0, green: 101.0 / 255.0, blue: 8.0 / 255.0, alpha: alpha)
+    }
+    
+    public class var darkBackground: UIColor {
+        return UIColor(red: 10.0 / 255.0, green: 10.0 / 255.0, blue: 10.0 / 255.0, alpha: 1.0)
+    }
+    
+    public class var lightBackground: UIColor {
+        return UIColor(red: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255.0, alpha: 1.0)
+    }
+    
+    public class var greenPastel: UIColor {
+        return UIColor(red: 0.0 / 255.0, green: 169.0 / 255.0, blue: 108.0 / 255.0, alpha: 1.0)
+    }
+    
+    public class var redPastel: UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 54.0 / 255.0, blue: 53.0 / 255.0, alpha: 1.0)
+    }
+}
+
+extension UIColor {
+    internal class var systemBlue: UIColor {
+        return UIButton(type: .system).tintColor
+    }
+}
+//
+//extension UIColor {
+//    var inverted: UIColor {
+//        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
+//        UIColor.red.getRed(&r, green: &g, blue: &b, alpha: &a)
+//        return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: a) // Assuming you want the same alpha value.
+//    }
+//}

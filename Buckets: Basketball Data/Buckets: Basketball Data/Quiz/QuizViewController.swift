@@ -27,6 +27,8 @@ class QuizViewController: UIViewController {
     var currentQuestion: Question? = nil
 
     var gameStartSound: SystemSoundID = 0
+    var isDarkMode: Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +37,43 @@ class QuizViewController: UIViewController {
         displayQuestion()
     }
     
+    @objc func defaultsChanged(){
+        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            //dark theme enabled
+            updateToDarkTheme()
+            //isDarkMode = true
+            print(isDarkMode)
+            
+        } else {
+            
+            //dark theme disabled
+            updateToLightTheme()
+            //isDarkMode = false
+            print(isDarkMode)
+        }
+    }
+    
+    func updateToDarkTheme(){
+        self.questionField.textColor = .white
+        self.view.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        self.questionField.textColor = .black
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = true
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
         if UIDevice().userInterfaceIdiom == .phone {
             switch UIScreen.main.nativeBounds.height {
             case 1136:

@@ -79,7 +79,13 @@
                             <outlet property="delegate" destination="SE3-CR-oHf" id="lf1-eS-f5X"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Teams" id="8YK-3a-nhE"/>
+                    <navigationItem key="navigationItem" title="Teams" id="8YK-3a-nhE">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="njX-UJ-1S7">
+                            <connections>
+                                <segue destination="hTl-pr-MMX" kind="show" id="bHD-7N-mOZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1TU-o0-y1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -839,11 +845,15 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
                                             <outlet property="gamesPlayedLabel" destination="NLJ-re-BXV" id="u4F-JV-I6Q"/>
+                                            <outlet property="gpLabel" destination="A4f-Hx-GfQ" id="K1c-hG-Cc8"/>
+                                            <outlet property="lLabel" destination="8Gs-8b-3eO" id="CkF-pd-EMP"/>
                                             <outlet property="lossesLabel" destination="vId-Ct-7h6" id="joT-m7-MzS"/>
-                                            <outlet property="standingLabel" destination="Hee-Pq-06G" id="n7t-wy-LEr"/>
+                                            <outlet property="standingLabel" destination="Hee-Pq-06G" id="1x5-fe-ZVV"/>
                                             <outlet property="teamImageView" destination="hlz-ZZ-fTn" id="47q-6d-ugw"/>
+                                            <outlet property="wLabel" destination="u2e-fV-GG5" id="ukC-5z-pE4"/>
                                             <outlet property="winPercentageLabel" destination="MLv-d8-ex8" id="f8c-Z6-Hsk"/>
                                             <outlet property="winsLabel" destination="8Cr-4t-LRm" id="7I5-Rg-D92"/>
+                                            <outlet property="wpLabel" destination="6iL-wD-feO" id="rJv-b7-v5u"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -862,7 +872,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N3T-4W-yxr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Standings" id="FPj-Ui-gzk"/>
+                    <navigationItem key="navigationItem" title="Standings" id="FPj-Ui-gzk">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="BLt-UH-N0y">
+                            <connections>
+                                <segue destination="hTl-pr-MMX" kind="show" id="3K6-k7-nhU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="x0n-sV-lhk" id="NRU-Wd-ofx"/>
@@ -1003,12 +1019,13 @@
                                             <outlet property="awayScoreLabel" destination="v9h-nA-K9s" id="9nF-za-8ay"/>
                                             <outlet property="awayTeamImageView" destination="09i-Jr-pjT" id="Wg9-3H-Ft4"/>
                                             <outlet property="awayTeamNameLabel" destination="E9Q-L0-buc" id="7oB-OJ-qeG"/>
+                                            <outlet property="dividerLabel" destination="Ja1-jh-3iu" id="pT9-ey-CrN"/>
                                             <outlet property="homeScoreLabel" destination="HW1-ef-s0A" id="Ccr-ec-6zz"/>
                                             <outlet property="homeTeamImageView" destination="yKH-qw-LRP" id="fHt-sv-oZD"/>
                                             <outlet property="homeTeamNameLabel" destination="3bJ-OX-9Yd" id="hvY-bX-UFb"/>
-                                            <outlet property="noGamesLabel" destination="GAM-3v-PdS" id="eHz-vH-IJb"/>
                                             <outlet property="tipoffLabel" destination="xGW-qU-np8" id="wbC-de-SMw"/>
                                             <outlet property="venueLabel" destination="yKB-s6-kZw" id="PZP-Z2-PVh"/>
+                                            <outlet property="versusLabel" destination="eZf-v6-H6m" id="E2j-WC-PFk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1042,7 +1059,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="noGames" destination="GAM-3v-PdS" id="LmH-7O-ve3"/>
+                        <outlet property="noGames" destination="GAM-3v-PdS" id="wcQ-rA-d2q"/>
                         <outlet property="noGamesimage" destination="Gvx-Cg-hEo" id="GHL-5u-gkn"/>
                         <outlet property="tableView" destination="bXg-nk-Xra" id="xbe-Tt-EFh"/>
                     </connections>
@@ -1245,7 +1262,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vd2-dE-BsV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Quiz" id="xT5-PQ-502"/>
+                    <navigationItem key="navigationItem" title="Quiz" id="xT5-PQ-502">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="Xw3-zg-Dy8">
+                            <connections>
+                                <segue destination="hTl-pr-MMX" kind="show" id="RXh-t0-ICd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="feedbackField" destination="6Pt-jE-sdr" id="1fB-bK-mbt"/>
@@ -1289,7 +1312,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Main" footerTitle="You can switch themes by two fingers swiping up/down on any view." id="DX3-O9-MDF">
+                            <tableViewSection headerTitle="Main" id="DX3-O9-MDF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ffG-AM-S4s">
                                         <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="44"/>
@@ -1309,6 +1332,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zaf-Su-85Q">
                                                     <rect key="frame" x="349" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <connections>
+                                                        <action selector="toggleDarkModeSwitch:" destination="hTl-pr-MMX" eventType="valueChanged" id="d30-Vf-Qin"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1325,7 +1351,7 @@
                             <tableViewSection headerTitle="Other" id="BYl-1C-45C">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ZnF-7M-MNe" style="IBUITableViewCellStyleDefault" id="DAb-eo-xTU">
-                                        <rect key="frame" x="0.0" y="183.33333333333334" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="155.33333333333334" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DAb-eo-xTU" id="cFk-fJ-LHe">
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="44"/>
@@ -1342,7 +1368,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="z0R-2M-91a" detailTextLabel="A3a-93-isg" style="IBUITableViewCellStyleValue1" id="2Dq-Mc-ExZ">
-                                        <rect key="frame" x="0.0" y="227.33333333333334" width="414" height="44.000000000000028"/>
+                                        <rect key="frame" x="0.0" y="199.33333333333334" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Dq-Mc-ExZ" id="Mqm-2F-dFj">
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="44"/>
@@ -1366,7 +1392,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="Eab-JN-SEZ" detailTextLabel="9WH-iR-s91" style="IBUITableViewCellStyleValue1" id="Zoh-us-Sct">
-                                        <rect key="frame" x="0.0" y="271.33333333333337" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="243.33333333333337" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zoh-us-Sct" id="Ob7-1t-zt5">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1404,6 +1430,19 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="darkModeCell" destination="bcl-LK-pow" id="I78-Qo-PfL"/>
+                        <outlet property="darkModeLabel" destination="hdY-W3-uyN" id="vv5-wm-GtF"/>
+                        <outlet property="darkModeSwitchOutlet" destination="zaf-Su-85Q" id="VvY-xx-x5M"/>
+                        <outlet property="followMeLabel" destination="z0R-2M-91a" id="azm-Uw-GBK"/>
+                        <outlet property="reportIssueCell" destination="DAb-eo-xTU" id="6rn-VG-n3T"/>
+                        <outlet property="reportIssueLabel" destination="ZnF-7M-MNe" id="Yji-2n-lJR"/>
+                        <outlet property="twitterCell" destination="2Dq-Mc-ExZ" id="GAS-tb-LVj"/>
+                        <outlet property="twitterHandleLabel" destination="A3a-93-isg" id="SxN-Xf-D5H"/>
+                        <outlet property="versionCell" destination="Zoh-us-Sct" id="q5j-CE-lIQ"/>
+                        <outlet property="versionLabel" destination="Eab-JN-SEZ" id="Nve-kH-aAu"/>
+                        <outlet property="versionNumberLabel" destination="9WH-iR-s91" id="OaT-k4-Dt8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6u-bu-1GS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1419,4 +1458,7 @@
         <image name="standings" width="25" height="25"/>
         <image name="teams" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="3K6-k7-nhU"/>
+    </inferredMetricsTieBreakers>
 </document>

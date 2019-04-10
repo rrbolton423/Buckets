@@ -33,9 +33,42 @@ class PlayerDetailVC: UIViewController {
     var playerInfoURL: String?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
+    var isDarkMode: Bool = false
+
+    
+    @objc func defaultsChanged(){
+        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            //dark theme enabled
+            updateToDarkTheme()
+            //isDarkMode = true
+            print(isDarkMode)
+            
+        } else {
+            
+            //dark theme disabled
+            updateToLightTheme()
+            //isDarkMode = false
+            print(isDarkMode)
+        }
+    }
+    
+    func updateToDarkTheme(){
+        self.view.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
     
     func start() {
-        setupFavoriteBarButtonItem()
+//        setupFavoriteBarButtonItem()
         firebaseSetup()
         checkForPlayerID()
         fetchPlayer()
@@ -48,9 +81,9 @@ class PlayerDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,18 +92,18 @@ class PlayerDetailVC: UIViewController {
         self.activityIndicator.removeFromSuperview()
     }
     
-    func setupFavoriteBarButtonItem() {
-        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(getFavoriteAction))
-        navigationItem.rightBarButtonItem = favoriteItem
-    }
-    
-    @objc func getFavoriteAction() {
-        let alert = UIAlertController(title: nil, message: "\(detailPlayer?.name ?? "") has been added to your favorites!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+//    func setupFavoriteBarButtonItem() {
+//        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(getFavoriteAction))
+//        navigationItem.rightBarButtonItem = favoriteItem
+//    }
+//
+//    @objc func getFavoriteAction() {
+//        let alert = UIAlertController(title: nil, message: "\(detailPlayer?.name ?? "") has been added to your favorites!", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
 
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {

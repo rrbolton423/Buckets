@@ -25,10 +25,45 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var use_real_images: String?
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var refreshController = UIRefreshControl()
+
+    
+    @objc func defaultsChanged(){
+        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            //dark theme enabled
+            updateToDarkTheme()
+            //isDarkMode = true
+            print(isDarkMode)
+            tableView.reloadData()
+        } else {
+            
+            //dark theme disabled
+            updateToLightTheme()
+            //isDarkMode = false
+            print(isDarkMode)
+            tableView.reloadData()
+
+        }
+    }
+    
+    func updateToDarkTheme(){
+        self.view.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        self.view.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.accessibilityIgnoresInvertColors = true
         if tableView.visibleCells.isEmpty {
             start()
         } else {
@@ -39,8 +74,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = true
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -101,35 +136,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.use_real_images = FirebaseConstants().getImages()
         }
     }
-    
-//    func setupInfoBarButtonItem() {
-//        let infoButton = UIButton(type: .infoLight)
-//        infoButton.addTarget(self, action: #selector(getFavoriteAction), for: .touchUpInside)
-//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-//        navigationItem.rightBarButtonItem = infoBarButtonItem
-//    }
-//
-//    @objc func getFavoriteAction() {
-//        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
-
-//    func setupSettingsBarButtonItem() {
-//        let settingsButton = UIBarButtonItem(title: NSString(string: "\u{2699}\u{0000FE0E}") as String, style: .plain, target: self, action: #selector(getSettingsAction))
-//        let font = UIFont.systemFont(ofSize: 28) // adjust the size as required
-//        let attributes = [NSAttributedString.Key.font : font]
-//        settingsButton.setTitleTextAttributes(attributes, for: .normal)
-//        navigationItem.leftBarButtonItem = settingsButton
-//    }
-//
-//    @objc func getSettingsAction() {
-//        let alert = UIAlertController(title: "Settings...", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
     
     func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
@@ -229,6 +235,25 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         return 211
     }
     
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        
+        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            view.tintColor = hexStringToUIColor(hex: "#252525")
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.textColor = .white
+        } else {
+            
+            view.tintColor = UIColor.groupTableViewBackground
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.textColor = .black
+            
+        }
+        
+        
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if self.tableView(tableView, numberOfRowsInSection: section) > 0 {
             if (allGames.count == 0) {
@@ -256,22 +281,37 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {return self.allGames[section].count}
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-        let tableHeader = view as! UITableViewHeaderFooterView
-        tableHeader.backgroundView?.backgroundColor = UIColor.groupTableViewBackground
-    }
-    
+   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         FirebaseConstants().setupAPP()
         self.use_real_images = FirebaseConstants().getImages()
         let cell = tableView.dequeueReusableCell(withIdentifier: "todaysGamesCell", for: indexPath) as! TodaysGamesCell
         if indexPath.section == 0 {
-            cell.backgroundColor = .white
+            if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+                cell.backgroundColor = .black
+            } else {
+                cell.backgroundColor = .white
+            }
         } else {
-            cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
+            if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+                cell.backgroundColor = .black
+            } else {
+                cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
+
+            }
         }
         cell.homeTeamNameLabel.text = allGames[indexPath.section][indexPath.row].homeTeamName
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.homeTeamNameLabel.textColor = .white
+        } else {
+            cell.homeTeamNameLabel.textColor = .black
+        }
         cell.awayTeamNameLabel.text = allGames[indexPath.section][indexPath.row].awayTeamName
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.awayTeamNameLabel.textColor = .white
+        } else {
+            cell.awayTeamNameLabel.textColor = .black
+        }
         if self.use_real_images == "false" {
             switch allGames[indexPath.section][indexPath.row].awayTeamName {
             case "BKN": self.awayTeamImage = UIImage(named: "BKN_placeholder.png")
@@ -412,20 +452,59 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
         cell.homeTeamImageView.image = homeTeamImage
         cell.awayTeamImageView.image = awayTeamImage
+        
+        
+        
         cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].quarter
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.tipoffLabel.textColor = .white
+        } else {
+            cell.tipoffLabel.textColor = .black
+        }
+        
         let awayScore = allGames[indexPath.section][indexPath.row].awayTeamScore
         if awayScore == "" {
             cell.awayScoreLabel.text = "0"
         } else {
             cell.awayScoreLabel.text = awayScore
         }
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.awayScoreLabel.textColor = .white
+        } else {
+            cell.awayScoreLabel.textColor = .black
+        }
+        
         let homeScore = allGames[indexPath.section][indexPath.row].homeTeamScore
         if homeScore == "" {
             cell.homeScoreLabel.text = "0"
         } else {
             cell.homeScoreLabel.text = homeScore
         }
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.homeScoreLabel.textColor = .white
+        } else {
+            cell.homeScoreLabel.textColor = .black
+        }
+        
         cell.venueLabel.text = allGames[indexPath.section][indexPath.row].arena
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.venueLabel.textColor = .white
+        } else {
+            cell.venueLabel.textColor = .black
+        }
+        
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.versusLabel.textColor = .white
+        } else {
+            cell.versusLabel.textColor = .black
+        }
+        
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell.dividerLabel.textColor = .white
+        } else {
+            cell.dividerLabel.textColor = .black
+        }
+        
         return cell
     }
     
