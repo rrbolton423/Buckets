@@ -41,7 +41,8 @@ class TeamDetailVC: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     var isDarkMode: Bool = false
-
+    var store = DataStore.sharedInstance
+    var isFavoriteSelected: Bool = false
     
     @objc func defaultsChanged(){
         var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
@@ -83,8 +84,21 @@ class TeamDetailVC: UIViewController {
         fetchRoster()
     }
     
+    func checkIfTeamIsFavorite() {
+        if self.store.favoriteTeams.contains(staticTeam!) {
+            print("is a favorite")
+            self.isFavoriteSelected = true
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
+        } else {
+            print("not a favorite")
+            self.isFavoriteSelected = false
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkIfTeamIsFavorite()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
@@ -99,19 +113,6 @@ class TeamDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
-    }
-    
-    func setupFavoriteBarButtonItem() {
-        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(getFavoriteAction))
-        navigationItem.rightBarButtonItem = favoriteItem
-    }
-    
-    @objc func getFavoriteAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been added to your favorites!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
     }
     
     func firebaseSetup() {
@@ -360,5 +361,70 @@ class TeamDetailVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? PlayersTableVC
         detailVC?.selectedTeamID = teamToPass?.ID
+    }
+    
+    @objc func showFavorites() {
+        if (self.isFavoriteSelected == true) {
+            self.isFavoriteSelected = !isFavoriteSelected
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
+            saveData(item: staticTeam!)
+        } else {
+            self.isFavoriteSelected = !isFavoriteSelected
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
+            saveData(item: staticTeam!)
+        }
+        print(isFavoriteSelected)
+    }
+    
+    func setupFavoriteBarButtonItem() {
+        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showFavorites))
+        navigationItem.rightBarButtonItem = favoriteItem
+    }
+    
+    @objc func getFavoriteAction() {
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been added to your favorites!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func favoriteAlreadyAddedAction() {
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have already been added to your favorites.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    var filePath: String {
+        //1 - manager lets you examine contents of a files and folders in your app; creates a directory to where we are saving it
+        let manager = FileManager.default
+        //2 - this returns an array of urls from our documentDirectory and we take the first path
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("this is the url path in the documentDirectory \(url)")
+        //3 - creates a new path component and creates a new file called "Data" which is where we will store our Data array.
+        return (url!.appendingPathComponent("Data").path)
+    }
+    
+    private func saveData(item: StaticTeam) {
+        if self.store.favoriteTeams.contains(item) {
+            favoriteAlreadyAddedAction()
+            return
+        } else {
+            self.store.favoriteTeams.append(item)
+            
+            //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
+            //5 - archive root object saves our array of shopping items (our data) to our filepath url
+            NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
+            getFavoriteAction()
+        }
+    }
+    
+    private func loadData() {
+        //6 - if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of ShoppingItems
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
+            self.store.favoriteTeams = ourData
+        }
     }
 }

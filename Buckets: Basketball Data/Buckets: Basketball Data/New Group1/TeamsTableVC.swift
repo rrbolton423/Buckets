@@ -12,12 +12,15 @@ import Firebase
 class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     var unfilteredTeamList: [StaticTeam]?
     var filteredTeamList: [StaticTeam]?
-    var favoritesTeamList: [StaticTeam]? = []
+    var unfilteredFavoritesTeamList: [StaticTeam]? = []
+    var filteredFavoritesTeamList: [StaticTeam]? = []
     var teamToPass: StaticTeam?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     let searchController = UISearchController(searchResultsController: nil)
-    
+    var teamToFavorite: StaticTeam?
+    var isFavoriteSelected: Bool = false
+    var store = DataStore.sharedInstance
     
     @objc func defaultsChanged(){
         var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
@@ -67,11 +70,11 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         super.viewWillAppear(animated)
         
         // Retrive favorites
-        let decoded  = UserDefaults.standard.object(forKey: "favorites") as! Data
-        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [StaticTeam]
-        print(decodedTeams)
+//        let decoded  = UserDefaults.standard.object(forKey: "favorites") as! Data
+//        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [StaticTeam]
+//        print(decodedTeams)
 
-        
+        loadData()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -128,13 +131,37 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            filteredTeamList = unfilteredTeamList?.filter { team in
-                return (team.name?.lowercased().contains(searchText.lowercased()))!
+            
+            if isFavoriteSelected == false {
+                filteredTeamList = unfilteredTeamList?.filter { team in
+                    return (team.name?.lowercased().contains(searchText.lowercased()))!
+                }
+            } else {
+                self.store.favoriteTeams = (unfilteredFavoritesTeamList?.filter { team in
+                    return (team.name?.lowercased().contains(searchText.lowercased()))!
+                    })!
             }
+            
         } else {
             filteredTeamList = unfilteredTeamList
+            self.store.favoriteTeams = unfilteredFavoritesTeamList ?? []
         }
         tableView.reloadData()
+//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+//
+//            switch(isFavoriteSelected) {
+//            case false:
+//                filteredTeamList = unfilteredTeamList?.filter { team in
+//                    return (team.name?.lowercased().contains(searchText.lowercased()))!
+//                }
+//            case true:
+//                self.unfilteredFavoritesTeamList = unfilteredFavoritesTeamList?.filter { team in
+//                    return (team.name?.lowercased().contains(searchText.lowercased()))!
+//                }
+//
+//            }
+//        }
+//        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -197,7 +224,23 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredTeamList?.count ?? 0
+        
+        var returnValue = 0
+        switch(isFavoriteSelected)
+        {
+        case false:
+            print(filteredTeamList)
+            returnValue = filteredTeamList?.count ?? 0
+            break
+        case true:
+            returnValue = self.store.favoriteTeams.count
+            break
+        default:
+            break
+        }
+        return returnValue
+        
+        //return filteredTeamList?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -208,39 +251,50 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
         cell?.backgroundColor = .clear
         
-        if let teamPic = filteredTeamList?[indexPath.row].picture {
-            cell?.teamLogoImageView.image = UIImage(named: teamPic)
-        } else {
-            cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
-        }
-        if let teamName = filteredTeamList?[indexPath.row].name {
-            cell?.teamNameLabel.text = teamName
-        }
-        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
-            cell?.teamNameLabel.textColor = .white
-        } else {
-            cell?.teamNameLabel.textColor = .black
+        switch(isFavoriteSelected)
+        {
+        case false:
+            if let teamPic = filteredTeamList?[indexPath.row].picture {
+                cell?.teamLogoImageView.image = UIImage(named: teamPic)
+            } else {
+                cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+            }
+            if let teamName = filteredTeamList?[indexPath.row].name {
+                cell?.teamNameLabel.text = teamName
+            }
+            if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+                cell?.teamNameLabel.textColor = .white
+            } else {
+                cell?.teamNameLabel.textColor = .black
+            }
+            break
+        case true:
+            if let teamPic = self.store.favoriteTeams[indexPath.row].picture {
+                cell?.teamLogoImageView.image = UIImage(named: teamPic)
+            } else {
+                cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+            }
+            if let teamName = self.store.favoriteTeams[indexPath.row].name {
+                cell?.teamNameLabel.text = teamName
+            }
+            if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+                cell?.teamNameLabel.textColor = .white
+            } else {
+                cell?.teamNameLabel.textColor = .black
+            }
+            break
         }
         return cell ?? UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let row = indexPath.row
-        var teamToFavorite: StaticTeam?
         teamToFavorite = filteredTeamList?[row]
         print("Favorite: \(teamToFavorite!)")
         let favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
-            print(self.favoritesTeamList ?? "Empty")
-            self.favoritesTeamList?.append(teamToFavorite!)
-            print(self.favoritesTeamList!)
-            // save team to favorites
-            //UserDefaults.standard.set(self.favoritesTeamList, forKey: "favorites")
-            let encodedData: Data?
-            encodedData = NSKeyedArchiver.archivedData(withRootObject: self.favoritesTeamList!)
-
-            if encodedData == nil { return }
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(encodedData, forKey: "favorites")
+            print(self.unfilteredFavoritesTeamList ?? "Empty")
+            
+            self.saveData(item: self.teamToFavorite!)
             self.getFavoriteAction()
         }
         favorite.backgroundColor = .orange
@@ -248,7 +302,17 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func showFavorites() {
-        // show only favorite teams in table view once star is clicked
+        if (self.isFavoriteSelected == true) {
+            self.title = "All Teams"
+            self.isFavoriteSelected = !isFavoriteSelected
+            navigationItem.leftBarButtonItem?.image = UIImage(named: "star_Icon")
+        } else {
+            self.title = "Favorite Teams"
+            self.isFavoriteSelected = !isFavoriteSelected
+            navigationItem.leftBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
+        }
+        print(isFavoriteSelected)
+        tableView.reloadData()
     }
     
     func setupFavoriteBarButtonItem() {
@@ -257,21 +321,69 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func getFavoriteAction() {
-//        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have been added to your favorites!", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-//        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have been added to your favorites!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func favoriteAlreadyAddedAction() {
+        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have already been added to your favorites.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? TeamDetailVC
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            teamToPass = filteredTeamList?[(selectedIndexPath.row)]
-            detailVC?.staticTeam = teamToPass
-            let selectedCell = tableView.cellForRow(at: selectedIndexPath)
-            detailVC?.detailImage = selectedCell?.imageView?.image
+            print(selectedIndexPath)
+            
+            if isFavoriteSelected == false {
+                teamToPass = filteredTeamList?[(selectedIndexPath.row)]
+                detailVC?.staticTeam = teamToPass
+                let selectedCell = tableView.cellForRow(at: selectedIndexPath)
+                detailVC?.detailImage = selectedCell?.imageView?.image
+            } else {
+                print(self.store.favoriteTeams)
+                teamToPass = unfilteredFavoritesTeamList?[(selectedIndexPath.row)]
+                detailVC?.staticTeam = teamToPass
+                let selectedCell = tableView.cellForRow(at: selectedIndexPath)
+                detailVC?.detailImage = selectedCell?.imageView?.image
+            }
+           }
+        }
+    
+    var filePath: String {
+        //1 - manager lets you examine contents of a files and folders in your app; creates a directory to where we are saving it
+        let manager = FileManager.default
+        //2 - this returns an array of urls from our documentDirectory and we take the first path
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("this is the url path in the documentDirectory \(url)")
+        //3 - creates a new path component and creates a new file called "Data" which is where we will store our Data array.
+        return (url!.appendingPathComponent("Data").path)
+    }
+    
+    private func saveData(item: StaticTeam) {
+        if self.store.favoriteTeams.contains(item) {
+            favoriteAlreadyAddedAction()
+            return
+        }
+        self.store.favoriteTeams.append(item)
+        
+        //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
+        //5 - archive root object saves our array of shopping items (our data) to our filepath url
+        NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
+    }
+    
+    private func loadData() {
+        //6 - if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of ShoppingItems
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
+            self.store.favoriteTeams = ourData
+            self.unfilteredFavoritesTeamList = self.store.favoriteTeams
         }
     }
 }
