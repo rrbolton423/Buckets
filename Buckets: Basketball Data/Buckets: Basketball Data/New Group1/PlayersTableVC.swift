@@ -40,19 +40,23 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func updateToDarkTheme(){
-        self.tableView.indicatorStyle = .white;
+        self.searchController.searchBar.barStyle = .blackOpaque
+        self.tableView.indicatorStyle = .white
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = .black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
     
     func updateToLightTheme() {
+        self.searchController.searchBar.barStyle = .default
         self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
@@ -93,21 +97,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         checkForTeamID()
         fetchPlayers()
     }
-    
-//    func setupInfoBarButtonItem() {
-//        let infoButton = UIButton(type: .infoLight)
-//        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-//        navigationItem.rightBarButtonItem = infoBarButtonItem
-//    }
-//
-//    @objc func getInfoAction() {
-//        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
     
     func setupSearchController() {
         searchController.searchBar.searchBarStyle = .minimal
@@ -229,6 +218,11 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         if let nbaTeams = filteredRoster {
             if let playerName = nbaTeams[indexPath.row].fullName, let jerseyNumber = nbaTeams[indexPath.row].jerseyNumber {
                 cell?.playerNameLabel.text = "#"+jerseyNumber + " " + playerName
+            }
+            if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+                cell?.playerNameLabel.textColor = .white
+            } else {
+                cell?.playerNameLabel.textColor = .black
             }
             if let position = nbaTeams[indexPath.row].position {
                 cell?.positionLabel.text = position

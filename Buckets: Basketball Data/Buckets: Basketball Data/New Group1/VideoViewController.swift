@@ -18,22 +18,32 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     var game: Game?
     var activityIndicator = UIActivityIndicatorView(style: .gray)
     
+    @objc fileprivate func refreshWebpage() {
+        if CheckInternet.connection() {
+            let url = URL.init(string: "https://www.nba.com/games/\(self.game?.gameURL ?? "")#/video")
+            self.webView.allowsBackForwardNavigationGestures = true
+            let request = URLRequest(url: url!)
+            self.webView.load(request)
+        } else {
+            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func setupRefreshButton() {
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshWebpage))
+        self.navigationItem.rightBarButtonItem = refreshButton
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRefreshButton()
         defaultsChanged()
         setupActivityIndicator()
-        if CheckInternet.connection() {
-                let url = URL.init(string: "https://www.nba.com/games/\(self.game?.gameURL ?? "")#/video")
-                self.webView.allowsBackForwardNavigationGestures = true
-                let request = URLRequest(url: url!)
-                self.webView.load(request)
-        } else {
-                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    self.navigationController?.popToRootViewController(animated: true)
-                }))
-                self.present(alert, animated: true, completion: nil)
-        }
+        refreshWebpage()
     }
     
     func setupActivityIndicator() {
@@ -93,6 +103,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     func updateToDarkTheme(){
         self.view.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
@@ -101,6 +112,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         self.view.backgroundColor = UIColor.white
         
     self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }

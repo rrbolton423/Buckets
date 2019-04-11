@@ -48,19 +48,23 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func updateToDarkTheme(){
+        self.noGames.textColor = .white
         self.tableView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
     
     func updateToLightTheme() {
+        self.noGames.textColor = .black
         self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }

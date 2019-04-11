@@ -24,6 +24,19 @@ class PlayerDetailVC: UIViewController {
     @IBOutlet weak var apgLabel: UILabel!
     @IBOutlet weak var rpgLabel: UILabel!
     @IBOutlet weak var playerDetailScrollView: UIScrollView!
+    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var team: UILabel!
+    @IBOutlet weak var jersey: UILabel!
+    @IBOutlet weak var position: UILabel!
+    @IBOutlet weak var born: UILabel!
+    @IBOutlet weak var height: UILabel!
+    @IBOutlet weak var weight: UILabel!
+    @IBOutlet weak var school: UILabel!
+    @IBOutlet weak var experience: UILabel!
+    @IBOutlet weak var drafted: UILabel!
+    @IBOutlet weak var ppg: UILabel!
+    @IBOutlet weak var apg: UILabel!
+    @IBOutlet weak var rpg: UILabel!
     
     var detailPlayer: Player?
     var teamID: String?
@@ -45,7 +58,6 @@ class PlayerDetailVC: UIViewController {
             print(isDarkMode)
             
         } else {
-            
             //dark theme disabled
             updateToLightTheme()
             //isDarkMode = false
@@ -54,15 +66,19 @@ class PlayerDetailVC: UIViewController {
     }
     
     func updateToDarkTheme(){
+        self.playerDetailScrollView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
     
     func updateToLightTheme() {
+        self.playerDetailScrollView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
@@ -91,19 +107,6 @@ class PlayerDetailVC: UIViewController {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
     }
-    
-//    func setupFavoriteBarButtonItem() {
-//        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(getFavoriteAction))
-//        navigationItem.rightBarButtonItem = favoriteItem
-//    }
-//
-//    @objc func getFavoriteAction() {
-//        let alert = UIAlertController(title: nil, message: "\(detailPlayer?.name ?? "") has been added to your favorites!", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
 
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {
@@ -338,6 +341,41 @@ class PlayerDetailVC: UIViewController {
                 self.rpgLabel.text = "N/A"
             }
         }
+        
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            nameLabel.textColor = .white
+            teamLabel.textColor = .white
+            jerseyLabel.textColor = .white
+            positionLabel.textColor = .white
+            birthdateLabel.textColor = .white
+            heightLabel.textColor = .white
+            weightLabel.textColor = .white
+            schoolLabel.textColor = .white
+            experienceLabel.textColor = .white
+            draftedLabel.textColor = .white
+            ppgLabel.textColor = .white
+            apgLabel.textColor = .white
+            rpgLabel.textColor = .white
+            playerDetailScrollView.backgroundColor = .black
+            baseView.backgroundColor = .black
+        } else {
+            nameLabel.textColor = .black
+            teamLabel.textColor = .black
+            jerseyLabel.textColor = .black
+            positionLabel.textColor = .black
+            birthdateLabel.textColor = .black
+            heightLabel.textColor = .black
+            weightLabel.textColor = .black
+            schoolLabel.textColor = .black
+            experienceLabel.textColor = .black
+            draftedLabel.textColor = .black
+            ppgLabel.textColor = .black
+            apgLabel.textColor = .black
+            rpgLabel.textColor = .black
+            playerDetailScrollView.backgroundColor = .white
+            baseView.backgroundColor = .white
+        }
+        
     }
     
     func calcAge(birthday: String) -> Int {

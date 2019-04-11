@@ -32,15 +32,12 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.versionNumberLabel.text = getAppVersion()
-//        registerSettingsBundle()
-//        NotificationCenter.default.addObserver(self, selector: #selector(SettingsTableViewController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         defaultsChanged()
         darkModeSwitchOutlet.isOn = UserDefaults.standard.bool(forKey: "isDarkMode")
-        //self.darkModeSwitchOutlet.isOn = self.settings.isDarkMode
     }
     
     func registerSettingsBundle(){
@@ -56,15 +53,12 @@ class SettingsTableViewController: UITableViewController {
             //isDarkMode = true
             print(isDarkMode)
             tableView.reloadData()
-
         } else {
-            
             //dark theme disabled
             updateToLightTheme()
             //isDarkMode = false
             print(isDarkMode)
             tableView.reloadData()
-
         }
     }
     
@@ -88,6 +82,7 @@ class SettingsTableViewController: UITableViewController {
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = hexStringToUIColor(hex: "#252525")
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
@@ -110,6 +105,7 @@ class SettingsTableViewController: UITableViewController {
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
@@ -142,10 +138,7 @@ class SettingsTableViewController: UITableViewController {
             UserDefaults.standard.set(true, forKey: "isDarkMode")  // Set the state
         }
 
-//        NotificationCenter.default.post(name: sender.isOn ? .darkModeEnabled : .darkModeDisabled, object: nil)
     }
-
-    
 
     @IBAction func doneAction(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)

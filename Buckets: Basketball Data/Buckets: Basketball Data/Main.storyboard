@@ -289,7 +289,15 @@
                     </view>
                     <size key="freeformSize" width="375" height="1080"/>
                     <connections>
+                        <outlet property="baseView" destination="DCj-U1-v5C" id="jMt-rH-yVa"/>
+                        <outlet property="city" destination="os4-Zs-tL5" id="5PB-dV-AbT"/>
+                        <outlet property="conference" destination="I2t-mJ-Nlv" id="hUd-Aa-q0V"/>
+                        <outlet property="conferenceRank" destination="Ife-2L-xHb" id="C4e-mF-1TK"/>
+                        <outlet property="division" destination="IHU-Dy-xda" id="bTx-vX-RLT"/>
+                        <outlet property="divisionRank" destination="vxN-A0-uwj" id="SOC-xe-zCc"/>
+                        <outlet property="founded" destination="pBu-0I-GXE" id="JEs-Tr-4bI"/>
                         <outlet property="playersButton" destination="pgu-cF-Zg4" id="jnf-Lj-4I8"/>
+                        <outlet property="record" destination="x93-xm-ftf" id="hRu-MS-Ocf"/>
                         <outlet property="teamCityLabel" destination="RfV-rO-Aw8" id="T9B-3m-Qzj"/>
                         <outlet property="teamConferenceLabel" destination="1vw-1b-lUW" id="F7i-wb-tRG"/>
                         <outlet property="teamConferenceRankLabel" destination="TlY-DS-hJp" id="Dsa-8E-Ubn"/>
@@ -679,20 +687,33 @@
                     <navigationItem key="navigationItem" title="Player" largeTitleDisplayMode="always" id="LQc-z3-Z9J"/>
                     <size key="freeformSize" width="375" height="1396"/>
                     <connections>
+                        <outlet property="apg" destination="dUY-RQ-LIR" id="QsH-gF-RgL"/>
                         <outlet property="apgLabel" destination="OTF-sC-9mR" id="ik9-rC-Y70"/>
+                        <outlet property="baseView" destination="GKW-bW-X2K" id="cOl-lv-58b"/>
                         <outlet property="birthdateLabel" destination="XwM-ZJ-7VQ" id="Pfe-Uz-iAz"/>
+                        <outlet property="born" destination="A66-iP-5u8" id="Xck-zV-wex"/>
+                        <outlet property="drafted" destination="ADX-Er-MGG" id="KX4-Pk-D1F"/>
                         <outlet property="draftedLabel" destination="HUj-nN-fqH" id="iF9-Ap-97e"/>
+                        <outlet property="experience" destination="ZRu-GV-Gfp" id="k5a-Pd-TVd"/>
                         <outlet property="experienceLabel" destination="lar-dn-bVY" id="z4D-zH-6Tj"/>
                         <outlet property="headshotImageView" destination="lGP-WA-7hM" id="Hwm-9H-nLX"/>
+                        <outlet property="height" destination="IoG-ix-Gcb" id="vq0-Bp-x6M"/>
                         <outlet property="heightLabel" destination="eBE-CJ-X6g" id="yXo-vM-Xnz"/>
+                        <outlet property="jersey" destination="AeU-dd-UnD" id="r5z-NB-aj3"/>
                         <outlet property="jerseyLabel" destination="SJK-tN-P9d" id="1mG-65-gOC"/>
                         <outlet property="nameLabel" destination="nxt-gD-T7Q" id="VDB-VP-PHd"/>
                         <outlet property="playerDetailScrollView" destination="P3B-GR-JVX" id="8o0-gT-XcR"/>
+                        <outlet property="position" destination="MZv-Bc-aBx" id="2Wn-Qa-nB5"/>
                         <outlet property="positionLabel" destination="NVx-CN-oda" id="ww9-yA-MDk"/>
+                        <outlet property="ppg" destination="SJY-tS-NSC" id="xUK-YK-eak"/>
                         <outlet property="ppgLabel" destination="Onl-yW-Gux" id="78U-mz-npM"/>
+                        <outlet property="rpg" destination="BbH-Gd-yCf" id="Nmp-Sh-WqB"/>
                         <outlet property="rpgLabel" destination="ljH-hX-0Qm" id="8rg-Gz-Gjw"/>
+                        <outlet property="school" destination="bHc-N8-44D" id="1fl-mO-VJV"/>
                         <outlet property="schoolLabel" destination="PdP-Rp-Bhe" id="hbo-PG-YUN"/>
+                        <outlet property="team" destination="xnW-Gv-NkU" id="Xq1-uK-mkK"/>
                         <outlet property="teamLabel" destination="2pN-UI-lju" id="9Hg-AX-dvM"/>
+                        <outlet property="weight" destination="NAe-bp-mxn" id="B4Y-9T-IvF"/>
                         <outlet property="weightLabel" destination="6jd-ue-lE8" id="wLV-wr-XZe"/>
                     </connections>
                 </viewController>
@@ -1449,10 +1470,10 @@
             </objects>
             <point key="canvasLocation" x="5903" y="-1788"/>
         </scene>
-        <!--Watch-->
+        <!--Gamecast-->
         <scene sceneID="la8-Yi-D2I">
             <objects>
-                <viewController title="Watch" id="l2P-om-93M" customClass="VideoViewController" customModule="WebViewDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Gamecast" id="l2P-om-93M" customClass="VideoViewController" customModule="WebViewDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kdi-Q0-rmi"/>
                         <viewControllerLayoutGuide type="bottom" id="Ige-MH-6Wm"/>

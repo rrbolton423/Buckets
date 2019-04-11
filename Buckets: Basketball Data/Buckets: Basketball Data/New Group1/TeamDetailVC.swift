@@ -21,6 +21,14 @@ class TeamDetailVC: UIViewController {
     @IBOutlet weak var teamDivisionRankLabel: UILabel!
     @IBOutlet weak var teamDetailScrollView: UIScrollView!
     @IBOutlet weak var playersButton: UIButton!
+    @IBOutlet weak var founded: UILabel!
+    @IBOutlet weak var city: UILabel!
+    @IBOutlet weak var conference: UILabel!
+    @IBOutlet weak var division: UILabel!
+    @IBOutlet weak var record: UILabel!
+    @IBOutlet weak var conferenceRank: UILabel!
+    @IBOutlet weak var divisionRank: UILabel!
+    @IBOutlet weak var baseView: UIView!
     
     var staticTeam: StaticTeam?
     var teamToPass: DetailTeam?
@@ -53,15 +61,19 @@ class TeamDetailVC: UIViewController {
     }
     
     func updateToDarkTheme(){
+        self.teamDetailScrollView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
     
     func updateToLightTheme() {
+        self.teamDetailScrollView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
@@ -318,6 +330,33 @@ class TeamDetailVC: UIViewController {
         } else {
             self.teamDivisionRankLabel.text = "N/A"
         }
+        
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            //cell.homeScoreLabel.textColor = .white
+            baseView.backgroundColor = .black
+            teamNameLabel.textColor = .white
+            teamYearFoundedLabel.textColor = .white
+            teamCityLabel.textColor = .white
+            teamConferenceLabel.textColor = .white
+            teamDivisionLabel.textColor = .white
+            teamRecordLabel.textColor = .white
+            teamConferenceRankLabel.textColor = .white
+            teamDivisionRankLabel.textColor = .white
+            teamDetailScrollView.backgroundColor = .black
+            //playersButton.textColor = .white
+        } else {
+            baseView.backgroundColor = .white
+            teamNameLabel.textColor = .black
+            teamYearFoundedLabel.textColor = .black
+            teamCityLabel.textColor = .black
+            teamConferenceLabel.textColor = .black
+            teamDivisionLabel.textColor = .black
+            teamRecordLabel.textColor = .black
+            teamConferenceRankLabel.textColor = .black
+            teamDivisionRankLabel.textColor = .black
+            teamDetailScrollView.backgroundColor = .white
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

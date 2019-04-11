@@ -36,16 +36,12 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             //isDarkMode = true
             print(isDarkMode)
             tableView.reloadData()
-
-            
         } else {
-            
             //dark theme disabled
             updateToLightTheme()
             //isDarkMode = false
             print(isDarkMode)
             tableView.reloadData()
-
         }
     }
     
@@ -54,6 +50,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
@@ -63,6 +60,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }

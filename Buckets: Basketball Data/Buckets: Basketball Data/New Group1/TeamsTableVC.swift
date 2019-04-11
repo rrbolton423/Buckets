@@ -26,32 +26,33 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             //isDarkMode = true
             print(isDarkMode)
             tableView.reloadData()
-
         } else {
-            
             //dark theme disabled
             updateToLightTheme()
             //isDarkMode = false
             print(isDarkMode)
             tableView.reloadData()
-
         }
     }
     
     func updateToDarkTheme(){
-        self.tableView.indicatorStyle = .white;
+        self.searchController.searchBar.barStyle = .blackOpaque
+        self.tableView.indicatorStyle = .white
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = .black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
     }
     
     func updateToLightTheme() {
+        self.searchController.searchBar.barStyle = .default
         self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
@@ -90,21 +91,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         setupSearchController()
         loadTeams()
     }
-    
-//    func setupInfoBarButtonItem() {
-//        let infoButton = UIButton(type: .infoLight)
-//        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-//        navigationItem.rightBarButtonItem = infoBarButtonItem
-//    }
-//    
-//    @objc func getInfoAction() {
-//        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
     
     func setupSearchController() {
         searchController.searchBar.searchBarStyle = .minimal
@@ -209,6 +195,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamCell
         cell?.backgroundColor = .clear
+        
         if let teamPic = filteredTeamList?[indexPath.row].picture {
             cell?.teamLogoImageView.image = UIImage(named: teamPic)
         } else {
@@ -216,6 +203,11 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         }
         if let teamName = filteredTeamList?[indexPath.row].name {
             cell?.teamNameLabel.text = teamName
+        }
+        if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
+            cell?.teamNameLabel.textColor = .white
+        } else {
+            cell?.teamNameLabel.textColor = .black
         }
         return cell ?? UITableViewCell()
     }
