@@ -440,7 +440,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func getDeleteAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been deleted from your favorites.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been removed from your favorites.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
