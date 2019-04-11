@@ -64,15 +64,11 @@ PODS:
   - nanopb/encode (0.3.901)
   - Protobuf (3.6.1)
   - SwiftyJSON (4.2.0)
-  - TwitterCore (3.2.0)
-  - TwitterKit (3.4.2):
-    - TwitterCore (>= 3.2.0)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/RemoteConfig
   - SwiftyJSON (~> 4.0)
-  - TwitterKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -87,8 +83,6 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - SwiftyJSON
-    - TwitterCore
-    - TwitterKit
 
 SPEC CHECKSUMS:
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
@@ -102,9 +96,7 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
-  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 2e3d3f4ac9a60168d6bee70a7a9062e464ab112f
+PODFILE CHECKSUM: 75e4bc184db47d05201f1c1b3c1051735453c24c
 
 COCOAPODS: 1.5.2

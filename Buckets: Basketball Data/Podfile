@@ -11,5 +11,4 @@ target 'Buckets: Basketball Data' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
-  pod 'TwitterKit'
 end
