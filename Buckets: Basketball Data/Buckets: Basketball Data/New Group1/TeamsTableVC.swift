@@ -39,6 +39,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateToDarkTheme(){
+        self.tableView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = .black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
@@ -47,6 +48,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateToLightTheme() {
+        self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]

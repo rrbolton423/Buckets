@@ -19,6 +19,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var todaysGames = [Game]()
     var yesterdaysGames = [Game]()
     var allGames = [[Game]]()
+    var gameToPass: Game?
     var awayTeamImage: UIImage?
     var homeTeamImage: UIImage?
     var activityIndicator = UIActivityIndicatorView(style: .gray)
@@ -47,6 +48,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func updateToDarkTheme(){
+        self.tableView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
@@ -55,6 +57,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func updateToLightTheme() {
+        self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
@@ -297,7 +300,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                 cell.backgroundColor = .black
             } else {
                 cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
-
             }
         }
         cell.homeTeamNameLabel.text = allGames[indexPath.section][indexPath.row].homeTeamName
@@ -524,4 +526,33 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             UserDefaults.standard.set(appLaunches, forKey: "appLaunches")
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loadGame" {
+            if let detailVC = segue.destination as? VideoViewController {
+                let section = tableView.indexPathForSelectedRow!.section
+                print(section)
+                if section == 0 {
+                    let row = tableView.indexPathForSelectedRow!.row
+                    gameToPass = todaysGames[row]
+                } else {
+                    let row = tableView.indexPathForSelectedRow!.row
+                    gameToPass = yesterdaysGames[row]
+                }
+                detailVC.game = gameToPass
+            }
+        }
+    }
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//
+//    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let detailVC = segue.destination as? VideoViewController
+//        print(gameToPass)
+//        detailVC?.game = gameToPass
+//    }
 }

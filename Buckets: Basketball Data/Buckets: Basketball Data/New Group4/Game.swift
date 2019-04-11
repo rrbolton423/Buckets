@@ -9,6 +9,7 @@
 import Foundation
 
 struct Game {
+    let gameURL: String
     let arena: String
     let homeTeamName: String
     let homeTeamScore: String

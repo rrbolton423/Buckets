@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TeamCell" rowHeight="95" id="b9U-Nd-B30" userLabel="TeamCell" customClass="TeamCell" customModule="Buckets__Basketball_Data" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TeamCell" rowHeight="95" id="b9U-Nd-B30" userLabel="TeamCell" customClass="TeamCell" customModule="Buckets__Basketball_Data" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="95"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b9U-Nd-B30" id="YcS-lw-LOi">
@@ -911,11 +911,11 @@
                                 <rect key="frame" x="0.0" y="116" width="414" height="571"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="todaysGamesCell" rowHeight="211" id="N3S-wB-VUm" customClass="TodaysGamesCell" customModule="Buckets__Basketball_Data" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="todaysGamesCell" rowHeight="211" id="N3S-wB-VUm" customClass="TodaysGamesCell" customModule="Buckets__Basketball_Data" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="211"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N3S-wB-VUm" id="CqF-Da-B77">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="210.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="210.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="09i-Jr-pjT" userLabel="Away Image">
@@ -938,7 +938,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW1-ef-s0A">
-                                                    <rect key="frame" x="294" y="108.33333333333331" width="100" height="60"/>
+                                                    <rect key="frame" x="256" y="108.33333333333331" width="100" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="beH-WN-aUY"/>
                                                     </constraints>
@@ -947,7 +947,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9h-nA-K9s">
-                                                    <rect key="frame" x="294" y="20" width="100" height="60"/>
+                                                    <rect key="frame" x="256" y="20" width="100" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="r3S-wI-Leo"/>
                                                     </constraints>
@@ -1026,6 +1026,7 @@
                                             <outlet property="tipoffLabel" destination="xGW-qU-np8" id="wbC-de-SMw"/>
                                             <outlet property="venueLabel" destination="yKB-s6-kZw" id="PZP-Z2-PVh"/>
                                             <outlet property="versusLabel" destination="eZf-v6-H6m" id="E2j-WC-PFk"/>
+                                            <segue destination="l2P-om-93M" kind="show" identifier="loadGame" id="Ugm-z8-3SP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1306,7 +1307,7 @@
         <!--Settings-->
         <scene sceneID="kIF-n3-Rtb">
             <objects>
-                <tableViewController id="hTl-pr-MMX" customClass="SettingsTableViewController" customModule="VCoin" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hTl-pr-MMX" customClass="SettingsTableViewController" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zcw-bi-wq5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1448,6 +1449,61 @@
             </objects>
             <point key="canvasLocation" x="5903" y="-1788"/>
         </scene>
+        <!--Watch-->
+        <scene sceneID="la8-Yi-D2I">
+            <objects>
+                <viewController title="Watch" id="l2P-om-93M" customClass="VideoViewController" customModule="WebViewDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kdi-Q0-rmi"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ige-MH-6Wm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lzy-VB-Cpr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fk-9Z-TdN">
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="stop" id="Sil-nn-lxW"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="o1x-KB-7JN"/>
+                                    <barButtonItem systemItem="refresh" id="d2E-8Y-h3b"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="XNF-f8-oNA"/>
+                                    <barButtonItem systemItem="rewind" id="P5f-nk-3k0"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="c3n-aJ-E58"/>
+                                    <barButtonItem systemItem="fastForward" id="8nL-OX-kkk"/>
+                                </items>
+                            </toolbar>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQI-qh-7je">
+                                <rect key="frame" x="0.0" y="116" width="414" height="527"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="JQI-qh-7je" firstAttribute="trailing" secondItem="AZE-xa-9cl" secondAttribute="trailing" id="AbW-Ya-1oV"/>
+                            <constraint firstItem="8fk-9Z-TdN" firstAttribute="leading" secondItem="lzy-VB-Cpr" secondAttribute="leading" id="H6p-Xm-M2C"/>
+                            <constraint firstAttribute="bottom" secondItem="8fk-9Z-TdN" secondAttribute="bottom" id="Viq-yk-CHS"/>
+                            <constraint firstAttribute="trailing" secondItem="8fk-9Z-TdN" secondAttribute="trailing" id="dYD-BP-XgV"/>
+                            <constraint firstItem="JQI-qh-7je" firstAttribute="leading" secondItem="AZE-xa-9cl" secondAttribute="leading" id="qqe-d5-krk"/>
+                            <constraint firstItem="JQI-qh-7je" firstAttribute="top" secondItem="kdi-Q0-rmi" secondAttribute="bottom" id="sbu-ij-Pq7"/>
+                            <constraint firstItem="Ige-MH-6Wm" firstAttribute="top" secondItem="JQI-qh-7je" secondAttribute="bottom" id="yeP-7D-v9b"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="AZE-xa-9cl"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="JQI-qh-7je" id="FQt-pL-XdE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3F-r7-K3g" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7750.7246376811599" y="-946.46739130434787"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Settings_Icon" width="25" height="25"/>
@@ -1459,6 +1515,6 @@
         <image name="teams" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3K6-k7-nhU"/>
+        <segue reference="L2D-LF-6gx"/>
     </inferredMetricsTieBreakers>
 </document>

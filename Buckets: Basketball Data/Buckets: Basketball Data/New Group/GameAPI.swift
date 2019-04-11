@@ -29,6 +29,7 @@ class GameAPI {
                     let away = g["visitor"] as! NSDictionary
                     let gameStatus = g["period_time"] as! NSDictionary
 
+                    let gameURL = g["game_url"]! as! String
                     let arena = g["arena"]! as! String
                     let awayTeamName = away["abbreviation"]! as! String
                     let awayTeamScore = away["score"]! as! String
@@ -36,7 +37,7 @@ class GameAPI {
                     let homeTeamScore = home["score"]! as! String
                     let quarter = gameStatus["period_status"]! as! String
                     let time = gameStatus["game_clock"]! as! String
-                    let game = Game.init(arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
+                    let game = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                     yesterdaysGamesArray.append(game)
                 }
         } catch {
@@ -57,6 +58,7 @@ class GameAPI {
                 let home = g["home"] as! NSDictionary
                 let away = g["visitor"] as! NSDictionary
                 let gameStatus = g["period_time"] as! NSDictionary
+                let gameURL = g["game_url"]! as! String
                 let arena = g["arena"]! as! String
                 let awayTeamName = away["abbreviation"]! as! String
                 let awayTeamScore = away["score"]! as! String
@@ -64,7 +66,7 @@ class GameAPI {
                 let homeTeamScore = home["score"]! as! String
                 let quarter = gameStatus["period_status"]! as! String
                 let time = gameStatus["game_clock"]! as! String
-                let game = Game.init(arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
+                let game = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                 todaysGamesArray.append(game)
             }
             resultArray = [todaysGamesArray, yesterdaysGamesArray]
