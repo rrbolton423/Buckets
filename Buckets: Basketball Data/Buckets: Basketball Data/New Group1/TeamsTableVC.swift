@@ -19,6 +19,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     var use_real_images: String?
     let searchController = UISearchController(searchResultsController: nil)
     var teamToFavorite: StaticTeam?
+    var teamToDelete: StaticTeam?
     var isFavoriteSelected: Bool = false
     var store = DataStore.sharedInstance
     
@@ -288,17 +289,49 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let favorite: UITableViewRowAction
+        let delete: UITableViewRowAction
         let row = indexPath.row
-        teamToFavorite = filteredTeamList?[row]
-        print("Favorite: \(teamToFavorite!)")
-        let favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
-            print(self.unfilteredFavoritesTeamList ?? "Empty")
+        
+        switch(isFavoriteSelected)
+        {
             
-            self.saveData(item: self.teamToFavorite!)
-            self.getFavoriteAction()
+        case false:
+            teamToFavorite = self.filteredTeamList?[row]
+            teamToDelete = self.filteredTeamList?[row]
+            print("Favorite: \(teamToFavorite!)")
+            print("Delete: \(teamToDelete!)")
+            favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
+                self.saveData(item: self.teamToFavorite!)
+                self.getFavoriteAction()
+            }
+            favorite.backgroundColor = .orange
+            delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+                print(self.unfilteredFavoritesTeamList ?? "Empty")
+                self.deleteData(item: self.teamToDelete!)
+                self.getDeleteAction()
+            }
+            delete.backgroundColor = .red
+            break
+            
+        case true:
+            teamToFavorite = self.store.favoriteTeams[row]
+            teamToDelete = self.store.favoriteTeams[row]
+            favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
+                self.saveData(item: self.teamToFavorite!)
+                self.getFavoriteAction()
+            }
+            favorite.backgroundColor = .orange
+            delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+                self.deleteData(item: self.teamToDelete!)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.getDeleteAction()
+            }
+            delete.backgroundColor = .red
+            
+            break
         }
-        favorite.backgroundColor = .orange
-        return [favorite]
+        return [delete, favorite]
     }
     
     @objc func showFavorites() {
@@ -328,6 +361,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         self.present(alert, animated: true, completion: nil)
     }
     
+    @objc func getDeleteAction() {
+        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have been delete from your favorites!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func favoriteAlreadyAddedAction() {
         let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have already been added to your favorites.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -349,7 +390,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 detailVC?.detailImage = selectedCell?.imageView?.image
             } else {
                 print(self.store.favoriteTeams)
-                teamToPass = unfilteredFavoritesTeamList?[(selectedIndexPath.row)]
+                teamToPass = self.store.favoriteTeams[(selectedIndexPath.row)]
                 detailVC?.staticTeam = teamToPass
                 let selectedCell = tableView.cellForRow(at: selectedIndexPath)
                 detailVC?.detailImage = selectedCell?.imageView?.image
@@ -373,6 +414,18 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             return
         }
         self.store.favoriteTeams.append(item)
+        
+        //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
+        //5 - archive root object saves our array of shopping items (our data) to our filepath url
+        NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
+    }
+    
+    private func deleteData(item: StaticTeam) {
+        if self.store.favoriteTeams.contains(item) {
+            if let firstIndex = self.store.favoriteTeams.firstIndex(of: item) {
+                self.store.favoriteTeams.remove(at: firstIndex)
+            }
+        }
         
         //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
         //5 - archive root object saves our array of shopping items (our data) to our filepath url
