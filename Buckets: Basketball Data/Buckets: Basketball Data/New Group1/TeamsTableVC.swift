@@ -64,18 +64,13 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Retrive favorites
-//        let decoded  = UserDefaults.standard.object(forKey: "favorites") as! Data
-//        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [StaticTeam]
-//        print(decodedTeams)
 
-        loadData()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -362,7 +357,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func getDeleteAction() {
-        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have been delete from your favorites!", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have been delete from your favorites.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -370,7 +365,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func favoriteAlreadyAddedAction() {
-        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have already been added to your favorites.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") is a favorite.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -408,6 +403,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         return (url!.appendingPathComponent("Data").path)
     }
     
+    @objc func favoriteAlreadyDeletedAction() {
+        let alert = UIAlertController(title: nil, message: "The \(teamToDelete?.name ?? "") is not a favorite.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func saveData(item: StaticTeam) {
         if self.store.favoriteTeams.contains(item) {
             favoriteAlreadyAddedAction()
@@ -421,9 +424,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     private func deleteData(item: StaticTeam) {
-        if self.store.favoriteTeams.contains(item) {
-            if let firstIndex = self.store.favoriteTeams.firstIndex(of: item) {
-                self.store.favoriteTeams.remove(at: firstIndex)
+        if !self.store.favoriteTeams.contains(item) {
+            favoriteAlreadyDeletedAction()
+            return
+        } else {
+            if self.store.favoriteTeams.contains(item) {
+                if let firstIndex = self.store.favoriteTeams.firstIndex(of: item) {
+                    self.store.favoriteTeams.remove(at: firstIndex)
+                }
             }
         }
         

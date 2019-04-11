@@ -367,7 +367,7 @@ class TeamDetailVC: UIViewController {
         if (self.isFavoriteSelected == true) {
             self.isFavoriteSelected = !isFavoriteSelected
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
-            saveData(item: staticTeam!)
+            deleteData(item: staticTeam!)
         } else {
             self.isFavoriteSelected = !isFavoriteSelected
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
@@ -390,7 +390,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func favoriteAlreadyAddedAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have already been added to your favorites.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") is a favorite.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -419,6 +419,40 @@ class TeamDetailVC: UIViewController {
             NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
             getFavoriteAction()
         }
+    }
+    
+    private func deleteData(item: StaticTeam) {
+        if !self.store.favoriteTeams.contains(item) {
+            favoriteAlreadyDeletedAction()
+            return
+        } else {
+        if self.store.favoriteTeams.contains(item) {
+            if let firstIndex = self.store.favoriteTeams.firstIndex(of: item) {
+                self.store.favoriteTeams.remove(at: firstIndex)
+            }
+            }
+        }
+        
+        //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
+        //5 - archive root object saves our array of shopping items (our data) to our filepath url
+        NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
+        getDeleteAction()
+    }
+    
+    @objc func getDeleteAction() {
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been deleted from your favorites.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func favoriteAlreadyDeletedAction() {
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") is not a favorite.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func loadData() {
