@@ -1330,7 +1330,7 @@
             <objects>
                 <tableViewController id="hTl-pr-MMX" customClass="SettingsTableViewController" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zcw-bi-wq5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1473,7 +1473,7 @@
         <!--Gamecast-->
         <scene sceneID="la8-Yi-D2I">
             <objects>
-                <viewController title="Gamecast" id="l2P-om-93M" customClass="VideoViewController" customModule="WebViewDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Gamecast" id="l2P-om-93M" customClass="VideoViewController" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kdi-Q0-rmi"/>
                         <viewControllerLayoutGuide type="bottom" id="Ige-MH-6Wm"/>
@@ -1536,6 +1536,6 @@
         <image name="teams" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bHD-7N-mOZ"/>
+        <segue reference="L2D-LF-6gx"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,11 +12,12 @@ import Firebase
 class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     var unfilteredTeamList: [StaticTeam]?
     var filteredTeamList: [StaticTeam]?
+    var favoritesTeamList: [StaticTeam]? = []
     var teamToPass: StaticTeam?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     
     @objc func defaultsChanged(){
         var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
@@ -64,12 +65,23 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Retrive favorites
+        let decoded  = UserDefaults.standard.object(forKey: "favorites") as! Data
+        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [StaticTeam]
+        print(decodedTeams)
+
+        
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
+        
+//        if let loadedCart = UserDefaults.standard.array(forKey: "favorites") as? [[String: Any]] {
+//            print(loadedCart)  // [[price: 19.99, qty: 1, name: A], [price: 4.99, qty: 2, name: B]]"
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,7 +99,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func start() {
-        //setupInfoBarButtonItem()
+        setupFavoriteBarButtonItem()
         setupSearchController()
         loadTeams()
     }
@@ -148,7 +160,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 if let jsonArray = JSON as? [[String: Any]] {
                     for team in jsonArray {
-                        let team = StaticTeam(dictionary: team)
+                        let team = StaticTeam(dictionary: team)!
                         resultArray.append(team)
                     }
                 }
@@ -161,7 +173,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 if let jsonArray = JSON as? [[String: Any]] {
                     for team in jsonArray {
-                        let team = StaticTeam(dictionary: team)
+                        let team = StaticTeam(dictionary: team)!
                         resultArray.append(team)
                     }
                 }
@@ -210,6 +222,46 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             cell?.teamNameLabel.textColor = .black
         }
         return cell ?? UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let row = indexPath.row
+        var teamToFavorite: StaticTeam?
+        teamToFavorite = filteredTeamList?[row]
+        print("Favorite: \(teamToFavorite!)")
+        let favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
+            print(self.favoritesTeamList ?? "Empty")
+            self.favoritesTeamList?.append(teamToFavorite!)
+            print(self.favoritesTeamList!)
+            // save team to favorites
+            //UserDefaults.standard.set(self.favoritesTeamList, forKey: "favorites")
+            let encodedData: Data?
+            encodedData = NSKeyedArchiver.archivedData(withRootObject: self.favoritesTeamList!)
+
+            if encodedData == nil { return }
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(encodedData, forKey: "favorites")
+            self.getFavoriteAction()
+        }
+        favorite.backgroundColor = .orange
+        return [favorite]
+    }
+    
+    @objc func showFavorites() {
+        // show only favorite teams in table view once star is clicked
+    }
+    
+    func setupFavoriteBarButtonItem() {
+        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showFavorites))
+        navigationItem.leftBarButtonItem = favoriteItem
+    }
+    
+    @objc func getFavoriteAction() {
+//        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") have been added to your favorites!", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+//        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
