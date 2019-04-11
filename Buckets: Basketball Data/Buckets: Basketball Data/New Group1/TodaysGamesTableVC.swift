@@ -255,10 +255,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             view.tintColor = UIColor.groupTableViewBackground
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.textColor = .black
-            
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -286,6 +283,44 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         if (allGames.count == 0) {
             return 0
         } else {return self.allGames[section].count}
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        var gameToTweet: Game?
+        let section = indexPath.section
+        print(section)
+        if section == 0 {
+            let row = indexPath.row
+            gameToTweet = todaysGames[row]
+        } else {
+            let row = indexPath.row
+            gameToTweet = yesterdaysGames[row]
+        }
+        
+        let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
+            if let awayTeam = gameToTweet?.awayTeamName, let homeTeam = gameToTweet?.homeTeamName, let awayScore = gameToTweet?.awayTeamScore, let homeScore = gameToTweet?.homeTeamScore, let gameQuarter = gameToTweet?.quarter {
+                
+                let tweetText = "The score between \(awayTeam) vs. \(homeTeam) is \(awayScore) - \(homeScore) in the \(gameQuarter) quarter! Download the Buckets: Basketball App for more scores, stats and standings."
+                
+                let tweetUrl = "https://www.apple.com/ios/app-store/"
+                
+                let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
+                
+                // encode a space to %20 for example
+                let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                
+                // cast to an url
+                let url = URL(string: escapedShareString)
+                
+                // open in safari
+                UIApplication.shared.openURL(url!)
+            } else {
+                return
+            }
+        }
+        tweet.backgroundColor = hexStringToUIColor(hex: "#1DA1F2")
+        return [tweet]
     }
     
    
@@ -547,16 +582,4 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//
-//    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let detailVC = segue.destination as? VideoViewController
-//        print(gameToPass)
-//        detailVC?.game = gameToPass
-//    }
 }

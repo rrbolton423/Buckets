@@ -39,6 +39,7 @@ class GameAPI {
                     let time = gameStatus["game_clock"]! as! String
                     let game = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                     yesterdaysGamesArray.append(game)
+                    print(yesterdaysGamesArray)
                 }
         } catch {
             print(error)
@@ -73,7 +74,11 @@ class GameAPI {
             completion(resultArray)
         } catch {
             print(error)
-            completion([])
+            if yesterdaysGamesArray.count > 0 {
+                completion([[], yesterdaysGamesArray])
+            } else {
+                completion([])
+            }
         }
     }
     func getTodaysDate() -> String {

@@ -89,14 +89,11 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
             updateToDarkTheme()
             //isDarkMode = true
             print(isDarkMode)
-            
         } else {
-            
             //dark theme disabled
             updateToLightTheme()
             //isDarkMode = false
             print(isDarkMode)
-            
         }
     }
     

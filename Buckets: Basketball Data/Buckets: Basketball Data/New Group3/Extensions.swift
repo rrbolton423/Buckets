@@ -199,11 +199,32 @@ extension UIColor {
         return UIButton(type: .system).tintColor
     }
 }
-//
-//extension UIColor {
-//    var inverted: UIColor {
-//        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
-//        UIColor.red.getRed(&r, green: &g, blue: &b, alpha: &a)
-//        return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: a) // Assuming you want the same alpha value.
-//    }
-//}
+
+extension UIApplication {
+    
+    class var topViewController: UIViewController? {
+        return getTopViewController()
+    }
+    
+    private class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return getTopViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return getTopViewController(base: selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
+    }
+}
+
+extension Equatable {
+    func share() {
+        let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        UIApplication.topViewController?.present(activity, animated: true, completion: nil)
+    }
+}
