@@ -82,6 +82,10 @@
                     <navigationItem key="navigationItem" title="Teams" id="8YK-3a-nhE"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1TU-o0-y1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nba_logo" id="WaD-1j-98e">
+                    <rect key="frame" x="0.0" y="0.0" width="321" height="361"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </objects>
             <point key="canvasLocation" x="6812" y="-117"/>
         </scene>

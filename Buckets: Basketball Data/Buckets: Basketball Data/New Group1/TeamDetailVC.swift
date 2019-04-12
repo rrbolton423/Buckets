@@ -394,7 +394,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func getFavoriteAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been added to your favorites!", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been added to your favorites", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -402,7 +402,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func favoriteAlreadyAddedAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") is a favorite.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") is a favorite", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -473,7 +473,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func getDeleteAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been removed from your favorites.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") have been removed from your favorites", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -481,7 +481,7 @@ class TeamDetailVC: UIViewController {
     }
     
     @objc func favoriteAlreadyDeletedAction() {
-        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") is not a favorite.", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(staticTeam?.name ?? "") is not a favorite", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
