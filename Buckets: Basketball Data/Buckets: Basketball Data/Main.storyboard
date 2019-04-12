@@ -31,7 +31,7 @@
         <!--Teams-->
         <scene sceneID="BH3-IZ-8bI">
             <objects>
-                <tableViewController id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Teams" id="SE3-CR-oHf" customClass="TeamsTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VUs-FI-1zi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -904,7 +904,7 @@
         <!--Games-->
         <scene sceneID="3T7-Zb-67q">
             <objects>
-                <viewController title="Games" id="mWn-KQ-Ofd" userLabel="Games" customClass="TodaysGamesTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Scores" id="mWn-KQ-Ofd" userLabel="Games" customClass="TodaysGamesTableVC" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZDv-yj-Wb0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1076,11 +1076,11 @@
             </objects>
             <point key="canvasLocation" x="6811.594202898551" y="-946.46739130434787"/>
         </scene>
-        <!--Games-->
+        <!--Scores-->
         <scene sceneID="jkL-Q3-gHh">
             <objects>
-                <navigationController title="Games" automaticallyAdjustsScrollViewInsets="NO" id="xpt-BV-pFt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Games" image="games" selectedImage="games" id="SvK-Sc-5hy"/>
+                <navigationController title="Scores" automaticallyAdjustsScrollViewInsets="NO" id="xpt-BV-pFt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Scores" image="scores" selectedImage="scores" id="SvK-Sc-5hy"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JUR-O4-SVV">
@@ -1127,11 +1127,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="xpt-BV-pFt" kind="relationship" relationship="viewControllers" id="TQ9-Hh-DWe"/>
-                        <segue destination="g0M-fh-the" kind="relationship" relationship="viewControllers" id="x8t-aM-b9T"/>
-                        <segue destination="t4F-w5-mPi" kind="relationship" relationship="viewControllers" id="bol-7E-r8h"/>
-                        <segue destination="RP4-TX-3QM" kind="relationship" relationship="viewControllers" id="jVU-SD-SGF"/>
-                        <segue destination="uaJ-Ub-Rnn" kind="relationship" relationship="viewControllers" id="6gl-Cz-LFc"/>
+                        <segue destination="xpt-BV-pFt" kind="relationship" relationship="viewControllers" id="FR1-G5-dn9"/>
+                        <segue destination="t4F-w5-mPi" kind="relationship" relationship="viewControllers" id="XcL-jt-AIC"/>
+                        <segue destination="g0M-fh-the" kind="relationship" relationship="viewControllers" id="0n1-FC-tC1"/>
+                        <segue destination="RP4-TX-3QM" kind="relationship" relationship="viewControllers" id="Jpw-DC-zcP"/>
+                        <segue destination="uaJ-Ub-Rnn" kind="relationship" relationship="viewControllers" id="l6d-Zt-6Zw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1FV-s8-IcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1513,10 +1513,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="games" width="25" height="25"/>
         <image name="nba_logo" width="800" height="1777.3333740234375"/>
         <image name="placeholder" width="266.66665649414062" height="200"/>
         <image name="quiz" width="25" height="25"/>
+        <image name="scores" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="standings" width="25" height="25"/>
         <image name="teams" width="25" height="25"/>

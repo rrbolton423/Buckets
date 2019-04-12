@@ -98,6 +98,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.view.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
@@ -107,6 +108,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.view.backgroundColor = UIColor.white
         

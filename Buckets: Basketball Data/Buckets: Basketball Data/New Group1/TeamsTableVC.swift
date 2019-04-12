@@ -41,6 +41,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.searchController.searchBar.setTextColor(color: .white)
         self.tableView.indicatorStyle = .white
@@ -53,6 +54,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.searchController.searchBar.setTextColor(color: .black)
         self.tableView.indicatorStyle = .default
@@ -77,10 +79,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //        start()
         defaultsChanged()
         if (self.isFavoriteSelected == false) {
-            self.title = "All Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
-            self.title = "Favorite Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
         self.navigationController?.navigationBar.isTranslucent = false
@@ -346,7 +346,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             loadData()
             start()
             defaultsChanged()
-            self.title = "Favorite Teams"
             //self.isFavoriteSelected = !isFavoriteSelected
             //navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
@@ -362,7 +361,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             loadData()
             start()
             defaultsChanged()
-            self.title = "All Teams"
             self.isFavoriteSelected = !isFavoriteSelected
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
@@ -370,7 +368,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             loadData()
             start()
             defaultsChanged()
-            self.title = "Favorite Teams"
             self.isFavoriteSelected = !isFavoriteSelected
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
@@ -453,7 +450,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func allFavoritesAlreadyDeletedAction() {
-        let alert = UIAlertController(title: nil, message: "You have no favorites to delete", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "There are no favorites", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))

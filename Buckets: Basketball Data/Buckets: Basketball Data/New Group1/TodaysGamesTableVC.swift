@@ -46,6 +46,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.noGames.textColor = .white
         self.tableView.indicatorStyle = .white;
@@ -58,6 +59,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
+        self.navigationController?.view.backgroundColor = UIColor.white
         navigationController?.navigationBar.barStyle = .default
         self.noGames.textColor = .black
         self.tableView.indicatorStyle = .default;

@@ -55,6 +55,7 @@ class QuizViewController: UIViewController {
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.questionField.textColor = .white
         self.view.backgroundColor = UIColor.black
@@ -64,6 +65,7 @@ class QuizViewController: UIViewController {
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.questionField.textColor = .black
         self.view.backgroundColor = UIColor.white

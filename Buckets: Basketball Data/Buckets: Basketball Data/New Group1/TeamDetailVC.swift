@@ -60,6 +60,7 @@ class TeamDetailVC: UIViewController {
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.teamDetailScrollView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
@@ -70,6 +71,7 @@ class TeamDetailVC: UIViewController {
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.teamDetailScrollView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white

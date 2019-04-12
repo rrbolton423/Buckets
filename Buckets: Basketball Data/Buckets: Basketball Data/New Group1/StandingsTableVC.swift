@@ -46,6 +46,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.tableView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
@@ -57,6 +58,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white

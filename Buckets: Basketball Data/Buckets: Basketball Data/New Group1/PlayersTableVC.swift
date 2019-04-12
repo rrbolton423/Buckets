@@ -40,6 +40,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.searchController.searchBar.barStyle = .blackOpaque
         self.tableView.indicatorStyle = .white
@@ -52,6 +53,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.searchController.searchBar.barStyle = .default
         self.tableView.indicatorStyle = .default;

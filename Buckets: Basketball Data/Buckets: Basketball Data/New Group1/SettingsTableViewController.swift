@@ -63,6 +63,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.tableView.indicatorStyle = .white;
 
@@ -88,6 +89,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.tableView.indicatorStyle = .default;
         self.darkModeCell.backgroundColor = .white
