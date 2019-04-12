@@ -7,21 +7,21 @@
 //
 
 import UIKit
+import StoreKit
 
 class SettingsTableViewController: UITableViewController {
 
     // MARK: - View loading
 
     @IBOutlet weak var darkModeCell: UIView!
-    @IBOutlet weak var reportIssueCell: UITableViewCell!
-    @IBOutlet weak var twitterCell: UITableViewCell!
+    @IBOutlet weak var rateAppCell: UITableViewCell!
+    @IBOutlet weak var contactUsCell: UITableViewCell!
     @IBOutlet weak var versionCell: UITableViewCell!
     @IBOutlet weak var darkModeSwitchOutlet: UISwitch!
     //var isDarkMode: Bool = false
 
-    @IBOutlet weak var reportIssueLabel: UILabel!
-    @IBOutlet weak var followMeLabel: UILabel!
-    @IBOutlet weak var twitterHandleLabel: UILabel!
+    @IBOutlet weak var rateAppLabel: UILabel!
+    @IBOutlet weak var contactUsLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var versionNumberLabel: UILabel!
     @IBOutlet weak var darkModeLabel: UILabel!
@@ -67,14 +67,13 @@ class SettingsTableViewController: UITableViewController {
         self.tableView.indicatorStyle = .white;
 
         self.darkModeCell.backgroundColor = .black
-        self.reportIssueCell.backgroundColor = .black
-        self.twitterCell.backgroundColor = .black
+        self.rateAppCell.backgroundColor = .black
+        self.contactUsCell.backgroundColor = .black
         self.versionCell.backgroundColor = .black
         self.darkModeSwitchOutlet.backgroundColor = .black
         
-        self.reportIssueLabel.textColor = .white
-        self.followMeLabel.textColor = .white
-        self.twitterHandleLabel.textColor = .white
+        self.rateAppLabel.textColor = .white
+        self.contactUsLabel.textColor = .white
         self.versionLabel.textColor = .white
         self.versionNumberLabel.textColor = .white
         self.darkModeLabel.textColor = .white
@@ -92,14 +91,13 @@ class SettingsTableViewController: UITableViewController {
         navigationController?.navigationBar.barStyle = .default
         self.tableView.indicatorStyle = .default;
         self.darkModeCell.backgroundColor = .white
-        self.reportIssueCell.backgroundColor = .white
-        self.twitterCell.backgroundColor = .white
+        self.rateAppCell.backgroundColor = .white
+        self.contactUsCell.backgroundColor = .white
         self.versionCell.backgroundColor = .white
         self.darkModeSwitchOutlet.backgroundColor = .white
         
-        self.reportIssueLabel.textColor = .black
-        self.followMeLabel.textColor = .black
-        self.twitterHandleLabel.textColor = .black
+        self.rateAppLabel.textColor = .black
+        self.contactUsLabel.textColor = .black
         self.versionLabel.textColor = .black
         self.versionNumberLabel.textColor = .black
         self.darkModeLabel.textColor = .black
@@ -142,10 +140,6 @@ class SettingsTableViewController: UITableViewController {
 
     }
 
-    @IBAction func doneAction(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -156,9 +150,16 @@ class SettingsTableViewController: UITableViewController {
         self.unselectSelectedRow()
         
         if indexPath.section == 1 && indexPath.row == 0 {
-            "https://github.com/rrbolton423/".openInBrowser()
+            SKStoreReviewController.requestReview()
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            "https://twitter.com/ro_smoove".openInBrowser()
+            let email = "bolton.romell423@gmail.com"
+            if let url = URL(string: "mailto:\(email)") {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
         }
     }
 }

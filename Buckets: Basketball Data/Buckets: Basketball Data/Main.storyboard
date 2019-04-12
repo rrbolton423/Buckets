@@ -1356,7 +1356,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Report issue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZnF-7M-MNe">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Rate App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZnF-7M-MNe">
                                                     <rect key="frame" x="20" y="0.0" width="356" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1366,22 +1366,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="z0R-2M-91a" detailTextLabel="A3a-93-isg" style="IBUITableViewCellStyleValue1" id="2Dq-Mc-ExZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Gqe-g3-Cbj" style="IBUITableViewCellStyleDefault" id="Xup-tC-TKb">
                                         <rect key="frame" x="0.0" y="199.33333333333334" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Dq-Mc-ExZ" id="Mqm-2F-dFj">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xup-tC-TKb" id="Llk-LJ-mm2">
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Follow me on Twitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z0R-2M-91a">
-                                                    <rect key="frame" x="20" y="11.999999999999998" width="158" height="20.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="@ro_smoove" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A3a-93-isg">
-                                                    <rect key="frame" x="278.66666666666669" y="11.999999999999998" width="97.333333333333329" height="20.333333333333332"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gqe-g3-Cbj">
+                                                    <rect key="frame" x="20" y="0.0" width="356" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1424,14 +1417,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="LX5-mX-vbe"/>
                     <connections>
+                        <outlet property="contactUsCell" destination="Xup-tC-TKb" id="o5Q-d6-6Z6"/>
+                        <outlet property="contactUsLabel" destination="Gqe-g3-Cbj" id="OwO-ll-9rp"/>
                         <outlet property="darkModeCell" destination="bcl-LK-pow" id="I78-Qo-PfL"/>
                         <outlet property="darkModeLabel" destination="hdY-W3-uyN" id="vv5-wm-GtF"/>
                         <outlet property="darkModeSwitchOutlet" destination="zaf-Su-85Q" id="VvY-xx-x5M"/>
-                        <outlet property="followMeLabel" destination="z0R-2M-91a" id="azm-Uw-GBK"/>
-                        <outlet property="reportIssueCell" destination="DAb-eo-xTU" id="6rn-VG-n3T"/>
-                        <outlet property="reportIssueLabel" destination="ZnF-7M-MNe" id="Yji-2n-lJR"/>
-                        <outlet property="twitterCell" destination="2Dq-Mc-ExZ" id="GAS-tb-LVj"/>
-                        <outlet property="twitterHandleLabel" destination="A3a-93-isg" id="SxN-Xf-D5H"/>
+                        <outlet property="rateAppCell" destination="DAb-eo-xTU" id="1f7-Tt-FCW"/>
+                        <outlet property="rateAppLabel" destination="ZnF-7M-MNe" id="WPq-Yn-iBI"/>
                         <outlet property="versionCell" destination="Zoh-us-Sct" id="q5j-CE-lIQ"/>
                         <outlet property="versionLabel" destination="Eab-JN-SEZ" id="Nve-kH-aAu"/>
                         <outlet property="versionNumberLabel" destination="9WH-iR-s91" id="OaT-k4-Dt8"/>
