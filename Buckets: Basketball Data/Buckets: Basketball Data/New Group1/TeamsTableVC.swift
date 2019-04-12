@@ -522,13 +522,18 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func deleteAllData() {
+        print(self.store.favoriteTeams.count)
+        if self.store.favoriteTeams.count != 0 {
             self.store.favoriteTeams.removeAll()
             tableView.reloadData()
-        //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
-        //5 - archive root object saves our array of shopping items (our data) to our filepath url
-        NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
-        getAllFavoritesDeletedAction()
-        
+            //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
+            //5 - archive root object saves our array of shopping items (our data) to our filepath url
+            NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
+            getAllFavoritesDeletedAction()
+        } else {
+            allFavoritesAlreadyDeletedAction()
+            return
+        }
     }
     
     private func loadData() {
