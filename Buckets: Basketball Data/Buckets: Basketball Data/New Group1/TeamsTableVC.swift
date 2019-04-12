@@ -205,7 +205,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 print(error)
             }
         }
-        return resultArray
+        return resultArray.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
     }
     
     func setupActivityIndicator() {
