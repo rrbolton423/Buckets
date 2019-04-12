@@ -79,13 +79,7 @@
                             <outlet property="delegate" destination="SE3-CR-oHf" id="lf1-eS-f5X"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Teams" id="8YK-3a-nhE">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="njX-UJ-1S7">
-                            <connections>
-                                <segue destination="hTl-pr-MMX" kind="show" id="bHD-7N-mOZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Teams" id="8YK-3a-nhE"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1TU-o0-y1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -893,13 +887,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N3T-4W-yxr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Standings" id="FPj-Ui-gzk">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="BLt-UH-N0y">
-                            <connections>
-                                <segue destination="hTl-pr-MMX" kind="show" id="3K6-k7-nhU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Standings" id="FPj-Ui-gzk"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="x0n-sV-lhk" id="NRU-Wd-ofx"/>
@@ -1072,13 +1060,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3En-WZ-TMq"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Buckets" id="Gyy-y7-stM">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="oWi-eI-WeV">
-                            <connections>
-                                <segue destination="hTl-pr-MMX" kind="show" id="L2D-LF-6gx"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Buckets" id="Gyy-y7-stM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="noGames" destination="GAM-3v-PdS" id="wcQ-rA-d2q"/>
@@ -1145,6 +1127,7 @@
                         <segue destination="g0M-fh-the" kind="relationship" relationship="viewControllers" id="x8t-aM-b9T"/>
                         <segue destination="t4F-w5-mPi" kind="relationship" relationship="viewControllers" id="bol-7E-r8h"/>
                         <segue destination="RP4-TX-3QM" kind="relationship" relationship="viewControllers" id="jVU-SD-SGF"/>
+                        <segue destination="uaJ-Ub-Rnn" kind="relationship" relationship="viewControllers" id="6gl-Cz-LFc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1FV-s8-IcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1284,13 +1267,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vd2-dE-BsV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Quiz" id="xT5-PQ-502">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings_Icon" id="Xw3-zg-Dy8">
-                            <connections>
-                                <segue destination="hTl-pr-MMX" kind="show" id="RXh-t0-ICd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Quiz" id="xT5-PQ-502"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="feedbackField" destination="6Pt-jE-sdr" id="1fB-bK-mbt"/>
@@ -1328,9 +1305,9 @@
         <!--Settings-->
         <scene sceneID="kIF-n3-Rtb">
             <objects>
-                <tableViewController id="hTl-pr-MMX" customClass="SettingsTableViewController" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Settings" id="hTl-pr-MMX" customClass="SettingsTableViewController" customModule="Buckets__Basketball_Data" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zcw-bi-wq5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="571"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1445,13 +1422,7 @@
                             <outlet property="delegate" destination="hTl-pr-MMX" id="Rrr-Qq-ohZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="LX5-mX-vbe">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="99I-ki-4uS">
-                            <connections>
-                                <action selector="doneAction:" destination="hTl-pr-MMX" id="ocB-lH-uN4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="LX5-mX-vbe"/>
                     <connections>
                         <outlet property="darkModeCell" destination="bcl-LK-pow" id="I78-Qo-PfL"/>
                         <outlet property="darkModeLabel" destination="hdY-W3-uyN" id="vv5-wm-GtF"/>
@@ -1468,7 +1439,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6u-bu-1GS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5903" y="-1788"/>
+            <point key="canvasLocation" x="6812" y="-1715"/>
         </scene>
         <!--Gamecast-->
         <scene sceneID="la8-Yi-D2I">
@@ -1525,17 +1496,33 @@
             </objects>
             <point key="canvasLocation" x="7750.7246376811599" y="-946.46739130434787"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="vdv-wj-Kjt">
+            <objects>
+                <navigationController title="Settings" automaticallyAdjustsScrollViewInsets="NO" id="uaJ-Ub-Rnn" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="yHq-ha-tKk"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="qXy-Ez-rOP">
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hTl-pr-MMX" kind="relationship" relationship="rootViewController" id="OuP-q4-0SW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VPi-zm-rcs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5903" y="-1715"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Settings_Icon" width="25" height="25"/>
         <image name="games" width="25" height="25"/>
         <image name="nba_logo" width="800" height="1777.3333740234375"/>
         <image name="placeholder" width="266.66665649414062" height="200"/>
         <image name="quiz" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
         <image name="standings" width="25" height="25"/>
         <image name="teams" width="25" height="25"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="L2D-LF-6gx"/>
-    </inferredMetricsTieBreakers>
 </document>

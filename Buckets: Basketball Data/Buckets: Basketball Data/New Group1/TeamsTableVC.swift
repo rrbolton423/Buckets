@@ -41,7 +41,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateToDarkTheme(){
-        self.searchController.searchBar.barStyle = .blackOpaque
+        self.searchController.searchBar.setTextColor(color: .white)
         self.tableView.indicatorStyle = .white
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = .black
@@ -52,8 +52,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateToLightTheme() {
-        self.searchController.searchBar.barStyle = .default
-        self.tableView.indicatorStyle = .default;
+        self.searchController.searchBar.setTextColor(color: .black)
+        self.tableView.indicatorStyle = .default
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
@@ -64,23 +64,27 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("Before \(filteredTeamList?.count)")
         loadData()
         start()
         defaultsChanged()
+        if (self.isFavoriteSelected == false) {
+            self.title = "All Teams"
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
+        } else {
+            self.title = "Favorite Teams"
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
+        }
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
-        
-//        if let loadedCart = UserDefaults.standard.array(forKey: "favorites") as? [[String: Any]] {
-//            print(loadedCart)  // [[price: 19.99, qty: 1, name: A], [price: 4.99, qty: 2, name: B]]"
-//        }
+        print("After \(filteredTeamList?.count)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,7 +131,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            
             if isFavoriteSelected == false {
                 filteredTeamList = unfilteredTeamList?.filter { team in
                     return (team.name?.lowercased().contains(searchText.lowercased()))!
@@ -137,32 +140,19 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                     return (team.name?.lowercased().contains(searchText.lowercased()))!
                     })!
             }
-            
         } else {
-            
+//            filteredTeamList = unfilteredTeamList
+//            self.store.favoriteTeams = unfilteredFavoritesTeamList!
+
             if isFavoriteSelected == false {
                 filteredTeamList = unfilteredTeamList
             } else {
-                self.store.favoriteTeams = unfilteredFavoritesTeamList ?? []
+                self.store.favoriteTeams = unfilteredFavoritesTeamList!
             }
-            
         }
+        
+        
         tableView.reloadData()
-//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-//
-//            switch(isFavoriteSelected) {
-//            case false:
-//                filteredTeamList = unfilteredTeamList?.filter { team in
-//                    return (team.name?.lowercased().contains(searchText.lowercased()))!
-//                }
-//            case true:
-//                self.unfilteredFavoritesTeamList = unfilteredFavoritesTeamList?.filter { team in
-//                    return (team.name?.lowercased().contains(searchText.lowercased()))!
-//                }
-//
-//            }
-//        }
-//        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -225,23 +215,20 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var returnValue = 0
         switch(isFavoriteSelected)
         {
         case false:
-            print(filteredTeamList)
             returnValue = filteredTeamList?.count ?? 0
+            print(filteredTeamList?.count)
             break
+            
         case true:
             returnValue = self.store.favoriteTeams.count
-            break
-        default:
+            print(self.store.favoriteTeams.count)
             break
         }
         return returnValue
-        
-        //return filteredTeamList?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -303,6 +290,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             print("Delete: \(teamToDelete!)")
             favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
                 self.saveData(item: self.teamToFavorite!)
+                tableView.reloadData()
                 self.getFavoriteAction()
             }
             favorite.backgroundColor = .orange
@@ -319,16 +307,17 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             teamToDelete = self.store.favoriteTeams[row]
             favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
                 self.saveData(item: self.teamToFavorite!)
+                tableView.reloadData()
                 self.getFavoriteAction()
             }
             favorite.backgroundColor = .orange
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
                 self.deleteData(item: self.teamToDelete!)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.reloadData()
                 self.getDeleteAction()
             }
             delete.backgroundColor = .red
-            
             break
         }
         return [delete, favorite]
@@ -336,13 +325,19 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     @objc func showFavorites() {
         if (self.isFavoriteSelected == true) {
+            loadData()
+            start()
+            defaultsChanged()
             self.title = "All Teams"
             self.isFavoriteSelected = !isFavoriteSelected
-            navigationItem.leftBarButtonItem?.image = UIImage(named: "star_Icon")
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
+            loadData()
+            start()
+            defaultsChanged()
             self.title = "Favorite Teams"
             self.isFavoriteSelected = !isFavoriteSelected
-            navigationItem.leftBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
         print(isFavoriteSelected)
         tableView.reloadData()
@@ -350,7 +345,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func setupFavoriteBarButtonItem() {
         let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showFavorites))
-        navigationItem.leftBarButtonItem = favoriteItem
+        navigationItem.rightBarButtonItem = favoriteItem
     }
     
     @objc func getFavoriteAction() {
