@@ -66,6 +66,7 @@ class PlayerDetailVC: UIViewController {
     }
     
     func updateToDarkTheme(){
+        navigationController?.navigationBar.barStyle = .black
         self.playerDetailScrollView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
@@ -75,6 +76,7 @@ class PlayerDetailVC: UIViewController {
     }
     
     func updateToLightTheme() {
+        navigationController?.navigationBar.barStyle = .default
         self.playerDetailScrollView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]

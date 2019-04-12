@@ -26,7 +26,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var use_real_images: String?
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var refreshController = UIRefreshControl()
-
     
     @objc func defaultsChanged(){
         var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
@@ -43,11 +42,12 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             //isDarkMode = false
             print(isDarkMode)
             tableView.reloadData()
-
+            
         }
     }
     
     func updateToDarkTheme(){
+        navigationController?.navigationBar.barStyle = .black
         self.noGames.textColor = .white
         self.tableView.indicatorStyle = .white;
         self.view.backgroundColor = UIColor.black
@@ -59,6 +59,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func updateToLightTheme() {
+        navigationController?.navigationBar.barStyle = .default
         self.noGames.textColor = .black
         self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
@@ -96,8 +97,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshController)
         refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
-//        setupSettingsBarButtonItem()
-//        setupInfoBarButtonItem()
+        //        setupSettingsBarButtonItem()
+        //        setupInfoBarButtonItem()
         if CheckInternet.connection() {
             loadGamesWithActivityIndicator()
         } else {
@@ -121,7 +122,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshController)
         refreshController.addTarget(self,  action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
-//        setupInfoBarButtonItem()
+        //        setupInfoBarButtonItem()
         if CheckInternet.connection() {
             loadGamesWithRefreshController()
         } else {
@@ -323,7 +324,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         return [tweet]
     }
     
-   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         FirebaseConstants().setupAPP()
         self.use_real_images = FirebaseConstants().getImages()
