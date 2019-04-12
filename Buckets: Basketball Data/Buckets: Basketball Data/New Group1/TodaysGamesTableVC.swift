@@ -162,7 +162,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
             self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
-                if returnedGames.count > 0 {
+                if returnedGames[0].count > 0 || returnedGames[1].count > 0 {
                     self.allGames = returnedGames
                     self.yesterdaysGames = returnedGames[1]
                     self.todaysGames = returnedGames[0]
@@ -205,7 +205,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
             self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
-                if returnedGames.count > 0 {
+                if returnedGames[0].count > 0 || returnedGames[1].count > 0 {
                     self.allGames = returnedGames
                     self.yesterdaysGames = returnedGames[1]
                     self.todaysGames = returnedGames[0]

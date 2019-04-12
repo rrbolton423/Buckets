@@ -15,6 +15,7 @@ class GameAPI {
         var yesterdaysGamesArray = [Game]()
         var todaysGamesArray = [Game]()
         let yesterdaysUrl = URL(string: String(format: url, yesterdaysDate))
+        print(yesterdaysUrl!)
         guard let unwrappedYesterdaysUrl = yesterdaysUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedYesterdaysUrl)
@@ -43,9 +44,10 @@ class GameAPI {
                 }
         } catch {
             print(error)
-            completion([])
+            //completion([])
         }
         let todaysUrl = URL(string: String(format: url, todaysDate))
+        print(todaysUrl!)
         guard let unwrappedTodaysUrl = todaysUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedTodaysUrl)
@@ -70,16 +72,22 @@ class GameAPI {
                 let game = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
                 todaysGamesArray.append(game)
             }
-            resultArray = [todaysGamesArray, yesterdaysGamesArray]
-            completion(resultArray)
+            
         } catch {
             print(error)
-            if yesterdaysGamesArray.count > 0 {
-                completion([[], yesterdaysGamesArray])
-            } else {
-                completion([])
-            }
+//            if yesterdaysGamesArray.count > 0 {
+//                completion([[], yesterdaysGamesArray])
+//            } else {
+//                completion([])
+//            }
         }
+        
+        resultArray = [todaysGamesArray, yesterdaysGamesArray]
+        print("***********************************************************")
+        print(resultArray)
+        print("***********************************************************")
+        completion(resultArray)
+        
     }
     func getTodaysDate() -> String {
         let date = Date()
