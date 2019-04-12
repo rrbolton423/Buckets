@@ -136,7 +136,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func updateSearchResults(for searchController: UISearchController) {
         loadData()
-        start()
+        //start()
         defaultsChanged()
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
             if isFavoriteSelected == false {
@@ -330,9 +330,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             }
             favorite.backgroundColor = .orange
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-                self.deleteData(item: self.teamToDelete!)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-//                tableView.reloadData()
+                self.deleteData(item: self.store.favoriteTeams[indexPath.row])
+                tableView.reloadData()
                 self.getDeleteAction()
             }
             delete.backgroundColor = .red
@@ -518,10 +517,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 let results = self.store.favoriteTeams.filter { $0.name == item.name }
                 let exists = results.isEmpty == false
                 
+                
                 if exists == true {
                     let itemName = item.name!
                     if let index = self.store.favoriteTeams.firstIndex(where: {$0.name == itemName}) {
+                        //print(self.store.favoriteTeams.remove(at: index))
+                        print("INDEX IS \(index)")
                         self.store.favoriteTeams.remove(at: index)
+                        tableView.reloadData()
                     }
                 }
             }
