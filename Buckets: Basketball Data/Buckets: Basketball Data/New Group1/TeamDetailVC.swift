@@ -89,7 +89,7 @@ class TeamDetailVC: UIViewController {
     func checkIfTeamIsFavorite() {
         
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
@@ -421,7 +421,7 @@ class TeamDetailVC: UIViewController {
     
     func saveData(item: StaticTeam) {
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
@@ -442,7 +442,7 @@ class TeamDetailVC: UIViewController {
     
     func deleteData(item: StaticTeam) {
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
@@ -453,7 +453,7 @@ class TeamDetailVC: UIViewController {
             return
         } else {
             if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-                self.store.favoriteTeams = ourData
+                self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
                 print(ourData)
             }
             let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
@@ -491,7 +491,7 @@ class TeamDetailVC: UIViewController {
     private func loadData() {
         //6 - if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of ShoppingItems
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
         }
     }
 }

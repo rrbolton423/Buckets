@@ -470,7 +470,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func saveData(item: StaticTeam) {
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == teamToFavorite?.name }
@@ -491,7 +491,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func deleteData(item: StaticTeam) {
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == teamToDelete?.name }
@@ -502,7 +502,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             return
         } else {
             if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-                self.store.favoriteTeams = ourData
+                self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
                 print(ourData)
             }
             let results = self.store.favoriteTeams.filter { $0.name == teamToDelete?.name }
@@ -511,7 +511,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             if exists == true {
                 print(item.name)
                 if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-                    self.store.favoriteTeams = ourData
+                    self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
                     print(ourData)
                 }
                 let results = self.store.favoriteTeams.filter { $0.name == item.name }
@@ -553,7 +553,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     private func loadData() {
         //6 - if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of ShoppingItems
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
-            self.store.favoriteTeams = ourData
+            self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             self.unfilteredFavoritesTeamList = self.store.favoriteTeams
         }
     }
