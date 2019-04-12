@@ -132,6 +132,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        loadData()
+        start()
+        defaultsChanged()
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
             if isFavoriteSelected == false {
                 filteredTeamList = unfilteredTeamList?.filter { team in
@@ -292,13 +295,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             print("Delete: \(teamToDelete!)")
             favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
                 self.saveData(item: self.teamToFavorite!)
-                tableView.reloadData()
+//                tableView.reloadData()
                 self.getFavoriteAction()
             }
             favorite.backgroundColor = .orange
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
                 print(self.unfilteredFavoritesTeamList ?? "Empty")
                 self.deleteData(item: self.teamToDelete!)
+//                tableView.reloadData()
                 self.getDeleteAction()
             }
             delete.backgroundColor = .red
@@ -309,14 +313,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             teamToDelete = self.store.favoriteTeams[row]
             favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
                 self.saveData(item: self.teamToFavorite!)
-                tableView.reloadData()
+//                tableView.reloadData()
                 self.getFavoriteAction()
             }
             favorite.backgroundColor = .orange
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
                 self.deleteData(item: self.teamToDelete!)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                tableView.reloadData()
+//                tableView.reloadData()
                 self.getDeleteAction()
             }
             delete.backgroundColor = .red
