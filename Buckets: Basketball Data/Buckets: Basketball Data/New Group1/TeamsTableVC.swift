@@ -66,13 +66,15 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
+        start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("Before \(filteredTeamList?.count)")
-        loadData()
-        start()
+//        loadData()
+//        start()
         defaultsChanged()
         if (self.isFavoriteSelected == false) {
             self.title = "All Teams"
@@ -147,8 +149,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                     })!
             }
         } else {
-//            filteredTeamList = unfilteredTeamList
-//            self.store.favoriteTeams = unfilteredFavoritesTeamList!
 
             if isFavoriteSelected == false {
                 filteredTeamList = unfilteredTeamList
@@ -226,12 +226,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         switch(isFavoriteSelected)
         {
         case false:
-            
-            if filteredTeamList?.count == 0 {
-                self.tableView.setEmptyMessage("No favorite teams selected")
-            } else {
-                self.tableView.restore()
-            }
+    
+            self.tableView.restore()
             returnValue = filteredTeamList?.count ?? 0
             print(filteredTeamList?.count)
             break
@@ -239,8 +235,10 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         case true:
             
             if self.store.favoriteTeams.count == 0 {
-                self.tableView.setEmptyMessage("No favorite teams selected")
+//                self.searchController.searchBar.isUserInteractionEnabled = false
+                self.tableView.setEmptyMessage("No favorite teams found")
             } else {
+//                self.searchController.searchBar.isUserInteractionEnabled = true
                 self.tableView.restore()
             }
             returnValue = self.store.favoriteTeams.count ?? 0

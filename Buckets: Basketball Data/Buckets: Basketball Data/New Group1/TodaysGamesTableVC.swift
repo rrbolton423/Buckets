@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 
 class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -77,7 +76,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
         }
-        requestAppStoreReview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -556,15 +554,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.refreshController.endRefreshing()
         }))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    func requestAppStoreReview() {
-        if appLaunches == 5 || appLaunches == 25 || appLaunches == 50 {
-            SKStoreReviewController.requestReview()
-            var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
-            appLaunches += 1
-            UserDefaults.standard.set(appLaunches, forKey: "appLaunches")
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
