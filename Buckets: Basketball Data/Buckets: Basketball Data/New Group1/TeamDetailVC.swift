@@ -85,7 +85,17 @@ class TeamDetailVC: UIViewController {
     }
     
     func checkIfTeamIsFavorite() {
-        if self.store.favoriteTeams.contains(staticTeam!) {
+        
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
+            self.store.favoriteTeams = ourData
+            print(ourData)
+        }
+        let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
+        let exists = results.isEmpty == false
+        print(exists)
+        
+        
+        if exists == true {
             print("is a favorite")
             self.isFavoriteSelected = true
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
@@ -98,6 +108,7 @@ class TeamDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        start()
         checkIfTeamIsFavorite()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
@@ -112,7 +123,6 @@ class TeamDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
     }
     
     func firebaseSetup() {
@@ -407,8 +417,15 @@ class TeamDetailVC: UIViewController {
         return (url!.appendingPathComponent("Data").path)
     }
     
-    private func saveData(item: StaticTeam) {
-        if self.store.favoriteTeams.contains(item) {
+    func saveData(item: StaticTeam) {
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
+            self.store.favoriteTeams = ourData
+            print(ourData)
+        }
+        let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
+        let exists = results.isEmpty == false
+        print(exists)
+        if exists == true {
             favoriteAlreadyAddedAction()
             return
         } else {
@@ -421,18 +438,32 @@ class TeamDetailVC: UIViewController {
         }
     }
     
-    private func deleteData(item: StaticTeam) {
-        if !self.store.favoriteTeams.contains(item) {
+    func deleteData(item: StaticTeam) {
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
+            self.store.favoriteTeams = ourData
+            print(ourData)
+        }
+        let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
+        let exists = results.isEmpty == false
+        print(exists)
+        if exists == false {
             favoriteAlreadyDeletedAction()
             return
         } else {
-        if self.store.favoriteTeams.contains(item) {
-            if let firstIndex = self.store.favoriteTeams.firstIndex(of: item) {
-                self.store.favoriteTeams.remove(at: firstIndex)
+            if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
+                self.store.favoriteTeams = ourData
+                print(ourData)
             }
+            let results = self.store.favoriteTeams.filter { $0.name == staticTeam?.name }
+            let exists = results.isEmpty == false
+            
+            if exists == true {
+                let itemName = item.name!
+                if let index = self.store.favoriteTeams.firstIndex(where: {$0.name == itemName}) {
+                    self.store.favoriteTeams.remove(at: index)
+                }
             }
         }
-        
         //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
         //5 - archive root object saves our array of shopping items (our data) to our filepath url
         NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
