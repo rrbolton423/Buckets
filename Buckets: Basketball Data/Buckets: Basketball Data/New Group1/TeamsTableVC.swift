@@ -105,6 +105,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     @objc func start() {
         setupFavoriteBarButtonItem()
+        //setupTrashBarButtonItem()
         setupSearchController()
         loadTeams()
     }
@@ -329,8 +330,25 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         return [delete, favorite]
     }
     
+    @objc func deleteAllFavorites() {
+        if (self.isFavoriteSelected == true) {
+            deleteAllData()
+            loadData()
+            start()
+            defaultsChanged()
+            self.title = "Favorite Teams"
+            //self.isFavoriteSelected = !isFavoriteSelected
+            //navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
+        }
+        print(isFavoriteSelected)
+        self.store.favoriteTeams.removeAll()
+        tableView.reloadData()
+    }
+    
     @objc func showFavorites() {
         if (self.isFavoriteSelected == true) {
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.leftBarButtonItem?.isEnabled = false
             loadData()
             start()
             defaultsChanged()
@@ -338,6 +356,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             self.isFavoriteSelected = !isFavoriteSelected
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
+            setupTrashBarButtonItem()
             loadData()
             start()
             defaultsChanged()
@@ -352,6 +371,12 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     func setupFavoriteBarButtonItem() {
         let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showFavorites))
         navigationItem.rightBarButtonItem = favoriteItem
+    }
+    
+    func setupTrashBarButtonItem() {
+        let trashItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllData))
+        navigationItem.leftBarButtonItem = trashItem
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     @objc func getFavoriteAction() {
@@ -411,6 +436,22 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     @objc func favoriteAlreadyDeletedAction() {
         let alert = UIAlertController(title: nil, message: "The \(teamToDelete?.name ?? "") is not a favorite.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func allFavoritesAlreadyDeletedAction() {
+        let alert = UIAlertController(title: nil, message: "You have no favorites to delete.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func getAllFavoritesDeletedAction() {
+        let alert = UIAlertController(title: nil, message: "All favorites have been deleted!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -478,6 +519,16 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         //5 - archive root object saves our array of shopping items (our data) to our filepath url
         NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
         getDeleteAction()
+    }
+    
+    @objc func deleteAllData() {
+            self.store.favoriteTeams.removeAll()
+            tableView.reloadData()
+        //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
+        //5 - archive root object saves our array of shopping items (our data) to our filepath url
+        NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
+        getAllFavoritesDeletedAction()
+        
     }
     
     private func loadData() {
