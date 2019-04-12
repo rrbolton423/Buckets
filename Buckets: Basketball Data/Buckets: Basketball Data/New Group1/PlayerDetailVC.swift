@@ -96,11 +96,11 @@ class PlayerDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        start()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
