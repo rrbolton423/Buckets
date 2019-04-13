@@ -79,8 +79,10 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //        start()
         defaultsChanged()
         if (self.isFavoriteSelected == false) {
+            self.navigationItem.title = "All Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
+            self.navigationItem.title = "Favorite Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
         self.navigationController?.navigationBar.isTranslucent = false
@@ -363,6 +365,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             defaultsChanged()
             self.isFavoriteSelected = !isFavoriteSelected
             UserDefaults.standard.set(self.isFavoriteSelected, forKey: "isFavoriteSelected")
+            self.navigationItem.title = "All Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
             setupTrashBarButtonItem()
@@ -371,6 +374,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             defaultsChanged()
             self.isFavoriteSelected = !isFavoriteSelected
             UserDefaults.standard.set(self.isFavoriteSelected, forKey: "isFavoriteSelected")
+            self.navigationItem.title = "Favorite Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
         print(isFavoriteSelected)
