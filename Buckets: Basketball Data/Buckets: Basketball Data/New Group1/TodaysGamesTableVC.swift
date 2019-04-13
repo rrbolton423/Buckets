@@ -297,7 +297,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 var tweetText: String = String()
                 
-                if awayScore == "" && homeScore == "" {
+                if (awayScore == "" && homeScore == "") || (awayScore == "0" && homeScore == "0") {
                     print("game has not started yet")
                     tweetText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball App for more scores, stats and standings."
                 } else if gameQuarter == "Final" {
