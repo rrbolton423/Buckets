@@ -27,7 +27,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var refreshController = UIRefreshControl()
     
     @objc func defaultsChanged(){
-        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             //dark theme enabled
             updateToDarkTheme()
@@ -181,11 +181,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     DispatchQueue.main.async{
                         self.tableView.isHidden = true
                         self.noGames.isHidden = false
-                        if self.use_real_images == "false" {
-                            self.noGamesimage.image = UIImage(named: "placeholder.png")
-                        } else {
-                            self.noGamesimage.image = UIImage(named: "nba_logo.png")
-                        }
+                        self.noGamesimage.image = UIImage(named: "no_games.png")
                         self.noGamesimage.isHidden = false
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
@@ -224,11 +220,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     DispatchQueue.main.async{
                         self.tableView.isHidden = true
                         self.noGames.isHidden = false
-                        if self.use_real_images == "false" {
-                            self.noGamesimage.image = UIImage(named: "placeholder.png")
-                        } else {
-                            self.noGamesimage.image = UIImage(named: "nba_logo.png")
-                        }
+                        self.noGamesimage.image = UIImage(named: "tvstatic.png")
                         self.noGamesimage.isHidden = false
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
@@ -247,7 +239,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         
-        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             view.tintColor = hexStringToUIColor(hex: "#252525")
             let header = view as! UITableViewHeaderFooterView
@@ -316,7 +308,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                 let url = URL(string: escapedShareString)
                 
                 // open in safari
-                UIApplication.shared.openURL(url!)
+                //UIApplication.shared.openURL(url!)
+                if let url = URL(string: "\(url!)"), !url.absoluteString.isEmpty {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
             } else {
                 return
             }

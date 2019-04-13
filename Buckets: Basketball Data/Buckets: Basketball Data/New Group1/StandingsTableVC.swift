@@ -29,7 +29,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     
     @objc func defaultsChanged(){
-        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             //dark theme enabled
             updateToDarkTheme()
@@ -304,7 +304,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             let value: Float = (eastTeams[indexPath.row].winPercentage?.floatValue)!
             cell.winPercentageLabel.text = value.string(fractionDigits: 3)
             
-            var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+            let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
             if isDarkMode == true {
                 cell.standingLabel.textColor = .white
                 cell.gamesPlayedLabel.textColor = .white
@@ -409,7 +409,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             let value: Float = (westTeams[indexPath.row].winPercentage?.floatValue)!
             cell.winPercentageLabel.text = value.string(fractionDigits: 3)
             
-            var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+            let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
             if isDarkMode == true {
                 cell.standingLabel.textColor = .white
                 cell.gamesPlayedLabel.textColor = .white

@@ -83,7 +83,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     }
     
     @objc func defaultsChanged(){
-        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             //dark theme enabled
             updateToDarkTheme()

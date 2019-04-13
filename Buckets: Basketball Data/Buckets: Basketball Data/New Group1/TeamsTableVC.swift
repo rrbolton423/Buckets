@@ -24,7 +24,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     var store = DataStore.sharedInstance
     
     @objc func defaultsChanged(){
-        var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             //dark theme enabled
             updateToDarkTheme()
@@ -74,7 +74,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("Before \(filteredTeamList?.count)")
+//        print("Before \(filteredTeamList?.count)")
 //        loadData()
 //        start()
         defaultsChanged()
@@ -88,7 +88,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
-        print("After \(filteredTeamList?.count)")
+//        print("After \(filteredTeamList?.count)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -229,7 +229,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
             self.tableView.restore()
             returnValue = filteredTeamList?.count ?? 0
-            print(filteredTeamList?.count)
+//            print(filteredTeamList?.count)
             break
             
         case true:
@@ -241,7 +241,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //                self.searchController.searchBar.isUserInteractionEnabled = true
                 self.tableView.restore()
             }
-            returnValue = self.store.favoriteTeams.count ?? 0
+            returnValue = self.store.favoriteTeams.count 
             print(self.store.favoriteTeams.count)
             break
         }
@@ -436,7 +436,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         let manager = FileManager.default
         //2 - this returns an array of urls from our documentDirectory and we take the first path
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-        print("this is the url path in the documentDirectory \(url)")
+//        print("this is the url path in the documentDirectory \(url)")
         //3 - creates a new path component and creates a new file called "Data" which is where we will store our Data array.
         return (url!.appendingPathComponent("Data").path)
     }
@@ -506,7 +506,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             let exists = results.isEmpty == false
             
             if exists == true {
-                print(item.name)
+//                print(item.name)
                 if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
                     self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
                     print(ourData)
