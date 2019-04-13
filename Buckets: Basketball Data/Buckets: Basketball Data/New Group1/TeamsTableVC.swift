@@ -20,7 +20,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     let searchController = UISearchController(searchResultsController: nil)
     var teamToFavorite: StaticTeam?
     var teamToDelete: StaticTeam?
-    var isFavoriteSelected: Bool = false
+    var isFavoriteSelected: Bool = UserDefaults.standard.bool(forKey: "isFavoriteSelected")
     var store = DataStore.sharedInstance
     
     @objc func defaultsChanged(){
@@ -362,6 +362,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             start()
             defaultsChanged()
             self.isFavoriteSelected = !isFavoriteSelected
+            UserDefaults.standard.set(self.isFavoriteSelected, forKey: "isFavoriteSelected")
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon")
         } else {
             setupTrashBarButtonItem()
@@ -369,6 +370,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             start()
             defaultsChanged()
             self.isFavoriteSelected = !isFavoriteSelected
+            UserDefaults.standard.set(self.isFavoriteSelected, forKey: "isFavoriteSelected")
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
         print(isFavoriteSelected)
