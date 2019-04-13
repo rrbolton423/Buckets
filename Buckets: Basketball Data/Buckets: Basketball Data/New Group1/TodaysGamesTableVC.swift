@@ -293,9 +293,19 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
-            if let awayTeam = gameToTweet?.awayTeamName, let homeTeam = gameToTweet?.homeTeamName, let awayScore = gameToTweet?.awayTeamScore, let homeScore = gameToTweet?.homeTeamScore, let gameQuarter = gameToTweet?.quarter {
+            if let awayTeam = gameToTweet?.awayTeamName, let homeTeam = gameToTweet?.homeTeamName, let awayScore = gameToTweet?.awayTeamScore, let homeScore = gameToTweet?.homeTeamScore, let gameQuarter = gameToTweet?.quarter, let gameVenue = gameToTweet?.arena {
                 
-                let tweetText = "The score between \(awayTeam) vs. \(homeTeam) is \(awayScore) - \(homeScore) in the \(gameQuarter) quarter! Download the Buckets: Basketball App for more scores, stats and standings."
+                var tweetText: String = String()
+                
+                if awayScore == "" && homeScore == "" {
+                    print("game has not started yet")
+                    tweetText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball App for more scores, stats and standings."
+                } else if gameQuarter == "Final" {
+                    print("game has ended")
+                    tweetText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball App for more scores, stats and standings."
+                } else {
+                    tweetText = "The score of \(awayTeam) vs. \(homeTeam) is \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) in the \(gameQuarter) quarter! Download the Buckets: Basketball App for more scores, stats and standings."
+                }
                 
                 let tweetUrl = "https://www.apple.com/ios/app-store/"
                 

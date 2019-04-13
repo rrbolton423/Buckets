@@ -14,7 +14,7 @@ class GameAPI {
         var resultArray = [[Game]]()
         var yesterdaysGamesArray = [Game]()
         var todaysGamesArray = [Game]()
-        let yesterdaysUrl = URL(string: String(format: url, yesterdaysDate))
+        let yesterdaysUrl = URL(string: String(format: url, "20190301"))
         print(yesterdaysUrl!)
         guard let unwrappedYesterdaysUrl = yesterdaysUrl else { return }
         do {
