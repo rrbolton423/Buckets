@@ -310,14 +310,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //                tableView.reloadData()
                 self.getFavoriteAction()
             }
-            favorite.backgroundColor = .orange
+            favorite.backgroundColor = hexStringToUIColor(hex: "#5A5ED0")
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
                 print(self.unfilteredFavoritesTeamList ?? "Empty")
                 self.deleteData(item: self.teamToDelete!)
 //                tableView.reloadData()
                 self.getDeleteAction()
             }
-            delete.backgroundColor = .red
+            delete.backgroundColor = hexStringToUIColor(hex: "#FC3D39")
             break
             
         case true:
@@ -328,13 +328,13 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //                tableView.reloadData()
                 self.getFavoriteAction()
             }
-            favorite.backgroundColor = .orange
+            favorite.backgroundColor = hexStringToUIColor(hex: "#5A5ED0")
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
                 self.deleteData(item: self.store.favoriteTeams[indexPath.row])
                 tableView.reloadData()
                 self.getDeleteAction()
             }
-            delete.backgroundColor = .red
+            delete.backgroundColor = hexStringToUIColor(hex: "#FC3D39")
             break
         }
         return [delete, favorite]
@@ -403,7 +403,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func favoriteAlreadyAddedAction() {
-        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") is a favorite", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(teamToFavorite?.name ?? "") are a favorite", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -442,7 +442,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func favoriteAlreadyDeletedAction() {
-        let alert = UIAlertController(title: nil, message: "The \(teamToDelete?.name ?? "") is not a favorite", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "The \(teamToDelete?.name ?? "") are not a favorite", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
@@ -458,7 +458,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     @objc func getAllFavoritesDeletedAction() {
-        let alert = UIAlertController(title: nil, message: "All favorites have been deleted", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "Your favorites have been deleted", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
