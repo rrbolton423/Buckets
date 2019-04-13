@@ -313,33 +313,34 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 self.getFavoriteAction()
             }
             favorite.backgroundColor = hexStringToUIColor(hex: "#5A5ED0")
-            delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-                print(self.unfilteredFavoritesTeamList ?? "Empty")
-                self.deleteData(item: self.teamToDelete!)
-//                tableView.reloadData()
-                self.getDeleteAction()
-            }
-            delete.backgroundColor = hexStringToUIColor(hex: "#FC3D39")
-            break
+//            delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+//                print(self.unfilteredFavoritesTeamList ?? "Empty")
+//                self.deleteData(item: self.teamToDelete!)
+////                tableView.reloadData()
+//                self.getDeleteAction()
+//            }
+//            delete.backgroundColor = hexStringToUIColor(hex: "#FC3D39")
+            return [favorite]
             
         case true:
             teamToFavorite = self.store.favoriteTeams[row]
             teamToDelete = self.store.favoriteTeams[row]
-            favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
-                self.saveData(item: self.teamToFavorite!)
-//                tableView.reloadData()
-                self.getFavoriteAction()
-            }
-            favorite.backgroundColor = hexStringToUIColor(hex: "#5A5ED0")
+//            favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
+//                self.saveData(item: self.teamToFavorite!)
+////                tableView.reloadData()
+//                self.getFavoriteAction()
+//            }
+//            favorite.backgroundColor = hexStringToUIColor(hex: "#5A5ED0")
             delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
                 self.deleteData(item: self.store.favoriteTeams[indexPath.row])
                 tableView.reloadData()
                 self.getDeleteAction()
             }
             delete.backgroundColor = hexStringToUIColor(hex: "#FC3D39")
-            break
+            return [delete]
+            
         }
-        return [delete, favorite]
+        //return [delete, favorite]
     }
     
     @objc func deleteAllFavorites() {
