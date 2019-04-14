@@ -71,6 +71,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupSegmentedController()
         FirebaseConstants().setupAPP()
         self.use_real_images = FirebaseConstants().getImages()
         defaultsChanged()
@@ -80,7 +81,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSegmentedController()
         start()
     }
     
@@ -94,7 +94,13 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         segmentedController = UISegmentedControl(items: items)
         segmentedController.setWidth(80, forSegmentAt: 0)
         segmentedController.setWidth(80, forSegmentAt: 1)
-        segmentedController.selectedSegmentIndex = 0
+        if let value = UserDefaults.standard.value(forKey: "chosenConference"){
+            let selectedIndex = value as! Int
+            segmentedController.selectedSegmentIndex = selectedIndex
+        } else {
+            segmentedController.selectedSegmentIndex = 0
+            UserDefaults.standard.set(0, forKey: "chosenConference")
+        }
         segmentedController.addTarget(self, action: #selector(changeConference), for: .valueChanged)
         navigationItem.titleView = segmentedController
     }
@@ -194,6 +200,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     @objc func changeConference(sender: UISegmentedControl) {
+        UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: "chosenConference")
         FirebaseConstants().setupAPP()
         self.use_real_images = FirebaseConstants().getImages()
         start()
