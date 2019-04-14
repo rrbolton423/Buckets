@@ -77,6 +77,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //        print("Before \(filteredTeamList?.count)")
 //        loadData()
 //        start()
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
         defaultsChanged()
         if (self.isFavoriteSelected == false) {
             self.navigationItem.title = "All Teams"
@@ -261,11 +263,84 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         switch(isFavoriteSelected)
         {
         case false:
-            if let teamPic = filteredTeamList?[indexPath.row].picture {
-                cell?.teamLogoImageView.image = UIImage(named: teamPic)
+//            if let teamPic = filteredTeamList?[indexPath.row].picture {
+//                cell?.teamLogoImageView.image = UIImage(named: teamPic)
+//            } else {
+//                cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+//            }
+            
+            if self.use_real_images == "false" {
+                switch filteredTeamList?[indexPath.row].name {
+                case "Brooklyn Nets": cell?.teamLogoImageView.image = UIImage(named: "BKN_placeholder.png")
+                case "Atlanta Hawks": cell?.teamLogoImageView.image = UIImage(named: "ATL_placeholder.png")
+                case "Boston Celtics": cell?.teamLogoImageView.image = UIImage(named: "BOS_placeholder.png")
+                case "Charlotte Hornets": cell?.teamLogoImageView.image = UIImage(named: "CHA_placeholder.png")
+                case "Chicago Bulls": cell?.teamLogoImageView.image = UIImage(named: "CHI_placeholder.png")
+                case "Cleveland Cavaliers": cell?.teamLogoImageView.image = UIImage(named: "CLE_placeholder.png")
+                case "Dallas Mavericks": cell?.teamLogoImageView.image = UIImage(named: "DAL_placeholder.png")
+                case "Denver Nuggets": cell?.teamLogoImageView.image = UIImage(named: "DEN_placeholder.png")
+                case "Detroit Pistons": cell?.teamLogoImageView.image = UIImage(named: "DET_placeholder.png")
+                case "Golden State Warriors": cell?.teamLogoImageView.image = UIImage(named: "GSW_placeholder.png")
+                case "Houston Rockets": cell?.teamLogoImageView.image = UIImage(named: "HOU_placeholder.png")
+                case "Indiana Pacers": cell?.teamLogoImageView.image = UIImage(named: "IND_placeholder.png")
+                case "Los Angeles Clippers": cell?.teamLogoImageView.image = UIImage(named: "LAC_placeholder.png")
+                case "Los Angeles Lakers": cell?.teamLogoImageView.image = UIImage(named: "LAL_placeholder.png")
+                case "Memphis Grizzlies": cell?.teamLogoImageView.image = UIImage(named: "MEM_placeholder.png")
+                case "Miami Heat": cell?.teamLogoImageView.image = UIImage(named: "MIA_placeholder.png")
+                case "Milwaukee Bucks": cell?.teamLogoImageView.image = UIImage(named: "MIL_placeholder.png")
+                case "Minnesota Timberwolves": cell?.teamLogoImageView.image = UIImage(named: "MIN_placeholder.png")
+                case "New Orleans Pelicans": cell?.teamLogoImageView.image = UIImage(named: "NOP_placeholder.png")
+                case "New York Knicks": cell?.teamLogoImageView.image = UIImage(named: "NYK_placeholder.png")
+                case "Oklahoma City Thunder": cell?.teamLogoImageView.image = UIImage(named: "OKC_placeholder.png")
+                case "Orlando Magic": cell?.teamLogoImageView.image = UIImage(named: "ORL_placeholder.png")
+                case "Philadelphia 76ers": cell?.teamLogoImageView.image = UIImage(named: "PHI_placeholder.png")
+                case "Phoenix Suns": cell?.teamLogoImageView.image = UIImage(named: "PHX_placeholder.png")
+                case "Portland Trail Blazers": cell?.teamLogoImageView.image = UIImage(named: "POR_placeholder.png")
+                case "Sacramento Kings": cell?.teamLogoImageView.image = UIImage(named: "SAC_placeholder.png")
+                case "San Antonio Spurs": cell?.teamLogoImageView.image = UIImage(named: "SAS_placeholder.png")
+                case "Toronto Raptors": cell?.teamLogoImageView.image = UIImage(named: "TOR_placeholder.png")
+                case "Utah Jazz": cell?.teamLogoImageView.image = UIImage(named: "UTA_placeholder.png")
+                case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "WAS_placeholder.png")
+                default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                }
+                
             } else {
-                cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                switch filteredTeamList?[indexPath.row].name {
+            case "Brooklyn Nets": cell?.teamLogoImageView.image = UIImage(named: "bkn.png")
+            case "Atlanta Hawks": cell?.teamLogoImageView.image = UIImage(named: "atl.png")
+            case "Boston Celtics": cell?.teamLogoImageView.image = UIImage(named: "bos.png")
+            case "Charlotte Hornets": cell?.teamLogoImageView.image = UIImage(named: "cha.png")
+            case "Chicago Bulls": cell?.teamLogoImageView.image = UIImage(named: "chi.png")
+            case "Cleveland Cavaliers": cell?.teamLogoImageView.image = UIImage(named: "cle.png")
+            case "Dallas Mavericks": cell?.teamLogoImageView.image = UIImage(named: "dal.png")
+            case "Denver Nuggets": cell?.teamLogoImageView.image = UIImage(named: "den.png")
+            case "Detroit Pistons": cell?.teamLogoImageView.image = UIImage(named: "det.png")
+            case "Golden State Warriors": cell?.teamLogoImageView.image = UIImage(named: "gsw.png")
+            case "Houston Rockets": cell?.teamLogoImageView.image = UIImage(named: "hou.png")
+            case "Indiana Pacers": cell?.teamLogoImageView.image = UIImage(named: "ind.png")
+            case "Los Angeles Clippers": cell?.teamLogoImageView.image = UIImage(named: "lac.png")
+            case "Los Angeles Lakers": cell?.teamLogoImageView.image = UIImage(named: "lal.png")
+            case "Memphis Grizzlies": cell?.teamLogoImageView.image = UIImage(named: "mem.png")
+            case "Miami Heat": cell?.teamLogoImageView.image = UIImage(named: "mia.png")
+            case "Milwaukee Bucks": cell?.teamLogoImageView.image = UIImage(named: "mil.png")
+            case "Minnesota Timberwolves": cell?.teamLogoImageView.image = UIImage(named: "min.png")
+            case "New Orleans Pelicans": cell?.teamLogoImageView.image = UIImage(named: "nop.png")
+            case "New York Knicks": cell?.teamLogoImageView.image = UIImage(named: "nyk.png")
+            case "Oklahoma City Thunder": cell?.teamLogoImageView.image = UIImage(named: "okc.png")
+            case "Orlando Magic": cell?.teamLogoImageView.image = UIImage(named: "orl.png")
+            case "Philadelphia 76ers": cell?.teamLogoImageView.image = UIImage(named: "phi.png")
+            case "Phoenix Suns": cell?.teamLogoImageView.image = UIImage(named: "phx.png")
+            case "Portland Trail Blazers": cell?.teamLogoImageView.image = UIImage(named: "por.png")
+            case "Sacramento Kings": cell?.teamLogoImageView.image = UIImage(named: "sac.png")
+            case "San Antonio Spurs": cell?.teamLogoImageView.image = UIImage(named: "sas.png")
+            case "Toronto Raptors": cell?.teamLogoImageView.image = UIImage(named: "tor.png")
+            case "Utah Jazz": cell?.teamLogoImageView.image = UIImage(named: "uta.png")
+            case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "was.png")
+            default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                }
             }
+            
+            
             if let teamName = filteredTeamList?[indexPath.row].name {
                 cell?.teamNameLabel.text = teamName
             }
@@ -276,11 +351,84 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             }
             break
         case true:
-            if let teamPic = self.store.favoriteTeams[indexPath.row].picture {
-                cell?.teamLogoImageView.image = UIImage(named: teamPic)
+//            if let teamPic = self.store.favoriteTeams[indexPath.row].picture {
+//                cell?.teamLogoImageView.image = UIImage(named: teamPic)
+//            } else {
+//                cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+//            }
+            
+            if self.use_real_images == "false" {
+                switch self.store.favoriteTeams[indexPath.row].name {
+                case "Brooklyn Nets": cell?.teamLogoImageView.image = UIImage(named: "BKN_placeholder.png")
+                case "Atlanta Hawks": cell?.teamLogoImageView.image = UIImage(named: "ATL_placeholder.png")
+                case "Boston Celtics": cell?.teamLogoImageView.image = UIImage(named: "BOS_placeholder.png")
+                case "Charlotte Hornets": cell?.teamLogoImageView.image = UIImage(named: "CHA_placeholder.png")
+                case "Chicago Bulls": cell?.teamLogoImageView.image = UIImage(named: "CHI_placeholder.png")
+                case "Cleveland Cavaliers": cell?.teamLogoImageView.image = UIImage(named: "CLE_placeholder.png")
+                case "Dallas Mavericks": cell?.teamLogoImageView.image = UIImage(named: "DAL_placeholder.png")
+                case "Denver Nuggets": cell?.teamLogoImageView.image = UIImage(named: "DEN_placeholder.png")
+                case "Detroit Pistons": cell?.teamLogoImageView.image = UIImage(named: "DET_placeholder.png")
+                case "Golden State Warriors": cell?.teamLogoImageView.image = UIImage(named: "GSW_placeholder.png")
+                case "Houston Rockets": cell?.teamLogoImageView.image = UIImage(named: "HOU_placeholder.png")
+                case "Indiana Pacers": cell?.teamLogoImageView.image = UIImage(named: "IND_placeholder.png")
+                case "Los Angeles Clippers": cell?.teamLogoImageView.image = UIImage(named: "LAC_placeholder.png")
+                case "Los Angeles Lakers": cell?.teamLogoImageView.image = UIImage(named: "LAL_placeholder.png")
+                case "Memphis Grizzlies": cell?.teamLogoImageView.image = UIImage(named: "MEM_placeholder.png")
+                case "Miami Heat": cell?.teamLogoImageView.image = UIImage(named: "MIA_placeholder.png")
+                case "Milwaukee Bucks": cell?.teamLogoImageView.image = UIImage(named: "MIL_placeholder.png")
+                case "Minnesota Timberwolves": cell?.teamLogoImageView.image = UIImage(named: "MIN_placeholder.png")
+                case "New Orleans Pelicans": cell?.teamLogoImageView.image = UIImage(named: "NOP_placeholder.png")
+                case "New York Knicks": cell?.teamLogoImageView.image = UIImage(named: "NYK_placeholder.png")
+                case "Oklahoma City Thunder": cell?.teamLogoImageView.image = UIImage(named: "OKC_placeholder.png")
+                case "Orlando Magic": cell?.teamLogoImageView.image = UIImage(named: "ORL_placeholder.png")
+                case "Philadelphia 76ers": cell?.teamLogoImageView.image = UIImage(named: "PHI_placeholder.png")
+                case "Phoenix Suns": cell?.teamLogoImageView.image = UIImage(named: "PHX_placeholder.png")
+                case "Portland Trail Blazers": cell?.teamLogoImageView.image = UIImage(named: "POR_placeholder.png")
+                case "Sacramento Kings": cell?.teamLogoImageView.image = UIImage(named: "SAC_placeholder.png")
+                case "San Antonio Spurs": cell?.teamLogoImageView.image = UIImage(named: "SAS_placeholder.png")
+                case "Toronto Raptors": cell?.teamLogoImageView.image = UIImage(named: "TOR_placeholder.png")
+                case "Utah Jazz": cell?.teamLogoImageView.image = UIImage(named: "UTA_placeholder.png")
+                case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "WAS_placeholder.png")
+                default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                }
+                
             } else {
-                cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                switch self.store.favoriteTeams[indexPath.row].name {
+                case "Brooklyn Nets": cell?.teamLogoImageView.image = UIImage(named: "bkn.png")
+                case "Atlanta Hawks": cell?.teamLogoImageView.image = UIImage(named: "atl.png")
+                case "Boston Celtics": cell?.teamLogoImageView.image = UIImage(named: "bos.png")
+                case "Charlotte Hornets": cell?.teamLogoImageView.image = UIImage(named: "cha.png")
+                case "Chicago Bulls": cell?.teamLogoImageView.image = UIImage(named: "chi.png")
+                case "Cleveland Cavaliers": cell?.teamLogoImageView.image = UIImage(named: "cle.png")
+                case "Dallas Mavericks": cell?.teamLogoImageView.image = UIImage(named: "dal.png")
+                case "Denver Nuggets": cell?.teamLogoImageView.image = UIImage(named: "den.png")
+                case "Detroit Pistons": cell?.teamLogoImageView.image = UIImage(named: "det.png")
+                case "Golden State Warriors": cell?.teamLogoImageView.image = UIImage(named: "gsw.png")
+                case "Houston Rockets": cell?.teamLogoImageView.image = UIImage(named: "hou.png")
+                case "Indiana Pacers": cell?.teamLogoImageView.image = UIImage(named: "ind.png")
+                case "Los Angeles Clippers": cell?.teamLogoImageView.image = UIImage(named: "lac.png")
+                case "Los Angeles Lakers": cell?.teamLogoImageView.image = UIImage(named: "lal.png")
+                case "Memphis Grizzlies": cell?.teamLogoImageView.image = UIImage(named: "mem.png")
+                case "Miami Heat": cell?.teamLogoImageView.image = UIImage(named: "mia.png")
+                case "Milwaukee Bucks": cell?.teamLogoImageView.image = UIImage(named: "mil.png")
+                case "Minnesota Timberwolves": cell?.teamLogoImageView.image = UIImage(named: "min.png")
+                case "New Orleans Pelicans": cell?.teamLogoImageView.image = UIImage(named: "nop.png")
+                case "New York Knicks": cell?.teamLogoImageView.image = UIImage(named: "nyk.png")
+                case "Oklahoma City Thunder": cell?.teamLogoImageView.image = UIImage(named: "okc.png")
+                case "Orlando Magic": cell?.teamLogoImageView.image = UIImage(named: "orl.png")
+                case "Philadelphia 76ers": cell?.teamLogoImageView.image = UIImage(named: "phi.png")
+                case "Phoenix Suns": cell?.teamLogoImageView.image = UIImage(named: "phx.png")
+                case "Portland Trail Blazers": cell?.teamLogoImageView.image = UIImage(named: "por.png")
+                case "Sacramento Kings": cell?.teamLogoImageView.image = UIImage(named: "sac.png")
+                case "San Antonio Spurs": cell?.teamLogoImageView.image = UIImage(named: "sas.png")
+                case "Toronto Raptors": cell?.teamLogoImageView.image = UIImage(named: "tor.png")
+                case "Utah Jazz": cell?.teamLogoImageView.image = UIImage(named: "uta.png")
+                case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "was.png")
+                default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                }
             }
+            
+            
             if let teamName = self.store.favoriteTeams[indexPath.row].name {
                 cell?.teamNameLabel.text = teamName
             }
@@ -559,6 +707,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
             self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             self.unfilteredFavoritesTeamList = self.store.favoriteTeams
+            
         }
     }
 }

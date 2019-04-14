@@ -71,6 +71,8 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -192,6 +194,8 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     @objc func changeConference(sender: UISegmentedControl) {
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
         start()
     }
     
