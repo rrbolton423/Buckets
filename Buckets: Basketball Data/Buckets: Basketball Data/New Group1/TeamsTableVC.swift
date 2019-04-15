@@ -460,7 +460,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
 //                tableView.reloadData()
                 self.getFavoriteAction()
             }
-            favorite.backgroundColor = hexStringToUIColor(hex: "#5A5ED0")
+            favorite.backgroundColor = hexStringToUIColor(hex: "#2ecc71")
 //            delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
 //                print(self.unfilteredFavoritesTeamList ?? "Empty")
 //                self.deleteData(item: self.teamToDelete!)
