@@ -311,7 +311,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     tweetText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball App for more scores, stats and standings."
                 }
                 
-                let tweetUrl = "https://www.apple.com/ios/app-store/"
+                let tweetUrl = "https://itunes.apple.com/us/app/buckets-basketball-data/id1456202460?ls=1&mt=8"
                 
                 let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
                 

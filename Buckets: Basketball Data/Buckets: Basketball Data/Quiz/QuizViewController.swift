@@ -20,6 +20,10 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var fourthChoiceButton: UIButton!
     @IBOutlet weak var nextQuestionButton: UIButton!
     
+    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     var questions = QuestionModel()
     let score = ScoreModel()
     
@@ -55,6 +59,7 @@ class QuizViewController: UIViewController {
     }
     
     func updateToDarkTheme(){
+        self.baseView.backgroundColor = UIColor.black
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.questionField.textColor = .white
@@ -65,6 +70,7 @@ class QuizViewController: UIViewController {
     }
     
     func updateToLightTheme() {
+        self.baseView.backgroundColor = UIColor.white
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.questionField.textColor = .black
@@ -78,36 +84,6 @@ class QuizViewController: UIViewController {
         super.viewWillAppear(animated)
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
-        if UIDevice().userInterfaceIdiom == .phone {
-            switch UIScreen.main.nativeBounds.height {
-            case 1136:
-                print("iPhone 5 or 5S or 5C")
-                self.navigationController?.navigationBar.prefersLargeTitles = false
-                
-            case 1334:
-                print("iPhone 6/6S/7/8")
-                self.navigationController?.navigationBar.prefersLargeTitles = false
-                
-            case 1920, 2208:
-                print("iPhone 6+/6S+/7+/8+")
-                self.navigationController?.navigationBar.prefersLargeTitles = true
-                
-            case 2436:
-                print("iPhone X, XS")
-                self.navigationController?.navigationBar.prefersLargeTitles = true
-                
-            case 2688:
-                print("iPhone XS Max")
-                self.navigationController?.navigationBar.prefersLargeTitles = true
-                
-            case 1792:
-                print("iPhone XR")
-                self.navigationController?.navigationBar.prefersLargeTitles = true
-                
-            default:
-                print("Unknown")
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
