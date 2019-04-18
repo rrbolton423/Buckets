@@ -309,7 +309,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             
             cell.standingLabel.text = String(indexPath.row + 1)
             cell.teamImageView.image = teamImage
-            cell.gamesPlayedLabel.text = eastTeams[indexPath.row].gamesPlayed
+//            cell.gamesPlayedLabel.text = eastTeams[indexPath.row].gamesPlayed
             cell.winsLabel.text = eastTeams[indexPath.row].wins
             cell.lossesLabel.text = eastTeams[indexPath.row].losses
             let value: Float = (eastTeams[indexPath.row].winPercentage?.floatValue)!
@@ -318,23 +318,23 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
             if isDarkMode == true {
                 cell.standingLabel.textColor = .white
-                cell.gamesPlayedLabel.textColor = .white
+//                cell.gamesPlayedLabel.textColor = .white
                 cell.winsLabel.textColor = .white
                 cell.lossesLabel.textColor = .white
                 cell.winPercentageLabel.textColor = .white
                 
-                cell.gpLabel.textColor = .white
+//                cell.gpLabel.textColor = .white
                 cell.lLabel.textColor = .white
                 cell.wLabel.textColor = .white
                 cell.wpLabel.textColor = .white
             } else {
                 cell.standingLabel.textColor = .black
-                cell.gamesPlayedLabel.textColor = .black
+//                cell.gamesPlayedLabel.textColor = .black
                 cell.winsLabel.textColor = .black
                 cell.lossesLabel.textColor = .black
                 cell.winPercentageLabel.textColor = .black
                 
-                cell.gpLabel.textColor = .black
+//                cell.gpLabel.textColor = .black
                 cell.lLabel.textColor = .black
                 cell.wLabel.textColor = .black
                 cell.wpLabel.textColor = .black
@@ -413,7 +413,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             }
             cell.standingLabel.text = String(indexPath.row + 1)
             cell.teamImageView.image = teamImage
-            cell.gamesPlayedLabel.text = westTeams[indexPath.row].gamesPlayed
+//            cell.gamesPlayedLabel.text = westTeams[indexPath.row].gamesPlayed
             cell.winsLabel.text = westTeams[indexPath.row].wins
             cell.lossesLabel.text = westTeams[indexPath.row].losses
             cell.winPercentageLabel.text = westTeams[indexPath.row].winPercentage
@@ -423,23 +423,23 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
             if isDarkMode == true {
                 cell.standingLabel.textColor = .white
-                cell.gamesPlayedLabel.textColor = .white
+//                cell.gamesPlayedLabel.textColor = .white
                 cell.winsLabel.textColor = .white
                 cell.lossesLabel.textColor = .white
                 cell.winPercentageLabel.textColor = .white
                 
-                cell.gpLabel.textColor = .white
+//                cell.gpLabel.textColor = .white
                 cell.lLabel.textColor = .white
                 cell.wLabel.textColor = .white
                 cell.wpLabel.textColor = .white
             } else {
                 cell.standingLabel.textColor = .black
-                cell.gamesPlayedLabel.textColor = .black
+//                cell.gamesPlayedLabel.textColor = .black
                 cell.winsLabel.textColor = .black
                 cell.lossesLabel.textColor = .black
                 cell.winPercentageLabel.textColor = .black
                 
-                cell.gpLabel.textColor = .black
+//                cell.gpLabel.textColor = .black
                 cell.lLabel.textColor = .black
                 cell.wLabel.textColor = .black
                 cell.wpLabel.textColor = .black

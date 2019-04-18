@@ -19,9 +19,8 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var thirdChoiceButton: UIButton!
     @IBOutlet weak var fourthChoiceButton: UIButton!
     @IBOutlet weak var nextQuestionButton: UIButton!
-    
     @IBOutlet weak var baseView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var quizScrollView: UIScrollView!
     
     
     var questions = QuestionModel()
@@ -59,6 +58,7 @@ class QuizViewController: UIViewController {
     }
     
     func updateToDarkTheme(){
+        self.quizScrollView.indicatorStyle = .white;
         self.baseView.backgroundColor = UIColor.black
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
@@ -70,6 +70,7 @@ class QuizViewController: UIViewController {
     }
     
     func updateToLightTheme() {
+        self.quizScrollView.indicatorStyle = .default;
         self.baseView.backgroundColor = UIColor.white
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
