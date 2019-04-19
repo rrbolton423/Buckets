@@ -26,22 +26,38 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
     var refreshController = UIRefreshControl()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if tableView.visibleCells.isEmpty {
+            start()
+        } else {
+            if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.refreshController.endRefreshing()
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+    }
+    
     @objc func defaultsChanged(){
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
-            //dark theme enabled
             updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
             tableView.reloadData()
         } else {
-            
-            //dark theme disabled
             updateToLightTheme()
-            //isDarkMode = false
-            print(isDarkMode)
             tableView.reloadData()
-            
         }
     }
     
@@ -72,36 +88,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if tableView.visibleCells.isEmpty {
-            start()
-        } else {
-            if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        FirebaseConstants().setupAPP()
-        self.use_real_images = FirebaseConstants().getImages()
-        defaultsChanged()
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.refreshController.endRefreshing()
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
-    }
-    
     @objc func start() {
         tableView.addSubview(refreshController)
         refreshController.addTarget(self, action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
-        //        setupSettingsBarButtonItem()
-        //        setupInfoBarButtonItem()
         if CheckInternet.connection() {
             loadGamesWithActivityIndicator()
         } else {
@@ -125,7 +115,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshController)
         refreshController.addTarget(self,  action: #selector(startWithRefreshController), for: .valueChanged)
         firebaseSetup()
-        //        setupInfoBarButtonItem()
         if CheckInternet.connection() {
             loadGamesWithRefreshController()
         } else {
@@ -282,10 +271,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         var gameToTweet: Game?
         let section = indexPath.section
-        print(section)
         if section == 0 {
             let row = indexPath.row
             gameToTweet = todaysGames[row]
@@ -293,36 +280,22 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let row = indexPath.row
             gameToTweet = yesterdaysGames[row]
         }
-        
         let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
             if let awayTeam = gameToTweet?.awayTeamName, let homeTeam = gameToTweet?.homeTeamName, let awayScore = gameToTweet?.awayTeamScore, let homeScore = gameToTweet?.homeTeamScore, let gameQuarter = gameToTweet?.quarter, let gameVenue = gameToTweet?.arena {
                 
                 var tweetText: String = String()
                 
-                print("GAME QUARTER: \(gameQuarter)")
                 if gameQuarter.contains(":") {
-                    print("game has not started")
                     tweetText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball App for more scores, stats and standings."
                 } else if gameQuarter == "Final" {
-                    print("game has ended")
                     tweetText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball App for more scores, stats and standings."
                 } else {
-                    print("game has started")
                     tweetText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball App for more scores, stats and standings."
                 }
-                
                 let tweetUrl = "https://itunes.apple.com/us/app/buckets-basketball-data/id1456202460?ls=1&mt=8"
-                
                 let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
-                
-                // encode a space to %20 for example
                 let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-                
-                // cast to an url
                 let url = URL(string: escapedShareString)
-                
-                // open in safari
-                //UIApplication.shared.openURL(url!)
                 if let url = URL(string: "\(url!)"), !url.absoluteString.isEmpty {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
@@ -504,16 +477,12 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
         cell.homeTeamImageView.image = homeTeamImage
         cell.awayTeamImageView.image = awayTeamImage
-        
-        
-        
         cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].quarter
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
             cell.tipoffLabel.textColor = .white
         } else {
             cell.tipoffLabel.textColor = .black
         }
-        
         let awayScore = allGames[indexPath.section][indexPath.row].awayTeamScore
         if awayScore == "" {
             cell.awayScoreLabel.text = "0"
@@ -525,7 +494,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.awayScoreLabel.textColor = .black
         }
-        
         let homeScore = allGames[indexPath.section][indexPath.row].homeTeamScore
         if homeScore == "" {
             cell.homeScoreLabel.text = "0"
@@ -537,26 +505,22 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.homeScoreLabel.textColor = .black
         }
-        
         cell.venueLabel.text = allGames[indexPath.section][indexPath.row].arena
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
             cell.venueLabel.textColor = .white
         } else {
             cell.venueLabel.textColor = .black
         }
-        
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
             cell.versusLabel.textColor = .white
         } else {
             cell.versusLabel.textColor = .black
         }
-        
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
             cell.dividerLabel.textColor = .white
         } else {
             cell.dividerLabel.textColor = .black
         }
-        
         return cell
     }
     
@@ -572,7 +536,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "loadGame" {
             if let detailVC = segue.destination as? VideoViewController {
                 let section = tableView.indexPathForSelectedRow!.section
-                print(section)
                 if section == 0 {
                     let row = tableView.indexPathForSelectedRow!.row
                     gameToPass = todaysGames[row]

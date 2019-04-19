@@ -27,20 +27,33 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     var use_real_images: String?
     var segmentedController: UISegmentedControl!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupSegmentedController()
+        FirebaseConstants().setupAPP()
+        self.use_real_images = FirebaseConstants().getImages()
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+    }
     
     @objc func defaultsChanged(){
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
-            //dark theme enabled
             updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
             tableView.reloadData()
         } else {
-            //dark theme disabled
             updateToLightTheme()
-            //isDarkMode = false
-            print(isDarkMode)
             tableView.reloadData()
         }
     }
@@ -69,26 +82,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupSegmentedController()
-        FirebaseConstants().setupAPP()
-        self.use_real_images = FirebaseConstants().getImages()
-        defaultsChanged()
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        start()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
-    }
-    
     func setupSegmentedController() {
         let items = ["East", "West"]
         segmentedController = UISegmentedControl(items: items)
@@ -115,26 +108,10 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             return
         }
         firebaseSetup()
-//        setupInfoBarButtonItem()
         standingsURL = "\(StandingsURL)\(date.month)%2F\(date.day)%2F\(date.year)"
         fetchStandings()
         self.tableView.reloadData()
     }
-    
-//    func setupInfoBarButtonItem() {
-//        let infoButton = UIButton(type: .infoLight)
-//        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-//        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-//        navigationItem.rightBarButtonItem = infoBarButtonItem
-//    }
-//
-//    @objc func getInfoAction() {
-//        let alert = UIAlertController(title: "Buckets v.1.0", message: "This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
     
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {
@@ -306,41 +283,32 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 default: self.teamImage = UIImage(named: "placeholder.png")
                 }
             }
-            
             cell.standingLabel.text = String(indexPath.row + 1)
             cell.teamImageView.image = teamImage
-//            cell.gamesPlayedLabel.text = eastTeams[indexPath.row].gamesPlayed
             cell.winsLabel.text = eastTeams[indexPath.row].wins
             cell.lossesLabel.text = eastTeams[indexPath.row].losses
             let value: Float = (eastTeams[indexPath.row].winPercentage?.floatValue)!
             cell.winPercentageLabel.text = value.string(fractionDigits: 3)
-            
             let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
             if isDarkMode == true {
                 cell.standingLabel.textColor = .white
-//                cell.gamesPlayedLabel.textColor = .white
                 cell.winsLabel.textColor = .white
                 cell.lossesLabel.textColor = .white
                 cell.winPercentageLabel.textColor = .white
-                
-//                cell.gpLabel.textColor = .white
                 cell.lLabel.textColor = .white
                 cell.wLabel.textColor = .white
                 cell.wpLabel.textColor = .white
             } else {
                 cell.standingLabel.textColor = .black
-//                cell.gamesPlayedLabel.textColor = .black
                 cell.winsLabel.textColor = .black
                 cell.lossesLabel.textColor = .black
                 cell.winPercentageLabel.textColor = .black
-                
-//                cell.gpLabel.textColor = .black
                 cell.lLabel.textColor = .black
                 cell.wLabel.textColor = .black
                 cell.wpLabel.textColor = .black
             }
-            
             break
+            
         case 1:
             if self.use_real_images == "false" {
                 switch westTeams[indexPath.row].team {
@@ -413,38 +381,31 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             }
             cell.standingLabel.text = String(indexPath.row + 1)
             cell.teamImageView.image = teamImage
-//            cell.gamesPlayedLabel.text = westTeams[indexPath.row].gamesPlayed
             cell.winsLabel.text = westTeams[indexPath.row].wins
             cell.lossesLabel.text = westTeams[indexPath.row].losses
             cell.winPercentageLabel.text = westTeams[indexPath.row].winPercentage
             let value: Float = (westTeams[indexPath.row].winPercentage?.floatValue)!
             cell.winPercentageLabel.text = value.string(fractionDigits: 3)
-            
             let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
             if isDarkMode == true {
                 cell.standingLabel.textColor = .white
-//                cell.gamesPlayedLabel.textColor = .white
                 cell.winsLabel.textColor = .white
                 cell.lossesLabel.textColor = .white
                 cell.winPercentageLabel.textColor = .white
-                
-//                cell.gpLabel.textColor = .white
                 cell.lLabel.textColor = .white
                 cell.wLabel.textColor = .white
                 cell.wpLabel.textColor = .white
             } else {
                 cell.standingLabel.textColor = .black
-//                cell.gamesPlayedLabel.textColor = .black
                 cell.winsLabel.textColor = .black
                 cell.lossesLabel.textColor = .black
                 cell.winPercentageLabel.textColor = .black
-                
-//                cell.gpLabel.textColor = .black
                 cell.lLabel.textColor = .black
                 cell.wLabel.textColor = .black
                 cell.wpLabel.textColor = .black
             }
             break
+            
         default:
             break
         }

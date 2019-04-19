@@ -1,42 +1,19 @@
 //
-//  ViewController.swift
-//  WebViewExample
+//  VideoViewController.swift
+//  Buckets: Basketball Data
 //
-//  Created by wayou on 10/26/18.
-//  Copyright © 2018 wayou. All rights reserved.
+//  Created by Romell Bolton on 3/8/19.
+//  Copyright © 2019 Romell Bolton. All rights reserved.
 //
-//  references:
-//  - https://www.hackingwithswift.com/read/4/2/creating-a-simple-browser-with-wkwebview
-//  - https://stackoverflow.com/questions/49638653/load-local-web-files-resources-in-wkwebview
-
 
 import UIKit
 import WebKit
 
 class VideoViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet weak var webView: WKWebView!
+    
     var game: Game?
     var activityIndicator = UIActivityIndicatorView(style: .gray)
-    
-    @objc fileprivate func refreshWebpage() {
-        if CheckInternet.connection() {
-            let url = URL.init(string: "https://www.nba.com/games/\(self.game?.gameURL ?? "")#/video")
-            self.webView.allowsBackForwardNavigationGestures = true
-            let request = URLRequest(url: url!)
-            self.webView.load(request)
-        } else {
-            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                self.navigationController?.popToRootViewController(animated: true)
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    fileprivate func setupRefreshButton() {
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshWebpage))
-        self.navigationItem.rightBarButtonItem = refreshButton
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +23,17 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         refreshWebpage()
     }
     
+    fileprivate func setupRefreshButton() {
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshWebpage))
+        self.navigationItem.rightBarButtonItem = refreshButton
+    }
+    
     func setupActivityIndicator() {
         self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
         self.activityIndicator.color = UIColor.gray
-        self.view.addSubview(self.activityIndicator)// Auto layout
+        self.view.addSubview(self.activityIndicator)
         let horizontalConstraint = NSLayoutConstraint(item: activityIndicator,
                                                       attribute: .centerX,
                                                       relatedBy: .equal,
@@ -69,31 +51,12 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         NSLayoutConstraint.activate([horizontalConstraint, verticalConstraint])
     }
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.activityIndicator.startAnimating()
-    }
-    
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        self.activityIndicator.stopAnimating()
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.activityIndicator.stopAnimating()
-        print("Finished navigating to url \(String(describing: webView.url))")
-    }
-    
     @objc func defaultsChanged(){
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
-            //dark theme enabled
             updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
         } else {
-            //dark theme disabled
             updateToLightTheme()
-            //isDarkMode = false
-            print(isDarkMode)
         }
     }
     
@@ -112,10 +75,37 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         navigationController?.navigationBar.barStyle = .default
         self.view.backgroundColor = UIColor.white
         
-    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
+    @objc fileprivate func refreshWebpage() {
+        if CheckInternet.connection() {
+            let url = URL.init(string: "https://www.nba.com/games/\(self.game?.gameURL ?? "")#/video")
+            self.webView.allowsBackForwardNavigationGestures = true
+            let request = URLRequest(url: url!)
+            self.webView.load(request)
+        } else {
+            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.activityIndicator.startAnimating()
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.activityIndicator.stopAnimating()
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.activityIndicator.stopAnimating()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,12 +123,5 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         view = webView
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
 }
 

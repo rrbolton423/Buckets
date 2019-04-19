@@ -47,21 +47,27 @@ class PlayerDetailVC: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
     var isDarkMode: Bool = false
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        start()
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+    }
     
     @objc func defaultsChanged(){
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
-            //dark theme enabled
             updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
-            
         } else {
-            //dark theme disabled
             updateToLightTheme()
-            //isDarkMode = false
-            print(isDarkMode)
         }
     }
     
@@ -88,30 +94,11 @@ class PlayerDetailVC: UIViewController {
     }
     
     func start() {
-//        setupFavoriteBarButtonItem()
         firebaseSetup()
         checkForPlayerID()
         fetchPlayer()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        start()
-        defaultsChanged()
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
-    }
-
     func firebaseSetup() {
         DispatchQueue.global(qos: .background).async {
             FirebaseConstants().setupAPP()

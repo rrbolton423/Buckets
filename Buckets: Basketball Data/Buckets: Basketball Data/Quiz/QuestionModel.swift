@@ -9,7 +9,6 @@
 import GameKit
 
 struct QuestionModel {
-    
     let questions = [
         Question(interrogative: "Who invented the game of basketball?", answers: ["Frank Mahan", "Abner Doubleday", "Walter Camp", "James Naismith"], correctAnswerIndex: 3),
         Question(interrogative: "What teammates were nicknamed the \"Splash Brothers\"?", answers: ["Jerry West & Wilt Chamberlain", "Kevin Durant & Russell Westbrook", "Michael Jordan & Scottie Pippen", "Stephen Curry & Klay Thompson"], correctAnswerIndex: 3),
@@ -24,26 +23,20 @@ struct QuestionModel {
     ]
     
     var previouslyUsedNumbers: [Int] = []
-    
     mutating func getRandomQuestion() -> Question {
-        
         if (previouslyUsedNumbers.count == questions.count) {
             previouslyUsedNumbers = []
         }
         var randomNumber = GKRandomSource.sharedRandom().nextInt(upperBound: questions.count)
-        
-        // Picks a new random number if the previous one has been used
         while (previouslyUsedNumbers.contains(randomNumber)) {
             randomNumber = GKRandomSource.sharedRandom().nextInt(upperBound: questions.count)
         }
         previouslyUsedNumbers.append(randomNumber)
-        
         return questions[randomNumber]
     }
 }
 
 class Question {
-    
     fileprivate let interrogative: String
     fileprivate let answers: [String]
     fileprivate let correctAnswerIndex: Int

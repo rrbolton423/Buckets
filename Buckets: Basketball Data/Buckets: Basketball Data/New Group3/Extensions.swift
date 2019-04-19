@@ -118,30 +118,12 @@ func hexStringToUIColor (hex:String) -> UIColor {
     )
 }
 
-extension UIView {
-    @IBInspectable var ignoresInvertColors: Bool {
-        get {
-            if #available(iOS 11.0, *) {
-                return accessibilityIgnoresInvertColors
-            }
-            return false
-        }
-        set {
-            if #available(iOS 11.0, *) {
-                accessibilityIgnoresInvertColors = newValue
-            }
-        }
-    }
-}
-
 extension String {
-    
     func openInBrowser() {
         if let url = URL(string: self) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    
 }
 
 extension UITableViewController {
@@ -165,32 +147,6 @@ extension UITableViewCell {
         let bgColorView = UIView()
         bgColorView.backgroundColor = color
         self.selectedBackgroundView = bgColorView
-    }
-}
-
-extension UIColor {
-    public class var main: UIColor {
-        return UIColor(red: 240.0 / 255.0, green: 101.0 / 255.0, blue: 8.0 / 255.0, alpha: 1.0)
-    }
-    
-    public class func main(alpha: CGFloat) -> UIColor {
-        return UIColor(red: 240.0 / 255.0, green: 101.0 / 255.0, blue: 8.0 / 255.0, alpha: alpha)
-    }
-    
-    public class var darkBackground: UIColor {
-        return UIColor(red: 10.0 / 255.0, green: 10.0 / 255.0, blue: 10.0 / 255.0, alpha: 1.0)
-    }
-    
-    public class var lightBackground: UIColor {
-        return UIColor(red: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255.0, alpha: 1.0)
-    }
-    
-    public class var greenPastel: UIColor {
-        return UIColor(red: 0.0 / 255.0, green: 169.0 / 255.0, blue: 108.0 / 255.0, alpha: 1.0)
-    }
-    
-    public class var redPastel: UIColor {
-        return UIColor(red: 255.0 / 255.0, green: 54.0 / 255.0, blue: 53.0 / 255.0, alpha: 1.0)
     }
 }
 
@@ -230,7 +186,6 @@ extension Equatable {
 }
 
 public extension UISearchBar {
-    
     func setTextColor(color: UIColor) {
         let svs = subviews.flatMap { $0.subviews }
         guard let tf = (svs.filter { $0 is UITextField }).first as? UITextField else { return }
@@ -239,7 +194,6 @@ public extension UISearchBar {
 }
 
 extension UITableView {
-    
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
         messageLabel.text = message
@@ -255,7 +209,6 @@ extension UITableView {
         self.backgroundView = messageLabel;
         self.separatorStyle = .none;
     }
-    
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine

@@ -23,45 +23,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     var isFavoriteSelected: Bool = UserDefaults.standard.bool(forKey: "isFavoriteSelected")
     var store = DataStore.sharedInstance
     
-    @objc func defaultsChanged(){
-        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
-        if isDarkMode == true {
-            updateToDarkTheme()
-            print(isDarkMode)
-            tableView.reloadData()
-        } else {
-            updateToLightTheme()
-            print(isDarkMode)
-            tableView.reloadData()
-        }
-    }
-    
-    func updateToDarkTheme(){
-        navigationController?.view.backgroundColor = .black
-        navigationController?.navigationBar.barStyle = .black
-        self.searchController.searchBar.setTextColor(color: .white)
-        self.tableView.indicatorStyle = .white
-        self.view.backgroundColor = UIColor.black
-        self.tableView.backgroundColor = .black
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        self.tabBarController?.tabBar.barTintColor = .black
-        self.navigationController?.navigationBar.barTintColor = UIColor.black
-    }
-    
-    func updateToLightTheme() {
-        navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.barStyle = .default
-        self.searchController.searchBar.setTextColor(color: .black)
-        self.tableView.indicatorStyle = .default
-        self.view.backgroundColor = UIColor.white
-        self.tableView.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
-        self.tabBarController?.tabBar.barTintColor = .white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -104,9 +65,63 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         searchController.dismiss(animated: true, completion: nil)
     }
     
+    func setupFavoriteBarButtonItem() {
+        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showFavorites))
+        navigationItem.rightBarButtonItem = favoriteItem
+    }
+    
+    func setupTrashBarButtonItem() {
+        let trashItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllData))
+        navigationItem.leftBarButtonItem = trashItem
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    func setupActivityIndicator() {
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        self.activityIndicator.color = UIColor.gray
+        self.view.addSubview(self.activityIndicator)
+    }
+    
+    @objc func defaultsChanged(){
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            updateToDarkTheme()
+            tableView.reloadData()
+        } else {
+            updateToLightTheme()
+            tableView.reloadData()
+        }
+    }
+    
+    func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
+        navigationController?.navigationBar.barStyle = .black
+        self.searchController.searchBar.setTextColor(color: .white)
+        self.tableView.indicatorStyle = .white
+        self.view.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = .black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
+        navigationController?.navigationBar.barStyle = .default
+        self.searchController.searchBar.setTextColor(color: .black)
+        self.tableView.indicatorStyle = .default
+        self.view.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
     @objc func start() {
         setupFavoriteBarButtonItem()
-        //setupTrashBarButtonItem()
         setupSearchController()
         loadTeams()
     }
@@ -135,7 +150,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     
     func updateSearchResults(for searchController: UISearchController) {
         loadData()
-        //start()
         defaultsChanged()
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
             if isFavoriteSelected == false {
@@ -148,15 +162,13 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                     })!
             }
         } else {
-
+            
             if isFavoriteSelected == false {
                 filteredTeamList = unfilteredTeamList
             } else {
                 self.store.favoriteTeams = unfilteredFavoritesTeamList!
             }
         }
-        
-        
         tableView.reloadData()
     }
     
@@ -207,38 +219,26 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         return resultArray.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
     }
     
-    func setupActivityIndicator() {
-        self.activityIndicator.center = self.view.center
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        self.activityIndicator.color = UIColor.gray
-        self.view.addSubview(self.activityIndicator)
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var returnValue = 0
-        
         switch(isFavoriteSelected)
         {
         case false:
-    
             self.tableView.restore()
             returnValue = filteredTeamList?.count ?? 0
             break
             
         case true:
-            
             if self.store.favoriteTeams.count == 0 {
                 self.tableView.setEmptyMessage("No favorite teams found")
             } else {
                 self.tableView.restore()
             }
             returnValue = self.store.favoriteTeams.count 
-            print(self.store.favoriteTeams.count)
             break
         }
         return returnValue
@@ -289,40 +289,39 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "WAS_placeholder.png")
                 default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
                 }
-                
             } else {
                 switch filteredTeamList?[indexPath.row].name {
-            case "Brooklyn Nets": cell?.teamLogoImageView.image = UIImage(named: "bkn.png")
-            case "Atlanta Hawks": cell?.teamLogoImageView.image = UIImage(named: "atl.png")
-            case "Boston Celtics": cell?.teamLogoImageView.image = UIImage(named: "bos.png")
-            case "Charlotte Hornets": cell?.teamLogoImageView.image = UIImage(named: "cha.png")
-            case "Chicago Bulls": cell?.teamLogoImageView.image = UIImage(named: "chi.png")
-            case "Cleveland Cavaliers": cell?.teamLogoImageView.image = UIImage(named: "cle.png")
-            case "Dallas Mavericks": cell?.teamLogoImageView.image = UIImage(named: "dal.png")
-            case "Denver Nuggets": cell?.teamLogoImageView.image = UIImage(named: "den.png")
-            case "Detroit Pistons": cell?.teamLogoImageView.image = UIImage(named: "det.png")
-            case "Golden State Warriors": cell?.teamLogoImageView.image = UIImage(named: "gsw.png")
-            case "Houston Rockets": cell?.teamLogoImageView.image = UIImage(named: "hou.png")
-            case "Indiana Pacers": cell?.teamLogoImageView.image = UIImage(named: "ind.png")
-            case "Los Angeles Clippers": cell?.teamLogoImageView.image = UIImage(named: "lac.png")
-            case "Los Angeles Lakers": cell?.teamLogoImageView.image = UIImage(named: "lal.png")
-            case "Memphis Grizzlies": cell?.teamLogoImageView.image = UIImage(named: "mem.png")
-            case "Miami Heat": cell?.teamLogoImageView.image = UIImage(named: "mia.png")
-            case "Milwaukee Bucks": cell?.teamLogoImageView.image = UIImage(named: "mil.png")
-            case "Minnesota Timberwolves": cell?.teamLogoImageView.image = UIImage(named: "min.png")
-            case "New Orleans Pelicans": cell?.teamLogoImageView.image = UIImage(named: "nop.png")
-            case "New York Knicks": cell?.teamLogoImageView.image = UIImage(named: "nyk.png")
-            case "Oklahoma City Thunder": cell?.teamLogoImageView.image = UIImage(named: "okc.png")
-            case "Orlando Magic": cell?.teamLogoImageView.image = UIImage(named: "orl.png")
-            case "Philadelphia 76ers": cell?.teamLogoImageView.image = UIImage(named: "phi.png")
-            case "Phoenix Suns": cell?.teamLogoImageView.image = UIImage(named: "phx.png")
-            case "Portland Trail Blazers": cell?.teamLogoImageView.image = UIImage(named: "por.png")
-            case "Sacramento Kings": cell?.teamLogoImageView.image = UIImage(named: "sac.png")
-            case "San Antonio Spurs": cell?.teamLogoImageView.image = UIImage(named: "sas.png")
-            case "Toronto Raptors": cell?.teamLogoImageView.image = UIImage(named: "tor.png")
-            case "Utah Jazz": cell?.teamLogoImageView.image = UIImage(named: "uta.png")
-            case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "was.png")
-            default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
+                case "Brooklyn Nets": cell?.teamLogoImageView.image = UIImage(named: "bkn.png")
+                case "Atlanta Hawks": cell?.teamLogoImageView.image = UIImage(named: "atl.png")
+                case "Boston Celtics": cell?.teamLogoImageView.image = UIImage(named: "bos.png")
+                case "Charlotte Hornets": cell?.teamLogoImageView.image = UIImage(named: "cha.png")
+                case "Chicago Bulls": cell?.teamLogoImageView.image = UIImage(named: "chi.png")
+                case "Cleveland Cavaliers": cell?.teamLogoImageView.image = UIImage(named: "cle.png")
+                case "Dallas Mavericks": cell?.teamLogoImageView.image = UIImage(named: "dal.png")
+                case "Denver Nuggets": cell?.teamLogoImageView.image = UIImage(named: "den.png")
+                case "Detroit Pistons": cell?.teamLogoImageView.image = UIImage(named: "det.png")
+                case "Golden State Warriors": cell?.teamLogoImageView.image = UIImage(named: "gsw.png")
+                case "Houston Rockets": cell?.teamLogoImageView.image = UIImage(named: "hou.png")
+                case "Indiana Pacers": cell?.teamLogoImageView.image = UIImage(named: "ind.png")
+                case "Los Angeles Clippers": cell?.teamLogoImageView.image = UIImage(named: "lac.png")
+                case "Los Angeles Lakers": cell?.teamLogoImageView.image = UIImage(named: "lal.png")
+                case "Memphis Grizzlies": cell?.teamLogoImageView.image = UIImage(named: "mem.png")
+                case "Miami Heat": cell?.teamLogoImageView.image = UIImage(named: "mia.png")
+                case "Milwaukee Bucks": cell?.teamLogoImageView.image = UIImage(named: "mil.png")
+                case "Minnesota Timberwolves": cell?.teamLogoImageView.image = UIImage(named: "min.png")
+                case "New Orleans Pelicans": cell?.teamLogoImageView.image = UIImage(named: "nop.png")
+                case "New York Knicks": cell?.teamLogoImageView.image = UIImage(named: "nyk.png")
+                case "Oklahoma City Thunder": cell?.teamLogoImageView.image = UIImage(named: "okc.png")
+                case "Orlando Magic": cell?.teamLogoImageView.image = UIImage(named: "orl.png")
+                case "Philadelphia 76ers": cell?.teamLogoImageView.image = UIImage(named: "phi.png")
+                case "Phoenix Suns": cell?.teamLogoImageView.image = UIImage(named: "phx.png")
+                case "Portland Trail Blazers": cell?.teamLogoImageView.image = UIImage(named: "por.png")
+                case "Sacramento Kings": cell?.teamLogoImageView.image = UIImage(named: "sac.png")
+                case "San Antonio Spurs": cell?.teamLogoImageView.image = UIImage(named: "sas.png")
+                case "Toronto Raptors": cell?.teamLogoImageView.image = UIImage(named: "tor.png")
+                case "Utah Jazz": cell?.teamLogoImageView.image = UIImage(named: "uta.png")
+                case "Washington Wizards": cell?.teamLogoImageView.image = UIImage(named: "was.png")
+                default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
                 }
             }
             if let teamName = filteredTeamList?[indexPath.row].name {
@@ -334,6 +333,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 cell?.teamNameLabel.textColor = .black
             }
             break
+            
         case true:
             if self.use_real_images == "false" {
                 switch self.store.favoriteTeams[indexPath.row].name {
@@ -405,8 +405,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
                 default: cell?.teamLogoImageView.image = UIImage(named: "placeholder.png")
                 }
             }
-            
-            
             if let teamName = self.store.favoriteTeams[indexPath.row].name {
                 cell?.teamNameLabel.text = teamName
             }
@@ -431,8 +429,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         case false:
             teamToFavorite = self.filteredTeamList?[row]
             teamToDelete = self.filteredTeamList?[row]
-            print("Favorite: \(teamToFavorite!)")
-            print("Delete: \(teamToDelete!)")
             favorite = UITableViewRowAction(style: .default, title: "Favorite") { (action, indexPath) in
                 self.saveData(item: self.teamToFavorite!)
                 self.getFavoriteAction()
@@ -450,7 +446,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             }
             delete.backgroundColor = hexStringToUIColor(hex: "#FC3D39")
             return [delete]
-            
         }
     }
     
@@ -461,7 +456,6 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             start()
             defaultsChanged()
         }
-        print(isFavoriteSelected)
         self.store.favoriteTeams.removeAll()
         tableView.reloadData()
     }
@@ -487,19 +481,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             self.navigationItem.title = "Favorite Teams"
             navigationItem.rightBarButtonItem?.image = UIImage(named: "star_Icon_Filled")
         }
-        print(isFavoriteSelected)
         tableView.reloadData()
-    }
-    
-    func setupFavoriteBarButtonItem() {
-        let favoriteItem = UIBarButtonItem(image: UIImage(named: "star_Icon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showFavorites))
-        navigationItem.rightBarButtonItem = favoriteItem
-    }
-    
-    func setupTrashBarButtonItem() {
-        let trashItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllData))
-        navigationItem.leftBarButtonItem = trashItem
-        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     @objc func getFavoriteAction() {
@@ -526,34 +508,26 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? TeamDetailVC
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            print(selectedIndexPath)
-            
             if isFavoriteSelected == false {
                 teamToPass = filteredTeamList?[(selectedIndexPath.row)]
                 detailVC?.staticTeam = teamToPass
                 let selectedCell = tableView.cellForRow(at: selectedIndexPath)
                 detailVC?.detailImage = selectedCell?.imageView?.image
             } else {
-                print(self.store.favoriteTeams)
                 teamToPass = self.store.favoriteTeams[(selectedIndexPath.row)]
                 detailVC?.staticTeam = teamToPass
                 let selectedCell = tableView.cellForRow(at: selectedIndexPath)
                 detailVC?.detailImage = selectedCell?.imageView?.image
             }
-           }
         }
+    }
     
     var filePath: String {
-        //1 - manager lets you examine contents of a files and folders in your app; creates a directory to where we are saving it
         let manager = FileManager.default
-        //2 - this returns an array of urls from our documentDirectory and we take the first path
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-//        print("this is the url path in the documentDirectory \(url)")
-        //3 - creates a new path component and creates a new file called "Data" which is where we will store our Data array.
         return (url!.appendingPathComponent("Data").path)
     }
     
@@ -584,18 +558,14 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     func saveData(item: StaticTeam) {
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
             self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
-            print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == teamToFavorite?.name }
         let exists = results.isEmpty == false
-        print(exists)
         if exists == true {
             favoriteAlreadyAddedAction()
             return
         } else {
             self.store.favoriteTeams.append(item)
-            //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
-            //5 - archive root object saves our array of shopping items (our data) to our filepath url
             NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
             getFavoriteAction()
         }
@@ -604,56 +574,41 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     func deleteData(item: StaticTeam) {
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
             self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
-            print(ourData)
         }
         let results = self.store.favoriteTeams.filter { $0.name == teamToDelete?.name }
         let exists = results.isEmpty == false
-        print(exists)
         if exists == false {
             favoriteAlreadyDeletedAction()
             return
         } else {
             if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
                 self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
-                print(ourData)
             }
             let results = self.store.favoriteTeams.filter { $0.name == teamToDelete?.name }
             let exists = results.isEmpty == false
-            
             if exists == true {
-//                print(item.name)
                 if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
                     self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
-                    print(ourData)
                 }
                 let results = self.store.favoriteTeams.filter { $0.name == item.name }
                 let exists = results.isEmpty == false
-                
-                
                 if exists == true {
                     let itemName = item.name!
                     if let index = self.store.favoriteTeams.firstIndex(where: {$0.name == itemName}) {
-                        //print(self.store.favoriteTeams.remove(at: index))
-                        print("INDEX IS \(index)")
                         self.store.favoriteTeams.remove(at: index)
                         tableView.reloadData()
                     }
                 }
             }
         }
-        //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
-        //5 - archive root object saves our array of shopping items (our data) to our filepath url
         NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
         getDeleteAction()
     }
     
     @objc func deleteAllData() {
-        print(self.store.favoriteTeams.count)
         if self.store.favoriteTeams.count != 0 {
             self.store.favoriteTeams.removeAll()
             tableView.reloadData()
-            //4 - nskeyedarchiver is going to look in every shopping list class and look for encode function and is going to encode our data and save it to our file path.  This does everything for encoding and decoding.
-            //5 - archive root object saves our array of shopping items (our data) to our filepath url
             NSKeyedArchiver.archiveRootObject(self.store.favoriteTeams, toFile: filePath)
             getAllFavoritesDeletedAction()
         } else {
@@ -663,11 +618,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     }
     
     private func loadData() {
-        //6 - if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of ShoppingItems
         if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [StaticTeam] {
             self.store.favoriteTeams = ourData.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
             self.unfilteredFavoritesTeamList = self.store.favoriteTeams
-            
         }
     }
 }

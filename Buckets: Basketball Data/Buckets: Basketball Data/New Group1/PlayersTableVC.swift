@@ -17,53 +17,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     let searchController = UISearchController(searchResultsController: nil)
     var isDarkMode: Bool = false
-
-    
-    @objc func defaultsChanged(){
-        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
-        if isDarkMode == true {
-            //dark theme enabled
-            updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
-            tableView.reloadData()
-
-        } else {
-            
-            //dark theme disabled
-            updateToLightTheme()
-            //isDarkMode = false
-            print(isDarkMode)
-            tableView.reloadData()
-
-        }
-    }
-    
-    func updateToDarkTheme(){
-        navigationController?.view.backgroundColor = .black
-        navigationController?.navigationBar.barStyle = .black
-        self.searchController.searchBar.barStyle = .blackOpaque
-        self.tableView.indicatorStyle = .white
-        self.view.backgroundColor = UIColor.black
-        self.tableView.backgroundColor = .black
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        self.tabBarController?.tabBar.barTintColor = .black
-        self.navigationController?.navigationBar.barTintColor = UIColor.black
-    }
-    
-    func updateToLightTheme() {
-        navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.barStyle = .default
-        self.searchController.searchBar.barStyle = .default
-        self.tableView.indicatorStyle = .default;
-        self.view.backgroundColor = UIColor.white
-        self.tableView.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
-        self.tabBarController?.tabBar.barTintColor = .white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,8 +47,44 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         searchController.dismiss(animated: true, completion: nil)
     }
     
+    @objc func defaultsChanged(){
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            updateToDarkTheme()
+            tableView.reloadData()
+        } else {
+            updateToLightTheme()
+            tableView.reloadData()
+        }
+    }
+    
+    func updateToDarkTheme(){
+        navigationController?.view.backgroundColor = .black
+        navigationController?.navigationBar.barStyle = .black
+        self.searchController.searchBar.barStyle = .blackOpaque
+        self.tableView.indicatorStyle = .white
+        self.view.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = .black
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    func updateToLightTheme() {
+        navigationController?.view.backgroundColor = .white
+        navigationController?.navigationBar.barStyle = .default
+        self.searchController.searchBar.barStyle = .default
+        self.tableView.indicatorStyle = .default;
+        self.view.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
     @objc func start() {
-//        setupInfoBarButtonItem()
         setupSearchController()
         firebaseSetup()
         checkForTeamID()
@@ -201,8 +190,6 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
             }
         }
     }
-    
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

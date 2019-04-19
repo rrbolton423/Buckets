@@ -1,38 +1,25 @@
 //
 //  SettingsTableViewController.swift
-//  vcoin
+//  Buckets: Basketball Data
 //
-//  Created by Marcin Czachurski on 18.01.2018.
-//  Copyright © 2018 Marcin Czachurski. All rights reserved.
+//  Created by Romell Bolton on 3/8/19.
+//  Copyright © 2019 Romell Bolton. All rights reserved.
 //
 
 import UIKit
 import StoreKit
 
 class SettingsTableViewController: UITableViewController {
-
-    // MARK: - View loading
-
     @IBOutlet weak var darkModeCell: UIView!
     @IBOutlet weak var rateAppCell: UITableViewCell!
     @IBOutlet weak var contactUsCell: UITableViewCell!
     @IBOutlet weak var versionCell: UITableViewCell!
     @IBOutlet weak var darkModeSwitchOutlet: UISwitch!
-    //var isDarkMode: Bool = false
-
     @IBOutlet weak var rateAppLabel: UILabel!
     @IBOutlet weak var contactUsLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var versionNumberLabel: UILabel!
     @IBOutlet weak var darkModeLabel: UILabel!
-    
-    // MARK: - View loading
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.versionNumberLabel.text = getAppVersion()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,24 +27,23 @@ class SettingsTableViewController: UITableViewController {
         darkModeSwitchOutlet.isOn = UserDefaults.standard.bool(forKey: "isDarkMode")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.versionNumberLabel.text = getAppVersion()
+    }
+    
     func registerSettingsBundle(){
         let appDefaults = [String:AnyObject]()
         UserDefaults.standard.register(defaults: appDefaults)
     }
-
+    
     @objc func defaultsChanged(){
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
-            //dark theme enabled
             updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
             tableView.reloadData()
         } else {
-            //dark theme disabled
             updateToLightTheme()
-            //isDarkMode = false
-            print(isDarkMode)
             tableView.reloadData()
         }
     }
@@ -66,20 +52,16 @@ class SettingsTableViewController: UITableViewController {
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.tableView.indicatorStyle = .white;
-
         self.darkModeCell.backgroundColor = .black
         self.rateAppCell.backgroundColor = .black
         self.contactUsCell.backgroundColor = .black
         self.versionCell.backgroundColor = .black
         self.darkModeSwitchOutlet.backgroundColor = .black
-        
         self.rateAppLabel.textColor = .white
         self.contactUsLabel.textColor = .white
         self.versionLabel.textColor = .white
         self.versionNumberLabel.textColor = .white
         self.darkModeLabel.textColor = .white
-        
-        
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = hexStringToUIColor(hex: "#212121")
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
@@ -97,13 +79,11 @@ class SettingsTableViewController: UITableViewController {
         self.contactUsCell.backgroundColor = .white
         self.versionCell.backgroundColor = .white
         self.darkModeSwitchOutlet.backgroundColor = .white
-        
         self.rateAppLabel.textColor = .black
         self.contactUsLabel.textColor = .black
         self.versionLabel.textColor = .black
         self.versionNumberLabel.textColor = .black
         self.darkModeLabel.textColor = .black
-        
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
@@ -111,50 +91,31 @@ class SettingsTableViewController: UITableViewController {
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    // MARK: - Application version
-
-    func getAppVersion() -> String {
-        return "\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")"
-    }
-    
-    // MARK: - Actions
     
     @IBAction func toggleDarkModeSwitch(_ sender: UISwitch) {
         var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             isDarkMode = false
-            print(isDarkMode)
             updateToLightTheme()
-            UserDefaults.standard.set(false, forKey: "isDarkMode")  // Set the state
-
-        }
-        else {
+            UserDefaults.standard.set(false, forKey: "isDarkMode")
+        } else {
             isDarkMode = true
-            print(isDarkMode)
             updateToDarkTheme()
-            UserDefaults.standard.set(true, forKey: "isDarkMode")  // Set the state
+            UserDefaults.standard.set(true, forKey: "isDarkMode")
         }
-
     }
-
-    // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.unselectSelectedRow()
         
         if indexPath.section == 1 && indexPath.row == 0 {
             SKStoreReviewController.requestReview()
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            let email = "bolton.romell423@gmail.com"
+            let email = "realbucketsapp@gmail.com"
             if let url = URL(string: "mailto:\(email)") {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url)
@@ -164,12 +125,16 @@ class SettingsTableViewController: UITableViewController {
             }
         }
     }
+    
+    func getAppVersion() -> String {
+        return "\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")"
+    }
 }
 
 extension UIColor {
     var inverted: UIColor {
         var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
         UIColor.red.getRed(&r, green: &g, blue: &b, alpha: &a)
-        return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: a) // Assuming you want the same alpha value.
+        return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: a)
     }
 }

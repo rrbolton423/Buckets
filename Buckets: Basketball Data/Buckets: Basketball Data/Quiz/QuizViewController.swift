@@ -28,10 +28,9 @@ class QuizViewController: UIViewController {
     
     let numberOfQuestionPerRound = 10
     var currentQuestion: Question? = nil
-
+    
     var gameStartSound: SystemSoundID = 0
     var isDarkMode: Bool = false
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,19 +39,18 @@ class QuizViewController: UIViewController {
         displayQuestion()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        defaultsChanged()
+        self.navigationController?.navigationBar.isTranslucent = false
+    }
+    
     @objc func defaultsChanged(){
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
-            //dark theme enabled
             updateToDarkTheme()
-            //isDarkMode = true
-            print(isDarkMode)
-            
         } else {
-            
-            //dark theme disabled
             updateToLightTheme()
-            //isDarkMode = false
             print(isDarkMode)
         }
     }
@@ -81,26 +79,14 @@ class QuizViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        defaultsChanged()
-        self.navigationController?.navigationBar.isTranslucent = false
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     func isGameOver() -> Bool {
         return score.getQuestionsAsked() >= numberOfQuestionPerRound
     }
     
     func displayQuestion() {
         currentQuestion = questions.getRandomQuestion()
-        
         if let question = currentQuestion {
             let choices = question.getChoices()
-            
             questionField.text = question.getInterrogative()
             firstChoiceButton.setTitle(choices[0], for: .normal)
             secondChoiceButton.setTitle(choices[1], for: .normal)
@@ -113,24 +99,20 @@ class QuizViewController: UIViewController {
                 nextQuestionButton.setTitle("Next Question", for: .normal)
             }
         }
-        
         firstChoiceButton.isEnabled = true
         secondChoiceButton.isEnabled = true
         thirdChoiceButton.isEnabled = true
         fourthChoiceButton.isEnabled = true
-
         firstChoiceButton.isHidden = false
         secondChoiceButton.isHidden = false
         thirdChoiceButton.isHidden = false
         fourthChoiceButton.isHidden = false
         feedbackField.isHidden = true
-
         nextQuestionButton.isEnabled = false
     }
     
     @IBAction func checkAnswer(_ sender: UIButton) {
         if let question = currentQuestion, let answer = sender.titleLabel?.text {
-            
             if (question.validateAnswer(to: answer)) {
                 score.incrementCorrectAnswers()
                 feedbackField.textColor = UIColor(red:0.15, green:0.61, blue:0.61, alpha:1.0)
@@ -145,7 +127,6 @@ class QuizViewController: UIViewController {
             thirdChoiceButton.isEnabled = false
             fourthChoiceButton.isEnabled = false
             nextQuestionButton.isEnabled = true
-            
             feedbackField.isHidden = false
         }
     }
@@ -162,7 +143,6 @@ class QuizViewController: UIViewController {
         questionField.text = score.getScore()
         score.reset()
         nextQuestionButton.setTitle("Play again", for: .normal)
-        
         feedbackField.isHidden = true
         firstChoiceButton.isHidden = true
         secondChoiceButton.isHidden = true
@@ -170,12 +150,9 @@ class QuizViewController: UIViewController {
         fourthChoiceButton.isHidden = true
     }
     
-    // MARK: Sounds
-    
     func loadGameStartSound() {
         let pathToSoundFile = Bundle.main.path(forResource: "GameSound", ofType: "wav")
         let soundURL = URL(fileURLWithPath: pathToSoundFile!)
-        
         AudioServicesCreateSystemSoundID(soundURL as CFURL, &gameStartSound)
     }
     
