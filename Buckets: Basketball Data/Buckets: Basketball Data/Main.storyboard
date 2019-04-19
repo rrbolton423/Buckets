@@ -1326,7 +1326,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inb-Ow-Jvl">
-                                <rect key="frame" x="0.0" y="64" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="111" width="375" height="576"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5lP-Bu-pLK">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
@@ -1471,7 +1471,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j9O-b7-55e"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Quiz" largeTitleDisplayMode="never" id="f71-da-8d0"/>
+                    <navigationItem key="navigationItem" title="Quiz" largeTitleDisplayMode="always" id="f71-da-8d0"/>
                     <size key="freeformSize" width="375" height="730"/>
                     <connections>
                         <outlet property="baseView" destination="5lP-Bu-pLK" id="GXZ-Zi-C9O"/>
@@ -1495,8 +1495,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="75g-mX-Vcc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Quiz" image="quiz" selectedImage="quiz" id="6CL-eD-dIf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d7V-dB-Cpe">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="d7V-dB-Cpe">
+                        <rect key="frame" x="0.0" y="20" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
