@@ -286,11 +286,11 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                 var tweetText: String = String()
                 
                 if gameQuarter.contains(":") {
-                    tweetText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball App for more scores, stats and standings."
+                    tweetText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else if gameQuarter == "Final" {
-                    tweetText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball App for more scores, stats and standings."
+                    tweetText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else {
-                    tweetText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball App for more scores, stats and standings."
+                    tweetText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball Data app for more scores, stats and standings."
                 }
                 let tweetUrl = "https://itunes.apple.com/us/app/buckets-basketball-data/id1456202460?ls=1&mt=8"
                 let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
