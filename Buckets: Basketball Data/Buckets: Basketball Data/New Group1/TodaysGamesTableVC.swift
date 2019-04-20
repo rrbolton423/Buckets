@@ -403,7 +403,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             case "TOR": self.awayTeamImage = UIImage(named: "tor.png")
             case "UTA": self.awayTeamImage = UIImage(named: "uta.png")
             case "WAS": self.awayTeamImage = UIImage(named: "was.png")
-            default: self.awayTeamImage = UIImage(named: "placeholder.png")
+            default: self.awayTeamImage = UIImage(named: "nba_logo.png")
             }
         }
         if self.use_real_images == "false" {
@@ -472,7 +472,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             case "TOR": self.homeTeamImage = UIImage(named: "tor.png")
             case "UTA": self.homeTeamImage = UIImage(named: "uta.png")
             case "WAS": self.homeTeamImage = UIImage(named: "was.png")
-            default: self.homeTeamImage = UIImage(named: "placeholder.png")
+            default: self.homeTeamImage = UIImage(named: "nba_logo.png")
             }
         }
         cell.homeTeamImageView.image = homeTeamImage

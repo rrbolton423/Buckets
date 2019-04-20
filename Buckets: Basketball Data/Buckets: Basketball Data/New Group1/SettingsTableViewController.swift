@@ -11,12 +11,14 @@ import StoreKit
 
 class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var darkModeCell: UIView!
-    @IBOutlet weak var rateAppCell: UITableViewCell!
     @IBOutlet weak var contactUsCell: UITableViewCell!
+    @IBOutlet weak var rateAppCell: UITableViewCell!
+    @IBOutlet weak var followUsCell: UITableViewCell!
     @IBOutlet weak var versionCell: UITableViewCell!
     @IBOutlet weak var darkModeSwitchOutlet: UISwitch!
-    @IBOutlet weak var rateAppLabel: UILabel!
     @IBOutlet weak var contactUsLabel: UILabel!
+    @IBOutlet weak var rateAppLabel: UILabel!
+    @IBOutlet weak var followUsLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var versionNumberLabel: UILabel!
     @IBOutlet weak var darkModeLabel: UILabel!
@@ -55,10 +57,12 @@ class SettingsTableViewController: UITableViewController {
         self.darkModeCell.backgroundColor = .black
         self.rateAppCell.backgroundColor = .black
         self.contactUsCell.backgroundColor = .black
+        self.followUsCell.backgroundColor = .black
         self.versionCell.backgroundColor = .black
         self.darkModeSwitchOutlet.backgroundColor = .black
-        self.rateAppLabel.textColor = .white
         self.contactUsLabel.textColor = .white
+        self.rateAppLabel.textColor = .white
+        self.followUsLabel.textColor = .white
         self.versionLabel.textColor = .white
         self.versionNumberLabel.textColor = .white
         self.darkModeLabel.textColor = .white
@@ -75,12 +79,14 @@ class SettingsTableViewController: UITableViewController {
         navigationController?.navigationBar.barStyle = .default
         self.tableView.indicatorStyle = .default;
         self.darkModeCell.backgroundColor = .white
-        self.rateAppCell.backgroundColor = .white
         self.contactUsCell.backgroundColor = .white
+        self.rateAppCell.backgroundColor = .white
+        self.followUsCell.backgroundColor = .white
         self.versionCell.backgroundColor = .white
         self.darkModeSwitchOutlet.backgroundColor = .white
-        self.rateAppLabel.textColor = .black
         self.contactUsLabel.textColor = .black
+        self.rateAppLabel.textColor = .black
+        self.followUsLabel.textColor = .black
         self.versionLabel.textColor = .black
         self.versionNumberLabel.textColor = .black
         self.darkModeLabel.textColor = .black
@@ -111,10 +117,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.unselectSelectedRow()
-        
         if indexPath.section == 1 && indexPath.row == 0 {
-            SKStoreReviewController.requestReview()
-        } else if indexPath.section == 1 && indexPath.row == 1 {
             let email = "realbucketsapp@gmail.com"
             if let url = URL(string: "mailto:\(email)") {
                 if #available(iOS 10.0, *) {
@@ -122,6 +125,15 @@ class SettingsTableViewController: UITableViewController {
                 } else {
                     UIApplication.shared.openURL(url)
                 }
+            }
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            SKStoreReviewController.requestReview()
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            let bucketsTwitterProfileUrl = "https://twitter.com/RealBucketsApp"
+            let escapedShareString = bucketsTwitterProfileUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+            let url = URL(string: escapedShareString)
+            if let url = URL(string: "\(url!)"), !url.absoluteString.isEmpty {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
     }
