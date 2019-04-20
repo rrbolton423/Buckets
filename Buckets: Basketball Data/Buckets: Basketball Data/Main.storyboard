@@ -756,7 +756,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2e-fV-GG5">
-                                                    <rect key="frame" x="154" y="22" width="31" height="26.5"/>
+                                                    <rect key="frame" x="209" y="22" width="31" height="26.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26.329999999999998" id="jTV-Vo-Ix3"/>
                                                         <constraint firstAttribute="width" constant="31" id="x1e-NT-FKf"/>
@@ -766,7 +766,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gs-8b-3eO">
-                                                    <rect key="frame" x="205" y="22" width="31" height="26.5"/>
+                                                    <rect key="frame" x="260" y="22" width="31" height="26.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26.329999999999998" id="8oz-Cf-pmR"/>
                                                         <constraint firstAttribute="width" constant="31" id="spk-9B-Lvd"/>
@@ -776,7 +776,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iL-wD-feO">
-                                                    <rect key="frame" x="256" y="22" width="45" height="26.5"/>
+                                                    <rect key="frame" x="311" y="22" width="45" height="26.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="LBA-lv-hiY"/>
                                                         <constraint firstAttribute="height" constant="26.329999999999998" id="SGC-eM-lSl"/>
@@ -786,7 +786,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Cr-4t-LRm">
-                                                    <rect key="frame" x="157.5" y="56" width="24" height="21"/>
+                                                    <rect key="frame" x="212.5" y="56" width="24" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="6re-kt-HPP"/>
                                                         <constraint firstAttribute="height" constant="21" id="ApW-fR-4bf"/>
@@ -796,7 +796,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vId-Ct-7h6" userLabel="Losses">
-                                                    <rect key="frame" x="208.5" y="56" width="24" height="21"/>
+                                                    <rect key="frame" x="263.5" y="56" width="24" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="MgL-vK-KiH"/>
                                                         <constraint firstAttribute="height" constant="21" id="vva-IH-NvI"/>
@@ -806,7 +806,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MLv-d8-ex8" userLabel="Win %">
-                                                    <rect key="frame" x="253.5" y="56" width="50" height="21"/>
+                                                    <rect key="frame" x="308.5" y="56" width="50" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="2uk-U9-TUx"/>
                                                         <constraint firstAttribute="height" constant="21" id="il2-32-rfl"/>
@@ -925,7 +925,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW1-ef-s0A">
-                                                    <rect key="frame" x="167" y="108" width="100" height="60"/>
+                                                    <rect key="frame" x="222" y="108" width="100" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="beH-WN-aUY"/>
                                                     </constraints>
@@ -934,7 +934,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9h-nA-K9s">
-                                                    <rect key="frame" x="167" y="20" width="100" height="60"/>
+                                                    <rect key="frame" x="222" y="20" width="100" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="r3S-wI-Leo"/>
                                                     </constraints>
@@ -1212,7 +1212,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="BaL-bk-fnb">
+                            <tableViewSection footerTitle="© Romell Bolton 2019" id="BaL-bk-fnb">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="Eab-JN-SEZ" detailTextLabel="9WH-iR-s91" style="IBUITableViewCellStyleValue1" id="Zoh-us-Sct">
                                         <rect key="frame" x="0.0" y="283" width="375" height="44"/>
