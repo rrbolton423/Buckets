@@ -46,11 +46,16 @@ class TeamDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        start()
+        firebaseSetup()
         checkIfTeamIsFavorite()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,6 +74,16 @@ class TeamDetailVC: UIViewController {
     }
     
     func updateToDarkTheme(){
+        teamNameLabel.textColor = .white
+        teamYearFoundedLabel.textColor = .white
+        teamCityLabel.textColor = .white
+        teamConferenceLabel.textColor = .white
+        teamDivisionLabel.textColor = .white
+        teamRecordLabel.textColor = .white
+        teamConferenceRankLabel.textColor = .white
+        teamDivisionRankLabel.textColor = .white
+        baseView.backgroundColor = .black
+        teamDetailScrollView.backgroundColor = .black
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.teamDetailScrollView.indicatorStyle = .white;
@@ -80,6 +95,16 @@ class TeamDetailVC: UIViewController {
     }
     
     func updateToLightTheme() {
+        teamNameLabel.textColor = .black
+        teamYearFoundedLabel.textColor = .black
+        teamCityLabel.textColor = .black
+        teamConferenceLabel.textColor = .black
+        teamDivisionLabel.textColor = .black
+        teamRecordLabel.textColor = .black
+        teamConferenceRankLabel.textColor = .black
+        teamDivisionRankLabel.textColor = .black
+        baseView.backgroundColor = .white
+        teamDetailScrollView.backgroundColor = .white
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.teamDetailScrollView.indicatorStyle = .default;

@@ -48,9 +48,14 @@ class PlayerDetailVC: UIViewController {
     var use_real_images: String?
     var isDarkMode: Bool = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        start()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        start()
+        firebaseSetup()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
@@ -72,6 +77,21 @@ class PlayerDetailVC: UIViewController {
     }
     
     func updateToDarkTheme(){
+        nameLabel.textColor = .white
+        teamLabel.textColor = .white
+        jerseyLabel.textColor = .white
+        positionLabel.textColor = .white
+        birthdateLabel.textColor = .white
+        heightLabel.textColor = .white
+        weightLabel.textColor = .white
+        schoolLabel.textColor = .white
+        experienceLabel.textColor = .white
+        draftedLabel.textColor = .white
+        ppgLabel.textColor = .white
+        apgLabel.textColor = .white
+        rpgLabel.textColor = .white
+        baseView.backgroundColor = .black
+        playerDetailScrollView.backgroundColor = .black
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
         self.playerDetailScrollView.indicatorStyle = .white;
@@ -83,6 +103,21 @@ class PlayerDetailVC: UIViewController {
     }
     
     func updateToLightTheme() {
+        nameLabel.textColor = .black
+        teamLabel.textColor = .black
+        jerseyLabel.textColor = .black
+        positionLabel.textColor = .black
+        birthdateLabel.textColor = .black
+        heightLabel.textColor = .black
+        weightLabel.textColor = .black
+        schoolLabel.textColor = .black
+        experienceLabel.textColor = .black
+        draftedLabel.textColor = .black
+        ppgLabel.textColor = .black
+        apgLabel.textColor = .black
+        rpgLabel.textColor = .black
+        baseView.backgroundColor = .white
+        playerDetailScrollView.backgroundColor = .white
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.playerDetailScrollView.indicatorStyle = .default;

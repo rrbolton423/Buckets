@@ -9,7 +9,6 @@
 import UIKit
 
 class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    
     var unfilteredRoster: [Players]?
     var filteredRoster: [Players]?
     var selectedTeamID: String?
@@ -25,6 +24,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        firebaseSetup()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
