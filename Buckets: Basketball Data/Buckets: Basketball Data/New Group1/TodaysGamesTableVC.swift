@@ -10,7 +10,7 @@ import UIKit
 
 class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noGamesimage: UIImageView!
+    @IBOutlet weak var noGamesImage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
     
     let section = ["Today's Games", "Yesterday's Games"]
@@ -31,6 +31,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         FirebaseConstants().setupAPP()
         self.use_real_images = FirebaseConstants().getImages()
         defaultsChanged()
+        self.setNoGamesImage()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -119,9 +120,9 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             loadGamesWithRefreshController()
         } else {
             self.tableView.isUserInteractionEnabled = true
+            self.allGames.removeAll()
             self.todaysGames.removeAll()
             self.yesterdaysGames.removeAll()
-            self.todaysGames.removeAll()
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
@@ -145,11 +146,21 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.addSubview(self.activityIndicator)
     }
     
+    func setNoGamesImage() {
+        if self.use_real_images == "false" {
+            self.noGamesImage.image = UIImage(named: "tvstatic.png")
+        } else {
+            self.noGamesImage.image = UIImage(named: "nba_logo.png")
+        }
+    }
+    
     func loadGamesWithRefreshController(){
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         self.tableView.isUserInteractionEnabled = false
         self.allGames.removeAll()
+        self.todaysGames.removeAll()
+        self.yesterdaysGames.removeAll()
         self.tableView.reloadData()
         DispatchQueue.global(qos: .background).async {
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
@@ -157,12 +168,12 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
                 if returnedGames[0].count > 0 || returnedGames[1].count > 0 {
                     self.allGames = returnedGames
-                    self.yesterdaysGames = returnedGames[1]
                     self.todaysGames = returnedGames[0]
+                    self.yesterdaysGames = returnedGames[1]
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
-                        self.noGamesimage.isHidden = true
+                        self.noGamesImage.isHidden = true
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
@@ -172,8 +183,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     DispatchQueue.main.async{
                         self.tableView.isHidden = true
                         self.noGames.isHidden = false
-                        self.noGamesimage.image = UIImage(named: "no_games.png")
-                        self.noGamesimage.isHidden = false
+                        self.setNoGamesImage()
+                        self.noGamesImage.isHidden = false
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
@@ -186,7 +197,9 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     func loadGamesWithActivityIndicator(){
         self.tableView.isUserInteractionEnabled = false
+        self.allGames.removeAll()
         self.todaysGames.removeAll()
+        self.yesterdaysGames.removeAll()
         self.tableView.reloadData()
         setupActivityIndicator()
         if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
@@ -196,12 +209,12 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
                 if returnedGames[0].count > 0 || returnedGames[1].count > 0 {
                     self.allGames = returnedGames
-                    self.yesterdaysGames = returnedGames[1]
                     self.todaysGames = returnedGames[0]
+                    self.yesterdaysGames = returnedGames[1]
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
-                        self.noGamesimage.isHidden = true
+                        self.noGamesImage.isHidden = true
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
@@ -211,8 +224,8 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
                     DispatchQueue.main.async{
                         self.tableView.isHidden = true
                         self.noGames.isHidden = false
-                        self.noGamesimage.image = UIImage(named: "tvstatic.png")
-                        self.noGamesimage.isHidden = false
+                        self.setNoGamesImage()
+                        self.noGamesImage.isHidden = false
                         self.refreshController.endRefreshing()
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.removeFromSuperview()
