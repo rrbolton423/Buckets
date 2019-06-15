@@ -46,7 +46,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @objc func infoButtonTapped() {
-        let alert = UIAlertController(title: "Buckets: Basketball Data Version \(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")", message: "Disclaimer: \"Buckets: Basketball Data\" is not affiliated in any way with the National Basketball Association (NBA) or its 30 teams. All data, images, and logos are provided, with consent, by stats.nba.com and used solely for reference purposes.", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Buckets: Basketball Data v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")", message: "Disclaimer: This app is not endorsed by or affiliated with the National Basketball Association. Any trademarks used in the app are done so under “fair use” with the sole purpose of identifying the respective entities, and remain the property of their respective owners.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
