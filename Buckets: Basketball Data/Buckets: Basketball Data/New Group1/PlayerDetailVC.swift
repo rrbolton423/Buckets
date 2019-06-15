@@ -210,9 +210,7 @@ class PlayerDetailVC: UIViewController {
                         self.playerHeadshotURL = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/\(teamID)/\(PictureYear)/260x190/\(ID).png"
                         if self.playerHeadshotURL != nil {
                             self.headshotImageView.loadImageUsingCache(withURL: self.playerHeadshotURL ?? "")
-                            if self.headshotImageView.image != nil {
-                                return
-                            } else {
+                            if self.headshotImageView.image == nil {
                                 self.headshotImageView.displayPlaceholderImage()
                             }
                         }
