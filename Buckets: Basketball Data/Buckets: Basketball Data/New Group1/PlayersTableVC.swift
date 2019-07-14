@@ -159,18 +159,33 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
             DispatchQueue.global(qos: .background).async {
                 let playersAPI = PlayersApi()
                 if let teamRosterURL = self.teamRosterURL {
-                    playersAPI.getPlayers(url: teamRosterURL) { (players) in
-                        self.unfilteredRoster = players
-                        let namesSorted = self.unfilteredRoster?.sorted { (initial, next) -> Bool in
-                            return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
-                        }
-                        self.unfilteredRoster = namesSorted
-                        self.filteredRoster = self.unfilteredRoster
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.removeFromSuperview()
-                            self.tableView.isUserInteractionEnabled = true
+                    playersAPI.getPlayers(url: teamRosterURL) { players, error in
+                        if error == nil {
+                            self.unfilteredRoster = players
+                            let namesSorted = self.unfilteredRoster?.sorted { (initial, next) -> Bool in
+                                return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
+                            }
+                            self.unfilteredRoster = namesSorted
+                            self.filteredRoster = self.unfilteredRoster
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                self.tableView.isUserInteractionEnabled = true
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.tableView.isUserInteractionEnabled = false
+                                self.filteredRoster = nil
+                                self.tableView.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            }
                         }
                     }
                 }

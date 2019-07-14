@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class EastStandingsAPI {
     var eastTeamsArray = [StandingTeam]()
-    func getStandings(url: String, completion: @escaping ([StandingTeam]) -> Void) {
+    func getStandings(url: String, completion: @escaping ([StandingTeam]?, Error?) -> Void) {
         var eastTeam: StandingTeam?
         var ID: String?
         var conference: String?
@@ -67,7 +67,8 @@ class EastStandingsAPI {
             }
         } catch {
             print(error)
+            completion(nil, error)
         }
-        completion(eastTeamsArray)
+        completion(eastTeamsArray, nil)
     }
 }

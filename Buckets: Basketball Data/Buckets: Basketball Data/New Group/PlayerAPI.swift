@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class PlayerApi {
-    func getPlayers(url: String, completion: @escaping (Player) -> Void) {
+    func getPlayers(url: String, completion: @escaping (Player?, Error?) -> Void) {
         var player: Player?
         var ID: String?
         var teamID: String?
@@ -101,9 +101,10 @@ class PlayerApi {
             }            
         } catch {
             print(error)
+            completion(nil, error)
         }
         if let player = player {
-            completion(player)
+            completion(player, nil)
         }
     }
 }

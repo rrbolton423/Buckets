@@ -172,14 +172,24 @@ class TeamDetailVC: UIViewController {
             DispatchQueue.global(qos: .background).async {
                 let teamApi = TeamAPI()
                 if let teamInfoURL = self.teamInfoURL {
-                    teamApi.getTeamInfo(url: teamInfoURL) { (detailTeam) in
-                        DispatchQueue.main.async {
-                            self.teamToPass = detailTeam
-                            self.showInfoDetail(team: detailTeam)
-                            self.hideUI(value: false)
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.removeFromSuperview()
-                            self.teamDetailScrollView.isUserInteractionEnabled = true
+                    teamApi.getTeamInfo(url: teamInfoURL) { detailTeam, error in
+                        if error == nil {
+                            DispatchQueue.main.async {
+                                self.teamToPass = detailTeam
+                                self.showInfoDetail(team: detailTeam)
+                                self.hideUI(value: false)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                self.teamDetailScrollView.isUserInteractionEnabled = true
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            }
                         }
                     }
                 }

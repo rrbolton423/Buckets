@@ -184,32 +184,40 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
             let tomorrowsDate = self.gamesAPI.getTomorrowsDate()
-            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, tomorrowsDate: tomorrowsDate, completion: { (returnedGames) in
-                if returnedGames[0].count > 0 || returnedGames[1].count > 0 {
-                    self.allGames = returnedGames
-                    self.yesterdaysGames = returnedGames[0]
-                    self.todaysGames = returnedGames[1]
-                    self.tomorrowsGames = returnedGames[2]
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.noGames.isHidden = true
-                        self.noGamesImage.isHidden = true
-                        self.refreshController.endRefreshing()
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.removeFromSuperview()
-                        self.tableView.isUserInteractionEnabled = true
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, tomorrowsDate: tomorrowsDate, completion: { returnedGames, error in
+                if error == nil {
+                    if let games = returnedGames {
+                        if games[0].count > 0 || games[1].count > 0 || games[2].count > 0 {
+                            self.allGames = games
+                            self.yesterdaysGames = games[0]
+                            self.todaysGames = games[1]
+                            self.tomorrowsGames = games[2]
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                self.noGames.isHidden = true
+                                self.noGamesImage.isHidden = true
+                                self.refreshController.endRefreshing()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                self.tableView.isUserInteractionEnabled = true
+                            }
+                        }
                     }
                 } else {
-                    DispatchQueue.main.async{
-                        self.tableView.isHidden = true
-                        self.noGames.isHidden = false
-                        self.setNoGamesImage()
-                        self.noGamesImage.isHidden = false
-                        self.refreshController.endRefreshing()
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.removeFromSuperview()
-                        self.tableView.isUserInteractionEnabled = false
-                    }
+                    let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        DispatchQueue.main.async{
+                            self.tableView.isHidden = true
+                            self.noGames.isHidden = false
+                            self.setNoGamesImage()
+                            self.noGamesImage.isHidden = false
+                            self.refreshController.endRefreshing()
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
+                            self.tableView.isUserInteractionEnabled = false
+                        }
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             })
         }
@@ -228,32 +236,40 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
             let tomorrowsDate = self.gamesAPI.getTomorrowsDate()
-            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, tomorrowsDate: tomorrowsDate, completion: { (returnedGames) in
-                if returnedGames[0].count > 0 || returnedGames[1].count > 0 {
-                    self.allGames = returnedGames
-                    self.yesterdaysGames = returnedGames[0]
-                    self.todaysGames = returnedGames[1]
-                    self.tomorrowsGames = returnedGames[2]
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.noGames.isHidden = true
-                        self.noGamesImage.isHidden = true
-                        self.refreshController.endRefreshing()
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.removeFromSuperview()
-                        self.tableView.isUserInteractionEnabled = true
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, tomorrowsDate: tomorrowsDate, completion: { returnedGames, error in
+                if error == nil {
+                    if let games = returnedGames {
+                        if games[0].count > 0 || games[1].count > 0 || games[2].count > 0 {
+                            self.allGames = games
+                            self.yesterdaysGames = games[0]
+                            self.todaysGames = games[1]
+                            self.tomorrowsGames = games[2]
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                self.noGames.isHidden = true
+                                self.noGamesImage.isHidden = true
+                                self.refreshController.endRefreshing()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                self.tableView.isUserInteractionEnabled = true
+                            }
+                        }
                     }
                 } else {
-                    DispatchQueue.main.async{
-                        self.tableView.isHidden = true
-                        self.noGames.isHidden = false
-                        self.setNoGamesImage()
-                        self.noGamesImage.isHidden = false
-                        self.refreshController.endRefreshing()
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.removeFromSuperview()
-                        self.tableView.isUserInteractionEnabled = false
-                    }
+                    let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        DispatchQueue.main.async{
+                            self.tableView.isHidden = true
+                            self.noGames.isHidden = false
+                            self.setNoGamesImage()
+                            self.noGamesImage.isHidden = false
+                            self.refreshController.endRefreshing()
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
+                            self.tableView.isUserInteractionEnabled = false
+                        }
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             })
         }

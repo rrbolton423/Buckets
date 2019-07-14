@@ -170,14 +170,26 @@ class PlayerDetailVC: UIViewController {
             DispatchQueue.global(qos: .background).async {
                 let detailPlayerApi = PlayerApi()
                 if let playerInfoURL = self.playerInfoURL {
-                    detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer) in
-                        DispatchQueue.main.async {
-                            self.detailPlayer = detailPlayer
-                            self.showDetail(player: detailPlayer)
-                            self.hideUI(value: false)
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.removeFromSuperview()
-                            self.playerDetailScrollView.isUserInteractionEnabled = true
+                    detailPlayerApi.getPlayers(url: playerInfoURL) { (detailPlayer, error)  in
+                        if error == nil {
+                            DispatchQueue.main.async {
+                                if let player = detailPlayer {
+                                    self.detailPlayer = player
+                                    self.showDetail(player: player)
+                                }
+                                self.hideUI(value: false)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                self.playerDetailScrollView.isUserInteractionEnabled = true
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            }
                         }
                     }
                 }

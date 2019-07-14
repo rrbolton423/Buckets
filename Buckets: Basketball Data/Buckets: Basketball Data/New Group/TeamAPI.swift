@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class TeamAPI {
-    func getTeamInfo(url: String, completion: @escaping (DetailTeam) -> Void) {
+    func getTeamInfo(url: String, completion: @escaping (DetailTeam?, Error?) -> Void) {
         var detailTeam: DetailTeam?
         let ID: String?
         let city: String?
@@ -61,9 +61,10 @@ class TeamAPI {
             }
         } catch {
             print(error)
+            completion(nil, error)
         }
         if let team = detailTeam {
-            completion(team)
+            completion(team, nil)
         }
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class PlayersApi {
-    func getPlayers(url: String, completion: @escaping ([Players]) -> Void) {
+    func getPlayers(url: String, completion: @escaping ([Players]?, Error?) -> Void) {
         var resultArray = [Players]()
         guard let url = URL(string: url) else { return }
         var ID: String?
@@ -67,9 +67,10 @@ class PlayersApi {
                     }
                 }
             }
-            completion(resultArray)
+            completion(resultArray, nil)
         } catch {
             print(error)
+            completion(nil, error)
         }
     }
 }
