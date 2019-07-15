@@ -149,15 +149,14 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                             }
                         } else {
                             DispatchQueue.main.async {
-                                self.eastTeams.removeAll()
-                                self.westTeams.removeAll()
-                                self.tableView.reloadData()
-                                self.tableView.isUserInteractionEnabled = true
-                                self.activityIndicator.stopAnimating()
-                                self.activityIndicator.removeFromSuperview()
                                 let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                                    self.navigationController?.popToRootViewController(animated: true)
+                                    self.eastTeams.removeAll()
+                                    self.westTeams.removeAll()
+                                    self.tableView.reloadData()
+                                    self.tableView.isUserInteractionEnabled = true
+                                    self.activityIndicator.stopAnimating()
+                                    self.activityIndicator.removeFromSuperview()
                                 }))
                                 self.present(alert, animated: true, completion: nil)
                             }
@@ -173,15 +172,14 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                             }
                         } else {
                             DispatchQueue.main.async {
-                                self.eastTeams.removeAll()
-                                self.westTeams.removeAll()
-                                self.tableView.reloadData()
-                                self.tableView.isUserInteractionEnabled = true
-                                self.activityIndicator.stopAnimating()
-                                self.activityIndicator.removeFromSuperview()
                                 let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                                    self.navigationController?.popToRootViewController(animated: true)
+                                    self.eastTeams.removeAll()
+                                    self.westTeams.removeAll()
+                                    self.tableView.reloadData()
+                                    self.tableView.isUserInteractionEnabled = true
+                                    self.activityIndicator.stopAnimating()
+                                    self.activityIndicator.removeFromSuperview()
                                 }))
                                 self.present(alert, animated: true, completion: nil)
                             }
@@ -197,15 +195,14 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             }
         } else {
             DispatchQueue.main.async {
-                self.eastTeams.removeAll()
-                self.westTeams.removeAll()
-                self.tableView.reloadData()
-                self.tableView.isUserInteractionEnabled = true
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.removeFromSuperview()
                 let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    self.navigationController?.popToRootViewController(animated: true)
+                    self.eastTeams.removeAll()
+                    self.westTeams.removeAll()
+                    self.tableView.reloadData()
+                    self.tableView.isUserInteractionEnabled = true
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.removeFromSuperview()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
