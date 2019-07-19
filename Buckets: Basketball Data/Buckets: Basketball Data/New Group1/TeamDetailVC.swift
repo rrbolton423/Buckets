@@ -211,7 +211,7 @@ class TeamDetailVC: UIViewController {
     
     func showInfoDetail(team: DetailTeam?) {
         if let city = team?.city, let name = team?.name {
-            if name == "" {
+            if name == "" || name == " " {
                 self.teamNameLabel.text = "N/A"
             } else {
                 self.teamNameLabel.text = "\(city) \(name)"
@@ -293,7 +293,7 @@ class TeamDetailVC: UIViewController {
         self.teamLogoImageView.image = self.teamImage
         
         if let yearFounded = team?.yearFounded {
-            if yearFounded == "" {
+            if yearFounded == "" || yearFounded == " " {
                 self.teamYearFoundedLabel.text = "N/A"
             } else {
                 self.teamYearFoundedLabel.text = yearFounded
@@ -303,7 +303,7 @@ class TeamDetailVC: UIViewController {
         }
         
         if let city = team?.city {
-            if city == "" {
+            if city == "" || city == " " {
                 self.teamCityLabel.text = "N/A"
             } else {
                 self.teamCityLabel.text = city
@@ -313,7 +313,7 @@ class TeamDetailVC: UIViewController {
         }
         
         if let conference = team?.conference {
-            if conference == "" {
+            if conference == "" || conference == " " {
                 self.teamConferenceLabel.text = "N/A"
             } else {
                 self.teamConferenceLabel.text = conference
@@ -323,7 +323,7 @@ class TeamDetailVC: UIViewController {
         }
         
         if let division = team?.division {
-            if division == "" {
+            if division == "" || division == " " {
                 self.teamDivisionLabel.text = "N/A"
             } else {
                 self.teamDivisionLabel.text = team?.division
@@ -333,7 +333,7 @@ class TeamDetailVC: UIViewController {
         }
         
         if let wins = team?.wins, let losses = team?.losses {
-            if wins == "" || losses == "" {
+            if wins == "" || losses == "" || wins == " " || losses == " " {
                 self.teamRecordLabel.text = "N/A"
             } else {
                 self.teamRecordLabel.text = "\(wins) - \(losses)"
@@ -343,7 +343,7 @@ class TeamDetailVC: UIViewController {
         }
         
         if let conferenceRank = team?.conferenceRank {
-            if conferenceRank == "" {
+            if conferenceRank == "" || conferenceRank == " " {
                 self.teamConferenceRankLabel.text = "N/A"
             } else {
                 self.teamConferenceRankLabel.text = team?.conferenceRank
@@ -353,7 +353,7 @@ class TeamDetailVC: UIViewController {
         }
         
         if let divisonRank = team?.divisionRank {
-            if divisonRank == "" {
+            if divisonRank == "" || divisonRank == " " {
                 self.teamDivisionRankLabel.text = "N/A"
             } else {
                 self.teamDivisionRankLabel.text = team?.divisionRank

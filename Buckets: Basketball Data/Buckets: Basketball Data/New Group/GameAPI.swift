@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class GameAPI {
-    func getGames(yesterdaysDate: String, todaysDate: String, url: String, tomorrowsDate: String, completion: @escaping ([[Game]]?, Error?) -> Void) {
+    func getGames(yesterdaysDate: String, todaysDate: String, url: String, tomorrowsDate: String, completion: @escaping ([[Game]]) -> Void) {
         var resultArray = [[Game]]()
         var yesterdaysGamesArray = [Game]()
         var todaysGamesArray = [Game]()
@@ -101,7 +101,7 @@ class GameAPI {
             print(error)
         }
         resultArray = [yesterdaysGamesArray, todaysGamesArray, tomorrowsGamesArray]
-        completion(resultArray, nil)
+        completion(resultArray)
     }
     
     func getTodaysDate() -> String {

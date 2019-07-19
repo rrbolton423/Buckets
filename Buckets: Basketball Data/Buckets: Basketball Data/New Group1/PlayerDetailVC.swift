@@ -152,6 +152,7 @@ class PlayerDetailVC: UIViewController {
     func checkForPlayerID() {
         if let playerID = self.playerID {
             playerInfoURL = "\(PlayerInfoBaseURL)?\(PlayerID)\(playerID)"
+            print(playerInfoURL)
         } else {
             self.navigationController?.popToRootViewController(animated: true)
             self.alert(title: "Fatal Error", message: "PlayerID Required")
@@ -233,7 +234,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let name = player.name {
-                if name == "" {
+                if name == "" || name == " " {
                     self.nameLabel.text = "N/A"
                 } else {
                     self.nameLabel.text = name
@@ -243,7 +244,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let teamCity = player.teamCity, let teamName = player.teamName {
-                if teamCity == "" || teamName == "" {
+                if teamCity == "" || teamCity == " " {
                     self.teamLabel.text = "N/A"
                 } else {
                     self.teamLabel.text = "\(teamCity) \(teamName)"
@@ -253,7 +254,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let jerseyNumber = player.jerseyNumber {
-                if jerseyNumber == "" {
+                if jerseyNumber == "" || jerseyNumber == " " {
                     self.jerseyLabel.text = "N/A"
                 } else {
                     self.jerseyLabel.text = "#\(jerseyNumber)"
@@ -263,7 +264,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let position = player.position {
-                if position == "" {
+                if position == "" || position == " " {
                     self.positionLabel.text = "N/A"
                 } else {
                     self.positionLabel.text = position
@@ -273,7 +274,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let birthdate = self.playerBirthdateFormatted {
-                if birthdate == "" {
+                if birthdate == "" || birthdate == " " {
                     self.birthdateLabel.text = "N/A"
                 } else {
                     self.birthdateLabel.text = "\(birthdate.lowercased().capitalized) (\(self.calcAge(birthday: birthdate)) years)"
@@ -283,7 +284,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let height = player.height {
-                if height == "" {
+                if height == "" || height == " " {
                     self.heightLabel.text = "N/A"
                 } else {
                     let newHeight = height.replacingOccurrences(of: "-", with: " ' ")
@@ -295,7 +296,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let weight = player.weight {
-                if weight == "" {
+                if weight == "" || weight == " " {
                     self.weightLabel.text = "N/A"
                 } else {
                     self.weightLabel.text = "\(weight) lbs"
@@ -305,7 +306,8 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let school = player.school {
-                if school == "" {
+                print(school)
+                if school == "" || school == " " {
                     self.schoolLabel.text = "N/A"
                 } else {
                     self.schoolLabel.text = school
@@ -315,7 +317,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let experience = player.experience {
-                if experience == "" {
+                if experience == "" || experience == " " {
                     self.experienceLabel.text = "N/A"
                 } else {
                     if experience == "0" {
@@ -331,7 +333,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let draftYear = player.draftYear, let draftRound = player.draftRound, let draftPick = player.draftNumber {
-                if draftYear == "" || draftRound == "" || draftPick == "" {
+                if draftYear == "" || draftRound == "" || draftPick == "" || draftYear == " " || draftRound == " " || draftPick == " " {
                     self.draftedLabel.text = "N/A"
                 } else {
                     if draftYear == "Undrafted" || draftRound == "Undrafted" || draftPick == "Undrafted" {
@@ -345,7 +347,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let ppg = player.ppg {
-                if ppg == "" {
+                if ppg == "" || ppg == " " {
                     self.ppgLabel.text = "N/A"
                 } else {
                     let ppg = (ppg as NSString).doubleValue
@@ -356,7 +358,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let apg = player.apg {
-                if apg == "" {
+                if apg == "" || apg == " " {
                     self.apgLabel.text = "N/A"
                 } else {
                     let apg = (apg as NSString).doubleValue
@@ -367,7 +369,7 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let rpg = player.rpg {
-                if rpg == "" {
+                if rpg == "" || rpg == " " {
                     self.rpgLabel.text = "N/A"
                 } else {
                     let rpg = (rpg as NSString).doubleValue
