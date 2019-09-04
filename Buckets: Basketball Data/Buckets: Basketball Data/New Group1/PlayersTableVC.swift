@@ -223,7 +223,11 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         cell?.backgroundColor = .clear
         if let nbaTeams = filteredRoster {
             if let playerName = nbaTeams[indexPath.row].fullName, let jerseyNumber = nbaTeams[indexPath.row].jerseyNumber {
-                cell?.playerNameLabel.text = "#"+jerseyNumber + " " + playerName
+                if jerseyNumber == "" || jerseyNumber == " " {
+                    cell?.playerNameLabel.text = playerName
+                } else {
+                    cell?.playerNameLabel.text = "#"+jerseyNumber + " " + playerName
+                }
             }
             if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
                 cell?.playerNameLabel.textColor = .white

@@ -108,7 +108,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             return
         }
         firebaseSetup()
-        standingsURL = "\(StandingsURL)\(date.month)%2F\(date.day)%2F\(date.year)"
+        standingsURL = "\(StandingsURL)\(date.month)%2F\(date.day)%2F\(Int(date.year)! + 1)"
         fetchStandings()
         self.tableView.reloadData()
     }
@@ -142,6 +142,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             DispatchQueue.global(qos: .background).async {
                 let eastStandingsAPI = EastStandingsAPI()
                 if let eastStandingsURL = self.standingsURL {
+                    print(eastStandingsURL)
                     eastStandingsAPI.getStandings(url: eastStandingsURL) { eastTeams, error  in
                         if error == nil {
                             if let unrwappedEastTeams = eastTeams {
@@ -166,6 +167,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 }
                 let westStandingsAPI = WestStandingsAPI()
                 if let westStandingsURL = self.standingsURL {
+                    print(westStandingsURL)
                     westStandingsAPI.getStandings(url: westStandingsURL) { westTeams, error in
                         if error == nil {
                             if let unrwappedWestTeams = westTeams {

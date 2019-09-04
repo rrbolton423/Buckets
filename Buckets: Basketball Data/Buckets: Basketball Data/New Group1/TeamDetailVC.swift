@@ -172,6 +172,7 @@ class TeamDetailVC: UIViewController {
             DispatchQueue.global(qos: .background).async {
                 let teamApi = TeamAPI()
                 if let teamInfoURL = self.teamInfoURL {
+                    print(teamInfoURL)
                     teamApi.getTeamInfo(url: teamInfoURL) { detailTeam, error in
                         if error == nil {
                             DispatchQueue.main.async {
@@ -334,32 +335,32 @@ class TeamDetailVC: UIViewController {
         
         if let wins = team?.wins, let losses = team?.losses {
             if wins == "" || losses == "" || wins == " " || losses == " " {
-                self.teamRecordLabel.text = "N/A"
+                self.teamRecordLabel.text = "0 - 0"
             } else {
                 self.teamRecordLabel.text = "\(wins) - \(losses)"
             }
         } else {
-            self.teamConferenceRankLabel.text = "N/A"
+            self.teamConferenceRankLabel.text = "0 - 0"
         }
         
         if let conferenceRank = team?.conferenceRank {
             if conferenceRank == "" || conferenceRank == " " {
-                self.teamConferenceRankLabel.text = "N/A"
+                self.teamConferenceRankLabel.text = "0"
             } else {
                 self.teamConferenceRankLabel.text = team?.conferenceRank
             }
         } else {
-            self.teamConferenceRankLabel.text = "N/A"
+            self.teamConferenceRankLabel.text = "0"
         }
         
         if let divisonRank = team?.divisionRank {
             if divisonRank == "" || divisonRank == " " {
-                self.teamDivisionRankLabel.text = "N/A"
+                self.teamDivisionRankLabel.text = "0"
             } else {
                 self.teamDivisionRankLabel.text = team?.divisionRank
             }
         } else {
-            self.teamDivisionRankLabel.text = "N/A"
+            self.teamDivisionRankLabel.text = "0"
         }
         
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
