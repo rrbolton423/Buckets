@@ -172,7 +172,6 @@ class TeamDetailVC: UIViewController {
             DispatchQueue.global(qos: .background).async {
                 let teamApi = TeamAPI()
                 if let teamInfoURL = self.teamInfoURL {
-                    print(teamInfoURL)
                     teamApi.getTeamInfo(url: teamInfoURL) { detailTeam, error in
                         if error == nil {
                             DispatchQueue.main.async {

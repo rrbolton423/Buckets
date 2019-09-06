@@ -152,7 +152,6 @@ class PlayerDetailVC: UIViewController {
     func checkForPlayerID() {
         if let playerID = self.playerID {
             playerInfoURL = "\(PlayerInfoBaseURL)?\(PlayerID)\(playerID)"
-            print(playerInfoURL)
         } else {
             self.navigationController?.popToRootViewController(animated: true)
             self.alert(title: "Fatal Error", message: "PlayerID Required")
@@ -306,7 +305,6 @@ class PlayerDetailVC: UIViewController {
             }
             
             if let school = player.school {
-                print(school)
                 if school == "" || school == " " {
                     self.schoolLabel.text = "N/A"
                 } else {

@@ -51,7 +51,6 @@ class QuizViewController: UIViewController {
             updateToDarkTheme()
         } else {
             updateToLightTheme()
-            print(isDarkMode)
         }
     }
     
