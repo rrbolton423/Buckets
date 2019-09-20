@@ -72,7 +72,7 @@ class GameAPI {
         } catch {
             print(error)
         }
-        let tomorrowsUrl = URL(string: String(format: url, tomorrowsDate))
+        let tomorrowsUrl = URL(string: String(format: url, "20190303"))
         guard let unwrappedTomorrowsUrl = tomorrowsUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedTomorrowsUrl)

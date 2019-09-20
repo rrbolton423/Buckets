@@ -157,7 +157,6 @@ extension UIColor {
 }
 
 extension UIApplication {
-    
     class var topViewController: UIViewController? {
         return getTopViewController()
     }

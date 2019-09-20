@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class StandingsCell: UITableViewCell {
-    
     @IBOutlet weak var teamImageView: UIImageView!
     @IBOutlet weak var winsLabel: UILabel!
     @IBOutlet weak var lossesLabel: UILabel!
@@ -19,5 +18,4 @@ class StandingsCell: UITableViewCell {
     @IBOutlet weak var lLabel: UILabel!
     @IBOutlet weak var wLabel: UILabel!
     @IBOutlet weak var wpLabel: UILabel!
-    
 }

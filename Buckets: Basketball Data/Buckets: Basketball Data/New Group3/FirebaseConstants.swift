@@ -11,7 +11,6 @@ import UIKit
 import Firebase
 
 class FirebaseConstants: NSObject {
-    
     var remoteConfig:RemoteConfig!
     
     func setupAPP() {

@@ -140,10 +140,10 @@
 		A34191402239DA2A0041E3CD /* Buckets: Basketball Data */ = {
 			isa = PBXGroup;
 			children = (
-				A34191892239DBF70041E3CD /* Models */,
-				A34191922239DC0E0041E3CD /* Views */,
-				A34191762239DB9D0041E3CD /* Controllers */,
-				A341916F2239DB6D0041E3CD /* APIs */,
+				A34191892239DBF70041E3CD /* Model */,
+				A34191922239DC0E0041E3CD /* View */,
+				A34191762239DB9D0041E3CD /* Controller */,
+				A341916F2239DB6D0041E3CD /* API */,
 				A341917F2239DBD50041E3CD /* JSON */,
 				A34191822239DBE10041E3CD /* Utils */,
 				A34903EE22556FB4008F159D /* Quiz */,
@@ -158,7 +158,7 @@
 			path = "Buckets: Basketball Data";
 			sourceTree = "<group>";
 		};
-		A341916F2239DB6D0041E3CD /* APIs */ = {
+		A341916F2239DB6D0041E3CD /* API */ = {
 			isa = PBXGroup;
 			children = (
 				A3A8A01D224C56BD0051BF7E /* GameAPI.swift */,
@@ -168,11 +168,11 @@
 				A32D59632247BAAA0038CE69 /* EastStandingsAPI.swift */,
 				A32D59692247ECA00038CE69 /* WestStandingsAPI.swift */,
 			);
-			name = APIs;
+			name = API;
 			path = "New Group";
 			sourceTree = "<group>";
 		};
-		A34191762239DB9D0041E3CD /* Controllers */ = {
+		A34191762239DB9D0041E3CD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				A32D595F224751120038CE69 /* TodaysGamesTableVC.swift */,
@@ -184,7 +184,7 @@
 				A3889E94225DC095006F0591 /* SettingsTableViewController.swift */,
 				A3616D37225E843000E34DFC /* VideoViewController.swift */,
 			);
-			name = Controllers;
+			name = Controller;
 			path = "New Group1";
 			sourceTree = "<group>";
 		};
@@ -210,7 +210,7 @@
 			path = "New Group3";
 			sourceTree = "<group>";
 		};
-		A34191892239DBF70041E3CD /* Models */ = {
+		A34191892239DBF70041E3CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				A3A8A01B224C56A00051BF7E /* Game.swift */,
@@ -220,11 +220,11 @@
 				A331D553223BFE4B0096A5A9 /* DetailTeam.swift */,
 				A32D59672247CEAC0038CE69 /* StandingTeam.swift */,
 			);
-			name = Models;
+			name = Model;
 			path = "New Group4";
 			sourceTree = "<group>";
 		};
-		A34191922239DC0E0041E3CD /* Views */ = {
+		A34191922239DC0E0041E3CD /* View */ = {
 			isa = PBXGroup;
 			children = (
 				A32D595D22474DF70038CE69 /* TodaysGamesCell.swift */,
@@ -232,7 +232,7 @@
 				A331D54E223BFE420096A5A9 /* PlayerCell.swift */,
 				A32D595B22474C730038CE69 /* StandingsCell.swift */,
 			);
-			name = Views;
+			name = View;
 			path = "New Group5";
 			sourceTree = "<group>";
 		};

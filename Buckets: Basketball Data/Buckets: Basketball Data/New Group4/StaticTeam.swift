@@ -35,7 +35,6 @@ class StaticTeam: NSObject, NSCoding {
         aCoder.encode(self.name,forKey:"teamName")
         aCoder.encode(self.picture,forKey:"teamPic")
     }
-    
 }
 
 class DataStore {

@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 class VideoViewController: UIViewController, WKNavigationDelegate {
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet var webView: WKWebView!
     
     var game: Game?
     var activityIndicator = UIActivityIndicatorView(style: .gray)
