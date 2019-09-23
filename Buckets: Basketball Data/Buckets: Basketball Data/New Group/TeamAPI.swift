@@ -29,7 +29,6 @@ class TeamAPI {
             _ = json["resultSets"][0]["headers"]
             let rowSet = json["resultSets"][0]["rowSet"]
             var teamInfo: JSON?
-            
             if rowSet.count == 0 {
                 ID = "N/A"
                 city = "N/A"
