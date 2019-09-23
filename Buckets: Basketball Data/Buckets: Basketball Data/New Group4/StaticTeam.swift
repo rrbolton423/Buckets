@@ -9,7 +9,6 @@
 import Foundation
 
 class StaticTeam: NSObject, NSCoding {
-    
     let ID: String?
     let abbreviation: String?
     let name: String?
