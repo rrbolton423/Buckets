@@ -18,7 +18,7 @@ class FirebaseConstants: NSObject {
         remoteConfig.fetch(withExpirationDuration: 0) { (status, error) -> Void in
             if (status == RemoteConfigFetchStatus.success) {
                 print("Config fetched!")
-                self.remoteConfig.activateFetched()
+                self.remoteConfig.activate(completionHandler: nil)
             } else {
                 print("Config not fetched")
             }
@@ -27,8 +27,6 @@ class FirebaseConstants: NSObject {
     
     func createDefaults() {
         remoteConfig = RemoteConfig.remoteConfig()
-        let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: true)
-        remoteConfig.configSettings = remoteConfigSettings
         remoteConfig.setDefaults(fromPlist: "RemoteConfigDefaults")
     }
     

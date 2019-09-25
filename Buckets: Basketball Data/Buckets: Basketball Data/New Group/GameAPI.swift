@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class GameAPI {
     func getGames(yesterdaysDate: String, todaysDate: String, url: String, tomorrowsDate: String, completion: @escaping ([[Game]]) -> Void) {

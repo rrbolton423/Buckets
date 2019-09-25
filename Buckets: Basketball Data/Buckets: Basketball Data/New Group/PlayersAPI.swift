@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class PlayersApi {
     func getPlayers(url: String, completion: @escaping ([Players]?, Error?) -> Void) {
