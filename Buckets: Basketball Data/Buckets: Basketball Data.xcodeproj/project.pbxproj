@@ -123,6 +123,13 @@
 			isa = PBXGroup;
 			children = (
 				A34191402239DA2A0041E3CD /* Buckets: Basketball Data */,
+				A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */,
+				A3E56B1F224ECDD000C3E72E /* Main.storyboard */,
+				A331D539223BFE0F0096A5A9 /* Assets.xcassets */,
+				A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */,
+				A341914D2239DA2C0041E3CD /* Info.plist */,
+				A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */,
+				A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */,
 				A341913F2239DA2A0041E3CD /* Products */,
 				3652C7695FDEFACC487366D6 /* Pods */,
 				BC84F26864683BBD1A2C0BE0 /* Frameworks */,
@@ -145,15 +152,9 @@
 				A34191762239DB9D0041E3CD /* Controller */,
 				A341916F2239DB6D0041E3CD /* API */,
 				A34903EE22556FB4008F159D /* Quiz */,
+				A3FFC66C23467AA900CE494B /* Storyboard */,
 				A34191822239DBE10041E3CD /* Utils */,
 				A341917F2239DBD50041E3CD /* JSON */,
-				A331D53A223BFE0F0096A5A9 /* AppDelegate.swift */,
-				A3E56B1F224ECDD000C3E72E /* Main.storyboard */,
-				A331D539223BFE0F0096A5A9 /* Assets.xcassets */,
-				A331D538223BFE0E0096A5A9 /* LaunchScreen.storyboard */,
-				A341914D2239DA2C0041E3CD /* Info.plist */,
-				A3378DA7223ECEEA0043BFFC /* GoogleService-Info.plist */,
-				A3378DAB223ED37E0043BFFC /* RemoteConfigDefaults.plist */,
 			);
 			path = "Buckets: Basketball Data";
 			sourceTree = "<group>";
@@ -245,6 +246,13 @@
 				A34903F522557074008F159D /* GameSound.wav */,
 			);
 			path = Quiz;
+			sourceTree = "<group>";
+		};
+		A3FFC66C23467AA900CE494B /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		BC84F26864683BBD1A2C0BE0 /* Frameworks */ = {
@@ -546,7 +554,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XQ87AL2NL5;
-				INFOPLIST_FILE = "Buckets: Basketball Data/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,7 +576,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XQ87AL2NL5;
-				INFOPLIST_FILE = "Buckets: Basketball Data/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

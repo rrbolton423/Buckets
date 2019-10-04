@@ -265,7 +265,6 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-        
         let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         if isDarkMode == true {
             view.tintColor = hexStringToUIColor(hex: "#252525")
@@ -307,32 +306,31 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        var gameToTweet: Game?
+        var gameToShare: Game?
+        let appUrl = "https://itunes.apple.com/us/app/buckets-basketball-data/id1456202460?ls=1&mt=8"
+        var shareText: String = String()
         let section = indexPath.section
         if section == 0 {
             let row = indexPath.row
-            gameToTweet = yesterdaysGames[row]
+            gameToShare = yesterdaysGames[row]
         } else if section == 1 {
             let row = indexPath.row
-            gameToTweet = todaysGames[row]
+            gameToShare = todaysGames[row]
         } else {
             let row = indexPath.row
-            gameToTweet = tomorrowsGames[row]
+            gameToShare = tomorrowsGames[row]
         }
         let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
-            if let awayTeam = gameToTweet?.awayTeamName, let homeTeam = gameToTweet?.homeTeamName, let awayScore = gameToTweet?.awayTeamScore, let homeScore = gameToTweet?.homeTeamScore, let gameQuarter = gameToTweet?.quarter, let gameVenue = gameToTweet?.arena {
-                
-                var tweetText: String = String()
+            if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena {
                 
                 if gameQuarter.contains(":") {
-                    tweetText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                    shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else if gameQuarter == "Final" {
-                    tweetText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
+                    shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else {
-                    tweetText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball Data app for more scores, stats and standings."
                 }
-                let tweetUrl = "https://itunes.apple.com/us/app/buckets-basketball-data/id1456202460?ls=1&mt=8"
-                let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
+                let shareString = "https://twitter.com/intent/tweet?text=\(shareText)&url=\(appUrl)"
                 let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
                 let url = URL(string: escapedShareString)
                 if let url = URL(string: "\(url!)"), !url.absoluteString.isEmpty {
@@ -343,7 +341,30 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         tweet.backgroundColor = hexStringToUIColor(hex: "#1DA1F2")
-        return [tweet]
+        
+        let post = UITableViewRowAction(style: .default, title: "Post") { (action, indexPath) in
+            if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena {
+                
+                if gameQuarter.contains(":") {
+                    shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                } else if gameQuarter == "Final" {
+                    shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
+                } else {
+                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                }
+                let shareString = "https://www.facebook.com/sharer/sharer.php?u=\(appUrl)&quote=\(shareText)"
+                let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                let url = URL(string: escapedShareString)
+                if let url = URL(string: "\(url!)"), !url.absoluteString.isEmpty {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            } else {
+                return
+            }
+        }
+        post.backgroundColor = hexStringToUIColor(hex: "#3b5998")
+
+        return [tweet, post]
     }
     
     
@@ -408,7 +429,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             case "TOR": self.awayTeamImage = UIImage(named: "TOR_placeholder.png")
             case "UTA": self.awayTeamImage = UIImage(named: "UTA_placeholder.png")
             case "WAS": self.awayTeamImage = UIImage(named: "WAS_placeholder.png")
-            default: self.awayTeamImage = UIImage(named: "placeholder.png")
+            default: self.awayTeamImage = UIImage(named: "tvstatic.png")
             }
         } else {
             switch allGames[indexPath.section][indexPath.row].awayTeamName {
@@ -477,7 +498,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             case "TOR": self.homeTeamImage = UIImage(named: "TOR_placeholder.png")
             case "UTA": self.homeTeamImage = UIImage(named: "UTA_placeholder.png")
             case "WAS": self.homeTeamImage = UIImage(named: "WAS_placeholder.png")
-            default: self.homeTeamImage = UIImage(named: "placeholder.png")
+            default: self.homeTeamImage = UIImage(named: "tvstatic.png")
             }
         } else {
             switch allGames[indexPath.section][indexPath.row].homeTeamName {
