@@ -7,17 +7,20 @@
 //
 
 import UIKit
-import Firebase
 import CoreData
+import Firebase
+import UserNotifications
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+
     var window: UIWindow?
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        configurePushNotification()
+//        FirebaseApp.configure()
         FirebaseConstants().setupAPP()
         var appLaunches = UserDefaults.standard.integer(forKey: "appLaunches")
         appLaunches += 1
@@ -47,6 +50,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    //MARK: - Configure Push Notification
+    fileprivate func configurePushNotification() {
+        FirebaseApp.configure()
+        if #available(iOS 10, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+                (granted, error) in
+                // For iOS 10 display notification (sent via APNS)
+                UNUserNotificationCenter.current().delegate = self
+                
+                // For iOS 10 data message (sent via FCM)
+                Messaging.messaging().delegate = self
+            }
+            
+        } else {
+            let notificationSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+        
+    }
+    
+    //MARK: - UIApplicationDelegate Methods
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        
+        // Print message ID.
+        //    if let messageID = userInfo[gcmMessageIDKey]
+        //    {
+        //      print("Message ID: \(messageID)")
+        //    }
+        
+        // Print full message.
+        print(userInfo)
+        
+        //    let code = String.getString(message: userInfo["code"])
+        guard let aps = userInfo["aps"] as? Dictionary<String, Any> else { return }
+        guard (aps["alert"] as? String) != nil else { return }
+        //    guard let body = alert["body"] as? String else { return }
+        
+        completionHandler([])
+    }
+    
+    // Handle notification messages after display notification is tapped by the user.
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        print(userInfo)
+        completionHandler()
+    }
+    
+    //MARK: - Fire Messaging Delegates
+    func application(received remoteMessage: MessagingRemoteMessage) {
+        print(remoteMessage.appData)
     }
     
     // MARK: - Core Data stack
@@ -95,4 +157,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
-
