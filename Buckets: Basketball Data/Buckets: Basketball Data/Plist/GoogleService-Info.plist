@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>4072311406-uqdglg6adae1fg3sqg43omtrf79ff3ch.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.4072311406-uqdglg6adae1fg3sqg43omtrf79ff3ch</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBqbt_-8MOhXtcBdQhP8r6h5I60ucDCQik</string>
+	<key>GCM_SENDER_ID</key>
+	<string>4072311406</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.romellbolton.Buckets--Basketball-Data</string>
+	<key>PROJECT_ID</key>
+	<string>buckets-e7a96</string>
+	<key>STORAGE_BUCKET</key>
+	<string>buckets-e7a96.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:4072311406:ios:e2c37b697d242bc7</string>
+	<key>DATABASE_URL</key>
+	<string>https://buckets-e7a96.firebaseio.com</string>
+</dict>
+</plist>
