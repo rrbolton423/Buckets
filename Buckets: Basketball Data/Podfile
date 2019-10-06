@@ -12,5 +12,4 @@ target 'Buckets: Basketball Data' do
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Messaging'
-  pod 'Firebase/Firestore'
 end

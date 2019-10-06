@@ -45,7 +45,6 @@
 		A3889E95225DC095006F0591 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3889E94225DC095006F0591 /* SettingsTableViewController.swift */; };
 		A3A8A01C224C56A00051BF7E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A01B224C56A00051BF7E /* Game.swift */; };
 		A3A8A01E224C56BD0051BF7E /* GameAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A01D224C56BD0051BF7E /* GameAPI.swift */; };
-		A3CBDB492347D50B00B5EC51 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CBDB482347D50B00B5EC51 /* PushNotificationManager.swift */; };
 		A3E56B20224ECDD000C3E72E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E56B1F224ECDD000C3E72E /* Main.storyboard */; };
 		A3EA9D1622529BCB005D85F1 /* StaticTeams.json in Resources */ = {isa = PBXBuildFile; fileRef = A3EA9D1522529BCB005D85F1 /* StaticTeams.json */; };
 		B2BF8E988EA5B0A82C834FEE /* Pods_Buckets__Basketball_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32ED668544646D0C65CB25 /* Pods_Buckets__Basketball_Data.framework */; };
@@ -95,7 +94,6 @@
 		A3A8A01B224C56A00051BF7E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		A3A8A01D224C56BD0051BF7E /* GameAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAPI.swift; sourceTree = "<group>"; };
 		A3CBDB462347D3BD00B5EC51 /* Buckets: Basketball Data.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Buckets: Basketball Data.entitlements"; sourceTree = "<group>"; };
-		A3CBDB482347D50B00B5EC51 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		A3E56B1F224ECDD000C3E72E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A3EA9D1522529BCB005D85F1 /* StaticTeams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticTeams.json; sourceTree = "<group>"; };
 		A5AEA5F3184DF99C20E038A6 /* Pods-Buckets: Basketball Data.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buckets: Basketball Data.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data.debug.xcconfig"; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				A3CBDB462347D3BD00B5EC51 /* Buckets: Basketball Data.entitlements */,
-				A3CBDB482347D50B00B5EC51 /* PushNotificationManager.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -390,24 +387,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Buckets: Basketball Data/Pods-Buckets: Basketball Data-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +447,6 @@
 				A331D55D223BFE590096A5A9 /* TeamAPI.swift in Sources */,
 				A32D59682247CEAC0038CE69 /* StandingTeam.swift in Sources */,
 				A331D53E223BFE100096A5A9 /* AppDelegate.swift in Sources */,
-				A3CBDB492347D50B00B5EC51 /* PushNotificationManager.swift in Sources */,
 				A3889E95225DC095006F0591 /* SettingsTableViewController.swift in Sources */,
 				A331D550223BFE430096A5A9 /* PlayerCell.swift in Sources */,
 				A32D59622247514B0038CE69 /* StandingsTableVC.swift in Sources */,
