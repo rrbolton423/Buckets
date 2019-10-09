@@ -92,7 +92,7 @@ class SettingsTableViewController: UITableViewController {
         self.versionNumberLabel.textColor = .black
         self.darkModeLabel.textColor = .black
         self.view.backgroundColor = UIColor.white
-        self.tableView.backgroundColor = hexStringToUIColor(hex: "#EAEAEA")
+        self.tableView.backgroundColor = hexStringToUIColor(hex: "#E9E9EB")
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
