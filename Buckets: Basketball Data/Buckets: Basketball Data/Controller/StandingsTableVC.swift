@@ -25,7 +25,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     var standingsURL: String? = String()
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var use_real_images: String?
-    var segmentedController: UISegmentedControl!
+    var segmentedControl: UISegmentedControl!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,6 +68,12 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
+        if #available(iOS 13.0, *) {
+           segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+           segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
+        } else {
+           segmentedControl.tintColor = UIColor.systemBlue
+        }
     }
     
     func updateToLightTheme() {
@@ -80,22 +86,28 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        if #available(iOS 13.0, *) {
+           segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+           segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
+        } else {
+           segmentedControl.tintColor = UIColor.systemBlue
+        }
     }
     
     func setupSegmentedController() {
         let items = ["East", "West"]
-        segmentedController = UISegmentedControl(items: items)
-        segmentedController.setWidth(80, forSegmentAt: 0)
-        segmentedController.setWidth(80, forSegmentAt: 1)
+        segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.setWidth(80, forSegmentAt: 0)
+        segmentedControl.setWidth(80, forSegmentAt: 1)
         if let value = UserDefaults.standard.value(forKey: "chosenConference"){
             let selectedIndex = value as! Int
-            segmentedController.selectedSegmentIndex = selectedIndex
+            segmentedControl.selectedSegmentIndex = selectedIndex
         } else {
-            segmentedController.selectedSegmentIndex = 0
+            segmentedControl.selectedSegmentIndex = 0
             UserDefaults.standard.set(0, forKey: "chosenConference")
         }
-        segmentedController.addTarget(self, action: #selector(changeConference), for: .valueChanged)
-        navigationItem.titleView = segmentedController
+        segmentedControl.addTarget(self, action: #selector(changeConference), for: .valueChanged)
+        navigationItem.titleView = segmentedControl
     }
     
     @objc func start() {
@@ -104,7 +116,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.tableView.isUserInteractionEnabled = true
-            self.segmentedController?.isEnabled = true
+            self.segmentedControl?.isEnabled = true
             return
         }
         firebaseSetup()
@@ -230,7 +242,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var returnValue = 0
-        switch(segmentedController?.selectedSegmentIndex)
+        switch(segmentedControl?.selectedSegmentIndex)
         {
         case 0:
             returnValue = eastTeams.count
@@ -247,7 +259,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "standingsCell", for: indexPath) as! StandingsCell
         cell.backgroundColor = .clear
-        switch(segmentedController?.selectedSegmentIndex)
+        switch(segmentedControl?.selectedSegmentIndex)
         {
         case 0:
             if self.use_real_images == "false" {

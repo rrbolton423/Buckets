@@ -97,7 +97,8 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     func updateToDarkTheme(){
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
-        self.searchController.searchBar.setTextColor(color: .white)
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        searchController.searchBar.setMagnifyingGlassColorTo(color: hexStringToUIColor(hex: "#9A9A9E"))
         self.tableView.indicatorStyle = .white
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = .black
@@ -110,8 +111,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
     func updateToLightTheme() {
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
-        self.searchController.searchBar.setTextColor(color: .black)
-        self.tableView.indicatorStyle = .default
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        searchController.searchBar.setMagnifyingGlassColorTo(color: hexStringToUIColor(hex: "#9A9A9E"))
+        self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
@@ -130,7 +132,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
         self.definesPresentationContext = true

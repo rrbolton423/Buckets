@@ -61,7 +61,8 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     func updateToDarkTheme(){
         navigationController?.view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .black
-        self.searchController.searchBar.barStyle = .blackOpaque
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        searchController.searchBar.setMagnifyingGlassColorTo(color: hexStringToUIColor(hex: "#9A9A9E"))
         self.tableView.indicatorStyle = .white
         self.view.backgroundColor = UIColor.black
         self.tableView.backgroundColor = .black
@@ -73,8 +74,9 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     func updateToLightTheme() {
         navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.barStyle = .default
-        self.searchController.searchBar.barStyle = .default
+        navigationController?.navigationBar.barStyle = .black
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        searchController.searchBar.setMagnifyingGlassColorTo(color: hexStringToUIColor(hex: "#9A9A9E"))
         self.tableView.indicatorStyle = .default;
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
@@ -95,7 +97,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController;
         self.definesPresentationContext = true

@@ -271,8 +271,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.textColor = .white
         } else {
-            
-            view.tintColor = UIColor.groupTableViewBackground
+            view.tintColor = hexStringToUIColor(hex: "#EAEAEA")
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.textColor = .black
         }

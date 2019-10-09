@@ -20,8 +20,8 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedYesterdaysUrl)
             let json = try JSON(data: data)
-            var jsonData = json["sports_content"].dictionaryObject
-            var games = jsonData?["games"] as! [String:Any]
+            let jsonData = json["sports_content"].dictionaryObject
+            let games = jsonData?["games"] as! [String:Any]
             let gameList = (games["game"] as? [[String:Any]])!
             for game in gameList
             {
@@ -49,8 +49,8 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedTodaysUrl)
             let json = try JSON(data: data)
-            var jsonData = json["sports_content"].dictionaryObject
-            var games = jsonData?["games"] as! [String:Any]
+            let jsonData = json["sports_content"].dictionaryObject
+            let games = jsonData?["games"] as! [String:Any]
             let gameList = (games["game"] as? [[String:Any]])!
             for game in gameList
             {
@@ -77,8 +77,8 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedTomorrowsUrl)
             let json = try JSON(data: data)
-            var jsonData = json["sports_content"].dictionaryObject
-            var games = jsonData?["games"] as! [String:Any]
+            let jsonData = json["sports_content"].dictionaryObject
+            let games = jsonData?["games"] as! [String:Any]
             let gameList = (games["game"] as? [[String:Any]])!
             for game in gameList
             {

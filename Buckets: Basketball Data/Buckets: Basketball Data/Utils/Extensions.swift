@@ -213,3 +213,31 @@ extension UITableView {
         self.separatorStyle = .singleLine
     }
 }
+
+extension UISearchBar
+{
+    func setPlaceholderTextColorTo(color: UIColor)
+    {
+        let textFieldInsideSearchBar = self.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = color
+        let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
+        textFieldInsideSearchBarLabel?.textColor = color
+    }
+
+    func setMagnifyingGlassColorTo(color: UIColor)
+    {
+        let textFieldInsideSearchBar = self.value(forKey: "searchField") as? UITextField
+        let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView
+        glassIconView?.image = glassIconView?.image?.withRenderingMode(.alwaysTemplate)
+        glassIconView?.tintColor = color
+    }
+}
+
+extension UISegmentedControl{
+    func selectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .selected)
+    }
+    func unselectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .normal)
+    }
+}
