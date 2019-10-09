@@ -87,7 +87,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         if #available(iOS 13.0, *) {
-           segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+           segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
            segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
         } else {
            segmentedControl.tintColor = UIColor.systemBlue

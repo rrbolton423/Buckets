@@ -74,7 +74,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     func updateToLightTheme() {
         navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .default
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         searchController.searchBar.setMagnifyingGlassColorTo(color: hexStringToUIColor(hex: "#9A9A9E"))
         self.tableView.indicatorStyle = .default;
