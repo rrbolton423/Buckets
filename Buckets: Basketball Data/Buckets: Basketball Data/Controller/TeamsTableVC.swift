@@ -45,7 +45,7 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             setupTrashBarButtonItem()
         }
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }

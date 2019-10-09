@@ -50,7 +50,7 @@ class TeamDetailVC: UIViewController {
         checkIfTeamIsFavorite()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewDidLoad() {

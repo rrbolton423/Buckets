@@ -58,7 +58,7 @@ class PlayerDetailVC: UIViewController {
         firebaseSetup()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewWillDisappear(_ animated: Bool) {

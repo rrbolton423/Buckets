@@ -35,7 +35,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.setNoGamesImage()
         setupInfoBarButtonItem()
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
     }
     
     func setupInfoBarButtonItem() {
