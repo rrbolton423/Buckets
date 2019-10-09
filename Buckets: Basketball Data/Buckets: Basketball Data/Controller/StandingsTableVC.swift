@@ -69,10 +69,11 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
         if #available(iOS 13.0, *) {
-           segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-           segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
+            segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+            segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+            segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
         } else {
-           segmentedControl.tintColor = UIColor.systemBlue
+            segmentedControl.tintColor = UIColor.systemBlue
         }
     }
     
@@ -87,10 +88,11 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         if #available(iOS 13.0, *) {
-           segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
-           segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
+            segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
+            segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
+            segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
         } else {
-           segmentedControl.tintColor = UIColor.systemBlue
+            segmentedControl.tintColor = UIColor.systemBlue
         }
     }
     

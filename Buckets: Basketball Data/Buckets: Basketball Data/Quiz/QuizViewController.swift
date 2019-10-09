@@ -43,6 +43,7 @@ class QuizViewController: UIViewController {
         super.viewWillAppear(animated)
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.largeTitleDisplayMode = .always
     }
     
     @objc func defaultsChanged(){

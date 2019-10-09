@@ -28,6 +28,7 @@ class SettingsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         defaultsChanged()
         darkModeSwitchOutlet.isOn = UserDefaults.standard.bool(forKey: "isDarkMode")
+        self.navigationItem.largeTitleDisplayMode = .always
     }
     
     override func viewDidLoad() {
