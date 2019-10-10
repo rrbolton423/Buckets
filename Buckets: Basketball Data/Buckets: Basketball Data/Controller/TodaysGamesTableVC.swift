@@ -36,6 +36,9 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         setupInfoBarButtonItem()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.largeTitleDisplayMode = .always
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     func setupInfoBarButtonItem() {
@@ -88,6 +91,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
+        refreshController.tintColor = UIColor.gray
     }
     
     func updateToLightTheme() {
@@ -102,6 +106,7 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        refreshController.tintColor = UIColor.gray
     }
     
     @objc func start() {

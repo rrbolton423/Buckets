@@ -49,6 +49,9 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

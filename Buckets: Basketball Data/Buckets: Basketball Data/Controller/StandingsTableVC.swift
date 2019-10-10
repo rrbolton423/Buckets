@@ -35,6 +35,9 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.largeTitleDisplayMode = .always
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     override func viewDidLoad() {
@@ -68,6 +71,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.activityIndicator.color = UIColor.white
         if #available(iOS 13.0, *) {
             segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
             segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)

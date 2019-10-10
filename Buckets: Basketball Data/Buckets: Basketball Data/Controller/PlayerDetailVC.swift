@@ -59,6 +59,9 @@ class PlayerDetailVC: UIViewController {
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

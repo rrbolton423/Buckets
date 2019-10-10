@@ -31,6 +31,9 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +73,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.activityIndicator.color = UIColor.gray
     }
     
     func updateToLightTheme() {
@@ -84,6 +88,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.activityIndicator.color = UIColor.gray
     }
     
     @objc func start() {
