@@ -65,6 +65,7 @@ class QuizViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         self.questionField.textColor = .white
         self.view.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
@@ -77,6 +78,7 @@ class QuizViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .default
         self.questionField.textColor = .black
         self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white

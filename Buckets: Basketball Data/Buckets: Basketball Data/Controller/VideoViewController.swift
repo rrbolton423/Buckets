@@ -68,6 +68,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     func updateToLightTheme() {
@@ -79,6 +80,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     @objc fileprivate func refreshWebpage() {
@@ -111,7 +113,6 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         defaultsChanged()
-        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.largeTitleDisplayMode = .always
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false

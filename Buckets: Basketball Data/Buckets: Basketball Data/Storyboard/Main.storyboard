@@ -1092,7 +1092,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="67a-cc-ipr">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dbM-9w-vaj" sceneMemberID="viewController">
+                <tabBarController id="dbM-9w-vaj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="05o-OD-whG">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
