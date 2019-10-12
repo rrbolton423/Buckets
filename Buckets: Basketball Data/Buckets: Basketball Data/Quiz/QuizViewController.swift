@@ -43,7 +43,7 @@ class QuizViewController: UIViewController {
         super.viewWillAppear(animated)
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 13.0, *) {
             self.overrideUserInterfaceStyle = .light
         }

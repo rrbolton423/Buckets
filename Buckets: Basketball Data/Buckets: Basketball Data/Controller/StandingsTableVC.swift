@@ -34,7 +34,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.use_real_images = FirebaseConstants().getImages()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 13.0, *) {
             self.overrideUserInterfaceStyle = .light
         }

@@ -27,10 +27,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         firebaseSetup()
         defaultsChanged()
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.largeTitleDisplayMode = .always
-        if #available(iOS 11.0, *) {
-            navigationItem.hidesSearchBarWhenScrolling = false
-        }
+        self.navigationItem.largeTitleDisplayMode = .never
         if #available(iOS 13.0, *) {
             self.overrideUserInterfaceStyle = .light
         }
@@ -38,6 +35,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.definesPresentationContext = true
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = true
         }

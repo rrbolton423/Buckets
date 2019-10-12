@@ -28,7 +28,7 @@ class SettingsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         defaultsChanged()
         darkModeSwitchOutlet.isOn = UserDefaults.standard.bool(forKey: "isDarkMode")
-        self.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 13.0, *) {
             self.overrideUserInterfaceStyle = .light
         }

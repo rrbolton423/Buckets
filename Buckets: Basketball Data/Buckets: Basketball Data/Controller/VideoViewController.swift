@@ -75,7 +75,6 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
         self.view.backgroundColor = UIColor.white
-        
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
@@ -113,7 +112,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         defaultsChanged()
-        self.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
