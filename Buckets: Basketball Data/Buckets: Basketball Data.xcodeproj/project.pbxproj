@@ -25,7 +25,7 @@
 		A3DFA28D2349A7B800CEA326 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA2852349A7B800CEA326 /* VideoViewController.swift */; };
 		A3DFA28E2349A7B800CEA326 /* StandingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA2862349A7B800CEA326 /* StandingsTableVC.swift */; };
 		A3DFA28F2349A7B800CEA326 /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA2872349A7B800CEA326 /* TeamDetailVC.swift */; };
-		A3DFA2902349A7B800CEA326 /* TodaysGamesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA2882349A7B800CEA326 /* TodaysGamesTableVC.swift */; };
+		A3DFA2902349A7B800CEA326 /* GamesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA2882349A7B800CEA326 /* GamesTableVC.swift */; };
 		A3DFA2912349A7B800CEA326 /* PlayerDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA2892349A7B800CEA326 /* PlayerDetailVC.swift */; };
 		A3DFA2922349A7B800CEA326 /* TeamsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA28A2349A7B800CEA326 /* TeamsTableVC.swift */; };
 		A3DFA2932349A7B800CEA326 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFA28B2349A7B800CEA326 /* SettingsTableViewController.swift */; };
@@ -73,7 +73,7 @@
 		A3DFA2852349A7B800CEA326 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoViewController.swift; path = "Buckets: Basketball Data/Controller/VideoViewController.swift"; sourceTree = SOURCE_ROOT; };
 		A3DFA2862349A7B800CEA326 /* StandingsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandingsTableVC.swift; path = "Buckets: Basketball Data/Controller/StandingsTableVC.swift"; sourceTree = SOURCE_ROOT; };
 		A3DFA2872349A7B800CEA326 /* TeamDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamDetailVC.swift; path = "Buckets: Basketball Data/Controller/TeamDetailVC.swift"; sourceTree = SOURCE_ROOT; };
-		A3DFA2882349A7B800CEA326 /* TodaysGamesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodaysGamesTableVC.swift; path = "Buckets: Basketball Data/Controller/TodaysGamesTableVC.swift"; sourceTree = SOURCE_ROOT; };
+		A3DFA2882349A7B800CEA326 /* GamesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GamesTableVC.swift; path = "Buckets: Basketball Data/Controller/GamesTableVC.swift"; sourceTree = SOURCE_ROOT; };
 		A3DFA2892349A7B800CEA326 /* PlayerDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerDetailVC.swift; path = "Buckets: Basketball Data/Controller/PlayerDetailVC.swift"; sourceTree = SOURCE_ROOT; };
 		A3DFA28A2349A7B800CEA326 /* TeamsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamsTableVC.swift; path = "Buckets: Basketball Data/Controller/TeamsTableVC.swift"; sourceTree = SOURCE_ROOT; };
 		A3DFA28B2349A7B800CEA326 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = "Buckets: Basketball Data/Controller/SettingsTableViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -180,7 +180,7 @@
 				A3DFA2862349A7B800CEA326 /* StandingsTableVC.swift */,
 				A3DFA2872349A7B800CEA326 /* TeamDetailVC.swift */,
 				A3DFA28A2349A7B800CEA326 /* TeamsTableVC.swift */,
-				A3DFA2882349A7B800CEA326 /* TodaysGamesTableVC.swift */,
+				A3DFA2882349A7B800CEA326 /* GamesTableVC.swift */,
 				A3DFA2852349A7B800CEA326 /* VideoViewController.swift */,
 			);
 			name = Controller;
@@ -450,7 +450,7 @@
 				A3DFA2A32349A7EF00CEA326 /* Player.swift in Sources */,
 				A3DFA26C2349A51F00CEA326 /* GameAPI.swift in Sources */,
 				A3DFA2A42349A7EF00CEA326 /* Players.swift in Sources */,
-				A3DFA2902349A7B800CEA326 /* TodaysGamesTableVC.swift in Sources */,
+				A3DFA2902349A7B800CEA326 /* GamesTableVC.swift in Sources */,
 				A34903F322556FD1008F159D /* QuestionModel.swift in Sources */,
 				A3DFA29B2349A7D900CEA326 /* CheckInternet.swift in Sources */,
 				A3DFA29C2349A7D900CEA326 /* Extensions.swift in Sources */,

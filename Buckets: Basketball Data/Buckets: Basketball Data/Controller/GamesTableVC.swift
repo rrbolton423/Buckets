@@ -1,5 +1,5 @@
 //
-//  TodaysGamesTableVC.swift
+//  GamesTableVC.swift
 //  Buckets: Basketball Data
 //
 //  Created by Romell Bolton on 3/8/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGamesImage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
@@ -566,8 +566,10 @@ class TodaysGamesTableVC: UIViewController, UITableViewDataSource, UITableViewDe
         }
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
             cell.homeScoreLabel.textColor = .white
+            cell.setDisclosure(toColour: .white)
         } else {
             cell.homeScoreLabel.textColor = .black
+            cell.setDisclosure(toColour: .black)
         }
         cell.venueLabel.text = allGames[indexPath.section][indexPath.row].arena
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {

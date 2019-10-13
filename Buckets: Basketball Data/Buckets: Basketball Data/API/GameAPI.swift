@@ -15,7 +15,7 @@ class GameAPI {
         var yesterdaysGamesArray = [Game]()
         var todaysGamesArray = [Game]()
         var tomorrowsGamesArray = [Game]()
-        let yesterdaysUrl = URL(string: String(format: url, yesterdaysDate))
+        let yesterdaysUrl = URL(string: String(format: url, "20181225"))
         guard let unwrappedYesterdaysUrl = yesterdaysUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedYesterdaysUrl)
@@ -44,7 +44,7 @@ class GameAPI {
         } catch {
             print(error)
         }
-        let todaysUrl = URL(string: String(format: url, todaysDate))
+        let todaysUrl = URL(string: String(format: url, "20181226"))
         guard let unwrappedTodaysUrl = todaysUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedTodaysUrl)
@@ -72,7 +72,7 @@ class GameAPI {
         } catch {
             print(error)
         }
-        let tomorrowsUrl = URL(string: String(format: url, tomorrowsDate))
+        let tomorrowsUrl = URL(string: String(format: url, "20181227"))
         guard let unwrappedTomorrowsUrl = tomorrowsUrl else { return }
         do {
             let data = try Data(contentsOf: unwrappedTomorrowsUrl)

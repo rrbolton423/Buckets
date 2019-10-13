@@ -64,6 +64,9 @@ class SettingsTableViewController: UITableViewController {
         self.contactUsCell.backgroundColor = .black
         self.followUsCell.backgroundColor = .black
         self.versionCell.backgroundColor = .black
+        self.rateAppCell.setDisclosure(toColour: .white)
+        self.contactUsCell.setDisclosure(toColour: .white)
+        self.followUsCell.setDisclosure(toColour: .white)
         self.darkModeSwitchOutlet.backgroundColor = .black
         self.contactUsLabel.textColor = .white
         self.rateAppLabel.textColor = .white
@@ -88,6 +91,9 @@ class SettingsTableViewController: UITableViewController {
         self.rateAppCell.backgroundColor = .white
         self.followUsCell.backgroundColor = .white
         self.versionCell.backgroundColor = .white
+        self.rateAppCell.setDisclosure(toColour: .black)
+        self.contactUsCell.setDisclosure(toColour: .black)
+        self.followUsCell.setDisclosure(toColour: .black)
         self.darkModeSwitchOutlet.backgroundColor = .white
         self.contactUsLabel.textColor = .black
         self.rateAppLabel.textColor = .black

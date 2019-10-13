@@ -331,8 +331,10 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             }
             if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
                 cell?.teamNameLabel.textColor = .white
+                cell?.setDisclosure(toColour: .white)
             } else {
                 cell?.teamNameLabel.textColor = .black
+                cell?.setDisclosure(toColour: .black)
             }
             break
             
@@ -412,8 +414,10 @@ class TeamsTableVC: UITableViewController, UISearchResultsUpdating, UISearchBarD
             }
             if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
                 cell?.teamNameLabel.textColor = .white
+                cell?.setDisclosure(toColour: .white)
             } else {
                 cell?.teamNameLabel.textColor = .black
+                cell?.setDisclosure(toColour: .black)
             }
             break
         }
