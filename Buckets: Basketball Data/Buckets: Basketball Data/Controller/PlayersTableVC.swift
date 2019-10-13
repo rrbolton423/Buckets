@@ -236,8 +236,10 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
             }
             if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
                 cell?.playerNameLabel.textColor = .white
+                cell?.setDisclosure(toColour: .white)
             } else {
                 cell?.playerNameLabel.textColor = .black
+                cell?.setDisclosure(toColour: .black)
             }
             if let position = nbaTeams[indexPath.row].position {
                 cell?.positionLabel.text = position
