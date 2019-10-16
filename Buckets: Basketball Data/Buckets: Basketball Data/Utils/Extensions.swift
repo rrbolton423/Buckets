@@ -255,3 +255,10 @@ extension UITableViewCell {
         }
     }
 }
+
+extension UIActivityIndicatorView {
+    func assignColor(_ color: UIColor) {
+        style = .white
+        self.color = color
+    }
+}

@@ -72,6 +72,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
         self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.assignColor(.white)
     }
     
     func updateToLightTheme() {
@@ -87,6 +88,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.assignColor(.black)
     }
     
     @objc func start() {
@@ -115,8 +117,13 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
     func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.style = UIActivityIndicatorView.Style.white
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            self.activityIndicator.assignColor(.white)
+        } else {
+            self.activityIndicator.assignColor(.black)
+        }
         self.view.addSubview(self.activityIndicator)
     }
     

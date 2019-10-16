@@ -91,7 +91,7 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
-        refreshController.tintColor = UIColor.gray
+        refreshController.tintColor = .white
     }
     
     func updateToLightTheme() {
@@ -106,7 +106,7 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
-        refreshController.tintColor = UIColor.gray
+        refreshController.tintColor = .black
     }
     
     @objc func start() {
@@ -163,8 +163,13 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.style = UIActivityIndicatorView.Style.white
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            self.activityIndicator.assignColor(.white)
+        } else {
+            self.activityIndicator.assignColor(.black)
+        }
         self.view.addSubview(self.activityIndicator)
     }
     

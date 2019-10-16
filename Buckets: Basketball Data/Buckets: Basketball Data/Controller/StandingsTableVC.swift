@@ -79,6 +79,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         } else {
             segmentedControl.tintColor = UIColor.systemBlue
         }
+        self.activityIndicator.assignColor(.white)
     }
     
     func updateToLightTheme() {
@@ -98,6 +99,7 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         } else {
             segmentedControl.tintColor = UIColor.systemBlue
         }
+        self.activityIndicator.assignColor(.black)
     }
     
     func setupSegmentedController() {
@@ -141,8 +143,13 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.style = UIActivityIndicatorView.Style.white
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            self.activityIndicator.assignColor(.white)
+        } else {
+            self.activityIndicator.assignColor(.black)
+        }
         self.view.addSubview(self.activityIndicator)
     }
     

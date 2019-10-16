@@ -103,6 +103,7 @@ class PlayerDetailVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.activityIndicator.assignColor(.white)
     }
     
     func updateToLightTheme() {
@@ -129,6 +130,7 @@ class PlayerDetailVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.activityIndicator.assignColor(.black)
     }
     
     func start() {
@@ -147,8 +149,13 @@ class PlayerDetailVC: UIViewController {
     func setupActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.style = UIActivityIndicatorView.Style.white
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        if isDarkMode == true {
+            self.activityIndicator.assignColor(.white)
+        } else {
+            self.activityIndicator.assignColor(.black)
+        }
         self.view.addSubview(self.activityIndicator)
     }
     

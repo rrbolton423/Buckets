@@ -31,8 +31,8 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
     func setupActivityIndicator() {
         self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        self.activityIndicator.color = UIColor.gray
+        self.activityIndicator.style = UIActivityIndicatorView.Style.white
+        self.activityIndicator.assignColor(.black)
         self.view.addSubview(self.activityIndicator)
         let horizontalConstraint = NSLayoutConstraint(item: activityIndicator,
                                                       attribute: .centerX,
@@ -69,6 +69,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         self.tabBarController?.tabBar.barTintColor = .black
         self.navigationController?.navigationBar.barTintColor = UIColor.black
         self.navigationController?.navigationBar.isTranslucent = false
+        self.activityIndicator.assignColor(.black)
     }
     
     func updateToLightTheme() {
@@ -80,6 +81,7 @@ class VideoViewController: UIViewController, WKNavigationDelegate {
         self.tabBarController?.tabBar.barTintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = true
+        self.activityIndicator.assignColor(.black)
     }
     
     @objc fileprivate func refreshWebpage() {
