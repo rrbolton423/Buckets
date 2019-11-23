@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "867444FCE9615F51BF51B0FAF41F22AB"
+               BlueprintIdentifier = "D867F4A1BF27015C3069F4B9D686CEAB"
                BlueprintName = "Pods-Buckets: Basketball Data"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Pods-Buckets: Basketball Data.framework">
