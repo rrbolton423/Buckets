@@ -13,11 +13,10 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var noGamesImage: UIImageView!
     @IBOutlet weak var noGames: UILabel!
     
-    let section = ["Yesterday's Games", "Today's Games", "Tomorrow's Games"]
+    let section = ["Today's Games", "Yesterday's Games"]
     let gamesAPI = GameAPI()
     var todaysGames = [Game]()
     var yesterdaysGames = [Game]()
-    var tomorrowsGames = [Game]()
     var allGames = [[Game]]()
     var gameToPass: Game?
     var awayTeamImage: UIImage?
@@ -117,9 +116,8 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             loadGamesWithActivityIndicator()
         } else {
             self.tableView.isUserInteractionEnabled = true
-            self.yesterdaysGames.removeAll()
             self.todaysGames.removeAll()
-            self.tomorrowsGames.removeAll()
+            self.yesterdaysGames.removeAll()
             self.allGames.removeAll()
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
@@ -142,9 +140,8 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         } else {
             self.tableView.isUserInteractionEnabled = true
             self.allGames.removeAll()
-            self.yesterdaysGames.removeAll()
             self.todaysGames.removeAll()
-            self.tomorrowsGames.removeAll()
+            self.yesterdaysGames.removeAll()
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
@@ -186,20 +183,17 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.activityIndicator.removeFromSuperview()
         self.tableView.isUserInteractionEnabled = false
         self.allGames.removeAll()
-        self.yesterdaysGames.removeAll()
         self.todaysGames.removeAll()
-        self.tomorrowsGames.removeAll()
+        self.yesterdaysGames.removeAll()
         self.tableView.reloadData()
         DispatchQueue.global(qos: .background).async {
-            let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
-            let tomorrowsDate = self.gamesAPI.getTomorrowsDate()
-            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, tomorrowsDate: tomorrowsDate, completion: { (returnedGames) in
+            let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
                 if returnedGames[0].count > 0 || returnedGames[1].count > 0 || returnedGames[2].count > 0 {
                     self.allGames = returnedGames
-                    self.yesterdaysGames = returnedGames[0]
-                    self.todaysGames = returnedGames[1]
-                    self.tomorrowsGames = returnedGames[2]
+                    self.todaysGames = returnedGames[0]
+                    self.yesterdaysGames = returnedGames[1]
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
@@ -230,20 +224,17 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.allGames.removeAll()
         self.yesterdaysGames.removeAll()
         self.todaysGames.removeAll()
-        self.tomorrowsGames.removeAll()
         self.tableView.reloadData()
         setupActivityIndicator()
         if (!self.refreshController.isRefreshing) {self.activityIndicator.startAnimating()}
         DispatchQueue.global(qos: .background).async {
-            let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
             let todaysDate = self.gamesAPI.getTodaysDate()
-            let tomorrowsDate = self.gamesAPI.getTomorrowsDate()
-            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, tomorrowsDate: tomorrowsDate, completion: { (returnedGames) in
+            let yesterdaysDate = self.gamesAPI.getYesterdaysDate()
+            self.gamesAPI.getGames(yesterdaysDate: yesterdaysDate, todaysDate: todaysDate, url: ScoreBoardURL, completion: { (returnedGames) in
                 if returnedGames[0].count > 0 || returnedGames[1].count > 0 || returnedGames[2].count > 0 {
                     self.allGames = returnedGames
-                    self.yesterdaysGames = returnedGames[0]
-                    self.todaysGames = returnedGames[1]
-                    self.tomorrowsGames = returnedGames[2]
+                    self.todaysGames = returnedGames[0]
+                    self.yesterdaysGames = returnedGames[1]
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.noGames.isHidden = true
@@ -321,13 +312,10 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let section = indexPath.section
         if section == 0 {
             let row = indexPath.row
-            gameToShare = yesterdaysGames[row]
+            gameToShare = todaysGames[row]
         } else if section == 1 {
             let row = indexPath.row
-            gameToShare = todaysGames[row]
-        } else {
-            let row = indexPath.row
-            gameToShare = tomorrowsGames[row]
+            gameToShare = yesterdaysGames[row]
         }
         let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
             if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena {
@@ -385,13 +373,13 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
                 cell.backgroundColor = .black
             } else {
-                cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
+                cell.backgroundColor = .white
             }
         } else {
             if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
                 cell.backgroundColor = .black
             } else {
-                cell.backgroundColor = .white
+                cell.backgroundColor = hexStringToUIColor(hex: "#d9d9d9")
             }
         }
         cell.homeTeamNameLabel.text = allGames[indexPath.section][indexPath.row].homeTeamName
@@ -609,13 +597,10 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 let section = tableView.indexPathForSelectedRow!.section
                 if section == 0 {
                     let row = tableView.indexPathForSelectedRow!.row
-                    gameToPass = yesterdaysGames[row]
+                    gameToPass = todaysGames[row]
                 } else if section == 1 {
                     let row = tableView.indexPathForSelectedRow!.row
-                    gameToPass = todaysGames[row]
-                } else {
-                    let row = tableView.indexPathForSelectedRow!.row
-                    gameToPass = tomorrowsGames[row]
+                    gameToPass = yesterdaysGames[row]
                 }
                 detailVC.game = gameToPass
             }
