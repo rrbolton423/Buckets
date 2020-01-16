@@ -42,7 +42,17 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
+        if let value = UserDefaults.standard.value(forKey: "chosenConference") {
+            let selectedIndex = value as! Int
+            if selectedIndex == 0 {
+                start(conference: "East")
+            } else {
+                start(conference: "West")
+            }
+        } else {
+            UserDefaults.standard.set(0, forKey: "chosenConference") // Set default value
+            start(conference: "East")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,18 +128,36 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         navigationItem.titleView = segmentedControl
     }
     
-    @objc func start() {
-        if (eastTeams.count > 0) || (westTeams.count > 0) {
-            self.tableView.reloadData()
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.removeFromSuperview()
-            self.tableView.isUserInteractionEnabled = true
-            self.segmentedControl?.isEnabled = true
-            return
+    @objc func start(conference: String) {
+        if conference == "East" {
+            if (eastTeams.count > 0) {
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.removeFromSuperview()
+                self.tableView.isUserInteractionEnabled = true
+                self.segmentedControl?.isEnabled = true
+                return
+            }
+        } else if conference == "West" {
+            if (westTeams.count > 0) {
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.removeFromSuperview()
+                self.tableView.isUserInteractionEnabled = true
+                self.segmentedControl?.isEnabled = true
+                return
+            }
         }
         firebaseSetup()
         standingsURL = "\(StandingsURL)\(date.month)%2F\(date.day)%2F\(Int(date.year)! + 1)"
-        fetchStandings()
+        if let value = UserDefaults.standard.value(forKey: "chosenConference") {
+            let selectedIndex = value as! Int
+            if selectedIndex == 0 {
+                fetchEastStandings()
+            } else {
+                fetchWestStandings()
+            }
+        }
         self.tableView.reloadData()
     }
     
@@ -153,13 +181,12 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.view.addSubview(self.activityIndicator)
     }
     
-    func fetchStandings() {
+    func fetchEastStandings() {
         firebaseSetup()
         if CheckInternet.connection() {
             DispatchQueue.main.async {
                 self.tableView.isUserInteractionEnabled = false
                 self.eastTeams.removeAll()
-                self.westTeams.removeAll()
                 self.tableView.reloadData()
                 self.setupActivityIndicator()
                 self.activityIndicator.startAnimating()
@@ -175,31 +202,6 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                         } else {
                             DispatchQueue.main.async {
                                 self.eastTeams.removeAll()
-                                self.westTeams.removeAll()
-                                self.tableView.reloadData()
-                                self.tableView.isUserInteractionEnabled = true
-                                self.activityIndicator.stopAnimating()
-                                self.activityIndicator.removeFromSuperview()
-                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                                    self.navigationController?.popToRootViewController(animated: true)
-                                }))
-                                self.present(alert, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                }
-                let westStandingsAPI = WestStandingsAPI()
-                if let westStandingsURL = self.standingsURL {
-                    westStandingsAPI.getStandings(url: westStandingsURL) { westTeams, error in
-                        if error == nil {
-                            if let unrwappedWestTeams = westTeams {
-                                self.westTeams = unrwappedWestTeams
-                            }
-                        } else {
-                            DispatchQueue.main.async {
-                                self.eastTeams.removeAll()
-                                self.westTeams.removeAll()
                                 self.tableView.reloadData()
                                 self.tableView.isUserInteractionEnabled = true
                                 self.activityIndicator.stopAnimating()
@@ -223,6 +225,62 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         } else {
             DispatchQueue.main.async {
                 self.eastTeams.removeAll()
+                self.tableView.reloadData()
+                self.tableView.isUserInteractionEnabled = true
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.removeFromSuperview()
+                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func fetchWestStandings() {
+        firebaseSetup()
+        if CheckInternet.connection() {
+            DispatchQueue.main.async {
+                self.tableView.isUserInteractionEnabled = false
+                self.westTeams.removeAll()
+                self.tableView.reloadData()
+                self.setupActivityIndicator()
+                self.activityIndicator.startAnimating()
+            }
+            DispatchQueue.global(qos: .background).async {
+                let westStandingsAPI = WestStandingsAPI()
+                if let westStandingsURL = self.standingsURL {
+                    westStandingsAPI.getStandings(url: westStandingsURL) { westTeams, error in
+                        if error == nil {
+                            if let unrwappedWestTeams = westTeams {
+                                self.westTeams = unrwappedWestTeams
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.westTeams.removeAll()
+                                self.tableView.reloadData()
+                                self.tableView.isUserInteractionEnabled = true
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.removeFromSuperview()
+                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.removeFromSuperview()
+                    self.tableView.isUserInteractionEnabled = true
+                }
+            }
+        } else {
+            DispatchQueue.main.async {
                 self.westTeams.removeAll()
                 self.tableView.reloadData()
                 self.tableView.isUserInteractionEnabled = true
@@ -237,11 +295,19 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
+    
     @objc func changeConference(sender: UISegmentedControl) {
         UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: "chosenConference")
         FirebaseConstants().setupAPP()
         self.use_real_images = FirebaseConstants().getImages()
-        start()
+        if let value = UserDefaults.standard.value(forKey: "chosenConference") {
+            let selectedIndex = value as! Int
+            if selectedIndex == 0 {
+                start(conference: "East")
+            } else {
+                start(conference: "West")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

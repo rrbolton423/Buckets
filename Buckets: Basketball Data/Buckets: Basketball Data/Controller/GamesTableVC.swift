@@ -318,14 +318,15 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             gameToShare = yesterdaysGames[row]
         }
         let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
-            if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena {
+            if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena, let gameIsActive = gameToShare?.isGameActivated, let tipOffTime = gameToShare?.tipOffTime {
                 
-                if gameQuarter.contains(":") {
-                    shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
-                } else if gameQuarter == "Final" {
+                if gameIsActive == "false" && gameQuarter != "4" {
+                    shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(tipOffTime) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                } else if gameIsActive == "false" && gameQuarter == "4" {
                     shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
-                } else {
-                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                } else if gameIsActive == "true" {
+                    let qtrString = gameQuarter.createQuarterString()
+                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(qtrString)! Download the Buckets: Basketball Data app for more scores, stats and standings."
                 }
                 let shareString = "https://twitter.com/intent/tweet?text=\(shareText)&url=\(appUrl)"
                 let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -340,14 +341,15 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         tweet.backgroundColor = hexStringToUIColor(hex: "#1DA1F2")
         
         let post = UITableViewRowAction(style: .default, title: "Post") { (action, indexPath) in
-            if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena {
+            if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena, let gameIsActive = gameToShare?.isGameActivated, let tipOffTime = gameToShare?.tipOffTime {
                 
-                if gameQuarter.contains(":") {
-                    shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(gameQuarter) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
-                } else if gameQuarter == "Final" {
+                if gameIsActive == "false" && gameQuarter != "4" {
+                    shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(tipOffTime) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                } else if gameIsActive == "false" && gameQuarter == "4" {
                     shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
-                } else {
-                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(gameQuarter)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                } else if gameIsActive == "true" {
+                    let qtrString = gameQuarter.createQuarterString()
+                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(qtrString)! Download the Buckets: Basketball Data app for more scores, stats and standings."
                 }
                 let shareString = "https://www.facebook.com/sharer/sharer.php?u=\(appUrl)&quote=\(shareText)"
                 let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -360,7 +362,7 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
         }
         post.backgroundColor = hexStringToUIColor(hex: "#3b5998")
-
+        
         return [tweet, post]
     }
     
@@ -534,7 +536,31 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         cell.homeTeamImageView.image = homeTeamImage
         cell.awayTeamImageView.image = awayTeamImage
-        cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].quarter
+        let quarter = allGames[indexPath.section][indexPath.row].quarter
+        let isGameActivated = allGames[indexPath.section][indexPath.row].isGameActivated
+        if quarter == "0" && isGameActivated == "false" { // Game did not start yet
+            cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].tipOffTime
+        } else {
+            if quarter == "1" {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "1st Quarter"
+                } else {
+                    cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].tipOffTime
+                }
+            } else if quarter == "2" {
+                cell.tipoffLabel.text = "2nd Quarter"
+                
+            } else if quarter == "3" {
+                cell.tipoffLabel.text = "3rd Quarter"
+                
+            } else if quarter == "4" {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "4th Quarter"
+                } else {
+                    cell.tipoffLabel.text = "Final"
+                }
+            }
+        }
         if UserDefaults.standard.bool(forKey: "isDarkMode") == true {
             cell.tipoffLabel.textColor = .white
         } else {
@@ -604,6 +630,23 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 }
                 detailVC.game = gameToPass
             }
+        }
+    }
+}
+
+extension String {
+    func createQuarterString() -> String {
+        if self == "1" {
+            return "1st Qtr"
+        } else if self == "2" {
+            return "2nd Qtr"
+        } else if self == "3" {
+            return "3rd Qtr"
+        } else if self == "4" {
+            return "4th Qtr"
+        }
+        else {
+            return ""
         }
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Game {
+    let isGameActivated: String
     let gameURL: String
     let arena: String
     let homeTeamName: String
@@ -16,5 +17,5 @@ struct Game {
     let awayTeamName: String
     let awayTeamScore: String
     let quarter: String
-    let time: String
+    let tipOffTime: String
 }
