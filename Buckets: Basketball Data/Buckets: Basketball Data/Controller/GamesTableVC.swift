@@ -349,7 +349,12 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else if gameIsActive == "true" {
                     let qtrString = gameQuarter.createQuarterString()
-                    shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(qtrString)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                    if Int(qtrString)! > 4 {
+                        let overtimeQtrString = "\(Int(qtrString)! - 4)OT"
+                        shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(overtimeQtrString)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                    } else {
+                        shareText = "SCORE UPDATE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore) - \(qtrString)! Download the Buckets: Basketball Data app for more scores, stats and standings."
+                    }
                 }
                 let shareString = "https://www.facebook.com/sharer/sharer.php?u=\(appUrl)&quote=\(shareText)"
                 let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -564,11 +569,41 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 } else {
                     cell.tipoffLabel.text = "Final"
                 }
-            } else if (Int(quarter)! >= 5) {
+            } else if quarter == "5" {
+                    if isGameActivated == "true" {
+                        cell.tipoffLabel.text = "Overtime"
+                    } else {
+                        cell.tipoffLabel.text = "Final / OT"
+                    }
+            } else if quarter == "6" {
                 if isGameActivated == "true" {
-                    cell.tipoffLabel.text = "Overtime"
+                    cell.tipoffLabel.text = "\(Int(quarter)! - 4)OT"
                 } else {
-                    cell.tipoffLabel.text = "Final / OT"
+                    cell.tipoffLabel.text = "Final / \(Int(quarter)! - 4)OT"
+                }
+            } else if quarter == "7" {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "\(Int(quarter)! - 4)OT"
+                } else {
+                    cell.tipoffLabel.text = "Final / \(Int(quarter)! - 4)OT"
+                }
+            } else if quarter == "8" {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "\(Int(quarter)! - 4)OT"
+                } else {
+                    cell.tipoffLabel.text = "Final / \(Int(quarter)! - 4)OT"
+                }
+            } else if quarter == "9" {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "\(Int(quarter)! - 4)OT"
+                } else {
+                    cell.tipoffLabel.text = "Final / \(Int(quarter)! - 4)OT"
+                }
+            } else if quarter == "10" {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "\(Int(quarter)! - 4)OT"
+                } else {
+                    cell.tipoffLabel.text = "Final / \(Int(quarter)! - 4)OT"
                 }
             }
         }
