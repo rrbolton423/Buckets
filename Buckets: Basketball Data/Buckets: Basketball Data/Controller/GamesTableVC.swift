@@ -320,9 +320,9 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let tweet = UITableViewRowAction(style: .default, title: "Tweet") { (action, indexPath) in
             if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena, let gameIsActive = gameToShare?.isGameActivated, let tipOffTime = gameToShare?.tipOffTime {
                 
-                if gameIsActive == "false" && gameQuarter != "4" {
+                if gameIsActive == "false" && (Int(gameQuarter)! == 0) {
                     shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(tipOffTime) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
-                } else if gameIsActive == "false" && gameQuarter == "4" {
+                } else if gameIsActive == "false" && (Int(gameQuarter)! >= 4) {
                     shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else if gameIsActive == "true" {
                     let qtrString = gameQuarter.createQuarterString()
@@ -343,9 +343,9 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let post = UITableViewRowAction(style: .default, title: "Post") { (action, indexPath) in
             if let awayTeam = gameToShare?.awayTeamName, let homeTeam = gameToShare?.homeTeamName, let awayScore = gameToShare?.awayTeamScore, let homeScore = gameToShare?.homeTeamScore, let gameQuarter = gameToShare?.quarter, let gameVenue = gameToShare?.arena, let gameIsActive = gameToShare?.isGameActivated, let tipOffTime = gameToShare?.tipOffTime {
                 
-                if gameIsActive == "false" && gameQuarter != "4" {
+                if gameIsActive == "false" && (Int(gameQuarter)! == 0) {
                     shareText = "\(awayTeam) vs. \(homeTeam) tips off at \(tipOffTime) from \(gameVenue)! Download the Buckets: Basketball Data app for more scores, stats and standings."
-                } else if gameIsActive == "false" && gameQuarter == "4" {
+                } else if gameIsActive == "false" && (Int(gameQuarter)! >= 4) {
                     shareText = "FINAL SCORE: \(awayTeam) \(awayScore), \(homeTeam) \(homeScore). Download the Buckets: Basketball Data app for more scores, stats and standings."
                 } else if gameIsActive == "true" {
                     let qtrString = gameQuarter.createQuarterString()
@@ -538,7 +538,12 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         cell.awayTeamImageView.image = awayTeamImage
         let quarter = allGames[indexPath.section][indexPath.row].quarter
         let isGameActivated = allGames[indexPath.section][indexPath.row].isGameActivated
-        if quarter == "0" && isGameActivated == "false" { // Game did not start yet
+        let isHalftime = allGames[indexPath.section][indexPath.row].isHalftime
+        
+        if isHalftime == "true" {
+            cell.tipoffLabel.text = "Halftime"
+        }
+        else if quarter == "0" && isGameActivated == "false" { // Game did not start yet
             cell.tipoffLabel.text = allGames[indexPath.section][indexPath.row].tipOffTime
         } else {
             if quarter == "1" {
@@ -558,6 +563,12 @@ class GamesTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     cell.tipoffLabel.text = "4th Quarter"
                 } else {
                     cell.tipoffLabel.text = "Final"
+                }
+            } else if (Int(quarter)! >= 5) {
+                if isGameActivated == "true" {
+                    cell.tipoffLabel.text = "Overtime"
+                } else {
+                    cell.tipoffLabel.text = "Final / OT"
                 }
             }
         }
@@ -646,7 +657,7 @@ extension String {
             return "4th Qtr"
         }
         else {
-            return ""
+            return "OT"
         }
     }
 }

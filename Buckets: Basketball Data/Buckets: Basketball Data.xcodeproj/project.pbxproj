@@ -326,7 +326,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Romell Bolton";
 				TargetAttributes = {
 					A341913D2239DA2A0041E3CD = {
@@ -595,7 +595,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Buckets: Basketball Data/Notifications/Buckets: Basketball Data.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = XQ87AL2NL5;
 				INFOPLIST_FILE = "$(SRCROOT)/Buckets: Basketball Data/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -603,7 +603,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.17;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.romellbolton.Buckets--Basketball-Data";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -620,7 +620,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Buckets: Basketball Data/Notifications/Buckets: Basketball Data.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = XQ87AL2NL5;
 				INFOPLIST_FILE = "$(SRCROOT)/Buckets: Basketball Data/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -628,7 +628,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.17;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.romellbolton.Buckets--Basketball-Data";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

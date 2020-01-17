@@ -9,6 +9,7 @@
 import Foundation
 
 struct Game {
+    let isHalftime: String
     let isGameActivated: String
     let gameURL: String
     let arena: String

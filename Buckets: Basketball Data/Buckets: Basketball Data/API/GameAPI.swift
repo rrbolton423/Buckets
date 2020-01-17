@@ -31,7 +31,8 @@ class GameAPI {
                 let homeTeamScore = game["hTeam"]["score"].stringValue
                 let quarter = game["period"]["current"].stringValue
                 let startTime = game["startTimeEastern"].stringValue
-                let game = Game.init(isGameActivated: isGameActivated, gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, tipOffTime: startTime)
+                let isHalftime = game["period"]["isHalftime"].stringValue
+                let game = Game.init(isHalftime: isHalftime, isGameActivated: isGameActivated, gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, tipOffTime: startTime)
                 yesterdaysGamesArray.append(game)
             }
         } catch {
@@ -54,8 +55,8 @@ class GameAPI {
                 let homeTeamScore = game["hTeam"]["score"].stringValue
                 let quarter = game["period"]["current"].stringValue
                 let startTime = game["startTimeEastern"].stringValue
-                print(startTime)
-                let game = Game.init(isGameActivated: isGameActivated, gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, tipOffTime: startTime)
+                let isHalftime = game["period"]["isHalftime"].stringValue
+                let game = Game.init(isHalftime: isHalftime, isGameActivated: isGameActivated, gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, tipOffTime: startTime)
                 todaysGamesArray.append(game)
             }
         } catch {
