@@ -5,12 +5,9 @@
 //  Created by Romell Bolton on 3/27/19.
 //  Copyright © 2019 Romell Bolton. All rights reserved.
 //
-
 import Foundation
 
 struct Game {
-    let isHalftime: String
-    let isGameActivated: String
     let gameURL: String
     let arena: String
     let homeTeamName: String
@@ -18,5 +15,5 @@ struct Game {
     let awayTeamName: String
     let awayTeamScore: String
     let quarter: String
-    let tipOffTime: String
+    let time: String
 }
