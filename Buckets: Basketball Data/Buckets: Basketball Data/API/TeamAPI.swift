@@ -27,6 +27,8 @@ class TeamAPI {
         var request = URLRequest(url: headerUrl)
         request.httpMethod = "GET"
         request.setValue("stats.nba.com", forHTTPHeaderField:"Referer")
+        request.setValue("stats", forHTTPHeaderField:"x-nba-stats-origin")
+        request.setValue("true", forHTTPHeaderField:"x-nba-stats-token")
         request.timeoutInterval = 60.0
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { print(error!); return }

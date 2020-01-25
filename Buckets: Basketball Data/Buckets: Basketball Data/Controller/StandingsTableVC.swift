@@ -191,35 +191,33 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 self.setupActivityIndicator()
                 self.activityIndicator.startAnimating()
             }
-            DispatchQueue.global(qos: .background).async {
-                let eastStandingsAPI = EastStandingsAPI()
-                if let eastStandingsURL = self.standingsURL {
-                    eastStandingsAPI.getStandings(url: eastStandingsURL) { eastTeams, error  in
-                        if error == nil {
-                            if let unrwappedEastTeams = eastTeams {
-                                self.eastTeams = unrwappedEastTeams
-                            }
-                        } else {
+            let eastStandingsAPI = EastStandingsAPI()
+            if let eastStandingsURL = self.standingsURL {
+                eastStandingsAPI.getStandings(url: eastStandingsURL) { eastTeams, error  in
+                    if error == nil {
+                        if let unrwappedEastTeams = eastTeams {
+                            self.eastTeams = unrwappedEastTeams
                             DispatchQueue.main.async {
-                                self.eastTeams.removeAll()
                                 self.tableView.reloadData()
-                                self.tableView.isUserInteractionEnabled = true
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.removeFromSuperview()
-                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                                    self.navigationController?.popToRootViewController(animated: true)
-                                }))
-                                self.present(alert, animated: true, completion: nil)
+                                self.tableView.isUserInteractionEnabled = true
                             }
                         }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.eastTeams.removeAll()
+                            self.tableView.reloadData()
+                            self.tableView.isUserInteractionEnabled = true
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
+                            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                     }
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.removeFromSuperview()
-                    self.tableView.isUserInteractionEnabled = true
                 }
             }
         } else {
@@ -248,35 +246,33 @@ class StandingsTableVC: UIViewController, UITableViewDataSource, UITableViewDele
                 self.setupActivityIndicator()
                 self.activityIndicator.startAnimating()
             }
-            DispatchQueue.global(qos: .background).async {
-                let westStandingsAPI = WestStandingsAPI()
-                if let westStandingsURL = self.standingsURL {
-                    westStandingsAPI.getStandings(url: westStandingsURL) { westTeams, error in
-                        if error == nil {
-                            if let unrwappedWestTeams = westTeams {
-                                self.westTeams = unrwappedWestTeams
-                            }
-                        } else {
+            let westStandingsAPI = WestStandingsAPI()
+            if let westStandingsURL = self.standingsURL {
+                westStandingsAPI.getStandings(url: westStandingsURL) { westTeams, error in
+                    if error == nil {
+                        if let unrwappedWestTeams = westTeams {
+                            self.westTeams = unrwappedWestTeams
                             DispatchQueue.main.async {
-                                self.westTeams.removeAll()
                                 self.tableView.reloadData()
-                                self.tableView.isUserInteractionEnabled = true
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.removeFromSuperview()
-                                let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                                    self.navigationController?.popToRootViewController(animated: true)
-                                }))
-                                self.present(alert, animated: true, completion: nil)
+                                self.tableView.isUserInteractionEnabled = true
                             }
                         }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.westTeams.removeAll()
+                            self.tableView.reloadData()
+                            self.tableView.isUserInteractionEnabled = true
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.removeFromSuperview()
+                            let alert = UIAlertController(title: "No Internet Connection", message: "Your device is not connected to the internet", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                     }
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.removeFromSuperview()
-                    self.tableView.isUserInteractionEnabled = true
                 }
             }
         } else {
