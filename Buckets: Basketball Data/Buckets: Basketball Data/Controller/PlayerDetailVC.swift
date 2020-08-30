@@ -282,11 +282,18 @@ class PlayerDetailVC: UIViewController {
                 self.positionLabel.text = "N/A"
             }
             
-            if let birthdate = self.playerBirthdateFormatted {
+            if let birthdate = player.birthdate {
                 if birthdate == "" || birthdate == " " {
                     self.birthdateLabel.text = "N/A"
                 } else {
-                    self.birthdateLabel.text = "\(birthdate.lowercased().capitalized) (\(self.calcAge(birthday: birthdate)) years)"
+                    let unformattedBirthdate = "\(birthdate.dropLast(9))"
+                    let inputFormatter = DateFormatter()
+                    inputFormatter.dateFormat = "yyyy-MM-dd"
+                    let showDate = inputFormatter.date(from: unformattedBirthdate)
+                    inputFormatter.dateFormat = "MM/dd/yyyy"
+                    let resultString = inputFormatter.string(from: showDate!)
+                    let age = self.getAgeFromDOF(date: resultString)
+                    self.birthdateLabel.text = "\(resultString) (\(age.0) years)"
                 }
             } else {
                 self.birthdateLabel.text = "N/A"
@@ -424,15 +431,14 @@ class PlayerDetailVC: UIViewController {
         
     }
     
-    func calcAge(birthday: String) -> Int {
+    func getAgeFromDOF(date: String) -> (Int,Int,Int) {
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "MMM/dd/yyyy"
-        let birthdayDate = dateFormater.date(from: birthday)
-        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
-        let now = Date()
-        let calcAge = calendar.components(.year, from: birthdayDate!, to: now, options: [])
-        let age = calcAge.year
-        return age!
+        dateFormater.dateFormat = "MM/dd/yyyy"
+        let dateOfBirth = dateFormater.date(from: date)
+        let calender = Calendar.current
+        let dateComponent = calender.dateComponents([.year, .month, .day], from:
+        dateOfBirth!, to: Date())
+        return (dateComponent.year!, dateComponent.month!, dateComponent.day!)
     }
     
     @IBAction func reset(_ sender: Any) {

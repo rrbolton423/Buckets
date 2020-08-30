@@ -223,7 +223,7 @@ extension UISearchBar
         let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
         textFieldInsideSearchBarLabel?.textColor = color
     }
-
+    
     func setMagnifyingGlassColorTo(color: UIColor)
     {
         let textFieldInsideSearchBar = self.value(forKey: "searchField") as? UITextField
@@ -260,5 +260,16 @@ extension UIActivityIndicatorView {
     func assignColor(_ color: UIColor) {
         style = .white
         self.color = color
+    }
+}
+
+extension String {
+    func toDate(withFormat format: String = "yyyy-MM-dd") -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        guard let date = dateFormatter.date(from: self) else {
+            preconditionFailure("Take a look to your format")
+        }
+        return date
     }
 }

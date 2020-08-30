@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftyJSON
-import Alamofire
 
 class TeamAPI {
     func getTeamInfo(url: String, completion: @escaping (DetailTeam?, Error?) -> Void) {

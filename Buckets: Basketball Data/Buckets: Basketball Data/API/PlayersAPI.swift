@@ -67,9 +67,9 @@ class PlayersApi {
                                 lastName = fullNameArr?[1] ?? ""
                             }
                             birthdate = item.arrayValue[8].stringValue
-                            jerseyNumber = item.arrayValue[4].stringValue
-                            position = item.arrayValue[5].stringValue
-                            ID = item.arrayValue[12].stringValue
+                            jerseyNumber = item.arrayValue[5].stringValue
+                            position = item.arrayValue[6].stringValue
+                            ID = item.arrayValue[13].stringValue
                             let player = Players(ID: ID, fullName: fullName, firstName: firstName, lastName: lastName, birthdate: birthdate, jerseyNumber: jerseyNumber, position: position, teamID: teamID)
                             resultArray.append(player)
                         }

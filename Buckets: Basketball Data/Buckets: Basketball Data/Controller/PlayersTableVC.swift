@@ -177,6 +177,7 @@ class PlayersTableVC: UITableViewController, UISearchResultsUpdating, UISearchBa
                             let namesSorted = self.unfilteredRoster?.sorted { (initial, next) -> Bool in
                                 return initial.lastName?.compare(next.lastName ?? "") == .orderedAscending
                             }
+                            print(namesSorted)
                             self.unfilteredRoster = namesSorted
                             self.filteredRoster = self.unfilteredRoster
                             DispatchQueue.main.async {

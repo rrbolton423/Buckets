@@ -72,20 +72,20 @@ class PlayerApi {
                         for item in jsonArray
                         {
                             ID = item.arrayValue[0].stringValue
-                            teamID = item.arrayValue[16].stringValue
+                            teamID = item.arrayValue[17].stringValue
                             name = item.arrayValue[3].stringValue
-                            teamCity = item.arrayValue[20].stringValue
-                            teamName = item.arrayValue[17].stringValue
-                            jerseyNumber = item.arrayValue[13].stringValue
-                            position = item.arrayValue[14].stringValue
-                            birthdate = item.arrayValue[6].stringValue
-                            height = item.arrayValue[10].stringValue
-                            weight = item.arrayValue[11].stringValue
-                            school = item.arrayValue[7].stringValue
-                            experience = item.arrayValue[12].stringValue
-                            draftYear = item.arrayValue[27].stringValue
-                            draftRound = item.arrayValue[28].stringValue
-                            draftNumber = item.arrayValue[29].stringValue
+                            teamCity = item.arrayValue[21].stringValue
+                            teamName = item.arrayValue[18].stringValue
+                            jerseyNumber = item.arrayValue[14].stringValue
+                            position = item.arrayValue[15].stringValue
+                            birthdate = item.arrayValue[7].string
+                            height = item.arrayValue[11].stringValue
+                            weight = item.arrayValue[12].stringValue
+                            school = item.arrayValue[8].stringValue
+                            experience = item.arrayValue[13].stringValue
+                            draftYear = item.arrayValue[28].stringValue
+                            draftRound = item.arrayValue[29].stringValue
+                            draftNumber = item.arrayValue[30].stringValue
                         }
                     }
                 }

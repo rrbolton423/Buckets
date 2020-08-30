@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseCore
+import FirebaseRemoteConfig
 
 class FirebaseConstants: NSObject {
     var remoteConfig:RemoteConfig!

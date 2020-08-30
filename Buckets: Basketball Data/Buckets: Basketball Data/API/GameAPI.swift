@@ -18,26 +18,33 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedYesterdaysUrl)
             let json = try JSON(data: data)
-            let jsonData = json["sports_content"].dictionaryObject
-            let games = jsonData?["games"] as! [String:Any]
-            let gameList = (games["game"] as? [[String:Any]])!
-            for game in gameList
+            let gamesArray = json["games"].arrayValue
+            for game in gamesArray
             {
-                let g = game as NSDictionary
-                let home = g["home"] as! NSDictionary
-                let away = g["visitor"] as! NSDictionary
-                let gameStatus = g["period_time"] as! NSDictionary
-                
-                let gameURL = g["game_url"]! as! String
-                let arena = g["arena"]! as! String
-                let awayTeamName = away["abbreviation"]! as! String
-                let awayTeamScore = away["score"]! as! String
-                let homeTeamName = home["abbreviation"]! as! String
-                let homeTeamScore = home["score"]! as! String
-                let quarter = gameStatus["period_status"]! as! String
-                let time = gameStatus["game_clock"]! as! String
-                let game = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
-                yesterdaysGamesArray.append(game)
+                let isGameActivated = game["isGameActivated"].boolValue 
+                let gameURL = game["gameUrlCode"].rawString() ?? ""
+                let arena = game["arena"]["name"].rawString() ?? ""
+                let awayTeamName = game["vTeam"]["triCode"].rawString() ?? ""
+                let awayTeamScore = game["vTeam"]["score"].rawString() ?? ""
+                let homeTeamName = game["hTeam"]["triCode"].rawString() ?? ""
+                let homeTeamScore = game["hTeam"]["score"].rawString() ?? ""
+                let startTimeEastern = game["startTimeEastern"].rawString() ?? ""
+                var quarter = game["period"]["current"].rawString() ?? ""
+                let isHalftime = game["period"]["isHalftime"].boolValue 
+                if (isHalftime == true) {
+                    quarter = "Halftime"
+                } else {
+                    quarter = "Q\(quarter)"
+                    if quarter == "" || quarter == "Q0" {
+                        quarter = startTimeEastern
+                    }
+                }
+                if (isGameActivated == false && quarter == "Q4") {
+                    quarter = "Final"
+                }
+                let time = game["clock"].rawString() ?? ""
+                let yesterdaysGame = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
+                yesterdaysGamesArray.append(yesterdaysGame)
             }
         } catch {
             print(error)
@@ -47,25 +54,33 @@ class GameAPI {
         do {
             let data = try Data(contentsOf: unwrappedTodaysUrl)
             let json = try JSON(data: data)
-            let jsonData = json["sports_content"].dictionaryObject
-            let games = jsonData?["games"] as! [String:Any]
-            let gameList = (games["game"] as? [[String:Any]])!
-            for game in gameList
+            let gamesArray = json["games"].arrayValue
+            for game in gamesArray
             {
-                let g = game as NSDictionary
-                let home = g["home"] as! NSDictionary
-                let away = g["visitor"] as! NSDictionary
-                let gameStatus = g["period_time"] as! NSDictionary
-                let gameURL = g["game_url"]! as! String
-                let arena = g["arena"]! as! String
-                let awayTeamName = away["abbreviation"]! as! String
-                let awayTeamScore = away["score"]! as! String
-                let homeTeamName = home["abbreviation"]! as! String
-                let homeTeamScore = home["score"]! as! String
-                let quarter = gameStatus["period_status"]! as! String
-                let time = gameStatus["game_clock"]! as! String
-                let game = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
-                todaysGamesArray.append(game)
+                let isGameActivated = game["isGameActivated"].boolValue 
+                let gameURL = game["gameUrlCode"].rawString() ?? ""
+                let arena = game["arena"]["name"].rawString() ?? ""
+                let awayTeamName = game["vTeam"]["triCode"].rawString() ?? ""
+                let awayTeamScore = game["vTeam"]["score"].rawString() ?? ""
+                let homeTeamName = game["hTeam"]["triCode"].rawString() ?? ""
+                let homeTeamScore = game["hTeam"]["score"].rawString() ?? ""
+                let startTimeEastern = game["startTimeEastern"].rawString() ?? ""
+                var quarter = game["period"]["current"].rawString() ?? ""
+                let isHalftime = game["period"]["isHalftime"].boolValue 
+                if (isHalftime == true) {
+                    quarter = "Halftime"
+                } else {
+                    quarter = "Q\(quarter)"
+                    if quarter == "" || quarter == "Q0" {
+                        quarter = startTimeEastern
+                    }
+                }
+                if (isGameActivated == false && quarter == "Q4") {
+                    quarter = "Final"
+                }
+                let time = game["clock"].rawString() ?? ""
+                let todaysGame = Game.init(gameURL: gameURL, arena: arena, homeTeamName: homeTeamName, homeTeamScore: homeTeamScore, awayTeamName: awayTeamName, awayTeamScore: awayTeamScore, quarter: quarter, time: time)
+                todaysGamesArray.append(todaysGame)
             }
         } catch {
             print(error)
