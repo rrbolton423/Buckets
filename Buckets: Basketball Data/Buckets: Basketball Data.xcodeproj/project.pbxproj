@@ -601,7 +601,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Buckets: Basketball Data/Notifications/Buckets: Basketball Data.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = XQ87AL2NL5;
 				INFOPLIST_FILE = "$(SRCROOT)/Buckets: Basketball Data/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -626,7 +626,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Buckets: Basketball Data/Notifications/Buckets: Basketball Data.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = XQ87AL2NL5;
 				INFOPLIST_FILE = "$(SRCROOT)/Buckets: Basketball Data/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
